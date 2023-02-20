@@ -3,7 +3,7 @@
 ### Hi there 👋
 
 Let me introduce myself. My name is  Naufaldo , From Politeknik Manufaktur Bandung with major Teknologi Rekayasa Otomasi.
-An Robotics and Automation Enthusiasm
+An Automation and RoboticsEnthusiasm
 
 
 
