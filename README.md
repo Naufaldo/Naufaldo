@@ -18,9 +18,15 @@ An Automation and RoboticsEnthusiasm
 </p>
 
 ### Connect with me :smiley:
-<a href="https://twitter.com/nau136">
-  <img align="left" alt="Vedant Jajoo Twitter" width="21px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/099dc12b59179d07d534069bc8551718f786d91a/images/svg/twitter.svg" />
-</a>
-<a href="https://www.linkedin.com/in/naufaldo-do-80b39b1a5/?locale=en_US">
-  <img align="left" alt="Vedant Jajoo Linkdin" width="21px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/099dc12b59179d07d534069bc8551718f786d91a/images/svg/linkedin.svg" />
-</a>
+
+<div id="badges">
+  <a href="https://www.linkedin.com/in/naufaldo-do-80b39b1a5/?locale=en_US">
+    <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
+  </a>
+  <a href="https://www.youtube.com/channel/UCfcdchzhztPIqN_TO-n6XPQ">
+    <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
+  </a>
+  <a href="https://twitter.com/nau136">
+    <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
+  </a>
+</div>
