@@ -10,11 +10,8 @@
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 .w3-row-padding img {margin-bottom: 12px}
-/* Set the width of the sidebar to 120px */
 .w3-sidebar {width: 120px;background: #222;}
-/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
 #main {margin-left: 120px}
-/* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
 </style>
 </head>
@@ -63,7 +60,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
-    <h2 class="w3-text-light-grey">My Name</h2>
+    <h2 class="w3-text-light-grey">About Me</h2>
     <hr style="width:200px" class="w3-opacity">
     <p>Let me introduce myself. My name is  Naufaldo , From Politeknik Manufaktur Bandung with major Teknologi Rekayasa Otomasi. 
       An Automation and RoboticsEnthusiasm
@@ -73,7 +70,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     <h3 class="w3-padding-16 w3-text-light-grey">my github stats </h3>
 
-    <p align="left">
+    <p align="w3-center">
       <a href="https://github.com/Naufaldo">
         <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=Naufaldo&show_icons=true&theme=algolia&include_all_commits=true&count_private=true"/>
         <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=Naufaldo&layout=compact&langs_count=8&theme=algolia"/>
@@ -87,19 +84,59 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <h2 class="w3-text-light-grey">My Project</h2>
     <hr style="width:200px" class="w3-opacity">
 
-    <!-- Grid for photos -->
-    <div class="w3-row-padding" style="margin:0 -16px">
-      <div class="w3-half">
-        <img src="img/IMG-20230503-WA0015.jpg" style="width:100%">
-        <img src="img/IMG-20230503-WA0016.jpg" style="width:100%">
-        <img src="img/IMG-20230503-WA0017.jpg" style="width:100%">
-      </div>
+    <!-- Grid for photos --> 
+      <div class="w3-row-padding">       
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-display-container">
+            <div class="w3-display-topleft w3-black w3-padding">Hexapod Robot</div>
+            <img src="img/IMG-20230503-WA0016.jpg" alt="House" style="width:100%">
+          </div>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-display-container">
+            <div class="w3-display-topleft w3-black w3-padding">Ice Cream Robot</div>
+            <img src="img/IMG-20230503-WA0017.jpg" alt="House" style="width:100%">
+          </div>
+        </div>   
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-display-container">
+            <div class="w3-display-topleft w3-black w3-padding">BAS Simulator</div>
+            <img src="img/IMG-20230503-WA0019.jpg" alt="House" style="width:100%">
+          </div>
+        </div>     
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-display-container">
+            <div class="w3-display-topleft w3-black w3-padding">DCS Training System</div>
+            <img src="img/IMG-20230503-WA0021.jpg" alt="House" style="width:100%">
+          </div>
+        </div>
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-display-container">
+            <div class="w3-display-topleft w3-black w3-padding">Hybrid Car Principle</div>
+            <img src="img/IMG-20230503-WA0022.jpg" alt="House" style="width:100%">
+          </div>
+        </div>
 
-      <div class="w3-half">
-        <img src="img/IMG-20230503-WA0018.jpg" style="width:100%">
-        <img src="img/IMG-20230503-WA0019.jpg" style="width:100%">
-        <img src="img/IMG-20230503-WA0020.jpg" style="width:100%">
-        <img src="img/IMG-20230503-WA0021.jpg" style="width:100%">
+      </div>
+      <div class="w3-row-padding">
+        <div class="w3-col l3 m6 w3-margin-bottom">
+          <div class="w3-display-container">
+            <div class="w3-display-topleft w3-black w3-padding">Panel IOT</div>
+            <img src="img/IMG-20230503-WA0015.jpg" alt="House" style="width:100%">
+          </div>
+        </div>
+          <div class="w3-col l3 m6 w3-margin-bottom">
+            <div class="w3-display-container">
+              <div class="w3-display-topleft w3-black w3-padding">Forklift Simulator</div>
+              <img src="img/IMG-20230503-WA0018.jpg" alt="House" style="width:100%">
+            </div>
+          </div>
+          <div class="w3-col l3 m6 w3-margin-bottom">
+            <div class="w3-display-container">
+              <div class="w3-display-topleft w3-black w3-padding">BAS Panel</div>
+              <img src="img/IMG-20230503-WA0020.jpg" alt="House" style="width:100%">
+            </div>
+          </div>
       </div>
     <!-- End photo grid -->
     </div>
@@ -110,41 +147,25 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
     <h2 class="w3-text-light-grey">Contact Me</h2>
     <hr style="width:200px" class="w3-opacity">
-    <a href="https://www.linkedin.com/in/naufaldo-do-80b39b1a5/?locale=en_US">
-      <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>
-    </a>
-    <a href="https://www.youtube.com/channel/UCfcdchzhztPIqN_TO-n6XPQ">
-      <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
-    </a>
-    <h2></h2>
-    <a href="https://twitter.com/nau136">
-      <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
-    </a>
-    <a href = "https://www.instagram.com/nau136/">
-      <img src = "https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram Badge"/>
-    </a>
-    <h2></h2>
-    <a href = "https://open.spotify.com/user/zbhray13tjyz0sr9uwatsk8m9?si=eb5c028dddbb4e28">
-      <img src = "https://img.shields.io/badge/Spotify-1ED760?&style=for-the-badge&logo=spotify&logoColor=white" alt="Spotify Badge"/>
-    </a>
-     <a href = "https://steamcommunity.com/id/kirigashi/">
-      <img src = "https://img.shields.io/badge/Steam-000000?style=for-the-badge&logo=steam&logoColor=white" alt="Steam Badge"/>
-    </a>
 
     <div class="w3-section">
       <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Bandung, West java</p>
       <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +62 813-2060-8283</p>
       <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: naufaldo1301@gmail.com</p>
     </div><br>
-  -->
+
     <!--
     <p>Let's get in touch. Send me a message:</p>
 
    
   </div>
   
-  <!-- Footer -->
+  <-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <a href = "https://www.instagram.com/nau136/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+    <a href="https://www.youtube.com/channel/UCfcdchzhztPIqN_TO-n6XPQ"><i class="fa fa-youtube w3-hover-opacity"></i></a>
+    <a href="https://twitter.com/nau136" ><i class="fa fa-twitter w3-hover-opacity"></i></a>
+    <a href="https://www.linkedin.com/in/naufaldo-do-80b39b1a5/?locale=en_US" ><i class="fa fa-linkedin w3-hover-opacity"></i></a>
     <p class="w3-medium">Created by Naufaldo</a></p>
   <!-- End footer -->
   </footer>
