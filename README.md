@@ -2,9 +2,12 @@
 
 ### Hi there 👋
 
-Let me introduce myself. My name is  Naufaldo , From Politeknik Manufaktur Bandung with major Teknologi Rekayasa Otomasi.
-An Automation and Robotics Enthusiasm
-
+A Fresh Graduate from Politeknik Manufaktur Bandung, Indonesia, has a fervent passion for Robotics, 
+Internet of Things (IoT), and Programmable Logic Controllers (PLC). With hands-on experience in 
+industrial robotics, including AGV and robotic arm projects, he has gained practical insights into the 
+field. Naufaldo's versatility extends to PLC projects, reflecting his commitment to industrial automation. 
+His eagerness to learn and apply his knowledge positions him as a promising contributor to the dynamic 
+realms of Robotics, IoT, and PLCs
 
 
 
