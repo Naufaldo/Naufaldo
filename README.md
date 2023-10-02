@@ -3,12 +3,15 @@
 ### Hi there 👋
 
 Let me introduce myself. My name is  Naufaldo , From Politeknik Manufaktur Bandung with major Teknologi Rekayasa Otomasi.
-An Automation and RoboticsEnthusiasm
+An Automation and Robotics Enthusiasm
 
 
 
-- 🔭 I’m currently working on Fire extenguisher Robot with hexapod Base
-- 🌱 I’m currently learning Cloud Computing Bangkit 2023
+
+
+Several Proejct Done :
+- 🔭 Search And Rescue Robot Navigation System Using ROS and Lidar
+- IOT Watering and Monitoring for Garden
 
 <p align="left">
 <a href="https://github.com/Naufaldo">
