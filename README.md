@@ -1,8 +1,7 @@
-![a header](https://github.com/Naufaldo/Naufaldo/blob/5693990fe394ede2dd500813f7471ea06b2799cb/img/Header.jpeg)
 
 ### Hi there 👋
 
-A Fresh Graduate from Politeknik Manufaktur Bandung, Indonesia, has a fervent passion for Robotics, 
+A master student in National Taipei university of technology , from indonesia and has a fervent passion for Robotics, 
 Internet of Things (IoT), and Programmable Logic Controllers (PLC). With hands-on experience in 
 industrial robotics, including AGV and robotic arm projects, he has gained practical insights into the 
 field. Naufaldo's versatility extends to PLC projects, reflecting his commitment to industrial automation. 
@@ -12,9 +11,8 @@ realms of Robotics, IoT, and PLCs
 
 
 
-Several Proejct Done :
-- 🔭 Search And Rescue Robot Navigation System Using ROS and Lidar
-- IOT Watering and Monitoring for Garden
+Current Research Project :
+-Multi Agent System Formation Control
 
 <p align="left">
 <a href="https://github.com/Naufaldo">
