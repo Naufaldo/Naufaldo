@@ -21,18 +21,7 @@ Current Research Project :
 </a>
 </p>
 
-### Operating System Used 
-<div id="OS">
-  <a> <img src = "https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" /></a>
-  <a> <img src = "https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" /></a>
-  <a> <img src = "https://img.shields.io/badge/Kali_Linux-557C94?style=for-the-badge&logo=kali-linux&logoColor=white" /></a>
- </div>
- 
-### Most Used Language 👀
-<div id="skills">
-  <a> <img src = "https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" /></a>
-  <a> <img src = "https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" /></a>
- </div>
+
 
 ### Connect with me :smiley:
 
