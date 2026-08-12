@@ -73,13 +73,25 @@ const i18n = {
     "proj-filter-swarm": "Robotika & Swarm Drone",
     "proj-filter-auto": "Otomasi & Panel",
 
-    "proj-cs-title": "Industrial Cold Storage Systems",
-    "proj-cs-cat": "Cold Storage & Engineering",
-    "proj-cs-desc": "Perancangan, pemilihan kompresor Bitzer/Copeland, perakitan panel kelistrikan, dan commissioning sistem Freezer Room, Chiller Room, & ABF. Lihat portofolio lengkap di dinginlestariteknik.com.",
+    "proj-cs1-title": "Cold Storage & Freezer Room Project #1",
+    "proj-cs1-cat": "Cold Storage & Engineering",
+    "proj-cs1-desc": "Perancangan sistem termal, perakitan panel listrik 3-phase, pemilihan kompresor Bitzer, dan commissioning Freezer Room industri. Portofolio lengkap di dinginlestariteknik.com.",
 
-    "proj-dac-title": "Direct Air Capture (DAC) CO₂ System with Biochar",
-    "proj-dac-cat": "Green Tech & Hak Cipta Paten",
-    "proj-dac-desc": "Perancangan fisik sistem penangkap CO₂ di udara menggunakan media biochar, pembuatan instrumen hardware, pemrograman kendali telemetri terintegrasi MATLAB, dan memiliki Hak Cipta Paten untuk Software MATLAB.",
+    "proj-cs2-title": "Chiller Room Refrigeration System #2",
+    "proj-cs2-cat": "Cold Storage & Engineering",
+    "proj-cs2-desc": "Instalasi kamar dingin Chiller Room untuk produk komersial dengan optimasi efisiensi energi kompresor & evaporator.",
+
+    "proj-cs3-title": "Air Blast Freezer (ABF) System #3",
+    "proj-cs3-cat": "Cold Storage & Engineering",
+    "proj-cs3-desc": "Sistem pembekuan cepat Air Blast Freezer (ABF) kapasitas industri dengan pengontrol suhu presisi.",
+
+    "proj-dac1-title": "Direct Air Capture (DAC) CO₂ Prototype #1",
+    "proj-dac1-cat": "Green Tech & Hak Cipta Paten",
+    "proj-dac1-desc": "Perancangan fisik sistem penangkap CO₂ di udara menggunakan media biochar, pembuatan instrumen hardware, dan pengujian laju penyerapan gas.",
+
+    "proj-dac2-title": "DAC Telemetry Control & MATLAB Software Patent #2",
+    "proj-dac2-cat": "Green Tech & Hak Cipta Paten",
+    "proj-dac2-desc": "Pemrograman kendali telemetri terintegrasi MATLAB untuk sistem Direct Air Capture (DAC) dengan **Hak Cipta Paten Software Resmi**.",
 
     "proj-swarm-title": "Swarm Quadcopters Flight Control (SICE FES 2025)",
     "proj-swarm-cat": "Riset Swarm Drone & Flocking",
@@ -199,13 +211,25 @@ const i18n = {
     "proj-filter-swarm": "Robotics & Swarm Drone",
     "proj-filter-auto": "Automation & Panels",
 
-    "proj-cs-title": "Industrial Cold Storage Systems",
-    "proj-cs-cat": "Cold Storage & Engineering",
-    "proj-cs-desc": "Thermodynamic design, Bitzer/Copeland compressor sizing, 3-phase electrical panel integration, and commissioning for Freezer & Chiller rooms. Explore full portfolio at dinginlestariteknik.com.",
+    "proj-cs1-title": "Cold Storage & Freezer Room Project #1",
+    "proj-cs1-cat": "Cold Storage & Engineering",
+    "proj-cs1-desc": "Thermodynamic design, Bitzer compressor sizing, 3-phase electrical panel integration, and commissioning for industrial Freezer Room. Full portfolio at dinginlestariteknik.com.",
 
-    "proj-dac-title": "Direct Air Capture (DAC) CO₂ System with Biochar",
-    "proj-dac-cat": "Green Tech & Software Patent",
-    "proj-dac-desc": "Physical system engineering for ambient CO₂ capture via biochar, hardware fabrication, telemetry control system connected to MATLAB, holding a Registered Software Patent for MATLAB Control Logic.",
+    "proj-cs2-title": "Chiller Room Refrigeration System #2",
+    "proj-cs2-cat": "Cold Storage & Engineering",
+    "proj-cs2-desc": "Chiller Room installation for commercial perishable products with compressor energy efficiency optimization.",
+
+    "proj-cs3-title": "Air Blast Freezer (ABF) System #3",
+    "proj-cs3-cat": "Cold Storage & Engineering",
+    "proj-cs3-desc": "Industrial capacity Air Blast Freezer (ABF) system engineered for rapid freezing with precision temperature control.",
+
+    "proj-dac1-title": "Direct Air Capture (DAC) CO₂ Prototype #1",
+    "proj-dac1-cat": "Green Tech & Software Patent",
+    "proj-dac1-desc": "Physical system engineering for ambient CO₂ capture via biochar, hardware fabrication, and gas absorption rate evaluation.",
+
+    "proj-dac2-title": "DAC Telemetry Control & MATLAB Software Patent #2",
+    "proj-dac2-cat": "Green Tech & Software Patent",
+    "proj-dac2-desc": "MATLAB telemetry & control logic programming for Direct Air Capture (DAC) holding a **Registered Official Software Patent**.",
 
     "proj-swarm-title": "Swarm Quadcopters Flight Control (SICE FES 2025)",
     "proj-swarm-cat": "Swarm Drone Research",
@@ -418,40 +442,76 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects & Innovations Gallery Engine (Performance Optimized - Zero Auto-Video Load) ---
+// --- Projects & Innovations Gallery Engine (Individual Cards for CS_1..3 & DAC_1..2) ---
 const projectsData = [
-  // Cold Storage CS_1~3
+  // CS_1
   {
-    titleKey: "proj-cs-title",
-    catKey: "proj-cs-cat",
-    descKey: "proj-cs-desc",
+    titleKey: "proj-cs1-title",
+    catKey: "proj-cs1-cat",
+    descKey: "proj-cs1-desc",
     img: "img/New/CS_1.jpg",
     isVideo: false,
     category: "cs",
-    tags: ["Cold Storage", "Refrigeration", "Freezer Room", "Chiller", "ABF", "Bitzer/Copeland"],
+    tags: ["Cold Storage", "Freezer Room", "Compressor", "Panel 3-Phase"],
+    link: "https://dinginlestariteknik.com/",
+    linkText: "dinginlestariteknik.com"
+  },
+  // CS_2
+  {
+    titleKey: "proj-cs2-title",
+    catKey: "proj-cs2-cat",
+    descKey: "proj-cs2-desc",
+    img: "img/New/CS_2.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["Chiller Room", "Refrigeration", "Evaporator", "HVAC"],
+    link: "https://dinginlestariteknik.com/",
+    linkText: "dinginlestariteknik.com"
+  },
+  // CS_3
+  {
+    titleKey: "proj-cs3-title",
+    catKey: "proj-cs3-cat",
+    descKey: "proj-cs3-desc",
+    img: "img/New/CS_3.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["Air Blast Freezer", "Rapid Freezing", "Control Panel", "Bitzer"],
     link: "https://dinginlestariteknik.com/",
     linkText: "dinginlestariteknik.com"
   },
 
-  // Direct Air Capture DAC_1~2 (Patent)
+  // DAC_1
   {
-    titleKey: "proj-dac-title",
-    catKey: "proj-dac-cat",
-    descKey: "proj-dac-desc",
+    titleKey: "proj-dac1-title",
+    catKey: "proj-dac1-cat",
+    descKey: "proj-dac1-desc",
     img: "img/New/DAC_1.jpg",
     isVideo: false,
     category: "dac",
-    tags: ["Direct Air Capture", "CO2 Capture", "Biochar", "MATLAB Software Patent", "Hardware Design"],
+    tags: ["Direct Air Capture", "CO2 Capture", "Biochar Media", "Hardware Prototype"],
     link: "https://www.researchgate.net/profile/Naufaldo-2",
-    linkText: "Patent & Research Details"
+    linkText: "ResearchGate Details"
+  },
+  // DAC_2
+  {
+    titleKey: "proj-dac2-title",
+    catKey: "proj-dac2-cat",
+    descKey: "proj-dac2-desc",
+    img: "img/New/DAC_2.jpg",
+    isVideo: false,
+    category: "dac",
+    tags: ["MATLAB Software Patent", "Telemetry Control", "CO2 Sensor", "Paten Resmi"],
+    link: "https://www.researchgate.net/profile/Naufaldo-2",
+    linkText: "Patent Document"
   },
 
-  // Drone Swarm Video (SICE FES 2025) - Lightweight Poster Card in Grid
+  // Drone Swarm Video (SICE FES 2025)
   {
     titleKey: "proj-swarm-title",
     catKey: "proj-swarm-cat",
     descKey: "proj-swarm-desc",
-    img: "img/Header.jpeg", // Poster image! Fast load!
+    img: "img/Header.jpeg",
     videoSrc: "img/New/Drone_Swarm.avi",
     isVideo: true,
     category: "swarm",
@@ -573,7 +633,7 @@ function openProjectModal(index) {
   if (p.isVideo && p.videoSrc) {
     modalImg.style.display = "none";
     modalVideo.style.display = "block";
-    modalVideo.src = p.videoSrc; // Set video source ONLY when user opens modal!
+    modalVideo.src = p.videoSrc;
     modalVideo.play().catch(() => {});
   } else {
     modalVideo.style.display = "none";
@@ -606,7 +666,7 @@ function closeProjectModal() {
   const modalVideo = document.getElementById("modalVideo");
   if (modalVideo) {
     modalVideo.pause();
-    modalVideo.removeAttribute("src"); // Clear source to free memory!
+    modalVideo.removeAttribute("src");
   }
   if (modal) modal.classList.remove("active");
 }
@@ -640,8 +700,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".pub-filter-tags .filter-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
       document.querySelectorAll(".pub-filter-tags .filter-btn").forEach(b => b.classList.remove("active"));
-      e.target.classList.add("active");
-      const cat = e.target.dataset.cat;
+      e.currentTarget.classList.add("active");
+      const cat = e.currentTarget.dataset.cat;
       const query = document.getElementById("pubSearchInput")?.value || "";
       renderPublications(cat, query);
     });
@@ -653,8 +713,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".proj-filter-tags .filter-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
       document.querySelectorAll(".proj-filter-tags .filter-btn").forEach(b => b.classList.remove("active"));
-      e.target.classList.add("active");
-      renderProjects(e.target.dataset.cat);
+      e.currentTarget.classList.add("active");
+      renderProjects(e.currentTarget.dataset.cat);
     });
   });
 

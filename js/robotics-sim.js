@@ -1,13 +1,15 @@
 /* ==========================================================================
    Naufaldo Portfolio - Advanced Robotics Simulation Engines
-   1. PID Control of Differential-Drive Mobile Robot (DDMR) + APF (ICCAS 2025)
-   2. Swarm Quadcopters Boids Flocking + Altitude Modulation + APF (SICE FES 2025)
-   3. Indoor Exploration: Floodfill vs. Frontier-Based Method (ICCAS 2024)
-   4. LiDAR SLAM Autonomous Navigation System (IJRA 2024)
+   1. Fuzzy-Tuned PID DDMR & APF Multi-Agent Formation Control (ICCAS 2025 / IJCAS 2026)
+   2. Mathematical Kinematic Model to Dynamic Simulation (Eqs to 2D Plot)
+   3. OpenCV Vision-Based Leader-Follower Camera Tracking (Distance Detection)
+   4. Drone Swarm Flocking Dynamics & Altitude Modulation (SICE FES 2025)
+   5. Autonomous Indoor Exploration: Floodfill vs. Frontier-Based (ICCAS 2024)
+   6. LiDAR SLAM Autonomous Navigation System (IJRA 2024)
    ========================================================================== */
 
-// --- MODULE 1: PID Control of DDMR + APF ---
-class PIDDDMRSimulation {
+// --- MODULE 1: Fuzzy-Tuned PID DDMR Multi-Agent Formation Control (ICCAS 2025) ---
+class ICCASPIDDDMRSimulation {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
     if (!this.canvas) return;
@@ -15,34 +17,37 @@ class PIDDDMRSimulation {
     this.width = this.canvas.width = this.canvas.clientWidth || 700;
     this.height = this.canvas.height = this.canvas.clientHeight || 420;
 
-    // Robot state
-    this.robot = {
-      x: 80,
-      y: this.height / 2,
-      theta: 0,
-      v: 0,
-      w: 0,
-      radius: 14,
-      trail: []
+    this.formation = "triangle"; // triangle, circle, line
+    this.isRunning = true;
+
+    // Leader Robot (DDMR)
+    this.leader = {
+      x: this.width * 0.35,
+      y: this.height * 0.5,
+      targetX: this.width * 0.65,
+      targetY: this.height * 0.5,
+      angle: 0,
+      speed: 2.2,
+      radius: 14
     };
 
-    // Target goal
-    this.goal = { x: this.width - 100, y: this.height / 2 };
+    // Follower Robots (DDMR Swarm)
+    this.followers = [
+      { x: this.leader.x - 40, y: this.leader.y - 40, angle: 0, radius: 10, color: "#00f2fe" },
+      { x: this.leader.x - 40, y: this.leader.y + 40, angle: 0, radius: 10, color: "#4facfe" },
+      { x: this.leader.x - 70, y: this.leader.y, angle: 0, radius: 10, color: "#8b5cf6" }
+    ];
 
-    // Obstacles
+    // APF Obstacles
     this.obstacles = [
-      { x: this.width * 0.4, y: this.height * 0.4, radius: 25 },
-      { x: this.width * 0.6, y: this.height * 0.6, radius: 22 }
+      { x: this.width * 0.5, y: this.height * 0.35, radius: 25 },
+      { x: this.width * 0.5, y: this.height * 0.65, radius: 22 }
     ];
 
     // PID Gains
-    this.kp = 0.08;
-    this.ki = 0.0001;
-    this.kd = 0.15;
-
-    this.integralError = 0;
-    this.prevError = 0;
-    this.isRunning = true;
+    this.kp = 0.12;
+    this.ki = 0.001;
+    this.kd = 0.05;
 
     this.bindEvents();
     this.loop();
@@ -51,72 +56,122 @@ class PIDDDMRSimulation {
   bindEvents() {
     this.canvas.addEventListener("click", (e) => {
       const rect = this.canvas.getBoundingClientRect();
-      this.goal.x = e.clientX - rect.left;
-      this.goal.y = e.clientY - rect.top;
-      this.integralError = 0;
+      this.leader.targetX = e.clientX - rect.left;
+      this.leader.targetY = e.clientY - rect.top;
     });
   }
 
-  updateParams(kp, ki, kd) {
-    this.kp = kp;
-    this.ki = ki;
-    this.kd = kd;
+  setFormation(type) {
+    this.formation = type;
+  }
+
+  addObstacle() {
+    this.obstacles.push({
+      x: Math.random() * (this.width - 100) + 50,
+      y: Math.random() * (this.height - 100) + 50,
+      radius: Math.floor(Math.random() * 15) + 15
+    });
+  }
+
+  reset() {
+    this.obstacles = [
+      { x: this.width * 0.5, y: this.height * 0.35, radius: 25 },
+      { x: this.width * 0.5, y: this.height * 0.65, radius: 22 }
+    ];
+    this.leader.x = this.width * 0.3;
+    this.leader.y = this.height * 0.5;
+    this.leader.targetX = this.width * 0.7;
+    this.leader.targetY = this.height * 0.5;
+  }
+
+  getFormationOffsets() {
+    const dist = 45;
+    if (this.formation === "triangle") {
+      return [
+        { dx: -dist, dy: -dist * 0.8 },
+        { dx: -dist, dy: dist * 0.8 },
+        { dx: -dist * 1.7, dy: 0 }
+      ];
+    } else if (this.formation === "circle") {
+      return [
+        { dx: Math.cos(0) * dist, dy: Math.sin(0) * dist },
+        { dx: Math.cos((2*Math.PI)/3) * dist, dy: Math.sin((2*Math.PI)/3) * dist },
+        { dx: Math.cos((4*Math.PI)/3) * dist, dy: Math.sin((4*Math.PI)/3) * dist }
+      ];
+    } else { // Line
+      return [
+        { dx: -dist, dy: 0 },
+        { dx: -dist * 2, dy: 0 },
+        { dx: -dist * 3, dy: 0 }
+      ];
+    }
   }
 
   update() {
     if (!this.isRunning) return;
 
-    // Distance and orientation error
-    const dx = this.goal.x - this.robot.x;
-    const dy = this.goal.y - this.robot.y;
+    // Leader DDMR PID + Goal Tracking
+    const dx = this.leader.targetX - this.leader.x;
+    const dy = this.leader.targetY - this.leader.y;
     const dist = Math.hypot(dx, dy);
-    
-    const targetTheta = Math.atan2(dy, dx);
-    let errorTheta = targetTheta - this.robot.theta;
 
-    // Normalize error angle (-PI to PI)
-    while (errorTheta > Math.PI) errorTheta -= 2 * Math.PI;
-    while (errorTheta < -Math.PI) errorTheta += 2 * Math.PI;
+    if (dist > 3) {
+      this.leader.angle = Math.atan2(dy, dx);
+      let moveX = Math.cos(this.leader.angle) * this.leader.speed;
+      let moveY = Math.sin(this.leader.angle) * this.leader.speed;
 
-    // PID control for angular velocity (w)
-    this.integralError += errorTheta;
-    const derivativeError = errorTheta - this.prevError;
-    this.prevError = errorTheta;
+      // APF Obstacle Avoidance Vector
+      this.obstacles.forEach(obs => {
+        const odx = this.leader.x - obs.x;
+        const ody = this.leader.y - obs.y;
+        const odist = Math.hypot(odx, ody);
+        const minSafety = obs.radius + this.leader.radius + 35;
+        if (odist < minSafety && odist > 0) {
+          const force = (minSafety - odist) / minSafety * 3.8;
+          moveX += (odx / odist) * force;
+          moveY += (ody / odist) * force;
+        }
+      });
 
-    this.robot.w = (this.kp * errorTheta) + (this.ki * this.integralError) + (this.kd * derivativeError);
-
-    // Linear velocity with APF slowdown near obstacles
-    let baseV = Math.min(dist * 0.05, 2.5);
-    
-    // Repulsive APF force
-    let repX = 0, repY = 0;
-    this.obstacles.forEach(obs => {
-      const odx = this.robot.x - obs.x;
-      const ody = this.robot.y - obs.y;
-      const odist = Math.hypot(odx, ody);
-      const minSafety = obs.radius + this.robot.radius + 35;
-      if (odist < minSafety && odist > 0) {
-        const force = (minSafety - odist) / minSafety * 4.0;
-        repX += (odx / odist) * force;
-        repY += (ody / odist) * force;
-      }
-    });
-
-    if (dist > 5) {
-      this.robot.theta += this.robot.w;
-      this.robot.x += Math.cos(this.robot.theta) * baseV + repX;
-      this.robot.y += Math.sin(this.robot.theta) * baseV + repY;
-
-      // Keep trail
-      this.robot.trail.push({ x: this.robot.x, y: this.robot.y });
-      if (this.robot.trail.length > 120) this.robot.trail.shift();
+      this.leader.x += moveX;
+      this.leader.y += moveY;
     }
+
+    // Followers DDMR PID Formation Tracking
+    const offsets = this.getFormationOffsets();
+    this.followers.forEach((fol, idx) => {
+      const off = offsets[idx];
+      const targetX = this.leader.x + (off.dx * Math.cos(this.leader.angle) - off.dy * Math.sin(this.leader.angle));
+      const targetY = this.leader.y + (off.dx * Math.sin(this.leader.angle) + off.dy * Math.cos(this.leader.angle));
+
+      const fdx = targetX - fol.x;
+      const fdy = targetY - fol.y;
+      let fMoveX = fdx * (this.kp * 1.5);
+      let fMoveY = fdy * (this.kp * 1.5);
+
+      // APF Repulsion
+      this.obstacles.forEach(obs => {
+        const odx = fol.x - obs.x;
+        const ody = fol.y - obs.y;
+        const odist = Math.hypot(odx, ody);
+        const minSafety = obs.radius + fol.radius + 25;
+        if (odist < minSafety && odist > 0) {
+          const force = (minSafety - odist) / minSafety * 3.0;
+          fMoveX += (odx / odist) * force;
+          fMoveY += (ody / odist) * force;
+        }
+      });
+
+      fol.x += fMoveX;
+      fol.y += fMoveY;
+      fol.angle = Math.atan2(fdy, fdx);
+    });
   }
 
   draw() {
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    // Draw Grid
+    // Grid
     this.ctx.strokeStyle = "rgba(255,255,255,0.03)";
     this.ctx.lineWidth = 1;
     for (let x = 0; x < this.width; x += 30) {
@@ -126,25 +181,18 @@ class PIDDDMRSimulation {
       this.ctx.beginPath(); this.ctx.moveTo(0, y); this.ctx.lineTo(this.width, y); this.ctx.stroke();
     }
 
-    // Draw Trail
-    this.ctx.strokeStyle = "rgba(0, 242, 254, 0.4)";
+    // Target
+    this.ctx.strokeStyle = "#00f2fe";
     this.ctx.lineWidth = 2;
+    this.ctx.setLineDash([4, 4]);
     this.ctx.beginPath();
-    this.robot.trail.forEach((pt, i) => {
-      if (i === 0) this.ctx.moveTo(pt.x, pt.y);
-      else this.ctx.lineTo(pt.x, pt.y);
-    });
+    this.ctx.arc(this.leader.targetX, this.leader.targetY, 14, 0, Math.PI * 2);
     this.ctx.stroke();
+    this.ctx.setLineDash([]);
 
-    // Draw Goal
-    this.ctx.fillStyle = "#10b981";
-    this.ctx.beginPath();
-    this.ctx.arc(this.goal.x, this.goal.y, 10, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    // Draw Obstacles
+    // Obstacles
     this.obstacles.forEach(obs => {
-      this.ctx.fillStyle = "rgba(239, 68, 68, 0.2)";
+      this.ctx.fillStyle = "rgba(239, 68, 68, 0.25)";
       this.ctx.strokeStyle = "#ef4444";
       this.ctx.lineWidth = 2;
       this.ctx.beginPath();
@@ -153,28 +201,168 @@ class PIDDDMRSimulation {
       this.ctx.stroke();
     });
 
-    // Draw DDMR Robot Body
+    // Formation Comm Lines
+    this.followers.forEach(fol => {
+      this.ctx.strokeStyle = "rgba(0, 242, 254, 0.35)";
+      this.ctx.lineWidth = 1.5;
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.leader.x, this.leader.y);
+      this.ctx.lineTo(fol.x, fol.y);
+      this.ctx.stroke();
+    });
+
+    // Draw Followers
+    this.followers.forEach(fol => {
+      this.ctx.save();
+      this.ctx.translate(fol.x, fol.y);
+      this.ctx.rotate(fol.angle);
+
+      // Wheels
+      this.ctx.fillStyle = "#64748b";
+      this.ctx.fillRect(-7, -13, 14, 4);
+      this.ctx.fillRect(-7, 9, 14, 4);
+
+      this.ctx.fillStyle = fol.color;
+      this.ctx.beginPath();
+      this.ctx.arc(0, 0, fol.radius, 0, Math.PI * 2);
+      this.ctx.fill();
+
+      this.ctx.restore();
+    });
+
+    // Draw Leader
+    this.ctx.save();
+    this.ctx.translate(this.leader.x, this.leader.y);
+    this.ctx.rotate(this.leader.angle);
+
+    this.ctx.shadowColor = "#00f2fe";
+    this.ctx.shadowBlur = 12;
+    this.ctx.fillStyle = "#f59e0b";
+    this.ctx.beginPath();
+    this.ctx.arc(0, 0, this.leader.radius, 0, Math.PI * 2);
+    this.ctx.fill();
+
+    this.ctx.fillStyle = "#fff";
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.leader.radius + 5, 0);
+    this.ctx.lineTo(-4, -5);
+    this.ctx.lineTo(-4, 5);
+    this.ctx.fill();
+
+    this.ctx.restore();
+  }
+
+  loop() {
+    this.update();
+    this.draw();
+    requestAnimationFrame(() => this.loop());
+  }
+}
+
+// --- MODULE 2: Mathematical Model to Simulation Engine (Kinematics Equations to 2D Trajectory) ---
+class MathModelSimulation {
+  constructor(canvasId) {
+    this.canvas = document.getElementById(canvasId);
+    if (!this.canvas) return;
+    this.ctx = this.canvas.getContext("2d");
+    this.width = this.canvas.width = this.canvas.clientWidth || 700;
+    this.height = this.canvas.height = this.canvas.clientHeight || 420;
+
+    // Kinematic parameters
+    this.wr = 3.0; // Right wheel angular vel (rad/s)
+    this.wl = 2.0; // Left wheel angular vel (rad/s)
+    this.r = 0.05; // Wheel radius (m)
+    this.L = 0.25; // Wheelbase length (m)
+
+    this.robot = {
+      x: this.width * 0.2,
+      y: this.height * 0.5,
+      theta: 0,
+      trail: []
+    };
+
+    this.dt = 0.05;
+    this.loop();
+  }
+
+  setWheelVelocities(wr, wl) {
+    this.wr = parseFloat(wr);
+    this.wl = parseFloat(wl);
+  }
+
+  resetTrajectory() {
+    this.robot.x = this.width * 0.2;
+    this.robot.y = this.height * 0.5;
+    this.robot.theta = 0;
+    this.robot.trail = [];
+  }
+
+  update() {
+    // Kinematic Equations of DDMR:
+    // v = (r / 2) * (wr + wl)
+    // w = (r / L) * (wr - wl)
+    const v = (this.r / 2) * (this.wr + this.wl) * 35; // scaled for pixels
+    const w = (this.r / this.L) * (this.wr - this.wl);
+
+    this.robot.theta += w * this.dt;
+    this.robot.x += Math.cos(this.robot.theta) * v * this.dt;
+    this.robot.y += Math.sin(this.robot.theta) * v * this.dt;
+
+    // Boundary wrap
+    if (this.robot.x > this.width) this.robot.x = 0;
+    if (this.robot.x < 0) this.robot.x = this.width;
+    if (this.robot.y > this.height) this.robot.y = 0;
+    if (this.robot.y < 0) this.robot.y = this.height;
+
+    this.robot.trail.push({ x: this.robot.x, y: this.robot.y });
+    if (this.robot.trail.length > 250) this.robot.trail.shift();
+
+    // Update telemetry display
+    const telV = document.getElementById("mathTelV");
+    const telW = document.getElementById("mathTelW");
+    if (telV) telV.textContent = `${((this.r / 2) * (this.wr + this.wl)).toFixed(2)} m/s`;
+    if (telW) telW.textContent = `${w.toFixed(2)} rad/s`;
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+
+    // Grid
+    this.ctx.strokeStyle = "rgba(255,255,255,0.03)";
+    this.ctx.lineWidth = 1;
+    for (let x = 0; x < this.width; x += 30) {
+      this.ctx.beginPath(); this.ctx.moveTo(x, 0); this.ctx.lineTo(x, this.height); this.ctx.stroke();
+    }
+    for (let y = 0; y < this.height; y += 30) {
+      this.ctx.beginPath(); this.ctx.moveTo(0, y); this.ctx.lineTo(this.width, y); this.ctx.stroke();
+    }
+
+    // Trajectory Path
+    this.ctx.strokeStyle = "#8b5cf6";
+    this.ctx.lineWidth = 2.5;
+    this.ctx.beginPath();
+    this.robot.trail.forEach((pt, i) => {
+      if (i === 0) this.ctx.moveTo(pt.x, pt.y);
+      else this.ctx.lineTo(pt.x, pt.y);
+    });
+    this.ctx.stroke();
+
+    // Draw DDMR Robot
     this.ctx.save();
     this.ctx.translate(this.robot.x, this.robot.y);
     this.ctx.rotate(this.robot.theta);
 
-    // Wheels
-    this.ctx.fillStyle = "#64748b";
-    this.ctx.fillRect(-10, -18, 20, 5);
-    this.ctx.fillRect(-10, 13, 20, 5);
-
-    // Chassis
-    this.ctx.fillStyle = "#00f2fe";
+    this.ctx.fillStyle = "#10b981";
     this.ctx.beginPath();
-    this.ctx.arc(0, 0, this.robot.radius, 0, Math.PI * 2);
+    this.ctx.arc(0, 0, 15, 0, Math.PI * 2);
     this.ctx.fill();
 
-    // Heading direction
-    this.ctx.strokeStyle = "#fff";
+    // Velocity Vectors
+    this.ctx.strokeStyle = "#00f2fe";
     this.ctx.lineWidth = 2;
     this.ctx.beginPath();
     this.ctx.moveTo(0, 0);
-    this.ctx.lineTo(18, 0);
+    this.ctx.lineTo(25, 0);
     this.ctx.stroke();
 
     this.ctx.restore();
@@ -187,7 +375,145 @@ class PIDDDMRSimulation {
   }
 }
 
-// --- MODULE 2: Drone Swarm Flocking & Altitude Modulation (SICE FES 2025) ---
+// --- MODULE 3: OpenCV Vision-Based Leader-Follower (Camera Sensor FOV & Distance Detection) ---
+class OpenCVVisionSimulation {
+  constructor(canvasId) {
+    this.canvas = document.getElementById(canvasId);
+    if (!this.canvas) return;
+    this.ctx = this.canvas.getContext("2d");
+    this.width = this.canvas.width = this.canvas.clientWidth || 700;
+    this.height = this.canvas.height = this.canvas.clientHeight || 420;
+
+    this.leader = { x: this.width * 0.6, y: this.height * 0.5 };
+    this.follower = { x: this.width * 0.2, y: this.height * 0.5, theta: 0, fov: Math.PI / 3, camRange: 180 };
+    
+    this.targetDist = 70; // Target keeping distance (pixels)
+    this.detectedDist = 0;
+    this.detectedAngle = 0;
+    this.isDetected = false;
+
+    this.bindEvents();
+    this.loop();
+  }
+
+  bindEvents() {
+    this.canvas.addEventListener("mousemove", (e) => {
+      const rect = this.canvas.getBoundingClientRect();
+      this.leader.x = e.clientX - rect.left;
+      this.leader.y = e.clientY - rect.top;
+    });
+  }
+
+  update() {
+    // Camera Vision Geometry (Simulated OpenCV ArUco/Color Bounding Box)
+    const dx = this.leader.x - this.follower.x;
+    const dy = this.leader.y - this.follower.y;
+    const dist = Math.hypot(dx, dy);
+    const angleToLeader = Math.atan2(dy, dx);
+
+    let angleDiff = angleToLeader - this.follower.theta;
+    while (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+    while (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+
+    // Check if Leader is inside Follower's Camera FOV Cone & Range
+    if (dist <= this.follower.camRange && Math.abs(angleDiff) <= this.follower.fov / 2) {
+      this.isDetected = true;
+      this.detectedDist = dist;
+      this.detectedAngle = angleDiff;
+
+      // Vision-based Follower Control Loop
+      this.follower.theta += angleDiff * 0.1;
+      const speedErr = dist - this.targetDist;
+      const v = Math.max(-1.5, Math.min(speedErr * 0.06, 2.5));
+
+      this.follower.x += Math.cos(this.follower.theta) * v;
+      this.follower.y += Math.sin(this.follower.theta) * v;
+    } else {
+      this.isDetected = false;
+      // Search mode (slow rotate)
+      this.follower.theta += 0.015;
+    }
+
+    // Telemetry update
+    const camStatus = document.getElementById("visionStatus");
+    const camDist = document.getElementById("visionDist");
+    if (camStatus) {
+      camStatus.textContent = this.isDetected ? "TRACKING (OpenCV Box Found)" : "SEARCHING (Target Lost)";
+      camStatus.style.color = this.isDetected ? "#10b981" : "#ef4444";
+    }
+    if (camDist) {
+      camDist.textContent = this.isDetected ? `${Math.round(this.detectedDist)} px` : "--";
+    }
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+
+    // Grid
+    this.ctx.strokeStyle = "rgba(255,255,255,0.03)";
+    this.ctx.lineWidth = 1;
+    for (let x = 0; x < this.width; x += 30) {
+      this.ctx.beginPath(); this.ctx.moveTo(x, 0); this.ctx.lineTo(x, this.height); this.ctx.stroke();
+    }
+    for (let y = 0; y < this.height; y += 30) {
+      this.ctx.beginPath(); this.ctx.moveTo(0, y); this.ctx.lineTo(this.width, y); this.ctx.stroke();
+    }
+
+    // Follower Camera FOV Cone
+    this.ctx.save();
+    this.ctx.translate(this.follower.x, this.follower.y);
+    this.ctx.rotate(this.follower.theta);
+
+    this.ctx.fillStyle = this.isDetected ? "rgba(16, 185, 129, 0.15)" : "rgba(239, 68, 68, 0.15)";
+    this.ctx.strokeStyle = this.isDetected ? "#10b981" : "#ef4444";
+    this.ctx.lineWidth = 1.5;
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(0, 0);
+    this.ctx.arc(0, 0, this.follower.camRange, -this.follower.fov / 2, this.follower.fov / 2);
+    this.ctx.closePath();
+    this.ctx.fill();
+    this.ctx.stroke();
+
+    // Follower Robot
+    this.ctx.fillStyle = "#00f2fe";
+    this.ctx.beginPath();
+    this.ctx.arc(0, 0, 14, 0, Math.PI * 2);
+    this.ctx.fill();
+
+    // Camera Lens Icon
+    this.ctx.fillStyle = "#fff";
+    this.ctx.fillRect(8, -4, 6, 8);
+
+    this.ctx.restore();
+
+    // Leader Target Robot with Bounding Box
+    this.ctx.fillStyle = "#f59e0b";
+    this.ctx.beginPath();
+    this.ctx.arc(this.leader.x, this.leader.y, 14, 0, Math.PI * 2);
+    this.ctx.fill();
+
+    if (this.isDetected) {
+      // OpenCV Bounding Box Simulation
+      this.ctx.strokeStyle = "#10b981";
+      this.ctx.lineWidth = 2;
+      this.ctx.strokeRect(this.leader.x - 20, this.leader.y - 20, 40, 40);
+
+      // OpenCV Label text
+      this.ctx.fillStyle = "#10b981";
+      this.ctx.font = "11px monospace";
+      this.ctx.fillText(`Target: ${Math.round(this.detectedDist)}px`, this.leader.x - 25, this.leader.y - 25);
+    }
+  }
+
+  loop() {
+    this.update();
+    this.draw();
+    requestAnimationFrame(() => this.loop());
+  }
+}
+
+// --- MODULE 4: Swarm Quadcopters Flocking (SICE FES 2025) ---
 class DroneSwarmSimulation {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -232,7 +558,6 @@ class DroneSwarmSimulation {
     this.time += 0.04;
 
     this.drones.forEach((d, i) => {
-      // 1. Cohesion & Goal attraction
       let gdx = this.target.x - d.x;
       let gdy = this.target.y - d.y;
       let gdist = Math.hypot(gdx, gdy);
@@ -240,7 +565,6 @@ class DroneSwarmSimulation {
       d.vx += (gdx / gdist) * 0.12;
       d.vy += (gdy / gdist) * 0.12;
 
-      // 2. Separation between drones
       this.drones.forEach((other, j) => {
         if (i !== j) {
           let odx = d.x - other.x;
@@ -253,10 +577,8 @@ class DroneSwarmSimulation {
         }
       });
 
-      // 3. Sinusoidal Altitude Modulation (SICE FES 2025 Research Feature)
       d.altitude = 15 + Math.sin(this.time * 2 + d.phase) * 8;
 
-      // Speed limit
       const speed = Math.hypot(d.vx, d.vy);
       if (speed > 2.8) {
         d.vx = (d.vx / speed) * 2.8;
@@ -271,7 +593,6 @@ class DroneSwarmSimulation {
   draw() {
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    // Draw Grid
     this.ctx.strokeStyle = "rgba(255,255,255,0.03)";
     this.ctx.lineWidth = 1;
     for (let x = 0; x < this.width; x += 40) {
@@ -281,7 +602,6 @@ class DroneSwarmSimulation {
       this.ctx.beginPath(); this.ctx.moveTo(0, y); this.ctx.lineTo(this.width, y); this.ctx.stroke();
     }
 
-    // Target Marker
     this.ctx.strokeStyle = "#8b5cf6";
     this.ctx.lineWidth = 2;
     this.ctx.setLineDash([5, 5]);
@@ -290,16 +610,13 @@ class DroneSwarmSimulation {
     this.ctx.stroke();
     this.ctx.setLineDash([]);
 
-    // Draw Quadcopters
     this.drones.forEach(d => {
-      // Shadow (indicates altitude)
       const shadowRadius = Math.max(3, 10 - d.altitude * 0.3);
       this.ctx.fillStyle = "rgba(0,0,0,0.3)";
       this.ctx.beginPath();
       this.ctx.arc(d.x, d.y + d.altitude * 0.8, shadowRadius, 0, Math.PI * 2);
       this.ctx.fill();
 
-      // Drone Body (X-Frame Quadcopter)
       this.ctx.save();
       this.ctx.translate(d.x, d.y);
 
@@ -310,7 +627,6 @@ class DroneSwarmSimulation {
       this.ctx.moveTo(10, -10); this.ctx.lineTo(-10, 10);
       this.ctx.stroke();
 
-      // Rotors
       this.ctx.fillStyle = "rgba(139, 92, 246, 0.8)";
       [-10, 10].forEach(rx => {
         [-10, 10].forEach(ry => {
@@ -320,7 +636,6 @@ class DroneSwarmSimulation {
         });
       });
 
-      // Center LED
       this.ctx.fillStyle = "#10b981";
       this.ctx.beginPath();
       this.ctx.arc(0, 0, 3, 0, Math.PI * 2);
@@ -337,7 +652,7 @@ class DroneSwarmSimulation {
   }
 }
 
-// --- MODULE 3: Indoor Exploration (Floodfill vs Frontier-Based) (ICCAS 2024) ---
+// --- MODULE 5: Indoor Exploration (Floodfill vs Frontier) (ICCAS 2024) ---
 class IndoorExplorationSimulation {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -352,8 +667,7 @@ class IndoorExplorationSimulation {
     this.cellH = this.height / this.rows;
 
     this.grid = [];
-    this.mode = "frontier"; // "frontier" or "floodfill"
-    this.exploredCount = 0;
+    this.mode = "frontier";
     this.isExploring = false;
 
     this.initGrid();
@@ -361,23 +675,14 @@ class IndoorExplorationSimulation {
 
   initGrid() {
     this.grid = [];
-    this.exploredCount = 0;
     for (let r = 0; r < this.rows; r++) {
       const row = [];
       for (let c = 0; c < this.cols; c++) {
-        // Random obstacles
         const isWall = (r > 0 && r < this.rows - 1 && c > 0 && c < this.cols - 1) && Math.random() < 0.22;
-        row.push({
-          row: r,
-          col: c,
-          isWall: isWall,
-          visited: false,
-          isFrontier: false
-        });
+        row.push({ row: r, col: c, isWall: isWall, visited: false, isFrontier: false });
       }
       this.grid.push(row);
     }
-    // Start node
     this.grid[0][0].isWall = false;
     this.grid[0][0].visited = true;
     this.draw();
@@ -401,7 +706,6 @@ class IndoorExplorationSimulation {
       }
 
       if (this.mode === "frontier") {
-        // Frontier priority (closest unvisited boundary)
         queue.sort((a, b) => (a.r + a.c) - (b.r + b.c));
       }
 
@@ -410,10 +714,8 @@ class IndoorExplorationSimulation {
 
       if (!cell.visited) {
         cell.visited = true;
-        this.exploredCount++;
       }
 
-      // Check 4 neighbors
       const neighbors = [
         { r: current.r - 1, c: current.c },
         { r: current.r + 1, c: current.c },
@@ -463,7 +765,7 @@ class IndoorExplorationSimulation {
   }
 }
 
-// --- MODULE 4: LiDAR SLAM Autonomous Navigation (IJRA 2024) ---
+// --- MODULE 6: LiDAR SLAM Autonomous Navigation (IJRA 2024) ---
 class LiDARSLAMSimulation {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
@@ -479,7 +781,7 @@ class LiDARSLAMSimulation {
       { x: this.width * 0.7, y: this.height * 0.5, w: 60, h: 60 }
     ];
 
-    this.rays = 36; // 360 degree scan
+    this.rays = 36;
     this.scanData = [];
     this.bindEvents();
     this.loop();
@@ -497,17 +799,14 @@ class LiDARSLAMSimulation {
     this.robot.angle += 0.02;
     this.scanData = [];
 
-    // Cast 36 LiDAR Rays
     for (let i = 0; i < this.rays; i++) {
       const angle = this.robot.angle + (i * (Math.PI * 2 / this.rays));
-      let rayDist = 200; // max LiDAR range
+      let rayDist = 200;
 
-      // Ray march
       for (let d = 0; d < 200; d += 4) {
         const rx = this.robot.x + Math.cos(angle) * d;
         const ry = this.robot.y + Math.sin(angle) * d;
 
-        // Check canvas boundary or obstacle hit
         if (rx < 0 || rx > this.width || ry < 0 || ry > this.height) {
           rayDist = d;
           break;
@@ -530,18 +829,15 @@ class LiDARSLAMSimulation {
   draw() {
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    // Draw Obstacles
     this.ctx.fillStyle = "#475569";
     this.obstacles.forEach(obs => {
       this.ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
     });
 
-    // Draw LiDAR Rays & Point Cloud Hits
     this.scanData.forEach(ray => {
       const hx = this.robot.x + Math.cos(ray.angle) * ray.dist;
       const hy = this.robot.y + Math.sin(ray.angle) * ray.dist;
 
-      // Laser Ray
       this.ctx.strokeStyle = "rgba(0, 242, 254, 0.15)";
       this.ctx.lineWidth = 1;
       this.ctx.beginPath();
@@ -549,14 +845,12 @@ class LiDARSLAMSimulation {
       this.ctx.lineTo(hx, hy);
       this.ctx.stroke();
 
-      // Hit Point (Point Cloud)
       this.ctx.fillStyle = "#00f2fe";
       this.ctx.beginPath();
       this.ctx.arc(hx, hy, 2.5, 0, Math.PI * 2);
       this.ctx.fill();
     });
 
-    // Draw Hexapod Robot Center
     this.ctx.fillStyle = "#f59e0b";
     this.ctx.beginPath();
     this.ctx.arc(this.robot.x, this.robot.y, 10, 0, Math.PI * 2);
