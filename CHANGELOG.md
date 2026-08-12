@@ -6,6 +6,22 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.9] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(robotics-sim-theory)`**: Menambahkan dokumentasi teori komprehensif, referensi paper ilmiah asli, dan perumusan matematis KaTeX LaTeX pada semua 7 modul simulasi di `robotics-sim.html`:
+  - **Modul 1 (Paper ICCAS 2025)**: Persamaan kinematika unicycle DWMR, rotasi formasi dinamis $o_i(t)$, medan potensial APF gabungan ($U_{\text{att}} + U_{\text{rep}}$), dan hukum kendali kecepatan linier/angular Fuzzy-Tuned PID dengan Mamdani FIS ($f_{\text{pos}}, f_{\text{ang}} \in [0.2, 3]$).
+  - **Modul 2 (Paper IJCAS 2026 / Springer Nature)**: Matriks kinematika invers 4 roda Mecanum (MWDR), direct forward kinematics, persamaan kurva referensi sirkular dan lemniscate ($D_{xR}, D_{yR}$), serta hukum kendali PD leader-dependent.
+  - **Modul 3 (Path vs Trajectory)**: Analisis teoritis look-ahead pure pursuit ($e_{\text{cross}}$ & kelengkungan $\kappa$) vs batasan waktu spatiotemporal trajectory tracking $\mathbf{e}(t) \to 0$.
+  - **Modul 4 (Vision Follower)**: Model kamera lubang jarum (pinhole camera) untuk estimasi jarak metrik dari piksel bounding box ($Z_{\text{est}}$) dan Image-Based Visual Servoing (IBVS).
+  - **Modul 5 (Paper SICE FES 2025 / IEEE)**: Teori konsensus graf Laplacian multi-agent ($L = D - A$), 3 gaya bio-inspired flocking Reynolds (separation, cohesion, alignment), modulasi ketinggian sinusoidal 3D, dan mekanisme dynamic goal-shifting ($n_{\text{near}} \ge 2$).
+  - **Modul 6 (Paper ICCAS 2024 / IEEE)**: Metrik kelengkapan peta ($\text{Completeness}\%$), perumusan biaya frontier, serta tabel komparasi eksperimental resmi dari paper (Phoenix, Mememan, Complex Zee).
+  - **Modul 7 (Paper IJRA 2024 / MDPI)**: Teori pemetaan Bayesian Log-Odds Occupancy Grid Mapping, model 2D LiDAR ray-casting, dan formula kendali kemudi reaktif TurtleBot.
+- **`css/style.css`**: Styling collapsible card `.paper-theory-box`, formula card `.math-eq-card`, badge `.paper-meta-badge`, dan `.theory-table`.
+- **`robotics-sim.html`**: Penambahan KaTeX auto-render extension untuk rendering dinamis persamaan LaTeX di seluruh dokumen.
+
+---
+
 ## [v2026.08.12.8] — 2026-08-12
 
 ### Added / Ditambahkan

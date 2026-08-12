@@ -136,14 +136,57 @@
               <button class="btn btn-outline btn-sm" id="btnToggleObstacle1"><i class="fa fa-shield"></i> Tambah Obstacle APF</button>
             </div>
           </div>
+
+          <!-- Scientific Paper Theory & Formula Box -->
+          <details class="paper-theory-box" open>
+            <summary class="theory-summary">
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori &amp; Persamaan Matematis (Paper ICCAS 2025)</span>
+              <i class="fa fa-chevron-down toggle-chevron"></i>
+            </summary>
+            <div class="theory-content">
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: 25th ICCAS 2025, Songdo Convensia, Incheon, Korea (IEEE / ICROS)</div>
+              <p><strong>Judul Paper:</strong> <em>Fuzzy-Tuned PID Control for Dynamic Formation of Differential-Wheeled Mobile Robots with APF-Based Obstacle Avoidance</em> (Naufaldo &amp; Hsiu-Ming Wu, 2025).</p>
+              
+              <div class="theory-subheading"><i class="fa fa-code-fork"></i> 1. Model Kinematika Diferensial DWMR</div>
+              <p>Setiap robot dimodelkan sebagai unicycle beroda diferensial dengan radius roda $r$ dan jarak sumbu roda $b$. Kecepatan maju linier $V$ dan laju yaw $\omega$ dirumuskan:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Persamaan Kinematika Diferensial &amp; Ruang Keadaan</div>
+                $$V = \frac{v_R + v_L}{2}, \quad \omega = \frac{v_R - v_L}{b}$$
+                $$\begin{pmatrix} \dot{x} \\ \dot{y} \\ \dot{\theta} \end{pmatrix} = \begin{pmatrix} \cos\theta & 0 \\ \sin\theta & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} V \\ \omega \end{pmatrix}, \quad v_R = V + \frac{b}{2}\omega, \quad v_L = V - \frac{b}{2}\omega$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-circle-o-notch"></i> 2. Formasi Dinamis Relatif thd Virtual Leader</div>
+              <p>Posisi target $q_{di}(t)$ untuk robot follower $i$ dihitung dari orientasi virtual leader $\theta_L(t)$ dengan offset berotasi $o_i(t)$:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Offset Formasi Berputar &amp; Transformasi Global</div>
+                $$o_i(t) = R_f \begin{pmatrix} \cos\left(\phi_0(t) + \frac{2\pi(i-1)}{n}\right) \\ \sin\left(\phi_0(t) + \frac{2\pi(i-1)}{n}\right) \end{pmatrix}, \quad q_{di}(t) = \begin{pmatrix} \cos\theta_L & -\sin\theta_L \\ \sin\theta_L & \cos\theta_L \end{pmatrix} o_i(t) + \begin{pmatrix} x_L(t) \\ y_L(t) \end{pmatrix}$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-shield"></i> 3. Artificial Potential Field (APF) Multi-Agent</div>
+              <p>Medan potensial total $U(q_i)$ menggabungkan gaya tarik atraktif ke titik formasi dan gaya tolak repulsif dari rintangan statis serta tetangga agent:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Potensial Gabungan &amp; Vektor Gaya APF</div>
+                $$U(q_i) = \frac{1}{2}\zeta \|q_i - q_{di}\|^2 + \sum_{o} \frac{1}{2}\eta \left(\frac{1}{d_{io}} - \frac{1}{Q^*}\right)^2 + \sum_{j \in \mathcal{N}_i} \frac{1}{2}\eta \left(\frac{1}{d_{ij}} - \frac{1}{Q_r^*}\right)^2$$
+                $$\mathbf{F}_i = -\nabla U(q_i) \implies \theta_{di} = \text{atan2}(F_{iy}, F_{ix})$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-sliders"></i> 4. Hukum Kendali Fuzzy-Tuned PID &amp; APF Steering</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Perintah Kecepatan Linier &amp; Angular Adaptif</div>
+                $$v_i = K_{pi} e_{pi} + K_{Ipi} \int_0^t e_{pi}(\tau) d\tau + K_{Dpi} \dot{e}_{pi} + k_{vi}(V_L - v_i)\cos e_{\theta i}$$
+                $$\omega_i = K_{ai} e_{\theta i} + K_{Iai} \int_0^t e_{\theta i}(\tau) d\tau + K_{Dai} \dot{e}_{\theta i} + \Delta\omega_{\text{APF}}$$
+              </div>
+              <p style="font-size:0.8rem;color:var(--text-secondary);">Gain $K_{pi} = k_{pi} f_{\text{pos}}$ dan $K_{ai} = k_{ai} f_{\text{ang}}$ diskalakan secara real-time oleh <em>Mamdani Fuzzy Inference System</em> ($f_{\text{pos}}, f_{\text{ang}} \in [0.2, 3]$) berdasarkan error posisi $(e_p, \dot{e}_p)$ dan orientasi $(e_\theta, \dot{e}_\theta)$.</p>
+            </div>
+          </details>
         </div>
       </div>
 
       <!-- ===== TAB 2: Model Kinematika + PID Trajectory ===== -->
       <div class="sim-tab-content" id="tab2" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;">Modul 2: Model Matematika Kinematika → Simulasi 2D &amp; PID Trajectory Control</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;">Open-loop ωr/ωl <em>atau</em> mode PID Trajectory — robot mengejar lintasan referensi (Sinusoidal, Circular, Lemniscate, Square) dengan kontrol heading PID.</p>
+          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;">Modul 2: Model Matematika Kinematika Mecanum (MWDR) &amp; Trajectory Tracking</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;">Open-loop $\omega_r/\omega_l$ <em>atau</em> mode PID Trajectory — robot mengejar lintasan referensi (Sinusoidal, Circular, Lemniscate, Square) dengan kontrol heading PID.</p>
           <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
             <button class="btn btn-primary btn-sm" id="btnModeOpenLoop2">⚙ Open-Loop ωr/ωl</button>
             <button class="btn btn-outline btn-sm" id="btnModePID2">🎯 PID Trajectory</button>
@@ -203,6 +246,38 @@
             </div>
             <button class="btn btn-outline btn-sm" id="btnResetPID2"><i class="fa fa-refresh"></i> Reset Trajectory</button>
           </div>
+
+          <!-- Scientific Paper Theory & Formula Box -->
+          <details class="paper-theory-box" open>
+            <summary class="theory-summary">
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori Kinematika Mecanum (Paper IJCAS 2026 / Springer)</span>
+              <i class="fa fa-chevron-down toggle-chevron"></i>
+            </summary>
+            <div class="theory-content">
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: International Journal of Control, Automation, and Systems (IJCAS 2026 / Springer Nature)</div>
+              <p><strong>Judul Paper:</strong> <em>Robot Coordination in Multi-agent Systems: Leader-Dependent Following Configuration Control of Mecanum Wheeled Drive Robots</em> (Naufaldo, Hsiu-Ming Wu, Muhammad Qomaruz Zaman, 2026).</p>
+
+              <div class="theory-subheading"><i class="fa fa-cogs"></i> 1. Matriks Kinematika Invers Roda Mecanum (MWDR)</div>
+              <p>Pemetaan dari kecepatan bodi robot $[V_{xR}, V_{yR}, \omega_z]^T$ ke kecepatan sudut 4 roda Mecanum $(\omega_1, \omega_2, \omega_3, \omega_4)$:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Persamaan Invers Kinematika MWDR (Eq. 1 Paper)</div>
+                $$\begin{pmatrix} \omega_1 \\ \omega_2 \\ \omega_3 \\ \omega_4 \end{pmatrix} = -\frac{1}{r_w} \begin{pmatrix} 1 & -1 & \frac{L_x+L_y}{2} \\ 1 & 1 & \frac{L_x+L_y}{2} \\ 1 & 1 & -\frac{L_x+L_y}{2} \\ 1 & -1 & -\frac{L_x+L_y}{2} \end{pmatrix} \begin{pmatrix} V_{xR} \\ V_{yR} \\ \omega_z \end{pmatrix}$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-refresh"></i> 2. Matriks Kinematika Maju / Forward Kinematics</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Persamaan Direct Kinematika MWDR (Eq. 2 Paper)</div>
+                $$\begin{pmatrix} V_{xR} \\ V_{yR} \\ \omega_z \end{pmatrix} = \frac{r_w}{4} \begin{pmatrix} 1 & 1 & 1 & 1 \\ -1 & 1 & 1 & -1 \\ -\frac{2}{L_x+L_y} & \frac{2}{L_x+L_y} & -\frac{2}{L_x+L_y} & \frac{2}{L_x+L_y} \end{pmatrix} \begin{pmatrix} \omega_1 \\ \omega_2 \\ \omega_3 \\ \omega_4 \end{pmatrix}$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-compass"></i> 3. Trajectory Tracking &amp; Kendali PD Leader-Dependent</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Persamaan Trajektori Sirkular &amp; Lemniscate (Eq. 3-4 Paper)</div>
+                $$\mathbf{D}_{\text{circ}}(t) = \begin{pmatrix} x_c \\ y_c \end{pmatrix} + R \begin{pmatrix} \cos(\omega t) \\ \sin(\omega t) \end{pmatrix}, \quad \mathbf{D}_{\text{lemn}}(t) = \begin{pmatrix} x_c \\ y_c \end{pmatrix} + a \begin{pmatrix} \sin(\omega t) \\ \sin(\omega t)\cos(\omega t) \end{pmatrix}$$
+                $$e_{DL} = \sqrt{(D_{xR} - x_{RL})^2 + (D_{yR} - y_{RL})^2}, \quad e_{HL} = \text{atan2}(D_{yR} - y_{RL}, D_{xR} - x_{RL}) - \theta_{RL}$$
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -245,6 +320,29 @@
               <div style="font-size:0.82rem;color:var(--text-secondary);">Waktu simulasi: <span id="timer3Label" style="color:var(--accent-amber);font-family:monospace;font-size:0.9rem;">0.0s</span></div>
             </div>
           </div>
+
+          <!-- Scientific Paper Theory & Formula Box -->
+          <details class="paper-theory-box" open>
+            <summary class="theory-summary">
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori: Analisis Fundamental Path vs Trajectory</span>
+              <i class="fa fa-chevron-down toggle-chevron"></i>
+            </summary>
+            <div class="theory-content">
+              <div class="theory-subheading"><i class="fa fa-map-signs"></i> 1. Path Tracking (Pure Pursuit — Bebas Batasan Waktu)</div>
+              <p>Robot bertugas mengikuti bentuk geometris lintasan $f(x,y)=0$ tanpa kendala kapan harus mencapai titik tertentu. Kecepatan linier $v$ menyesuaikan radius kelengkungan kurva $\kappa(s)$ untuk meminimalkan <em>cross-track error</em>:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Formulasi Pure Pursuit &amp; Cross-Track Error</div>
+                $$e_{\text{cross}}(t) = (y_{\text{ref}} - y)\cos\theta - (x_{\text{ref}} - x)\sin\theta, \quad \kappa = \frac{2\sin\alpha}{L_{\text{lookahead}}}$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-clock-o"></i> 2. Trajectory Tracking (Time-Sync Parameterized)</div>
+              <p>Robot <strong>terikat secara tegas oleh parameter waktu $t$</strong>. Pada detik ke-$t_k$, robot wajib berada pada titik $(x_{\text{ref}}(t_k), y_{\text{ref}}(t_k))$. Jika robot terlambat karena tikungan tajam, controller akan menaikkan daya motor atau memotong sudut:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Vektor Error Spatiotemporal Trajectory</div>
+                $$\mathbf{e}(t) = \begin{pmatrix} x_{\text{ref}}(t) - x(t) \\ y_{\text{ref}}(t) - y(t) \end{pmatrix}, \quad \lim_{t \to \infty} \|\mathbf{e}(t)\| = 0 \quad \forall t \in [0, T]$$
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -258,6 +356,28 @@
             <div>Status: <span id="visionStatus" style="color:#ef4444;font-weight:600;">SEARCHING</span></div>
             <div>Distance: <span id="visionDist" style="color:var(--primary-cyan);">--</span></div>
           </div>
+
+          <!-- Scientific Paper Theory & Formula Box -->
+          <details class="paper-theory-box" open>
+            <summary class="theory-summary">
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori: Visual Servoing &amp; Bounding Box Monocular Tracking</span>
+              <i class="fa fa-chevron-down toggle-chevron"></i>
+            </summary>
+            <div class="theory-content">
+              <div class="theory-subheading"><i class="fa fa-camera"></i> 1. Estimasi Jarak berbasis Dimensi Bounding Box Piksel</div>
+              <p>Berdasarkan model kamera lubang jarum (<em>pinhole camera model</em>), jarak metrik $Z_{\text{est}}$ diestimasi dari rasio lebar piksel objek $w_{\text{pixel}}$ terhadap lebar fisik target $W_{\text{actual}}$:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Estimasi Jarak Pinhole Model &amp; Sudut Deviasi Horizontal</div>
+                $$Z_{\text{est}} = \frac{f_{\text{focal}} \cdot W_{\text{actual}}}{w_{\text{pixel}}}, \quad \alpha_{\text{err}} = \arctan\left(\frac{x_{\text{center,bbox}} - x_{\text{center,frame}}}{f_x}\right)$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-crosshairs"></i> 2. Hukum Kendali Kecepatan Image-Based Visual Servoing (IBVS)</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Kontrol Kecepatan Linier &amp; Angular Kamera Onboard</div>
+                $$v = K_v \cdot (w_{\text{target}} - w_{\text{pixel}}), \quad \omega = -K_\omega \cdot \left( x_{\text{center,bbox}} - \frac{W_{\text{frame}}}{2} \right)$$
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -292,6 +412,39 @@
               <button class="btn btn-sm" id="btnClearObstacles5" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:#ef4444;border-radius:6px;padding:0.4rem 0.85rem;cursor:pointer;"><i class="fa fa-trash"></i> Clear Obstacles</button>
             </div>
           </div>
+
+          <!-- Scientific Paper Theory & Formula Box -->
+          <details class="paper-theory-box" open>
+            <summary class="theory-summary">
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori Flocking Swarm Quadcopter (Paper SICE FES 2025 / IEEE)</span>
+              <i class="fa fa-chevron-down toggle-chevron"></i>
+            </summary>
+            <div class="theory-content">
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: 2025 SICE Festival with Annual Conference (SICE FES 2025, Chiang Mai, Thailand)</div>
+              <p><strong>Judul Paper:</strong> <em>Dynamic Goal-Shifting and Sinusoidal Altitude Modulation for Flight Control of a Swarm of Quadcopters with Flocking Dynamics</em> (Naufaldo, Hsiu-Ming Wu, Muhammad Qomaruz Zaman, 2025).</p>
+
+              <div class="theory-subheading"><i class="fa fa-sitemap"></i> 1. Model Konsensus Multi-Agent Graph Laplacian</div>
+              <p>Topologi komunikasi kawanan drone dimodelkan sebagai graf tak berarah $\mathcal{G} = (\mathcal{V}, \mathcal{E})$. Matriks derajat $D$, ketetanggaan $A$, dan Laplacian $L$ mengatur konsensus posisi:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Konsensus Posisi Berbasis Graf Laplacian (Eq. 20-22 Paper)</div>
+                $$L = D - A, \quad \dot{\mathbf{p}} = -L\mathbf{p} \implies \dot{p}_i = \sum_{j \in \mathcal{N}_i} a_{ij}(p_j - p_i)$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-twitter"></i> 2. Gaya Flocking Reynolds (Separation, Cohesion, Alignment)</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Gaya Interaksi Swarm (Eq. 23-26 Paper)</div>
+                $$\mathbf{F}_{\text{flock},i} = k_s \mathbf{F}_i^{\text{sep}} + k_c \mathbf{F}_i^{\text{coh}} + k_a \mathbf{F}_i^{\text{ali}}$$
+                $$\mathbf{F}_i^{\text{sep}} = \sum_{j \in \mathcal{N}_i} -\frac{p_j - p_i}{\|p_j - p_i\|^2 + \epsilon}, \quad \mathbf{F}_i^{\text{coh}} = \frac{1}{|\mathcal{N}_i|} \sum_{j \in \mathcal{N}_i} (p_j - p_i), \quad \mathbf{F}_i^{\text{ali}} = \frac{1}{|\mathcal{N}_i|} \sum_{j \in \mathcal{N}_i} (v_j - v_i)$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-line-chart"></i> 3. Modulasi Ketinggian Sinusoidal 3D &amp; Dynamic Goal-Shifting</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Profil Ketinggian Bergelombang &amp; Trigger Goal (Eq. 30-33 Paper)</div>
+                $$z_{id} = z_{\min} + \frac{z_{\max} - z_{\min}}{2}(1 + \sin\theta_i), \quad p_{id}^{\text{goal}} \leftarrow p_{id}^{\text{next}} \quad \text{jika } n_{\text{near}} \ge 2$$
+                $$\mathbf{F}_i^{\text{total}} = K_{\text{att}} \mathbf{F}_i^{\text{att}} + K_{\text{rep}} \mathbf{F}_i^{\text{rep}} + \mathbf{F}_{\text{flock},i}$$
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -336,6 +489,57 @@
               <button class="btn btn-outline btn-sm" id="btnResetExplore6"><i class="fa fa-refresh"></i> Reset Grid</button>
             </div>
           </div>
+
+          <!-- Scientific Paper Theory & Formula Box -->
+          <details class="paper-theory-box" open>
+            <summary class="theory-summary">
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori Eksplorasi Labirin (Paper ICCAS 2024 / IEEE)</span>
+              <i class="fa fa-chevron-down toggle-chevron"></i>
+            </summary>
+            <div class="theory-content">
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: 24th ICCAS 2024, Jeju Shinhwa World, Jeju, Korea (IEEE / ICROS)</div>
+              <p><strong>Judul Paper:</strong> <em>Comparative Analysis of Autonomous Indoor Exploration Strategies: Floodfill algorithm vs. Frontier-Based Method</em> (Naufaldo &amp; Hsiu-Ming Wu, 2024).</p>
+
+              <div class="theory-subheading"><i class="fa fa-bar-chart"></i> 1. Metrik Kelengkapan Peta (Map Completeness)</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Formula Kelengkapan Peta (Eq. 1 Paper)</div>
+                $$\text{Completeness}(\%) = \frac{\text{Known Cells}}{\text{Map Areas}} \times 100\%$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-table"></i> 2. Perbandingan Kinerja Eksperimental Paper Asli</div>
+              <table class="theory-table">
+                <thead>
+                  <tr>
+                    <th>Lingkungan Uji</th>
+                    <th>Waktu Floodfill</th>
+                    <th>Waktu Frontier-Based</th>
+                    <th>Peningkatan Efisiensi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Phoenix World Map</strong></td>
+                    <td>250 detik</td>
+                    <td><strong>106 detik</strong></td>
+                    <td style="color:#10b981;font-weight:600;">+57.6% lebih cepat</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Mememan World Map</strong></td>
+                    <td>85 detik (98%)</td>
+                    <td>120 detik (95%)</td>
+                    <td>Floodfill lebih stabil di area sempit</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Complex Zee World Map</strong></td>
+                    <td>900 detik (15 menit)</td>
+                    <td><strong>360 detik (6 menit)</strong></td>
+                    <td style="color:#10b981;font-weight:600;">+60.0% lebih cepat</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="font-size:0.8rem;color:var(--text-secondary);">Hasil riset membuktikan bahwa algoritma <strong>Frontier-Based</strong> unggul signifikan pada peta kompleks berskala luas karena memprioritaskan sel perbatasan (<em>frontiers</em>) dan merencanakan rute terpendek via A* &amp; DWA.</p>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -379,6 +583,32 @@
             Robot bergerak otomatis menggunakan data LiDAR untuk menghindari rintangan.<br>
             Algoritma: <strong style="color:var(--primary-cyan);">Reactive Obstacle Avoidance</strong> — memilih arah putar berdasarkan sisi dengan jarak LiDAR terpanjang.
           </div>
+
+          <!-- Scientific Paper Theory & Formula Box -->
+          <details class="paper-theory-box" open>
+            <summary class="theory-summary">
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori Pemetaan LiDAR SLAM &amp; Log-Odds Grid (Paper IJRA 2024)</span>
+              <i class="fa fa-chevron-down toggle-chevron"></i>
+            </summary>
+            <div class="theory-content">
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: International Journal of Robotics and Automation (IJRA 2024 / MDPI)</div>
+              <p><strong>Fokus Riset:</strong> <em>Autonomous Exploration and LiDAR SLAM with Reactive Navigation for Search and Rescue Hexapod &amp; Mobile Robots</em>.</p>
+
+              <div class="theory-subheading"><i class="fa fa-rss"></i> 1. Occupancy Grid Mapping (Bentuk Log-Odds)</div>
+              <p>Setiap berkas sinar laser LiDAR mengupdate probabilitas okupansi sel grid $m_i$ menggunakan update rekursif Bayesian log-odds $l_t(m_i)$:</p>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Persamaan Update Log-Odds Occupancy Grid</div>
+                $$l_t(m_i) = l_{t-1}(m_i) + \log\left(\frac{p(m_i \mid z_t)}{1 - p(m_i \mid z_t)}\right) - l_0$$
+              </div>
+
+              <div class="theory-subheading"><i class="fa fa-arrows"></i> 2. Model Ray-Casting &amp; Navigasi Reaktif TurtleBot</div>
+              <div class="math-eq-card">
+                <div class="math-eq-title">Model Berkas Sinar LiDAR 2D &amp; Kemudi Reaktif</div>
+                $$z_k = \min_{d \in [0, d_{\max}]} \{ d \mid (x_r + d\cos(\theta + \phi_k), y_r + d\sin(\theta + \phi_k)) \in \text{Obstacle} \}$$
+                $$\omega_{\text{steer}} = K_{\text{steer}} \cdot \left( \min_{k \in \text{Left}} z_k - \min_{k \in \text{Right}} z_k \right)$$
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
@@ -401,8 +631,24 @@
     </div>
   </footer>
 
-  <!-- KaTeX LaTeX Script -->
+  <!-- KaTeX LaTeX Script & Auto-Render -->
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof renderMathInElement !== "undefined") {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError: false
+        });
+      }
+    });
+  </script>
 
   <script src="js/app.js"></script>
   <script src="js/robotics-sim.js"></script>

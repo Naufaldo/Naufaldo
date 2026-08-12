@@ -957,3 +957,133 @@ input[type="range"] {
   cursor: pointer;
 }
 
+/* Scientific Paper Theory & Mathematical Foundation Cards */
+.paper-theory-box {
+  margin-top: 1.25rem;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.paper-theory-box[open] {
+  border-color: rgba(0, 242, 254, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 242, 254, 0.1);
+}
+
+.theory-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.2rem;
+  background: rgba(0, 242, 254, 0.05);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--primary-cyan);
+  user-select: none;
+  list-style: none;
+}
+
+.theory-summary::-webkit-details-marker {
+  display: none;
+}
+
+.theory-summary:hover {
+  background: rgba(0, 242, 254, 0.1);
+}
+
+.theory-summary .summary-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.theory-summary .toggle-chevron {
+  transition: transform 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.paper-theory-box[open] .theory-summary .toggle-chevron {
+  transform: rotate(180deg);
+}
+
+.theory-content {
+  padding: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.paper-meta-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 4px;
+  color: #c4b5fd;
+  font-size: 0.76rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.math-eq-card {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: 0.75rem 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.math-eq-title {
+  font-size: 0.78rem;
+  color: var(--accent-amber);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+
+.theory-subheading {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 1rem 0 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.theory-subheading i {
+  color: var(--primary-cyan);
+}
+
+.theory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.82rem;
+}
+
+.theory-table th, .theory-table td {
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.theory-table th {
+  background: rgba(0, 242, 254, 0.08);
+  color: var(--primary-cyan);
+  font-weight: 600;
+}
+
+.theory-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+
