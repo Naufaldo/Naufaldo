@@ -23,7 +23,13 @@ class ICCASPIDDDMRSimulation {
     this.formation = "triangle";
     this.trajMode = "manual"; // "manual" | "lemniscate" | "circular"
     this.t = 0;
-    this.simSpeed = 1.0;
+    this.simSpeed = 2.2;
+    this.followerCount = 3;
+    this.formDist = 48;
+    this.kp = 0.16;
+    this.apfForce = 4.0;
+
+    this.palette = ["#00f2fe", "#4facfe", "#a855f7", "#10b981", "#f59e0b", "#ec4899", "#3b82f6", "#14b8a6"];
 
     this.leader = {
       x: this.width * 0.35,
@@ -36,18 +42,14 @@ class ICCASPIDDDMRSimulation {
       trail: []
     };
 
-    this.followers = [
-      { x: this.leader.x - 45, y: this.leader.y - 35, angle: 0, radius: 10, color: "#00f2fe", trail: [] },
-      { x: this.leader.x - 45, y: this.leader.y + 35, angle: 0, radius: 10, color: "#4facfe", trail: [] },
-      { x: this.leader.x - 80, y: this.leader.y,       angle: 0, radius: 10, color: "#a855f7", trail: [] }
-    ];
+    this.followers = [];
+    this.initFollowers(this.followerCount);
 
     this.obstacles = [
       { x: this.width * 0.45, y: this.height * 0.35, radius: 24 },
       { x: this.width * 0.55, y: this.height * 0.65, radius: 22 }
     ];
 
-    this.kp = 0.16;
     this.bindEvents();
     this.loop();
   }
@@ -56,6 +58,43 @@ class ICCASPIDDDMRSimulation {
     resizeCanvasToWrapper(this.canvas);
     this.width = this.canvas.width;
     this.height = this.canvas.height;
+  }
+
+  initFollowers(count) {
+    this.followerCount = count;
+    this.followers = [];
+    for (let i = 0; i < count; i++) {
+      this.followers.push({
+        x: this.leader.x - 40 - (i + 1) * 18,
+        y: this.leader.y + (i % 2 === 0 ? -25 - i * 6 : 25 + i * 6),
+        angle: this.leader.angle,
+        radius: 10,
+        color: this.palette[i % this.palette.length],
+        trail: []
+      });
+    }
+  }
+
+  setFollowerCount(count) {
+    const c = Math.max(2, Math.min(8, parseInt(count) || 3));
+    this.initFollowers(c);
+  }
+
+  setFormDist(d) {
+    this.formDist = parseFloat(d) || 48;
+  }
+
+  setKp(kp) {
+    this.kp = parseFloat(kp) || 0.16;
+  }
+
+  setLeaderSpeed(spd) {
+    this.simSpeed = parseFloat(spd) || 2.2;
+    this.leader.speed = this.simSpeed;
+  }
+
+  setApfForce(f) {
+    this.apfForce = parseFloat(f) || 4.0;
   }
 
   bindEvents() {
@@ -103,12 +142,7 @@ class ICCASPIDDDMRSimulation {
     this.leader.angle = 0;
     this.leader.trail = [];
 
-    this.followers.forEach((f, idx) => {
-      f.x = this.leader.x - 40 - idx * 20;
-      f.y = this.leader.y + (idx === 0 ? -30 : idx === 1 ? 30 : 0);
-      f.angle = 0;
-      f.trail = [];
-    });
+    this.initFollowers(this.followerCount);
 
     this.obstacles = [
       { x: this.width * 0.45, y: this.height * 0.35, radius: 24 },
@@ -117,27 +151,40 @@ class ICCASPIDDDMRSimulation {
   }
 
   getFormationOffsets() {
-    const dist = 48;
+    const N = this.followers.length;
+    const d = this.formDist;
+    const offsets = [];
+
     if (this.formation === "triangle") {
-      return [
-        { dx: -dist, dy: -dist * 0.85 },
-        { dx: -dist, dy:  dist * 0.85 },
-        { dx: -dist * 1.75, dy: 0 }
-      ];
+      // Dynamic V-Shape / Wedge for any number of followers N
+      for (let i = 0; i < N; i++) {
+        const tier = Math.floor(i / 2) + 1;
+        const side = (i % 2 === 0) ? -1 : 1;
+        offsets.push({
+          dx: -d * (tier * 0.85),
+          dy: side * d * (tier * 0.75)
+        });
+      }
+    } else if (this.formation === "circle") {
+      // Dynamic Ring / Regular Polygon for N followers
+      for (let i = 0; i < N; i++) {
+        const angle = (i * 2 * Math.PI) / N;
+        offsets.push({
+          dx: Math.cos(angle) * d,
+          dy: Math.sin(angle) * d
+        });
+      }
+    } else {
+      // Dynamic Line / Abreast Formation for N followers
+      for (let i = 0; i < N; i++) {
+        const spanY = (i - (N - 1) / 2) * d * 0.85;
+        offsets.push({
+          dx: -d * 0.65,
+          dy: spanY
+        });
+      }
     }
-    if (this.formation === "circle") {
-      return [
-        { dx: Math.cos(0) * dist,             dy: Math.sin(0) * dist },
-        { dx: Math.cos((2 * Math.PI) / 3) * dist, dy: Math.sin((2 * Math.PI) / 3) * dist },
-        { dx: Math.cos((4 * Math.PI) / 3) * dist, dy: Math.sin((4 * Math.PI) / 3) * dist }
-      ];
-    }
-    // Line formation (Abreast)
-    return [
-      { dx: -dist * 0.6, dy: -dist * 1.1 },
-      { dx: -dist * 0.6, dy:  dist * 1.1 },
-      { dx: -dist * 1.2, dy: 0 }
-    ];
+    return offsets;
   }
 
   getTrajectoryPoint(t) {
@@ -183,7 +230,7 @@ class ICCASPIDDDMRSimulation {
           const od = Math.hypot(odx, ody);
           const min = obs.radius + this.leader.radius + 35;
           if (od < min && od > 0) {
-            const f = Math.pow((min - od) / min, 2) * 4.2;
+            const f = Math.pow((min - od) / min, 2) * this.apfForce * 1.1;
             mx += (odx / od) * f;
             my += (ody / od) * f;
           }
@@ -195,9 +242,9 @@ class ICCASPIDDDMRSimulation {
       }
     } else {
       // Trajectory Tracking (Lemniscate / Circular)
-      this.t += 0.016 * this.simSpeed;
+      this.t += 0.008 * this.simSpeed;
       const refPt = this.getTrajectoryPoint(this.t);
-      const nextRefPt = this.getTrajectoryPoint(this.t + 0.05);
+      const nextRefPt = this.getTrajectoryPoint(this.t + 0.04);
 
       const dx = refPt.x - this.leader.x;
       const dy = refPt.y - this.leader.y;
@@ -212,7 +259,7 @@ class ICCASPIDDDMRSimulation {
         const od = Math.hypot(odx, ody);
         const min = obs.radius + this.leader.radius + 35;
         if (od < min && od > 0) {
-          const f = Math.pow((min - od) / min, 2) * 4.5;
+          const f = Math.pow((min - od) / min, 2) * this.apfForce * 1.2;
           mx += (odx / od) * f;
           my += (ody / od) * f;
         }
@@ -235,7 +282,7 @@ class ICCASPIDDDMRSimulation {
     const sa = Math.sin(this.leader.angle);
 
     this.followers.forEach((fol, idx) => {
-      const off = offs[idx];
+      const off = offs[idx] || { dx: -40, dy: 0 };
       // Target position in world coordinates
       const tx = this.leader.x + off.dx * ca - off.dy * sa;
       const ty = this.leader.y + off.dx * sa + off.dy * ca;
@@ -254,7 +301,7 @@ class ICCASPIDDDMRSimulation {
         const od = Math.hypot(odx, ody);
         const min = obs.radius + fol.radius + 30;
         if (od < min && od > 0) {
-          const repForce = Math.pow((min - od) / min, 2) * 4.0;
+          const repForce = Math.pow((min - od) / min, 2) * this.apfForce;
           fx += (odx / od) * repForce;
           fy += (ody / od) * repForce;
         }
@@ -268,7 +315,7 @@ class ICCASPIDDDMRSimulation {
           const cd = Math.hypot(cdx, cdy);
           const safeDist = fol.radius + otherFol.radius + 12;
           if (cd < safeDist && cd > 0) {
-            const sepForce = ((safeDist - cd) / safeDist) * 2.0;
+            const sepForce = ((safeDist - cd) / safeDist) * 2.2;
             fx += (cdx / cd) * sepForce;
             fy += (cdy / cd) * sepForce;
           }
@@ -440,7 +487,7 @@ class ICCASPIDDDMRSimulation {
     ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
     ctx.font = "11px monospace";
     ctx.fillText(
-      `Mode: ${this.trajMode.toUpperCase()} | Formasi: ${this.formation.toUpperCase()} | Obstacles: ${this.obstacles.length}`,
+      `Mode: ${this.trajMode.toUpperCase()} | Formasi: ${this.formation.toUpperCase()} | Followers: ${this.followers.length} | Obstacles: ${this.obstacles.length}`,
       10,
       18
     );
@@ -1839,8 +1886,56 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Sliders for dynamic tuning
+  const sliderFollower1 = document.getElementById("sliderFollowerCount1");
+  const valFollower1 = document.getElementById("valFollowerCount1");
+  sliderFollower1?.addEventListener("input", (e) => {
+    const val = parseInt(e.target.value) || 3;
+    if (valFollower1) valFollower1.textContent = val;
+    sim1?.setFollowerCount(val);
+  });
+
+  const sliderDist1 = document.getElementById("sliderFormDist1");
+  const valDist1 = document.getElementById("valFormDist1");
+  sliderDist1?.addEventListener("input", (e) => {
+    const val = parseFloat(e.target.value) || 48;
+    if (valDist1) valDist1.textContent = `${val}px`;
+    sim1?.setFormDist(val);
+  });
+
+  const sliderKp1 = document.getElementById("sliderKp1");
+  const valKp1 = document.getElementById("valKp1");
+  sliderKp1?.addEventListener("input", (e) => {
+    const val = (parseInt(e.target.value) / 100).toFixed(2);
+    if (valKp1) valKp1.textContent = val;
+    sim1?.setKp(parseFloat(val));
+  });
+
+  const sliderSpeed1 = document.getElementById("sliderLeaderSpeed1");
+  const valSpeed1 = document.getElementById("valLeaderSpeed1");
+  sliderSpeed1?.addEventListener("input", (e) => {
+    const val = (parseInt(e.target.value) / 10).toFixed(1);
+    if (valSpeed1) valSpeed1.textContent = `${val}×`;
+    sim1?.setLeaderSpeed(parseFloat(val));
+  });
+
+  const sliderApf1 = document.getElementById("sliderApfForce1");
+  const valApf1 = document.getElementById("valApfForce1");
+  sliderApf1?.addEventListener("input", (e) => {
+    const val = (parseInt(e.target.value) / 10).toFixed(1);
+    if (valApf1) valApf1.textContent = val;
+    sim1?.setApfForce(parseFloat(val));
+  });
+
   // Action Buttons
-  document.getElementById("btnResetSim1")?.addEventListener("click", () => sim1?.reset());
+  document.getElementById("btnResetSim1")?.addEventListener("click", () => {
+    sim1?.reset();
+    if (sliderFollower1 && valFollower1) { sliderFollower1.value = "3"; valFollower1.textContent = "3"; }
+    if (sliderDist1 && valDist1) { sliderDist1.value = "48"; valDist1.textContent = "48px"; }
+    if (sliderKp1 && valKp1) { sliderKp1.value = "16"; valKp1.textContent = "0.16"; }
+    if (sliderSpeed1 && valSpeed1) { sliderSpeed1.value = "22"; valSpeed1.textContent = "2.2×"; }
+    if (sliderApf1 && valApf1) { sliderApf1.value = "40"; valApf1.textContent = "4.0"; }
+  });
   document.getElementById("btnToggleObstacle1")?.addEventListener("click", () => sim1?.addObstacle());
   document.getElementById("btnClearObstacles1")?.addEventListener("click", () => sim1?.clearObstacles());
 

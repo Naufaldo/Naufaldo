@@ -6,6 +6,21 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.16] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(swarm-config)`**: Konfigurasi Dinamis Jumlah Follower, Parameter Tuning Swarm, & Penerjemahan Bilingual Teori Modul:
+  - **Konfigurasi Jumlah Follower**: Pengguna kini dapat mengatur jumlah robot pengikut (*followers*) secara dinamis dari 2 hingga 8 agen menggunakan slider interaktif (`#sliderFollowerCount1`).
+  - **Perhitungan Geometri Formasi Adaptif**: Algoritma swap formasi (▲ Triangle/Wedge, ● Circle/Ring, ― Line/Abreast) secara otomatis beradaptasi dengan jumlah agen $N$ yang dipilih tanpa kehilangan simetri formasi.
+  - **Parameter Tuning Interaktif**:
+    1. Jarak Spasi Formasi ($d$): 25px hingga 80px (`#sliderFormDist1`).
+    2. Swarm PID Attraction Gain ($K_p$): 0.05 hingga 0.40 (`#sliderKp1`).
+    3. Kecepatan Gerak Leader ($V_L$): 1.0× hingga 4.5× (`#sliderLeaderSpeed1`).
+    4. Kekuatan Gaya Tolak APF ($\eta_{\text{APF}}$): 1.0 hingga 8.0 (`#sliderApfForce1`).
+  - **Dukungan Dwibahasa Penuh pada Kotak Teori Ilmiah**: Seluruh landasan teori, ringkasan paper, parameter, dan judul modul (Modul 1 s/d 7) kini terintegrasi penuh dengan tombol pengalih bahasa (ID 🇮🇩 / EN 🇬🇧).
+
+---
+
 ## [v2026.08.12.15] — 2026-08-12
 
 ### Added / Ditambahkan

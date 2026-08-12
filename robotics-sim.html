@@ -136,9 +136,33 @@
             <!-- Formation Shape Row -->
             <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.75rem;">
               <span style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;min-width:70px;" data-i18n="sim1-label-form">Formasi Swarm:</span>
-              <button class="sim-form-btn active" id="btnFormTriangle" data-form="triangle">▲ Triangle</button>
-              <button class="sim-form-btn" id="btnFormCircle" data-form="circle">● Circle</button>
-              <button class="sim-form-btn" id="btnFormLine" data-form="line">― Line</button>
+              <button class="sim-form-btn active" id="btnFormTriangle" data-form="triangle">▲ Triangle / Wedge</button>
+              <button class="sim-form-btn" id="btnFormCircle" data-form="circle">● Circle / Ring</button>
+              <button class="sim-form-btn" id="btnFormLine" data-form="line">― Line / Abreast</button>
+            </div>
+
+            <!-- Dynamic Parameter Sliders Grid -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:0.75rem;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:0.85rem;">
+              <div>
+                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-followers">Jumlah Follower:</span> <strong id="valFollowerCount1" style="color:var(--primary-cyan);">3</strong></label><br>
+                <input type="range" id="sliderFollowerCount1" min="2" max="8" value="3" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-spacing">Jarak Spasi (d):</span> <strong id="valFormDist1" style="color:var(--accent-emerald);">48px</strong></label><br>
+                <input type="range" id="sliderFormDist1" min="25" max="80" value="48" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-kp">PID Gain (Kp):</span> <strong id="valKp1" style="color:var(--accent-amber);">0.16</strong></label><br>
+                <input type="range" id="sliderKp1" min="5" max="40" value="16" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-speed">Kecepatan:</span> <strong id="valLeaderSpeed1" style="color:var(--accent-purple);">2.2×</strong></label><br>
+                <input type="range" id="sliderLeaderSpeed1" min="10" max="45" value="22" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-apf">Gaya Tolak APF:</span> <strong id="valApfForce1" style="color:#ef4444;">4.0</strong></label><br>
+                <input type="range" id="sliderApfForce1" min="10" max="80" value="40" style="width:100%;">
+              </div>
             </div>
 
             <!-- Action Buttons Row -->
@@ -152,11 +176,11 @@
           <!-- Scientific Paper Theory & Formula Box -->
           <details class="paper-theory-box" open>
             <summary class="theory-summary">
-              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori &amp; Persamaan Matematis (Paper ICCAS 2025)</span>
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> <span data-i18n="sim1-theory-title">Landasan Teori &amp; Persamaan Matematis (Paper ICCAS 2025)</span></span>
               <i class="fa fa-chevron-down toggle-chevron"></i>
             </summary>
             <div class="theory-content">
-              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: 25th ICCAS 2025, Songdo Convensia, Incheon, Korea (IEEE / ICROS)</div>
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> <span data-i18n="sim1-paper-meta">Publikasi Asli: 25th ICCAS 2025, Songdo Convensia, Incheon, Korea (IEEE / ICROS)</span></div>
               <p><strong>Judul Paper:</strong> <em>Fuzzy-Tuned PID Control for Dynamic Formation of Differential-Wheeled Mobile Robots with APF-Based Obstacle Avoidance</em> (Naufaldo &amp; Hsiu-Ming Wu, 2025).</p>
               
               <div class="theory-subheading"><i class="fa fa-code-fork"></i> 1. Model Kinematika Diferensial DWMR</div>
@@ -197,11 +221,11 @@
       <!-- ===== TAB 2: Model Kinematika + PID Trajectory ===== -->
       <div class="sim-tab-content" id="tab2" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;">Modul 2: Model Matematika Kinematika Mecanum (MWDR) &amp; Trajectory Tracking</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;">Open-loop $\omega_r/\omega_l$ <em>atau</em> mode PID Trajectory — robot mengejar lintasan referensi (Sinusoidal, Circular, Lemniscate, Square) dengan kontrol heading PID.</p>
+          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;" data-i18n="sim2-title">Modul 2: Model Matematika Kinematika Mecanum (MWDR) &amp; Trajectory Tracking</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;" data-i18n="sim2-desc">Open-loop $\omega_r/\omega_l$ <em>atau</em> mode PID Trajectory — robot mengejar lintasan referensi (Sinusoidal, Circular, Lemniscate, Square) dengan kontrol heading PID.</p>
           <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
-            <button class="btn btn-primary btn-sm" id="btnModeOpenLoop2">⚙ Open-Loop ωr/ωl</button>
-            <button class="btn btn-outline btn-sm" id="btnModePID2">🎯 PID Trajectory</button>
+            <button class="btn btn-primary btn-sm" id="btnModeOpenLoop2" data-i18n="sim2-btn-openloop">⚙ Open-Loop ωr/ωl</button>
+            <button class="btn btn-outline btn-sm" id="btnModePID2" data-i18n="sim2-btn-pid">🎯 PID Trajectory</button>
           </div>
           <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:1rem;margin-bottom:1rem;overflow-x:auto;text-align:center;">
             <div id="katexFormula1" style="font-size:1rem;color:var(--primary-cyan);margin-bottom:0.6rem;"></div>
@@ -262,11 +286,11 @@
           <!-- Scientific Paper Theory & Formula Box -->
           <details class="paper-theory-box" open>
             <summary class="theory-summary">
-              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori Kinematika Mecanum (Paper IJCAS 2026 / Springer)</span>
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> <span data-i18n="sim2-theory-title">Landasan Teori Kinematika Mecanum (Paper IJCAS 2026 / Springer)</span></span>
               <i class="fa fa-chevron-down toggle-chevron"></i>
             </summary>
             <div class="theory-content">
-              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: International Journal of Control, Automation, and Systems (IJCAS 2026 / Springer Nature)</div>
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> <span data-i18n="sim2-paper-meta">Publikasi Asli: International Journal of Control, Automation, and Systems (IJCAS 2026 / Springer Nature)</span></div>
               <p><strong>Judul Paper:</strong> <em>Robot Coordination in Multi-agent Systems: Leader-Dependent Following Configuration Control of Mecanum Wheeled Drive Robots</em> (Naufaldo, Hsiu-Ming Wu, Muhammad Qomaruz Zaman, 2026).</p>
 
               <div class="theory-subheading"><i class="fa fa-cogs"></i> 1. Matriks Kinematika Invers Roda Mecanum (MWDR)</div>
@@ -296,16 +320,17 @@
       <!-- ===== TAB 3: Path vs Trajectory Tracking ===== -->
       <div class="sim-tab-content" id="tab3" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;">Modul 3: Path Tracking vs Trajectory Tracking</h3>
+          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;" data-i18n="sim3-title">Modul 3: Path Tracking vs Trajectory Tracking</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;" data-i18n="sim3-desc">Perbandingan mendalam antara Path Tracking (Pure Pursuit tanpa kendala waktu) vs Trajectory Tracking (sinkronisasi ruang-waktu ketat).</p>
           <div style="display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
-            <span style="font-size:0.82rem;color:var(--text-secondary);">Mode Aktif:</span>
+            <span style="font-size:0.82rem;color:var(--text-secondary);" data-i18n="sim3-label-mode">Mode Aktif:</span>
             <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
               <input type="radio" name="trackMode3" id="radioPath3" value="path" checked>
-              <span style="font-size:0.84rem;color:var(--primary-cyan);font-weight:600;">Path Tracking (Pure Pursuit)</span>
+              <span style="font-size:0.84rem;color:var(--primary-cyan);font-weight:600;" data-i18n="sim3-mode-path">Path Tracking (Pure Pursuit)</span>
             </label>
             <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
               <input type="radio" name="trackMode3" id="radioTraj3" value="trajectory">
-              <span style="font-size:0.84rem;color:var(--accent-purple);font-weight:600;">Trajectory Tracking (Time-Sync)</span>
+              <span style="font-size:0.84rem;color:var(--accent-purple);font-weight:600;" data-i18n="sim3-mode-traj">Trajectory Tracking (Time-Sync)</span>
             </label>
           </div>
           <div id="katexPath3" style="background:rgba(0,242,254,0.05);border:1px solid rgba(0,242,254,0.2);border-radius:var(--radius-md);padding:0.85rem;margin-bottom:0.85rem;overflow-x:auto;text-align:center;font-size:0.9rem;"></div>
@@ -336,7 +361,7 @@
           <!-- Scientific Paper Theory & Formula Box -->
           <details class="paper-theory-box" open>
             <summary class="theory-summary">
-              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori: Analisis Fundamental Path vs Trajectory</span>
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> <span data-i18n="sim3-theory-title">Landasan Teori: Analisis Fundamental Path vs Trajectory</span></span>
               <i class="fa fa-chevron-down toggle-chevron"></i>
             </summary>
             <div class="theory-content">
@@ -361,8 +386,8 @@
       <!-- ===== TAB 4: Vision Follower Camera ===== -->
       <div class="sim-tab-content" id="tab4" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-amber);margin-bottom:0.5rem;">Modul 4: Robot Following Kamera Vision (OpenCV Bounding Box)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">Gerakkan <strong>mouse</strong> di atas kanvas untuk menggerakkan leader. Follower mendeteksi dan mengikuti target melalui FOV kamera.</p>
+          <h3 style="color:var(--accent-amber);margin-bottom:0.5rem;" data-i18n="sim4-title">Modul 4: Robot Following Kamera Vision (OpenCV Bounding Box)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;" data-i18n="sim4-desc">Simulasi visual tracking HSV &amp; kalkulasi error offset piksel (ex, ey) untuk mengendalikan aktuator gimbal kamera 2-DOF.</p>
           <div class="sim-canvas-wrapper"><canvas id="canvasSim4"></canvas></div>
           <div style="margin-top:0.75rem;display:flex;gap:2rem;font-size:0.82rem;color:var(--text-secondary);">
             <div>Status: <span id="visionStatus" style="color:#ef4444;font-weight:600;">SEARCHING</span></div>
@@ -372,10 +397,11 @@
           <!-- Scientific Paper Theory & Formula Box -->
           <details class="paper-theory-box" open>
             <summary class="theory-summary">
-              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori: Visual Servoing &amp; Bounding Box Monocular Tracking</span>
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> <span data-i18n="sim4-theory-title">Landasan Teori: Visual Servoing &amp; Bounding Box Monocular Tracking</span></span>
               <i class="fa fa-chevron-down toggle-chevron"></i>
             </summary>
             <div class="theory-content">
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> <span data-i18n="sim4-paper-meta">Publikasi Asli: SICE FES 2025, Hiroshima, Japan</span></div>
               <div class="theory-subheading"><i class="fa fa-camera"></i> 1. Estimasi Jarak berbasis Dimensi Bounding Box Piksel</div>
               <p>Berdasarkan model kamera lubang jarum (<em>pinhole camera model</em>), jarak metrik $Z_{\text{est}}$ diestimasi dari rasio lebar piksel objek $w_{\text{pixel}}$ terhadap lebar fisik target $W_{\text{actual}}$:</p>
               <div class="math-eq-card">
@@ -396,8 +422,8 @@
       <!-- ===== TAB 5: Drone Swarm 3D ===== -->
       <div class="sim-tab-content" id="tab5" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;">Modul 5: Drone Swarm Sinusoidal Altitude Flocking (SICE FES 2025)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">Kawanan quadcopter dengan algoritma flocking Cohesion/Separation/Alignment. Klik kanvas untuk pindah target.</p>
+          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;" data-i18n="sim5-title">Modul 5: Drone Swarm Sinusoidal Altitude Flocking (SICE FES 2025)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;" data-i18n="sim5-desc">Kawanan quadcopter dengan algoritma flocking Cohesion/Separation/Alignment. Klik kanvas untuk pindah target.</p>
           <div class="sim-canvas-wrapper"><canvas id="canvasSim5"></canvas></div>
           <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
@@ -536,11 +562,11 @@
           <!-- Scientific Paper Theory & Formula Box -->
           <details class="paper-theory-box" open>
             <summary class="theory-summary">
-              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori Eksplorasi Labirin (Paper ICCAS 2024 / IEEE)</span>
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> <span data-i18n="sim6-theory-title">Landasan Teori Eksplorasi Labirin (Paper ICCAS 2024 / IEEE)</span></span>
               <i class="fa fa-chevron-down toggle-chevron"></i>
             </summary>
             <div class="theory-content">
-              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: 24th ICCAS 2024, Jeju Shinhwa World, Jeju, Korea (IEEE / ICROS)</div>
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> <span data-i18n="sim6-paper-meta">Publikasi Asli: 24th ICCAS 2024, Jeju Shinhwa World, Jeju, Korea (IEEE / ICROS)</span></div>
               <p><strong>Judul Paper:</strong> <em>Comparative Analysis of Autonomous Indoor Exploration Strategies: Floodfill algorithm vs. Frontier-Based Method</em> (Naufaldo &amp; Hsiu-Ming Wu, 2024).</p>
 
               <div class="theory-subheading"><i class="fa fa-bar-chart"></i> 1. Metrik Kelengkapan Peta (Map Completeness)</div>
@@ -656,11 +682,11 @@
           <!-- Scientific Paper Theory & Formula Box -->
           <details class="paper-theory-box" open>
             <summary class="theory-summary">
-              <span class="summary-title"><i class="fa fa-graduation-cap"></i> Landasan Teori Pemetaan LiDAR SLAM &amp; Log-Odds Grid (Paper IJRA 2024)</span>
+              <span class="summary-title"><i class="fa fa-graduation-cap"></i> <span data-i18n="sim7-theory-title">Landasan Teori Pemetaan LiDAR SLAM &amp; Log-Odds Grid (Paper IJRA 2024)</span></span>
               <i class="fa fa-chevron-down toggle-chevron"></i>
             </summary>
             <div class="theory-content">
-              <div class="paper-meta-badge"><i class="fa fa-book"></i> Publikasi Asli: International Journal of Robotics and Automation (IJRA 2024 / MDPI)</div>
+              <div class="paper-meta-badge"><i class="fa fa-book"></i> <span data-i18n="sim7-paper-meta">Publikasi Asli: International Journal of Robotics and Automation (IJRA 2024 / MDPI)</span></div>
               <p><strong>Fokus Riset:</strong> <em>Autonomous Exploration and LiDAR SLAM with Reactive Navigation for Search and Rescue Hexapod &amp; Mobile Robots</em>.</p>
 
               <div class="theory-subheading"><i class="fa fa-rss"></i> 1. Occupancy Grid Mapping (Bentuk Log-Odds)</div>

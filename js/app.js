@@ -210,9 +210,43 @@ const i18n = {
     "sim1-mode-lemniscate": "♾ Trajektori Lemniscate (8)",
     "sim1-mode-circular": "⭕ Trajektori Circular (Melingkar)",
     "sim1-label-form": "Formasi Swarm:",
+    "sim1-param-followers": "Jumlah Follower:",
+    "sim1-param-spacing": "Jarak Spasi Formasi (d):",
+    "sim1-param-kp": "PID Gain (Kp):",
+    "sim1-param-speed": "Kecepatan Gerak:",
+    "sim1-param-apf": "Gaya Tolak APF:",
     "sim1-btn-reset": "↺ Reset Robot & Rintangan",
     "sim1-btn-add-obs": "+ Tambah Rintangan APF",
     "sim1-btn-clear-obs": "🗑 Hapus Semua Rintangan",
+    "sim1-theory-title": "Landasan Teori & Persamaan Matematis (Paper ICCAS 2025)",
+    "sim1-paper-meta": "Publikasi Asli: 25th ICCAS 2025, Songdo Convensia, Incheon, Korea (IEEE / ICROS)",
+
+    // Module 2 Bilingual Keys (ID)
+    "sim2-title": "Modul 2: Model Matematika Kinematika Mecanum (MWDR) & Trajectory Tracking",
+    "sim2-desc": "Open-loop ωr/ωl atau mode PID Trajectory — robot mengejar lintasan referensi (Sinusoidal, Circular, Lemniscate, Square) dengan kontrol heading PID.",
+    "sim2-btn-openloop": "⚙ Open-Loop ωr/ωl",
+    "sim2-btn-pid": "🎯 PID Trajectory",
+    "sim2-theory-title": "Landasan Teori Kinematika Mecanum (Paper IJCAS 2026 / Springer)",
+    "sim2-paper-meta": "Publikasi Asli: International Journal of Control, Automation, and Systems (IJCAS 2026 / Springer Nature)",
+
+    // Module 3 Bilingual Keys (ID)
+    "sim3-title": "Modul 3: Path Tracking vs Trajectory Tracking",
+    "sim3-desc": "Perbandingan mendalam antara Path Tracking (Pure Pursuit tanpa kendala waktu) vs Trajectory Tracking (sinkronisasi ruang-waktu ketat).",
+    "sim3-label-mode": "Mode Aktif:",
+    "sim3-mode-path": "Path Tracking (Pure Pursuit)",
+    "sim3-mode-traj": "Trajectory Tracking (Time-Sync)",
+    "sim3-theory-title": "Landasan Teori Path vs Trajectory Tracking",
+
+    // Module 4 Bilingual Keys (ID)
+    "sim4-title": "Modul 4: Target Tracking Kamera OpenCV & Visual Servoing (SICE FES 2025)",
+    "sim4-desc": "Simulasi visual tracking HSV & kalkulasi error offset piksel (ex, ey) untuk mengendalikan aktuator gimbal kamera 2-DOF.",
+    "sim4-theory-title": "Landasan Teori Visual Servoing (Paper SICE FES 2025)",
+    "sim4-paper-meta": "Publikasi Asli: SICE FES 2025, Hiroshima, Japan",
+
+    // Module 5 Bilingual Keys (ID)
+    "sim5-title": "Modul 5: Swarm Drone Flocking & 3D APF Formation",
+    "sim5-desc": "Simulasi flocking multi-UAV menggunakan aturan Reynolds (Cohesion, Separation, Alignment) dengan gaya tarik goal APF.",
+    "sim5-theory-title": "Landasan Teori Swarm Flocking Reynolds & APF 3D",
 
     // Module 6 Bilingual Keys
     "sim6-title": "Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",
@@ -229,6 +263,8 @@ const i18n = {
     "sim6-opt-mememan": "🏛 Mememan World (Ruangan Bundar & Rintangan Simpel)",
     "sim6-algo-frontier": "Frontier-Based (A* Path)",
     "sim6-algo-floodfill": "Floodfill (BFS Murni)",
+    "sim6-theory-title": "Landasan Teori Eksplorasi Labirin (Paper ICCAS 2024 / IEEE)",
+    "sim6-paper-meta": "Publikasi Asli: 24th ICCAS 2024, Jeju Shinhwa World, Jeju, Korea (IEEE / ICROS)",
 
     // Module 7 Bilingual Keys
     "sim7-title": "Modul 7: Navigasi Otonom & Pemetaan LiDAR SLAM (IJRA 2024)",
@@ -239,6 +275,8 @@ const i18n = {
     "sim7-btn-reset-pos": "↺ Reset Posisi Robot",
     "sim7-label-world": "Denah Ruangan Indoor & Sinar LiDAR (World View)",
     "sim7-label-polar": "Onboard LiDAR Polar Scope (Pandangan Robot)",
+    "sim7-theory-title": "Landasan Teori Pemetaan LiDAR SLAM & Log-Odds Grid (Paper IJRA 2024)",
+    "sim7-paper-meta": "Publikasi Asli: International Journal of Robotics and Automation (IJRA 2024 / MDPI)",
 
     // Contact
     "contact-title": "Hubungi Saya",
@@ -462,9 +500,43 @@ const i18n = {
     "sim1-mode-lemniscate": "♾ Lemniscate Trajectory (8)",
     "sim1-mode-circular": "⭕ Circular Trajectory",
     "sim1-label-form": "Swarm Formation:",
+    "sim1-param-followers": "Follower Count:",
+    "sim1-param-spacing": "Formation Spacing (d):",
+    "sim1-param-kp": "PID Gain (Kp):",
+    "sim1-param-speed": "Motion Speed:",
+    "sim1-param-apf": "APF Repulsion Force:",
     "sim1-btn-reset": "↺ Reset Robots & Obstacles",
     "sim1-btn-add-obs": "+ Add APF Obstacle",
     "sim1-btn-clear-obs": "🗑 Clear All Obstacles",
+    "sim1-theory-title": "Theoretical Foundations & Mathematical Formulas (Paper ICCAS 2025)",
+    "sim1-paper-meta": "Original Publication: 25th ICCAS 2025, Songdo Convensia, Incheon, Korea (IEEE / ICROS)",
+
+    // Module 2 Bilingual Keys (EN)
+    "sim2-title": "Module 2: Mecanum Kinematics Mathematical Model (MWDR) & Trajectory Tracking",
+    "sim2-desc": "Open-loop ωr/ωl or PID Trajectory mode — robot tracks reference trajectories (Sinusoidal, Circular, Lemniscate, Square) with closed-loop PID heading control.",
+    "sim2-btn-openloop": "⚙ Open-Loop ωr/ωl",
+    "sim2-btn-pid": "🎯 PID Trajectory",
+    "sim2-theory-title": "Mecanum Kinematics Foundations (Paper IJCAS 2026 / Springer)",
+    "sim2-paper-meta": "Original Publication: International Journal of Control, Automation, and Systems (IJCAS 2026 / Springer Nature)",
+
+    // Module 3 Bilingual Keys (EN)
+    "sim3-title": "Module 3: Path Tracking vs Trajectory Tracking",
+    "sim3-desc": "Comprehensive comparison between Path Tracking (Pure Pursuit without time constraints) vs Trajectory Tracking (strict spatio-temporal time synchronization).",
+    "sim3-label-mode": "Active Mode:",
+    "sim3-mode-path": "Path Tracking (Pure Pursuit)",
+    "sim3-mode-traj": "Trajectory Tracking (Time-Sync)",
+    "sim3-theory-title": "Path vs Trajectory Tracking Theory",
+
+    // Module 4 Bilingual Keys (EN)
+    "sim4-title": "Module 4: OpenCV Camera Target Tracking & Visual Servoing (SICE FES 2025)",
+    "sim4-desc": "Simulation of HSV visual object tracking & pixel offset error calculation (ex, ey) to drive a 2-DOF camera gimbal actuator.",
+    "sim4-theory-title": "Visual Servoing Foundations (Paper SICE FES 2025)",
+    "sim4-paper-meta": "Original Publication: SICE FES 2025, Hiroshima, Japan",
+
+    // Module 5 Bilingual Keys (EN)
+    "sim5-title": "Module 5: Swarm Drone Flocking & 3D APF Formation",
+    "sim5-desc": "Multi-UAV flocking simulation utilizing Reynolds rules (Cohesion, Separation, Alignment) combined with 3D APF goal attraction.",
+    "sim5-theory-title": "Reynolds Swarm Flocking & 3D APF Foundations",
 
     // Module 6 Bilingual Keys (EN)
     "sim6-title": "Module 6: Autonomous Indoor Exploration via 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",
@@ -481,6 +553,8 @@ const i18n = {
     "sim6-opt-mememan": "🏛 Mememan World (Circular Perimeter & Simple Obstacles)",
     "sim6-algo-frontier": "Frontier-Based (A* Path)",
     "sim6-algo-floodfill": "Floodfill (BFS Wavefront)",
+    "sim6-theory-title": "Maze Exploration Theory (Paper ICCAS 2024 / IEEE)",
+    "sim6-paper-meta": "Original Publication: 24th ICCAS 2024, Jeju Shinhwa World, Jeju, Korea (IEEE / ICROS)",
 
     // Module 7 Bilingual Keys (EN)
     "sim7-title": "Module 7: Autonomous Navigation & LiDAR SLAM Mapping (IJRA 2024)",
@@ -491,6 +565,8 @@ const i18n = {
     "sim7-btn-reset-pos": "↺ Reset Robot Position",
     "sim7-label-world": "Indoor Room Floorplan & LiDAR Rays (World View)",
     "sim7-label-polar": "Onboard LiDAR Polar Scope (Robot's View)",
+    "sim7-theory-title": "LiDAR SLAM Mapping & Log-Odds Grid Theory (Paper IJRA 2024)",
+    "sim7-paper-meta": "Original Publication: International Journal of Robotics and Automation (IJRA 2024 / MDPI)",
 
     // Contact
     "contact-title": "Contact Me",
