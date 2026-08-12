@@ -6,6 +6,17 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.18] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(theme-toggle)`**: Sistem Mode Cerah (Light Mode) & Mode Gelap (Dark Mode) Profesional Lintas Halaman:
+  - **Palet Warna Desain Sistem Light Mode**: Latar Slate Pearl (`#f8fafc`), kartu Frosted Glassmorphism putih (`rgba(255, 255, 255, 0.90)`), tipografi Navy Slate tajam (`#0f172a` / `#1e293b`), aksen Deep Cyan (`#0891b2`) & Sapphire Blue (`#2563eb`), serta border kartu halus (`rgba(203, 213, 225, 0.85)`).
+  - **Tombol Switcher Tema di Navbar**: Penambahan tombol toggle `🌙 / ☀️` (`#themeToggleBtn`) di navigation bar seluruh halaman (`index.html`, `projects.html`, `publications.html`, dan `robotics-sim.html`).
+  - **Penyimpanan Status Tema Otomatis**: Pilihan tema pengguna disimpan di `localStorage.getItem("naufaldo_theme")` dan dieksekusi secara instan saat pertama kali halaman dimuat untuk mencegah *Flash of Unstyled Content (FOUC)*.
+  - **Adaptasi Penuh Seluruh Komponen**: Seluruh kalkulator cold storage, form input, modal CMS, kartu publikasi, formula KaTeX, tabel riset, dan kotak landasan teori ilmiah menyesuaikan kontras secara otomatis.
+
+---
+
 ## [v2026.08.12.17] — 2026-08-12
 
 ### Added / Ditambahkan

@@ -1,9 +1,16 @@
 /* ==========================================================================
    Naufaldo Portfolio - Main JavaScript & Interactive Engines
    Bilingual System (ID/EN), Official CV Integrated Dataset,
+   Theme Switching Engine (Dark / Light Mode),
    Blogspot & Technical Article System, Interactive Admin CMS Engine,
    YouTube Embedded Video Support, Multi-Page Engine & Cold Storage Calculator
    ========================================================================== */
+
+// Immediate Theme initialization to prevent FOUC
+(function() {
+  const savedTheme = localStorage.getItem("naufaldo_theme") || "dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+})();
 
 // --- Translations Dictionary (ID & EN) ---
 const i18n = {
@@ -746,6 +753,35 @@ function updateLanguage(lang) {
   }
 }
 
+// --- Theme Switching Engine (Dark / Light Mode) ---
+let currentTheme = localStorage.getItem("naufaldo_theme") || "dark";
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  localStorage.setItem("naufaldo_theme", theme);
+  document.documentElement.setAttribute("data-theme", theme);
+  
+  const themeBtns = document.querySelectorAll("#themeToggleBtn, .theme-toggle-btn");
+  themeBtns.forEach(btn => {
+    btn.replaceChildren();
+    const icon = document.createElement("i");
+    if (theme === "light") {
+      icon.className = "fa fa-moon-o";
+      btn.setAttribute("title", currentLang === "id" ? "Ganti ke Mode Gelap (Dark Mode)" : "Switch to Dark Mode");
+      btn.setAttribute("aria-label", "Switch to Dark Mode");
+    } else {
+      icon.className = "fa fa-sun-o";
+      btn.setAttribute("title", currentLang === "id" ? "Ganti ke Mode Terang (Light Mode)" : "Switch to Light Mode");
+      btn.setAttribute("aria-label", "Switch to Light Mode");
+    }
+    btn.appendChild(icon);
+  });
+}
+
+function toggleTheme() {
+  applyTheme(currentTheme === "dark" ? "light" : "dark");
+}
+
 // --- Cold Storage Sizing Calculator Engine ---
 function calculateCoolingLoad() {
   const roomType = document.getElementById("calcRoomType")?.value || "chiller";
@@ -1352,19 +1388,26 @@ function closeCmsModal() {
 
 // --- Initialization & Event Binding ---
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize Language
+  // Initialize Language & Theme
   updateLanguage(currentLang);
+  applyTheme(currentTheme);
 
   const langBtn = document.getElementById("langToggleBtn");
   if (langBtn) {
     langBtn.addEventListener("click", () => {
       const nextLang = currentLang === "id" ? "en" : "id";
       updateLanguage(nextLang);
+      applyTheme(currentTheme); // refresh tooltip text
       renderPublications();
       renderBlogPosts();
       renderProjects(document.querySelector(".proj-filter-tags .filter-btn.active")?.dataset.cat || "all");
     });
   }
+
+  // Theme Toggle Buttons
+  document.querySelectorAll("#themeToggleBtn, .theme-toggle-btn").forEach(btn => {
+    btn.addEventListener("click", toggleTheme);
+  });
 
   // Calculator Submit
   document.getElementById("calcComputeBtn")?.addEventListener("click", calculateCoolingLoad);
