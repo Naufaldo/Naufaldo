@@ -116,137 +116,268 @@
 
   <!-- Simulation Canvas Section -->
   <section class="section-padding" style="padding-top: 0;">
-    <div class="container" style="max-width: 1000px;">
+    <div class="container" style="max-width: 1060px;">
 
-      <!-- Tab 1: Fuzzy PID & APF -->
+      <!-- ===== TAB 1: Fuzzy PID DDMR & APF ===== -->
       <div class="sim-tab-content active" id="tab1">
-        <div class="glass-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem;">Modul 1: Fuzzy PID DDMR & Multi-Agent Formation Control (ICCAS 2025)</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            Simulasi kendali robot roda diferensial (DDMR) menggunakan pengontrol PID berparameter Fuzzy logic dengan penghindaran rintangan dinamis Artificial Potential Field (APF). Klik pada kanvas untuk menentukan lokasi target baru!
-          </p>
-          <div class="sim-canvas-wrapper">
-            <canvas id="canvasSim1"></canvas>
-          </div>
-          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <button class="btn btn-primary btn-sm" id="btnResetSim1"><i class="fa fa-refresh"></i> Reset Posisi Robot</button>
-            <button class="btn btn-outline btn-sm" id="btnToggleObstacle1"><i class="fa fa-shield"></i> Toggle Rintangan APF</button>
+        <div class="glass-card" style="margin-bottom:1.5rem;">
+          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;">Modul 1: Fuzzy PID DDMR &amp; Multi-Agent Formation Control (ICCAS 2025)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">Kendali PID Fuzzy dengan penghindaran rintangan APF. Klik kanvas untuk set target baru. Pilih formasi swarm di bawah!</p>
+          <div class="sim-canvas-wrapper"><canvas id="canvasSim1"></canvas></div>
+          <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.65rem;">
+              <span style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;min-width:55px;">Formasi:</span>
+              <button class="sim-form-btn active" id="btnFormTriangle" data-form="triangle">▲ Triangle</button>
+              <button class="sim-form-btn" id="btnFormCircle" data-form="circle">● Circle</button>
+              <button class="sim-form-btn" id="btnFormLine" data-form="line">― Line</button>
+            </div>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+              <button class="btn btn-primary btn-sm" id="btnResetSim1"><i class="fa fa-refresh"></i> Reset Robot</button>
+              <button class="btn btn-outline btn-sm" id="btnToggleObstacle1"><i class="fa fa-shield"></i> Tambah Obstacle APF</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab 2: Model Kinematika Matematika -->
+      <!-- ===== TAB 2: Model Kinematika + PID Trajectory ===== -->
       <div class="sim-tab-content" id="tab2" style="display:none;">
-        <div class="glass-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--accent-emerald); margin-bottom: 0.5rem;">Modul 2: Model Matematika Kinematika ke Simulasi 2D</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            Mengubah persamaan diferensial linier dan angular roda ke dalam trajektori spasial 2D secara real-time.
-          </p>
-
-          <!-- KaTeX LaTeX Math Container -->
-          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem; overflow-x: auto; text-align: center;">
-            <div id="katexFormula1" style="font-size: 1.1rem; color: var(--primary-cyan); margin-bottom: 0.75rem;"></div>
-            <div id="katexFormula2" style="font-size: 1rem; color: var(--accent-emerald);"></div>
+        <div class="glass-card" style="margin-bottom:1.5rem;">
+          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;">Modul 2: Model Matematika Kinematika → Simulasi 2D &amp; PID Trajectory Control</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;">Open-loop ωr/ωl <em>atau</em> mode PID Trajectory — robot mengejar lintasan referensi (Sinusoidal, Circular, Lemniscate, Square) dengan kontrol heading PID.</p>
+          <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
+            <button class="btn btn-primary btn-sm" id="btnModeOpenLoop2">⚙ Open-Loop ωr/ωl</button>
+            <button class="btn btn-outline btn-sm" id="btnModePID2">🎯 PID Trajectory</button>
           </div>
-
-          <div class="sim-canvas-wrapper">
-            <canvas id="canvasSim2"></canvas>
+          <div style="background:rgba(0,0,0,0.4);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:1rem;margin-bottom:1rem;overflow-x:auto;text-align:center;">
+            <div id="katexFormula1" style="font-size:1rem;color:var(--primary-cyan);margin-bottom:0.6rem;"></div>
+            <div id="katexFormula2" style="font-size:0.92rem;color:var(--accent-emerald);"></div>
           </div>
-          <div style="margin-top: 1rem; display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
+          <div class="sim-canvas-wrapper"><canvas id="canvasSim2"></canvas></div>
+          <!-- Open-Loop panel -->
+          <div id="panelOpenLoop2" style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;">
             <div>
-              <label style="font-size: 0.82rem; color: var(--text-secondary);">Kecepatan Roda Kanan ($\omega_r$):</label>
-              <input type="range" id="sliderWr" min="0" max="100" value="60" style="width: 130px;">
+              <label style="font-size:0.8rem;color:var(--text-secondary);">ωr (Roda Kanan): <span id="wrLabel" style="color:var(--primary-cyan);">6.1</span></label><br>
+              <input type="range" id="sliderWr" min="0" max="100" value="60" style="width:140px;">
             </div>
             <div>
-              <label style="font-size: 0.82rem; color: var(--text-secondary);">Kecepatan Roda Kiri ($\omega_l$):</label>
-              <input type="range" id="sliderWl" min="0" max="100" value="40" style="width: 130px;">
+              <label style="font-size:0.8rem;color:var(--text-secondary);">ωl (Roda Kiri): <span id="wlLabel" style="color:var(--accent-emerald);">4.1</span></label><br>
+              <input type="range" id="sliderWl" min="0" max="100" value="40" style="width:140px;">
             </div>
-            <button class="btn btn-outline btn-sm" id="btnResetSim2"><i class="fa fa-refresh"></i> Reset Trajektori</button>
+            <div style="font-size:0.8rem;color:var(--text-secondary);line-height:1.8;">
+              v = <span id="mathTelV" style="color:var(--primary-cyan);">—</span><br>
+              ω = <span id="mathTelW" style="color:var(--accent-emerald);">—</span>
+            </div>
+            <button class="btn btn-outline btn-sm" id="btnResetSim2"><i class="fa fa-refresh"></i> Reset</button>
+          </div>
+          <!-- PID panel -->
+          <div id="panelPID2" style="display:none;margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Trajectory Type:</label><br>
+                <select id="selectTrajType" style="width:100%;margin-top:0.3rem;padding:0.4rem 0.6rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
+                  <option value="sinusoidal">🌊 Sinusoidal</option>
+                  <option value="circular">⭕ Circular</option>
+                  <option value="lemniscate">∞ Lemniscate</option>
+                  <option value="square">▪ Square</option>
+                </select>
+              </div>
+              <div style="font-size:0.8rem;color:var(--text-secondary);line-height:2;">
+                <label>PID Telemetri:</label><br>
+                e_θ = <span id="pidErrTheta" style="color:var(--accent-amber);">—</span> rad &nbsp;
+                v = <span id="pidVel" style="color:var(--primary-cyan);">—</span> px/s
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Kp: <span id="kpLabel" style="color:var(--primary-cyan);">2.5</span></label><br>
+                <input type="range" id="sliderKp" min="0" max="100" value="25" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Ki: <span id="kiLabel" style="color:var(--accent-emerald);">0.01</span></label><br>
+                <input type="range" id="sliderKi" min="0" max="20" value="1" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Kd: <span id="kdLabel" style="color:var(--accent-amber);">0.8</span></label><br>
+                <input type="range" id="sliderKd" min="0" max="50" value="8" style="width:100%;">
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm" id="btnResetPID2"><i class="fa fa-refresh"></i> Reset Trajectory</button>
           </div>
         </div>
       </div>
 
-      <!-- Tab 3: Path Tracking vs Trajectory Tracking -->
+      <!-- ===== TAB 3: Path vs Trajectory Tracking ===== -->
       <div class="sim-tab-content" id="tab3" style="display:none;">
-        <div class="glass-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--accent-purple); margin-bottom: 0.5rem;">Modul 3: Perbandingan Path Tracking vs Trajectory Tracking</h3>
-          
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
-            <div style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: var(--radius-md); padding: 1rem;">
-              <h4 style="color: var(--accent-purple); font-size: 0.95rem; margin-bottom: 0.35rem;"><i class="fa fa-map-signs"></i> Path Tracking (Pure Pursuit)</h4>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
-                Robot mengikuti kontur geometri lintasan $(x,y)$ tanpa terikat kendala waktu $t$. Kecepatan linier $v$ menyesuaikan tingkat kelengkungan tikungan untuk meminimalkan *cross-track error*.
-              </p>
-            </div>
-            <div style="background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: var(--radius-md); padding: 1rem;">
-              <h4 style="color: var(--primary-cyan); font-size: 0.95rem; margin-bottom: 0.35rem;"><i class="fa fa-clock-o"></i> Trajectory Tracking (Time-Sync)</h4>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
-                Robot **terikat kendala waktu $t$** untuk berada pada titik $(x(t), y(t))$ pada detik ke-$t$. Robot akan memutus sudut atau mempercepat daya motor jika tertinggal dari profil trajektori acuan.
-              </p>
-            </div>
+        <div class="glass-card" style="margin-bottom:1.5rem;">
+          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;">Modul 3: Path Tracking vs Trajectory Tracking</h3>
+          <div style="display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
+            <span style="font-size:0.82rem;color:var(--text-secondary);">Mode Aktif:</span>
+            <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
+              <input type="radio" name="trackMode3" id="radioPath3" value="path" checked>
+              <span style="font-size:0.84rem;color:var(--primary-cyan);font-weight:600;">Path Tracking (Pure Pursuit)</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
+              <input type="radio" name="trackMode3" id="radioTraj3" value="trajectory">
+              <span style="font-size:0.84rem;color:var(--accent-purple);font-weight:600;">Trajectory Tracking (Time-Sync)</span>
+            </label>
           </div>
-
-          <div class="sim-canvas-wrapper">
-            <canvas id="canvasSim3"></canvas>
-          </div>
-          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <button class="btn btn-primary btn-sm" id="btnRestartSim3"><i class="fa fa-play"></i> Jalankan Ulang Simulasi</button>
+          <div id="katexPath3" style="background:rgba(0,242,254,0.05);border:1px solid rgba(0,242,254,0.2);border-radius:var(--radius-md);padding:0.85rem;margin-bottom:0.85rem;overflow-x:auto;text-align:center;font-size:0.9rem;"></div>
+          <div id="katexTraj3" style="display:none;background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.2);border-radius:var(--radius-md);padding:0.85rem;margin-bottom:0.85rem;overflow-x:auto;text-align:center;font-size:0.9rem;"></div>
+          <div class="sim-canvas-wrapper"><canvas id="canvasSim3"></canvas></div>
+          <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Start X: <span id="startX3Label" style="color:var(--primary-cyan);">50</span>px</label><br>
+                <input type="range" id="startX3" min="30" max="250" value="50" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Offset Y: <span id="startY3Label" style="color:var(--accent-purple);">+0</span></label><br>
+                <input type="range" id="startY3" min="-150" max="150" value="0" style="width:100%;"><br>
+                <span style="font-size:0.72rem;color:var(--text-secondary);">(relatif thd tengah kanvas)</span>
+              </div>
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Kecepatan: <span id="speed3Label" style="color:var(--accent-amber);">1.0×</span></label><br>
+                <input type="range" id="speed3" min="1" max="50" value="10" style="width:100%;">
+              </div>
+            </div>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+              <button class="btn btn-primary btn-sm" id="btnResetSim3"><i class="fa fa-refresh"></i> Reset Posisi</button>
+              <div style="font-size:0.82rem;color:var(--text-secondary);">Waktu simulasi: <span id="timer3Label" style="color:var(--accent-amber);font-family:monospace;font-size:0.9rem;">0.0s</span></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab 4: Vision Follower Camera -->
+      <!-- ===== TAB 4: Vision Follower Camera ===== -->
       <div class="sim-tab-content" id="tab4" style="display:none;">
-        <div class="glass-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--accent-amber); margin-bottom: 0.5rem;">Modul 4: Robot Following Kamera Vision (OpenCV Bounding Box)</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            Simulasi sensor visual kamera onboard robot pengikut. Kamera mengkalkulasi selisih lebar piksel Bounding Box target untuk mengendalikan jarak robot pengikut secara otomatis.
-          </p>
-          <div class="sim-canvas-wrapper">
-            <canvas id="canvasSim4"></canvas>
+        <div class="glass-card" style="margin-bottom:1.5rem;">
+          <h3 style="color:var(--accent-amber);margin-bottom:0.5rem;">Modul 4: Robot Following Kamera Vision (OpenCV Bounding Box)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">Gerakkan <strong>mouse</strong> di atas kanvas untuk menggerakkan leader. Follower mendeteksi dan mengikuti target melalui FOV kamera.</p>
+          <div class="sim-canvas-wrapper"><canvas id="canvasSim4"></canvas></div>
+          <div style="margin-top:0.75rem;display:flex;gap:2rem;font-size:0.82rem;color:var(--text-secondary);">
+            <div>Status: <span id="visionStatus" style="color:#ef4444;font-weight:600;">SEARCHING</span></div>
+            <div>Distance: <span id="visionDist" style="color:var(--primary-cyan);">--</span></div>
           </div>
         </div>
       </div>
 
-      <!-- Tab 5: Drone Swarm 3D -->
+      <!-- ===== TAB 5: Drone Swarm 3D ===== -->
       <div class="sim-tab-content" id="tab5" style="display:none;">
-        <div class="glass-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem;">Modul 5: Drone Swarm Sinusoidal Altitude Flocking (SICE FES 2025)</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            Visualisasi kawanan quadcopter terbang dalam formasi 3D terkoordinasi dengan modulasi ketinggian sinusoidal.
-          </p>
-          <div class="sim-canvas-wrapper">
-            <canvas id="canvasSim5"></canvas>
+        <div class="glass-card" style="margin-bottom:1.5rem;">
+          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;">Modul 5: Drone Swarm Sinusoidal Altitude Flocking (SICE FES 2025)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">Kawanan quadcopter dengan algoritma flocking Cohesion/Separation/Alignment. Klik kanvas untuk pindah target.</p>
+          <div class="sim-canvas-wrapper"><canvas id="canvasSim5"></canvas></div>
+          <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Jumlah Drone: <span id="droneCountLabel" style="color:var(--primary-cyan);">12</span></label><br>
+                <input type="range" id="sliderDroneCount" min="3" max="25" value="12" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Cohesion (goal-seeking): <span id="cohesionLabel" style="color:var(--accent-emerald);">0.30</span></label><br>
+                <input type="range" id="sliderCohesion" min="0" max="100" value="30" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Separation Distance: <span id="separationLabel" style="color:var(--accent-amber);">40</span>px</label><br>
+                <input type="range" id="sliderSeparation" min="10" max="120" value="40" style="width:100%;">
+              </div>
+              <div>
+                <label style="font-size:0.8rem;color:var(--text-secondary);">Alignment (velocity match): <span id="alignmentLabel" style="color:var(--accent-purple);">0.20</span></label><br>
+                <input type="range" id="sliderAlignment" min="0" max="100" value="20" style="width:100%;">
+              </div>
+            </div>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+              <button class="btn btn-primary btn-sm" id="btnApplyDrone5"><i class="fa fa-check"></i> Apply &amp; Respawn</button>
+              <button class="btn btn-outline btn-sm" id="btnAddObstacle5"><i class="fa fa-plus-circle"></i> Tambah Obstacle</button>
+              <button class="btn btn-sm" id="btnClearObstacles5" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:#ef4444;border-radius:6px;padding:0.4rem 0.85rem;cursor:pointer;"><i class="fa fa-trash"></i> Clear Obstacles</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab 6: Eksplorasi Indoor -->
+      <!-- ===== TAB 6: Eksplorasi Indoor ===== -->
       <div class="sim-tab-content" id="tab6" style="display:none;">
-        <div class="glass-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--accent-emerald); margin-bottom: 0.5rem;">Modul 6: Strategi Eksplorasi Indoor (Floodfill vs Frontier) (ICCAS 2024)</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            Perbandingan algoritma eksplorasi labirin indoor: Floodfill berbasis grid vs pemetaan perbatasan Frontier-based method.
-          </p>
-          <div class="sim-canvas-wrapper">
-            <canvas id="canvasSim6"></canvas>
-          </div>
-          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <button class="btn btn-primary btn-sm" id="btnStartExplore6"><i class="fa fa-play"></i> Mulai Eksplorasi</button>
-            <button class="btn btn-outline btn-sm" id="btnResetExplore6"><i class="fa fa-refresh"></i> Reset Grid</button>
+        <div class="glass-card" style="margin-bottom:1.5rem;">
+          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;">Modul 6: Eksplorasi Indoor — Floodfill vs Frontier-Based (ICCAS 2024)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">BFS/Frontier dari posisi <strong style="color:#10b981;">Start [S]</strong> menuju <strong style="color:#ef4444;">Goal [G]</strong>. Set koordinat grid di bawah, lalu klik Mulai.</p>
+          <div class="sim-canvas-wrapper"><canvas id="canvasSim6"></canvas></div>
+          <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:0.75rem;">
+              <div>
+                <label style="font-size:0.78rem;color:#10b981;">Start Kolom (0–19)</label>
+                <input type="number" id="startCol6" min="0" max="19" value="0" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
+              </div>
+              <div>
+                <label style="font-size:0.78rem;color:#10b981;">Start Baris (0–11)</label>
+                <input type="number" id="startRow6" min="0" max="11" value="0" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
+              </div>
+              <div>
+                <label style="font-size:0.78rem;color:#ef4444;">Goal Kolom (0–19)</label>
+                <input type="number" id="goalCol6" min="0" max="19" value="19" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
+              </div>
+              <div>
+                <label style="font-size:0.78rem;color:#ef4444;">Goal Baris (0–11)</label>
+                <input type="number" id="goalRow6" min="0" max="11" value="11" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
+              </div>
+            </div>
+            <div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;margin-bottom:0.75rem;">
+              <span style="font-size:0.8rem;color:var(--text-secondary);">Algoritma:</span>
+              <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
+                <input type="radio" name="exploreAlgo6" id="radioFrontier6" value="frontier" checked>
+                <span style="font-size:0.82rem;color:var(--accent-amber);">🗺 Frontier-Based (Greedy-Goal)</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
+                <input type="radio" name="exploreAlgo6" id="radioFloodfill6" value="floodfill">
+                <span style="font-size:0.82rem;color:var(--primary-cyan);">🌊 Floodfill (BFS Murni)</span>
+              </label>
+            </div>
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+              <button class="btn btn-primary btn-sm" id="btnStartExplore6"><i class="fa fa-play"></i> Mulai Eksplorasi</button>
+              <button class="btn btn-outline btn-sm" id="btnResetExplore6"><i class="fa fa-refresh"></i> Reset Grid</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab 7: LiDAR SLAM -->
+      <!-- ===== TAB 7: LiDAR SLAM ===== -->
       <div class="sim-tab-content" id="tab7" style="display:none;">
-        <div class="glass-card" style="margin-bottom: 1.5rem;">
-          <h3 style="color: var(--accent-purple); margin-bottom: 0.5rem;">Modul 7: Navigasi Otonom & Pemetaan LiDAR SLAM (IJRA 2024)</h3>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            Simulasi pemindaian sinar laser LiDAR 360° dan pemetaan lingkungan bertahap (Occupancy Grid Mapping) untuk robot SAR berkaki enam.
-          </p>
-          <div class="sim-canvas-wrapper">
+        <div class="glass-card" style="margin-bottom:1.5rem;">
+          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;">Modul 7: Navigasi Otonom &amp; Pemetaan LiDAR SLAM (IJRA 2024)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;">Simulasi LiDAR 360° dengan 3 mode kontrol: Mouse | TurtleBot WASD | Auto-Navigation (Reactive).</p>
+          <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm sim-mode-btn" id="btnModeMouse7" data-mode="mouse">🖱 Mouse Control</button>
+            <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeWASD7" data-mode="wasd">⌨ TurtleBot WASD</button>
+            <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeAuto7" data-mode="auto">🤖 Auto-Navigation</button>
+          </div>
+          <div class="sim-canvas-wrapper" style="position:relative;">
             <canvas id="canvasSim7"></canvas>
+            <div id="lidarHUD" style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.65);border:1px solid var(--border-color);border-radius:8px;padding:6px 10px;font-size:0.74rem;font-family:monospace;color:var(--primary-cyan);pointer-events:none;line-height:1.6;">
+              X: <span id="lidarX">0</span> | Y: <span id="lidarY">0</span> | θ: <span id="lidarHeading">0°</span><br>
+              Mode: <span id="lidarMode" style="color:var(--accent-amber);">MOUSE</span>
+            </div>
+          </div>
+          <!-- TurtleBot WASD Pad -->
+          <div id="turtlebotPad" style="display:none;margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
+            <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:0.65rem;"><i class="fa fa-keyboard-o"></i> Gunakan tombol di bawah <em>atau</em> keyboard WASD / Arrow Keys:</p>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;max-width:220px;margin:0 auto;">
+              <button class="wasd-btn" id="wasdFwd" style="width:60px;height:46px;font-size:1.3rem;">▲</button>
+              <div style="display:flex;gap:0.4rem;">
+                <button class="wasd-btn" id="wasdLeft" style="width:60px;height:46px;font-size:1.3rem;">◄</button>
+                <button class="wasd-btn" id="wasdStop" style="width:60px;height:46px;font-size:0.68rem;line-height:1.3;background:rgba(239,68,68,0.2);border-color:rgba(239,68,68,0.5);color:#ef4444;">■<br>STOP</button>
+                <button class="wasd-btn" id="wasdRight" style="width:60px;height:46px;font-size:1.3rem;">►</button>
+              </div>
+              <button class="wasd-btn" id="wasdBack" style="width:60px;height:46px;font-size:1.3rem;">▼</button>
+              <div style="display:flex;gap:0.5rem;margin-top:0.25rem;">
+                <button class="wasd-btn" id="wasdRotL" style="width:90px;height:38px;font-size:0.88rem;">↺ Q (Putar Ki)</button>
+                <button class="wasd-btn" id="wasdRotR" style="width:90px;height:38px;font-size:0.88rem;">↻ E (Putar Ka)</button>
+              </div>
+            </div>
+          </div>
+          <!-- Auto-Nav info -->
+          <div id="autoNavInfo" style="display:none;margin-top:1rem;padding-top:0.75rem;border-top:1px solid var(--border-color);font-size:0.82rem;color:var(--text-secondary);">
+            <i class="fa fa-info-circle" style="color:var(--accent-amber);"></i>
+            Robot bergerak otomatis menggunakan data LiDAR untuk menghindari rintangan.<br>
+            Algoritma: <strong style="color:var(--primary-cyan);">Reactive Obstacle Avoidance</strong> — memilih arah putar berdasarkan sisi dengan jarak LiDAR terpanjang.
           </div>
         </div>
       </div>

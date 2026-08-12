@@ -6,6 +6,21 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.8] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(robotics-sim)`**: Kontrol interaktif lanjutan dan parameter real-time di semua 7 modul simulasi robotika:
+  - **Modul 1 (Fuzzy PID & APF)**: Tombol formasi swarm interaktif (**▲ Triangle**, **● Circle**, **― Line**), reset robot, dan penambahan rintangan dinamis APF.
+  - **Modul 2 (Model Kinematika & PID)**: Mode ganda **Open-Loop** (slider $\omega_r$/$\omega_l$) dan **PID Trajectory Tracking** dengan slider gain ($K_p$, $K_i$, $K_d$), 4 jenis kurva referensi (*Sinusoidal*, *Circular*, *Lemniscate*, *Square*), serta telemetri error sudut ($e_\theta$) dan kecepatan ($v$).
+  - **Modul 3 (Path vs Trajectory)**: Radio selector mode (*Pure Pursuit* vs *Time-Sync*), visualisasi formula KaTeX LaTeX untuk masing-masing mode, slider posisi awal ($X, \Delta Y$), pengatur kecepatan simulasi, dan timer akurat.
+  - **Modul 4 (Vision Follower)**: Integrasi tracking mouse dengan OpenCV Bounding Box dan status deteksi target.
+  - **Modul 5 (Drone Swarm Flocking)**: Kontrol kawanan 3D dengan slider jumlah drone (3–25), kekuatan *Cohesion*, jarak *Separation*, dan *Alignment*, plus mode interaktif tambah/hapus rintangan di kanvas.
+  - **Modul 6 (Eksplorasi Indoor)**: Pemilihan koordinat grid *Start* $(r, c)$ dan *Goal* $(r, c)$, selector algoritma (*Frontier-Based Greedy Goal* vs *Floodfill BFS*), dan visualisasi sel frontier/visited.
+  - **Modul 7 (LiDAR SLAM & TurtleBot)**: 3 mode kendali robot (*Mouse*, *TurtleBot Keyboard WASD/Arrow/Q/E*, dan *Auto-Navigation Reactive*), D-Pad interaktif on-screen, dan HUD overlay real-time untuk koordinat $(X, Y)$ dan heading sudut ($\theta$).
+- **`css/style.css`**: Styling tombol formasi (`.sim-form-btn`), D-Pad TurtleBot (`.wasd-btn`), serta aksen range slider bernuansa cybernetic neon.
+
+---
+
 ## [v2026.08.12.7] — 2026-08-12
 
 ### Fixed / Diperbaiki

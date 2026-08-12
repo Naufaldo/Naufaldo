@@ -1,0 +1,5 @@
+# Ignore Lighthouse and test output
+lighthouse.json
+*.log
+.DS_Store
+Thumbs.db
