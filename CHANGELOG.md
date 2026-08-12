@@ -6,6 +6,16 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.13] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(lidar-nav)`**: Fitur Reset Posisi Robot & Pemulihan Tabrakan Dinding (*Anti-Stuck Collision Resolver*) pada Modul 7 (LiDAR SLAM):
+  - **Tombol Reset Posisi**: Menambahkan tombol interaktif **↺ Reset Posisi Robot** (`#btnResetLidarPos7`) untuk mengembalikan robot ke titik awal yang aman seketika jika tersangkut atau terhalang dinding.
+  - **Klik Canvas untuk Repositioning / Teleport**: Pengguna dapat mengklik area bebas mana pun pada denah ruangan untuk langsung memindahkan posisi robot ke titik tersebut.
+  - **Pemulihan Otomatis (*Auto-Resolve Stuck*)**: Algoritma deteksi tabrakan aktif secara otomatis mendeteksi jika bodi robot terpotong oleh batas dinding dan mendorongnya dengan mulus ke area bebas terdekat.
+
+---
+
 ## [v2026.08.12.12] — 2026-08-12
 
 ### Performance / Performa

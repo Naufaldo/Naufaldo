@@ -1123,12 +1123,64 @@ class LiDARSLAMSimulation {
     this.targetMouse.y = this.robot.y;
   }
 
+  resetPosition(customX, customY) {
+    const defaultX = this.width * 0.22;
+    const defaultY = this.height * 0.50;
+    const targetX = (customX !== undefined) ? customX : defaultX;
+    const targetY = (customY !== undefined) ? customY : defaultY;
+
+    if (!this.checkWallCollision(targetX, targetY, this.robot.radius + 2)) {
+      this.robot.x = targetX;
+      this.robot.y = targetY;
+    } else {
+      this.robot.x = defaultX;
+      this.robot.y = defaultY;
+    }
+
+    this.robot.heading = 0;
+    this.targetMouse.x = this.robot.x;
+    this.targetMouse.y = this.robot.y;
+    this.keys = { w: false, s: false, a: false, d: false, q: false, e: false };
+    this.resolveWallStuck();
+  }
+
+  resolveWallStuck() {
+    if (this.checkWallCollision(this.robot.x, this.robot.y, this.robot.radius)) {
+      for (let r = 5; r <= 80; r += 5) {
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 4) {
+          const testX = this.robot.x + Math.cos(a) * r;
+          const testY = this.robot.y + Math.sin(a) * r;
+          if (testX > 20 && testX < this.width - 20 && testY > 20 && testY < this.height - 20) {
+            if (!this.checkWallCollision(testX, testY, this.robot.radius + 2)) {
+              this.robot.x = testX;
+              this.robot.y = testY;
+              return;
+            }
+          }
+        }
+      }
+    }
+  }
+
   bindEvents() {
     this.canvas.addEventListener("mousemove", (e) => {
       if (this.ctrlMode !== "mouse") return;
       const rect = this.canvas.getBoundingClientRect();
       this.targetMouse.x = e.clientX - rect.left;
       this.targetMouse.y = e.clientY - rect.top;
+    });
+
+    // Click canvas to immediately reposition/teleport robot if not inside wall
+    this.canvas.addEventListener("click", (e) => {
+      const rect = this.canvas.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+      if (!this.checkWallCollision(clickX, clickY, this.robot.radius + 2)) {
+        this.robot.x = clickX;
+        this.robot.y = clickY;
+        this.targetMouse.x = clickX;
+        this.targetMouse.y = clickY;
+      }
     });
 
     document.addEventListener("keydown", (e) => {
@@ -1222,6 +1274,9 @@ class LiDARSLAMSimulation {
     // Keep heading normalized [-PI, PI]
     while (this.robot.heading > Math.PI) this.robot.heading -= 2 * Math.PI;
     while (this.robot.heading < -Math.PI) this.robot.heading += 2 * Math.PI;
+
+    // Resolve any collision clipping
+    this.resolveWallStuck();
 
     // 3. 360-Degree LiDAR Ray Casting against all room walls and obstacles
     this.scanData = [];
@@ -1689,6 +1744,11 @@ document.addEventListener("DOMContentLoaded", () => {
   addHoldBtn("wasdRotR",  () => { if(sim7) sim7.robot.angle += 0.09; });
   document.getElementById("wasdStop")?.addEventListener("click", () => {
     if (sim7) sim7.keys = { w:false,s:false,a:false,d:false,q:false,e:false };
+  });
+
+  // Reset Position Button
+  document.getElementById("btnResetLidarPos7")?.addEventListener("click", () => {
+    sim7?.resetPosition();
   });
 
   // Set first mode button active

@@ -224,6 +224,7 @@ const i18n = {
     "sim7-btn-mouse": "🖱 Kontrol Mouse",
     "sim7-btn-wasd": "⌨ TurtleBot WASD",
     "sim7-btn-auto": "🤖 Auto-Navigation",
+    "sim7-btn-reset-pos": "↺ Reset Posisi Robot",
     "sim7-label-world": "Denah Ruangan Indoor & Sinar LiDAR (World View)",
     "sim7-label-polar": "Onboard LiDAR Polar Scope (Pandangan Robot)",
 
@@ -463,6 +464,7 @@ const i18n = {
     "sim7-btn-mouse": "🖱 Mouse Control",
     "sim7-btn-wasd": "⌨ TurtleBot WASD",
     "sim7-btn-auto": "🤖 Auto-Navigation",
+    "sim7-btn-reset-pos": "↺ Reset Robot Position",
     "sim7-label-world": "Indoor Room Floorplan & LiDAR Rays (World View)",
     "sim7-label-polar": "Onboard LiDAR Polar Scope (Robot's View)",
 

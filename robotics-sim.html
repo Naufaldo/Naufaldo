@@ -579,10 +579,11 @@
         <div class="glass-card" style="margin-bottom:1.5rem;">
           <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;" data-i18n="sim7-title">Modul 7: Navigasi Otonom &amp; Pemetaan LiDAR SLAM (IJRA 2024)</h3>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;" data-i18n="sim7-desc">Simulasi LiDAR 360° dengan 3 mode kontrol: Mouse | TurtleBot WASD | Auto-Navigation (Reactive).</p>
-          <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
+          <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center;">
             <button class="btn btn-primary btn-sm sim-mode-btn" id="btnModeMouse7" data-mode="mouse" data-i18n="sim7-btn-mouse">🖱 Mouse Control</button>
             <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeWASD7" data-mode="wasd" data-i18n="sim7-btn-wasd">⌨ TurtleBot WASD</button>
             <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeAuto7" data-mode="auto" data-i18n="sim7-btn-auto">🤖 Auto-Navigation</button>
+            <button class="btn btn-outline btn-sm" id="btnResetLidarPos7" style="margin-left:auto;border-color:var(--primary-cyan);color:var(--primary-cyan);"><i class="fa fa-crosshairs"></i> <span data-i18n="sim7-btn-reset-pos">↺ Reset Posisi Robot</span></button>
           </div>
           <div class="lidar-sim-grid" style="display:grid;grid-template-columns:1fr 270px;gap:1rem;align-items:start;margin-bottom:1rem;">
             <!-- Main World Room Canvas -->
