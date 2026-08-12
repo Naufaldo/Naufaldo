@@ -61,6 +61,15 @@ Our portfolio features a dedicated **Interactive Robotics Simulation Hub** showc
 
 ---
 
+## 📊 GitHub Developer Analytics
+
+<p align="center">
+  <img height="165em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=Naufaldo&show_icons=true&theme=algolia&include_all_commits=true&count_private=true"/>
+  <img height="165em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=Naufaldo&layout=compact&langs_count=8&theme=algolia"/>
+</p>
+
+---
+
 <p align="center">
   <i>Connecting physical refrigeration & industrial automation with professional competency assessment, green innovation, and autonomous robotics.</i>
 </p>
