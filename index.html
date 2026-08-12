@@ -1,457 +1,782 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Naufaldo | Cold Storage & Automation Engineer</title>
-
-<meta name="description"
-content="Cold Storage & Automation Engineer, Director of CV Dingin Lestari Teknik, Robotics Researcher and Mechatronics Engineer.">
-
-<meta name="keywords"
-content="Cold Storage, Refrigeration Engineer, Automation Engineer, Robotics Researcher, Bandung">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-.w3-row-padding img {margin-bottom: 12px}
-.w3-sidebar {width: 120px;background: #222;}
-#main {margin-left: 120px}
-@media only screen and (max-width: 600px) {#main {margin-left: 0}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naufaldo, M.Sc. | Cold Storage & Automation Engineer | Robotics Researcher</title>
+  
+  <meta name="description" content="Portofolio resmi Naufaldo, M.Sc. - Direktur CV. Dingin Lestari Teknik, Cold Storage & Automation Engineer, serta Peneliti Robotika Multi-Agent & Navigasi Otonom.">
+  <meta name="keywords" content="Naufaldo, Cold Storage Engineer, Automation Engineer, Director CV Dingin Lestari Teknik, Mechatronics M.Sc. NTUT, Multi-Agent Systems, Robotics Bandung">
+  <meta name="author" content="Naufaldo, M.Sc.">
+  
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="Naufaldo, M.Sc. | Cold Storage & Automation Engineer">
+  <meta property="og:description" content="Direktur CV. Dingin Lestari Teknik & Lulusan NTUT Taiwan. Spesialis Cold Storage Industri & Riset Robotika.">
+  <meta property="og:image" content="img/Pas Fotos.JPG">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
+  
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Custom Modern Design System -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="w3-white">
+<body>
 
-<!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center w3-white">
-  <!-- Avatar image in top left corner -->
-  <img src="img/Pas Fotos.JPG" style="width:100%">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">
-    <i class="fa fa-home w3-xxlarge"></i>
-    <p>HOME</p>
-  </a>
-  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-white">
-    <i class="fa fa-user w3-xxlarge"></i>
-    <p>ABOUT</p>
-  </a>
-  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-white">
-    <i class="fa fa-eye w3-xxlarge"></i>
-    <p>PROJECT</p>
-  </a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-white">
-    <i class="fa fa-envelope w3-xxlarge"></i>
-    <p>CONTACT</p>
-  </a>
-</nav>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="#" class="logo">
+        Naufaldo<span class="logo-dot"></span><span style="font-size:0.9rem; color:var(--text-secondary); font-weight:600;">M.Sc.</span>
+      </a>
 
-<!-- Navbar on small screens (Hidden on medium and large screens) -->
-<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
-  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
-    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PROJECT</a>
-    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
-  </div>
-</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active" data-i18n="nav-home">Beranda</a></li>
+        <li><a href="#about" class="nav-link" data-i18n="nav-about">Tentang</a></li>
+        <li><a href="#sim" class="nav-link" data-i18n="nav-sim">Simulasi Robotika</a></li>
+        <li><a href="#calc" class="nav-link" data-i18n="nav-calc">Kalkulator Pendingin</a></li>
+        <li><a href="#experience" class="nav-link" data-i18n="nav-exp">Pengalaman</a></li>
+        <li><a href="#education" class="nav-link" data-i18n="nav-edu">Pendidikan</a></li>
+        <li><a href="#publications" class="nav-link" data-i18n="nav-pub">Publikasi</a></li>
+        <li><a href="#projects" class="nav-link" data-i18n="nav-projects">Proyek</a></li>
+        <li><a href="#skills" class="nav-link" data-i18n="nav-skills">Keahlian</a></li>
+        <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Kontak</a></li>
+      </ul>
 
-<!-- Page Content -->
-<div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-white" id="home">
-    <h1 class="w3-jumbo"><span class="w3-hide-small">Naufaldo</h1>
-    <p>
-      Cold Storage & Automation Engineer<br>
-      Director of CV Dingin Lestari Teknik<br>
-      M.Sc. Mechatronics Engineering
-      </p>
-    <img src="img/Pas Fotos.JPG" alt="boy" class="w3-image" width="300" height="300">
-  </header>
+      <div class="nav-actions">
+        <!-- Language Switcher Button -->
+        <button class="lang-toggle-btn" id="langToggleBtn" title="Switch Language">
+          <span>🇮🇩</span> ID
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Menu">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="badge badge-purple" data-i18n="hero-badge">Magister Teknik Mekatronika (M.Sc.)</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="hero-title-prefix">Halo, Saya </span><span class="text-gradient">Naufaldo</span>
+        </h1>
+        <h2 class="hero-subtitle" data-i18n="hero-subtitle">
+          Cold Storage & Automation Engineer | Peneliti Robotika
+        </h2>
+        <p class="hero-desc" data-i18n="hero-desc">
+          Direktur CV. Dingin Lestari Teknik & Lulusan NTUT Taiwan. Berpengalaman dalam perancangan sistem cold storage industri, otomatisasi panel kontrol, serta riset kendali robot multi-agent dan navigasi otonom.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">
+            <i class="fa fa-envelope"></i> <span data-i18n="hero-btn-contact">Hubungi Saya</span>
+          </a>
+          <a href="#calc" class="btn btn-outline">
+            <i class="fa fa-calculator"></i> <span data-i18n="hero-btn-calc">Kalkulator Cold Storage</span>
+          </a>
+          <a href="#sim" class="btn btn-outline">
+            <i class="fa fa-gamepad"></i> <span data-i18n="hero-btn-sim">Uji Simulasi Robot</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">7<span>+</span></div>
+            <div class="stat-label" data-i18n="stat-exp">Tahun Pengalaman</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">7<span>+</span></div>
+            <div class="stat-label" data-i18n="stat-pub">Publikasi Ilmiah</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">15<span>+</span></div>
+            <div class="stat-label" data-i18n="stat-proj">Proyek Rekayasa</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avatar Frame with Floating Badges -->
+      <div class="hero-image-container">
+        <div class="hero-avatar-wrapper">
+          <img src="img/Pas Fotos.JPG" alt="Naufaldo, M.Sc." class="hero-avatar-img">
+          
+          <div class="hero-badge-float">
+            <i class="fa fa-snowflake-o fa-2x" style="color:var(--primary-cyan);"></i>
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-secondary);">Direktur Utama</div>
+              <div style="font-size:0.9rem; font-weight:700;">CV. Dingin Lestari Teknik</div>
+            </div>
+          </div>
+
+          <div class="hero-badge-float-2">
+            <i class="fa fa-graduation-cap fa-2x" style="color:var(--accent-purple);"></i>
+            <div>
+              <div style="font-size:0.75rem; color:var(--text-secondary);">Alumni M.Sc.</div>
+              <div style="font-size:0.9rem; font-weight:700;">NTUT Taiwan</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- About Section -->
-  
-  <div class="w3-content w3-justify w3-text-black w3-padding-64" id="about">
-    <h2 class="w3-text-black">About Me</h2>
-    <hr style="width:200px" class="w3-black">
-    <div class="w3-container w3-card w3-white w3-margin-bottom">
-    
-      <p>
-        I am a Cold Storage and Automation Engineer with expertise in refrigeration systems,
-        industrial automation, control systems, and robotics research.
+  <section class="section-padding" id="about">
+    <div class="container">
+      <h2 class="section-title" data-i18n="about-title">Profil & Keahlian Utama</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="about-sub">
+        Menggabungkan pengalaman praktis industri pendingin dengan riset akademik robotika tingkat lanjut
+      </p>
 
-        Currently, I serve as Director of CV Dingin Lestari Teknik, specializing in the design,
-        installation, and maintenance of cold storage systems, freezer rooms, chiller rooms,
-        and industrial refrigeration solutions.
-
-        My academic background includes a Master of Science in Mechatronics Engineering from
-        National Taipei University of Technology, where my research focused on multi-agent systems,
-        robot formation control, and autonomous navigation.
+      <div class="glass-card" style="max-width: 900px; margin: 0 auto; line-height: 1.8;">
+        <p style="margin-bottom: 1.25rem;" data-i18n="about-text-1">
+          Saya adalah seorang insinyur mekatronika dan otomatisasi yang berfokus pada dua bidang utama: rekayasa sistem cold storage industri dan riset sistem kendali robotika otonom. Saat ini saya memimpin <strong>CV. Dingin Lestari Teknik</strong> di Bandung, mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF).
         </p>
-      
-   </div>
-  </div>
-<!-- Experience and Work Section -->
-<div class="w3-padding-64 w3-content" id="experience">
-  <h2 class="w3-text-black">Experience and Education</h2>
-  <hr style="width:200px" class="w3-opacity">
-  
-  <div class="w3-container w3-card w3-white w3-margin-bottom">
-    <h2 class="w3-text-black w3-padding-16">
-      <i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Work Experience
-    </h2>
-            <!-- CV Dingin Lestari Teknik -->
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>CV. Dingin Lestari Teknik | Director</b></h5>
-            <h6 class="w3-text-teal">
-              <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-              June 2025 - Present
-            </h6>
-            <p>
-              Lead and develop a family-owned company specializing in refrigeration and cold storage systems.
-              Responsible for system design, compressor and evaporator selection, energy efficiency optimization,
-              project management, and client relations.
-            </p>
-            <hr>
-          </div>
-
-          <!-- Industrial Electrician -->
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>CV. Dingin Lestari Teknik | Industrial Electrician (Freelance)</b></h5>
-            <h6 class="w3-text-teal">
-              <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-              November 2018 - June 2025
-            </h6>
-            <p>
-              Designed and installed industrial electrical panels, performed electrical wiring,
-              troubleshooting, and supported HVAC and cold storage projects.
-            </p>
-            <hr>
-          </div>
-
-    <!-- Beantrack -->
-    <div class="w3-container">
-      <h5 class="w3-opacity"><b>Beantrack | Co-founder</b></h5>
-      <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>September 2023 – November 2024</h6>
-      <p>
-        Co-founded a smart agriculture startup focusing on product research and development.
-        Created an IoT-integrated solar dryer for coffee drying to optimize quality and efficiency.
-      </p>
-      <hr>
-    </div>
-  
-    <!-- Bangkit Academy -->
-    <div class="w3-container">
-      <h5 class="w3-opacity"><b>Bangkit Academy | Cloud Computing Path</b></h5>
-      <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>February 2023 – July 2023</h6>
-      <p>
-        Completed a Google-led Cloud Computing program with distinction.
-        Participated in a Capstone Project ranked in the TOP 20, receiving business incubation support.
-      </p>
-      <hr>
-    </div>
-  
-    <!-- Asperio -->
-    <div class="w3-container">
-      <h5 class="w3-opacity"><b>Asperio | Engineer Intern</b></h5>
-      <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>February 2022 – September 2022</h6>
-      <p>
-        Involved in 7 engineering projects covering programming, mechanical/electrical design, and graphic design.
-        Led user training sessions and helped develop training modules.
-        Supported project management, wiring, and tool/inventory organization.
-      </p>
-      <hr>
-    </div>
-  
-    <!-- Dingin Lestari -->
-    <div class="w3-container">
-      <h5 class="w3-opacity"><b>Dingin Lestari | Freelance Electrician</b></h5>
-      <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>November 2018 – December 2018</h6>
-      <p>
-        Designed and installed panel wiring for cold storage system control panels.
-      </p>
-      <hr>
-    </div>
-  
-    <!-- CV Akuratama Berkat Anugrah -->
-    <div class="w3-container">
-      <h5 class="w3-opacity"><b>CV Akuratama Berkat Anugrah | Engineer Intern</b></h5>
-      <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>July 2018 – September 2018</h6>
-      <p>
-        Created and installed control panel wiring for water treatment plant operations.
-      </p>
-      <br>
-    </div>
-  </div>
-  
-  <!-- Education Section -->
-  <div class="w3-padding-64 w3-content" id="education">
-    <div class="w3-container w3-card w3-white w3-margin-bottom">
-      <h2 class="w3-text-black w3-padding-16">
-        <i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Education
-      </h2>
-  
-      <!-- NTUT -->
-          <div class="w3-container">
-            <h5 class="w3-opacity"><b>National Taipei University of Technology</b></h5>
-            <h6 class="w3-text-teal">
-              <i class="fa fa-calendar fa-fw w3-margin-right"></i>
-              2024 - 2025
-            </h6>
-            <p>
-              Master of Science (M.Sc.) in Mechatronics Engineering.<br>
-              Thesis: Intelligent Control Strategies for Mobile Robotics:
-              Multi-Agent System Robot Control Formation.<br>
-              Research Areas: Multi-Agent Systems, Mobile Robotics,
-              Autonomous Navigation, and Swarm Robotics.
-            </p>
-            <hr>
-          </div>
-      <!-- Politeknik Manufaktur Bandung -->
-      <div class="w3-container">
-        <h5 class="w3-opacity"><b>Politeknik Manufaktur Bandung</b></h5>
-        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2019 – 2023</h6>
-        <p>
-          Bachelor of Engineering in Automation and Mechatronics Engineering.<br>
-          Thesis: Hexa-Legged SAR Robot Navigation System using LiDAR Sensor with SLAM Method.
+        <p data-i18n="about-text-2">
+          Di bidang akademik, saya meraih gelar Magister Sains (M.Sc.) Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Riset saya berfokus pada kendali formasi robot multi-agent, penghindaran rintangan cerdas, dan navigasi otonom berbasis LiDAR & SLAM.
         </p>
-        <hr>
-      </div>
-  
-      <!-- SMKN 4 Bandung -->
-      <div class="w3-container">
-        <h5 class="w3-opacity"><b>SMKN 4 Bandung</b></h5>
-        <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2017 – 2019</h6>
-        <p>
-          Vocational High School in Electrical Automation.<br>
-          Member of Paguyuban Anak Elektrik (PANEL) and Robotics Club (E-ROM).
-        </p>
-        <br>
       </div>
     </div>
-  </div>
-  
-      <!-- 
-    <h3 class="w3-padding-16 w3-text-light-grey">my github stats </h3>
--->
-    <!--<p align="w3-center">
-      <a href="https://github.com/Naufaldo">
-        <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=Naufaldo&show_icons=true&theme=algolia&include_all_commits=true&count_private=true"/>
-        <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=Naufaldo&layout=compact&langs_count=8&theme=algolia"/>
-      </a>
-      </p>-->
-    </div>
-  </div>
-<div class="w3-padding-64 w3-content" id="Publications">
-    <h2 class="w3-text-black">Publications</h2>
-    <hr style="width:200px" class="w3-black">
-  <div class="w3-container w3-card w3-white w3-margin-bottom">
-    <h2 class="w3-text-black w3-padding-16">
-    </h2>
-  
-    <div class="w3-container">
-  <h5 class="w3-opacity">
-    <b>Robot Coordination in Multi-agent Systems: Leader-Dependent Following Configuration Control of Mecanum Wheeled Drive Robots</b>
-  </h5>
-  <p>
-    International Journal of Control, Automation and Systems (IJCAS), 2026.<br>
-    DOI:
-    <a href="https://doi.org/10.1007/s12555-026-00119-1" target="_blank">
-      10.1007/s12555-026-00119-1
-    </a>
-  </p>
-  <hr>
-</div>
+  </section>
 
-<div class="w3-container">
-  <h5 class="w3-opacity">
-    <b>Fuzzy-Tuned PID Control for Dynamic Formation of Differential-Wheeled Mobile Robots with APF-Based Obstacle Avoidance</b>
-  </h5>
-  <p>
-    ICCAS 2025.<br>
-    DOI:
-    <a href="https://doi.org/10.23919/ICCAS66577.2025.11301156" target="_blank">
-      10.23919/ICCAS66577.2025.11301156
-    </a>
-  </p>
-  <hr>
-</div>
-
-<div class="w3-container">
-  <h5 class="w3-opacity">
-    <b>Dynamic Goal-Shifting and Sinusoidal Altitude Modulation for Flight Control of a Swarm of Quadcopters with Flocking Dynamics</b>
-  </h5>
-  <p>
-    SICE Festival 2025.<br>
-    DOI:
-    <a href="https://doi.org/10.23919/SICEFES67750.2025.11236621" target="_blank">
-      10.23919/SICEFES67750.2025.11236621
-    </a>
-  </p>
-  <hr>
-</div>
-
-<div class="w3-container">
-  <h5 class="w3-opacity">
-    <b>Leader-Follower Configuration Based Formation Control of Multi-Agent System</b>
-  </h5>
-  <p>
-    Journal of the Chinese Institute of Engineers (JCIE), 2025.<br>
-    DOI:
-    <a href="https://doi.org/10.1080/02533839.2025.2503867" target="_blank">
-      10.1080/02533839.2025.2503867
-    </a>
-  </p>
-  <hr>
-</div>
-
-    <div class="w3-container">
-      <h5 class="w3-opacity">
-        <b>Comparative Analysis of Autonomous Indoor Exploration Strategies: Floodfill Algorithm vs. Frontier-Based Method</b>
-      </h5>
-      <p>
-        Published in the 24th International Conference on Control, Automation and Systems (ICCAS), December 2024.<br>
-        DOI: <a href="http://doi.org/10.23919/ICCAS63016.2024.10773212" target="_blank">10.23919/ICCAS63016.2024.10773212</a>
+  <!-- Interactive Multi-Agent Robotics Simulator -->
+  <section class="section-padding" id="sim" style="background: var(--bg-secondary);">
+    <div class="container">
+      <h2 class="section-title" data-i18n="sim-title">Simulasi Robotika Multi-Agent</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="sim-sub">
+        Demonstrasi interaktif algoritma kendali formasi Leader-Follower & APF Obstacle Avoidance (Sesuai Riset Tesis M.Sc. Naufaldo)
       </p>
-      <hr>
-    </div>
-  
-    <div class="w3-container">
-      <h5 class="w3-opacity">
-        <b>Design and Development of a Substitution Product System for Data Logging of Water Flow and Pressure in Closed Pipe Systems Using LoRaWAN Communication</b>
-      </h5>
-      <p>
-        Published in JTT (Jurnal Teknologi Terapan), P3M Politeknik Negeri Indramayu, October 2024.<br>
-        DOI: <a href="https://doi.org/10.31884/jtt.v10i2.624" target="_blank">10.31884/jtt.v10i2.624</a>
-      </p>
-      <hr>
-    </div>
-  
-    <div class="w3-container">
-      <h5 class="w3-opacity">
-        <b>Autonomous Navigation System for Hexa-Legged Search and Rescue Robot Using LiDAR</b>
-      </h5>
-      <p>
-        Published in IAES International Journal of Robotics and Automation (IJRA), March 2024.<br>
-        DOI: <a href="http://doi.org/10.11591/ijra.v13i1.pp50-64" target="_blank">10.11591/ijra.v13i1.pp50-64</a>
-      </p>
-      <br>
-    </div>
-  </div>
-</div>
-  
-  <!-- Portfolio Section -->
 
-  <div class="w3-padding-64 w3-content" id="expertise">
-  <h2 class="w3-text-black">Industrial Expertise</h2>
-  <hr style="width:200px" class="w3-black">
-
-  <ul>
-    <li>Cold Storage System Design</li>
-    <li>Freezer Room & Chiller Room Engineering</li>
-    <li>Air Blast Freezer (ABF)</li>
-    <li>Industrial Refrigeration</li>
-    <li>Compressor Selection</li>
-    <li>Energy Efficiency Optimization</li>
-    <li>Industrial Electrical Panels</li>
-    <li>PLC Programming</li>
-    <li>SCADA Systems</li>
-    <li>Industrial Automation</li>
-  </ul>
-</div>
-
-  <div class="w3-padding-64 w3-content" id="photos">
-    <h2 class="w3-text-black">My Project</h2>
-    <hr style="width:200px" class="w3-black">
-    <div class="w3-container w3-card w3-white w3-margin-bottom">
-
-    <!-- Grid for photos --> 
-      <div class="w3-row-padding">       
-        <div class="w3-col l3 m6 w3-margin-bottom">
-          <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">Hexapod Robot</div>
-            <img src="img/IMG-20230503-WA0016.jpg" alt="House" style="width:100%">
-          </div>
-        </div>
-        <div class="w3-col l3 m6 w3-margin-bottom">
-          <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">Ice Cream Robot</div>
-            <img src="img/IMG-20230503-WA0017.jpg" alt="House" style="width:100%">
-          </div>
-        </div>   
-        <div class="w3-col l3 m6 w3-margin-bottom">
-          <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">BAS Simulator</div>
-            <img src="img/IMG-20230503-WA0019.jpg" alt="House" style="width:100%">
-          </div>
-        </div>     
-        <div class="w3-col l3 m6 w3-margin-bottom">
-          <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">DCS Training System</div>
-            <img src="img/IMG-20230503-WA0021.jpg" alt="House" style="width:100%">
-          </div>
-        </div>
-        <div class="w3-col l3 m6 w3-margin-bottom">
-          <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">Hybrid Car Principle</div>
-            <img src="img/IMG-20230503-WA0022.jpg" alt="House" style="width:100%">
-          </div>
+      <div class="sim-container">
+        <!-- 2D Physics Canvas -->
+        <div class="sim-canvas-wrapper">
+          <canvas id="simCanvas"></canvas>
         </div>
 
-      </div>
-      <div class="w3-row-padding">
-        <div class="w3-col l3 m6 w3-margin-bottom">
-          <div class="w3-display-container">
-            <div class="w3-display-topleft w3-black w3-padding">Panel IOT</div>
-            <img src="img/IMG-20230503-WA0015.jpg" alt="House" style="width:100%">
-          </div>
-        </div>
-          <div class="w3-col l3 m6 w3-margin-bottom">
-            <div class="w3-display-container">
-              <div class="w3-display-topleft w3-black w3-padding">Forklift Simulator</div>
-              <img src="img/IMG-20230503-WA0018.jpg" alt="House" style="width:100%">
+        <!-- Controls Panel -->
+        <div class="sim-controls-panel">
+          <div class="sim-control-group">
+            <label data-i18n="sim-label-formation">Pilih Formasi Robot</label>
+            <div class="sim-btn-grid">
+              <button class="btn btn-outline btn-sm" id="btnTriangle" data-i18n="sim-btn-triangle">Formasi Segitiga</button>
+              <button class="btn btn-outline btn-sm" id="btnCircle" data-i18n="sim-btn-circle">Formasi Lingkaran</button>
+              <button class="btn btn-outline btn-sm" id="btnLine" data-i18n="sim-btn-line">Formasi Garis</button>
             </div>
           </div>
-          <div class="w3-col l3 m6 w3-margin-bottom">
-            <div class="w3-display-container">
-              <div class="w3-display-topleft w3-black w3-padding">BAS Panel</div>
-              <img src="img/IMG-20230503-WA0020.jpg" alt="House" style="width:100%">
+
+          <div class="sim-control-group">
+            <label data-i18n="sim-label-actions">Aksi Interaktif</label>
+            <div class="sim-btn-grid">
+              <button class="btn btn-primary btn-sm" id="btnAddObs" data-i18n="sim-btn-obstacle">Tambah Rintangan</button>
+              <button class="btn btn-outline btn-sm" id="btnResetSim" data-i18n="sim-btn-reset">Reset Simulasi</button>
+            </div>
+            <button class="btn btn-outline btn-sm" id="btnPauseSim" style="margin-top: 0.5rem;" data-i18n="sim-btn-pause">Jeda / Jalan</button>
+          </div>
+
+          <!-- Telemetry Status Box -->
+          <div class="sim-status-box">
+            <div style="font-weight: 700; color: #fff;" data-i18n="sim-status-title">TELEMETRI SWARM:</div>
+            <div><span data-i18n="sim-status-leader">Posisi Leader:</span> <span id="simStatusLeader" style="color:var(--primary-cyan);">X:0 Y:0</span></div>
+            <div><span data-i18n="sim-status-mode">Mode Formasi:</span> <span id="simStatusMode" style="color:var(--accent-purple);">TRIANGLE</span></div>
+            <div><span data-i18n="sim-status-obs">Rintangan Aktif:</span> <span id="simStatusObs" style="color:#ef4444;">2</span></div>
+          </div>
+
+          <p style="font-size: 0.78rem; color: var(--text-dim); line-height: 1.4;" data-i18n="sim-instructions">
+            * Klik pada area kanvas untuk menentukan lokasi target pergerakan robot Leader.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cold Storage Calculator -->
+  <section class="section-padding" id="calc">
+    <div class="container">
+      <h2 class="section-title" data-i18n="calc-title">Kalkulator Estimasi Cold Storage</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="calc-sub">
+        Hitung estimasi kapasitas pendinginan (Cooling Load) & spesifikasi kompresor untuk kebutuhan industri Anda
+      </p>
+
+      <div class="calc-card">
+        <div class="calc-grid">
+          <!-- Inputs Form -->
+          <div class="calc-inputs">
+            <div class="form-group">
+              <label data-i18n="calc-label-room">Tipe Ruangan Pendingin</label>
+              <select class="form-select" id="calcRoomType">
+                <option value="chiller" data-i18n="calc-opt-chiller">Chiller Room (+2°C s/d +8°C) - Buah, Sayur, Obat</option>
+                <option value="freezer" data-i18n="calc-opt-freezer">Freezer Room (-18°C s/d -25°C) - Daging, Daging Beku</option>
+                <option value="abf" data-i18n="calc-opt-abf">Air Blast Freezer (-35°C s/d -40°C) - Pembekuan Cepat</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="calc-label-dim">Dimensi Ruangan (Meter)</label>
+              <div class="input-row">
+                <input type="number" class="form-control" id="calcLength" placeholder="Panjang (m)" value="6" data-i18n-ph="calc-label-length">
+                <input type="number" class="form-control" id="calcWidth" placeholder="Lebar (m)" value="4" data-i18n-ph="calc-label-width">
+                <input type="number" class="form-control" id="calcHeight" placeholder="Tinggi (m)" value="3" data-i18n-ph="calc-label-height">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="calc-label-ambient">Suhu Lingkungan (°C)</label>
+              <input type="number" class="form-control" id="calcAmbient" value="32">
+            </div>
+
+            <button class="btn btn-primary" id="calcComputeBtn" style="margin-top: 0.5rem;">
+              <i class="fa fa-calculator"></i> <span data-i18n="calc-btn-compute">Hitung Beban Pendinginan</span>
+            </button>
+          </div>
+
+          <!-- Output Box -->
+          <div class="calc-results-box">
+            <div>
+              <div style="font-weight: 700; color: var(--primary-cyan); letter-spacing: 0.05em; font-size: 0.85rem; margin-bottom: 1rem;" data-i18n="calc-res-title">
+                HASIL ESTIMASI REKAYASA
+              </div>
+
+              <div class="res-item">
+                <span style="color: var(--text-secondary);" data-i18n="calc-res-volume">Volume Ruangan:</span>
+                <span class="res-val" id="resVolume">72.0 m³</span>
+              </div>
+
+              <div class="res-item">
+                <span style="color: var(--text-secondary);" data-i18n="calc-res-load-kw">Beban Pendingin (kW):</span>
+                <span class="res-val" id="resLoadKw">3.89 kW</span>
+              </div>
+
+              <div class="res-item">
+                <span style="color: var(--text-secondary);" data-i18n="calc-res-load-btu">Kapasitas BTU/hr:</span>
+                <span class="res-val" id="resLoadBtu">13,265 BTU/h</span>
+              </div>
+
+              <div class="res-item">
+                <span style="color: var(--text-secondary);" data-i18n="calc-res-hp">Rekomendasi Kompresor:</span>
+                <span class="res-val" style="color: var(--accent-purple);" id="resHp">1.5 HP</span>
+              </div>
+            </div>
+
+            <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 1.5rem; line-height: 1.4;" data-i18n="calc-res-note">
+              * Estimasi standar rekayasa CV. Dingin Lestari Teknik. Hubungi kami untuk konsultasi teknis & detail spesifikasi kompresor Bitzer/Copeland.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Experience Timeline -->
+  <section class="section-padding" id="experience" style="background: var(--bg-secondary);">
+    <div class="container">
+      <h2 class="section-title" data-i18n="exp-title">Pengalaman Kerja Industri</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="exp-sub">
+        Rekam jejak kepemimpinan eksekutif dan pengerjaan teknis di bidang kelistrikan & otomatisasi
+      </p>
+
+      <div class="timeline">
+        <!-- DLT Director -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="exp-1-title">Direktur</h3>
+                <div class="timeline-role" data-i18n="exp-1-company">CV. Dingin Lestari Teknik | Bandung</div>
+              </div>
+              <span class="timeline-date" data-i18n="exp-1-date">Juni 2025 - Sekarang</span>
+            </div>
+            <p class="timeline-desc" data-i18n="exp-1-desc">
+              Memimpin dan mengarahkan strategi perusahaan keluarga di bidang sistem pendingin industri & cold storage. Bertanggung jawab atas desain sistem termal, pemilihan kompresor & evaporator, optimasi efisiensi energi, manajemen proyek dari commissioning hingga pemeliharaan.
+            </p>
+          </div>
+        </div>
+
+        <!-- DLT Electrician -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="exp-2-title">Industrial Electrician (Project-Based)</h3>
+                <div class="timeline-role" data-i18n="exp-2-company">CV. Dingin Lestari Teknik</div>
+              </div>
+              <span class="timeline-date" data-i18n="exp-2-date">Nov 2018 - Juni 2025</span>
+            </div>
+            <p class="timeline-desc" data-i18n="exp-2-desc">
+              Merancang dan mendesain panel kontrol listrik industri, instalasi pengkabelan 3-phase, troubleshooting sistem kontrol freezer/chiller room, dan integrasi HVAC.
+            </p>
+          </div>
+        </div>
+
+        <!-- Beantrack -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="exp-3-title">Co-founder</h3>
+                <div class="timeline-role" data-i18n="exp-3-company">Beantrack (Smart Agriculture Startup)</div>
+              </div>
+              <span class="timeline-date" data-i18n="exp-3-date">Sept 2023 - Nov 2024</span>
+            </div>
+            <p class="timeline-desc" data-i18n="exp-3-desc">
+              Mendirikan startup pertanian cerdas. Mengembangkan produk pengering kopi berbasis energi surya yang terintegrasi dengan pemantauan sensor IoT.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bangkit -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="exp-4-title">Peserta Cloud Computing (Distinction)</h3>
+                <div class="timeline-role" data-i18n="exp-4-company">Bangkit Academy by Google, GoTo, Traveloka</div>
+              </div>
+              <span class="timeline-date" data-i18n="exp-4-date">Feb 2023 - Juli 2023</span>
+            </div>
+            <p class="timeline-desc" data-i18n="exp-4-desc">
+              Lulus predikat Distinction. Memimpin arsitektur cloud untuk Capstone Project yang berhasil masuk TOP 20 Nasional dan memperoleh inkubasi bisnis.
+            </p>
+          </div>
+        </div>
+
+        <!-- Asperio -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="exp-5-title">Engineer Intern</h3>
+                <div class="timeline-role" data-i18n="exp-5-company">Asperio</div>
+              </div>
+              <span class="timeline-date" data-i18n="exp-5-date">Feb 2022 - Sept 2022</span>
+            </div>
+            <p class="timeline-desc" data-i18n="exp-5-desc">
+              Terlibat dalam 7 proyek rekayasa mencakup desain mekanikal, elektrikal, pelatihan kontrol industri, dan manajemen inventaris alat.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Academic Education -->
+  <section class="section-padding" id="education">
+    <div class="container">
+      <h2 class="section-title" data-i18n="edu-title">Pendidikan Akademik</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="edu-sub">
+        Latar belakang pendidikan formal dalam Mekatronika & Otomasi Industri
+      </p>
+
+      <div class="timeline">
+        <!-- NTUT -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="edu-1-title">Magister Sains (M.Sc.) Teknik Mekatronika</h3>
+                <div class="timeline-role" data-i18n="edu-1-school">National Taipei University of Technology (NTUT), Taiwan</div>
+              </div>
+              <span class="timeline-date" data-i18n="edu-1-date">2024 - 2025</span>
+            </div>
+            <p class="timeline-desc" data-i18n="edu-1-desc">
+              Fokus Riset: Multi-Agent System Robot Formation Control, Mobile Robotics, dan Autonomous Navigation. Tesis: Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation.
+            </p>
+          </div>
+        </div>
+
+        <!-- POLMAN -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="edu-2-title">Sarjana Terapan Teknik (S.Tr.T) Teknik Otomasi</h3>
+                <div class="timeline-role" data-i18n="edu-2-school">Politeknik Manufaktur Bandung (POLMAN)</div>
+              </div>
+              <span class="timeline-date" data-i18n="edu-2-date">2019 - 2023</span>
+            </div>
+            <p class="timeline-desc" data-i18n="edu-2-desc">
+              Fokus pada sistem kontrol otomasi industri, PLC, SCADA, dan robotika. Tugas Akhir: Sistem Navigasi Robot SAR Berkaki Enam Menggunakan Sensor LiDAR dengan Metode SLAM.
+            </p>
+          </div>
+        </div>
+
+        <!-- SMKN 4 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title" data-i18n="edu-3-title">Teknik Otomasi Industri</h3>
+                <div class="timeline-role" data-i18n="edu-3-school">SMKN 4 Bandung</div>
+              </div>
+              <span class="timeline-date" data-i18n="edu-3-date">2017 - 2019</span>
+            </div>
+            <p class="timeline-desc" data-i18n="edu-3-desc">
+              Dasar kelistrikan industri, kontrol motor listrik, pneumatik, dan aktif di Robotik Club.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scientific Publications -->
+  <section class="section-padding" id="publications" style="background: var(--bg-secondary);">
+    <div class="container">
+      <h2 class="section-title" data-i18n="pub-title">Publikasi Ilmiah & Jurnal</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="pub-sub">
+        Karya tulis riset terpublikasi di jurnal & konferensi internasional terindeks
+      </p>
+
+      <div class="pub-toolbar">
+        <div class="pub-search-box">
+          <i class="fa fa-search pub-search-icon"></i>
+          <input type="text" class="pub-search-input" id="pubSearchInput" placeholder="Cari judul jurnal atau DOI..." data-i18n-ph="pub-search-ph">
+        </div>
+
+        <div class="pub-filter-tags">
+          <button class="filter-btn active" data-cat="all" data-i18n="pub-filter-all">Semua</button>
+          <button class="filter-btn" data-cat="robotics" data-i18n="pub-filter-robotics">Robotika & Multi-Agent</button>
+          <button class="filter-btn" data-cat="control" data-i18n="pub-filter-control">Kontrol & Otomasi</button>
+          <button class="filter-btn" data-cat="iot" data-i18n="pub-filter-iot">IoT & Sistem Pendingin</button>
+        </div>
+      </div>
+
+      <!-- Render Container -->
+      <div class="pub-list" id="pubContainer"></div>
+    </div>
+  </section>
+
+  <!-- Engineering Projects Gallery -->
+  <section class="section-padding" id="projects">
+    <div class="container">
+      <h2 class="section-title" data-i18n="proj-title">Galeri Proyek Rekayasa</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="proj-sub">
+        Dokumentasi portofolio fisik robot, panel kelistrikan, dan simulator
+      </p>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="glass-card project-card" onclick="openProjectModal(0)">
+          <div class="project-img-wrapper">
+            <img src="img/IMG-20230503-WA0016.jpg" alt="Hexapod Robot" class="project-img">
+            <div class="project-overlay">
+              <span class="project-tag" data-i18n="proj-1-cat">Robotika & SLAM</span>
             </div>
           </div>
+          <h3 class="project-title" data-i18n="proj-1-title">Hexapod Search & Rescue Robot</h3>
+          <p style="font-size:0.88rem; color:var(--text-secondary);" data-i18n="proj-1-desc">
+            Robot berkaki enam berfasilitas LiDAR SLAM untuk pemetaan lingkungan dan navigasi otonom.
+          </p>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-card project-card" onclick="openProjectModal(1)">
+          <div class="project-img-wrapper">
+            <img src="img/IMG-20230503-WA0017.jpg" alt="Ice Cream Robot" class="project-img">
+            <div class="project-overlay">
+              <span class="project-tag" data-i18n="proj-2-cat">Robotika Servis</span>
+            </div>
+          </div>
+          <h3 class="project-title" data-i18n="proj-2-title">Ice Cream Service Robot</h3>
+          <p style="font-size:0.88rem; color:var(--text-secondary);" data-i18n="proj-2-desc">
+            Sistem lengan robotik otomatis untuk penyajian es krim secara presisi.
+          </p>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass-card project-card" onclick="openProjectModal(2)">
+          <div class="project-img-wrapper">
+            <img src="img/IMG-20230503-WA0019.jpg" alt="BAS Simulator" class="project-img">
+            <div class="project-overlay">
+              <span class="project-tag" data-i18n="proj-3-cat">Building Automation</span>
+            </div>
+          </div>
+          <h3 class="project-title" data-i18n="proj-3-title">BAS Simulator & Control Panel</h3>
+          <p style="font-size:0.88rem; color:var(--text-secondary);" data-i18n="proj-3-desc">
+            Simulator Building Automation System (BAS) untuk kontrol HVAC dan efisiensi energi gedung.
+          </p>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="glass-card project-card" onclick="openProjectModal(3)">
+          <div class="project-img-wrapper">
+            <img src="img/IMG-20230503-WA0021.jpg" alt="DCS Training System" class="project-img">
+            <div class="project-overlay">
+              <span class="project-tag" data-i18n="proj-4-cat">Otomasi Industri</span>
+            </div>
+          </div>
+          <h3 class="project-title" data-i18n="proj-4-title">DCS Industrial Training System</h3>
+          <p style="font-size:0.88rem; color:var(--text-secondary);" data-i18n="proj-4-desc">
+            Modul simulasi Distributed Control System (DCS) untuk pelatihan kontrol proses industri.
+          </p>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="glass-card project-card" onclick="openProjectModal(4)">
+          <div class="project-img-wrapper">
+            <img src="img/IMG-20230503-WA0015.jpg" alt="IoT Panel" class="project-img">
+            <div class="project-overlay">
+              <span class="project-tag" data-i18n="proj-5-cat">IoT & Kelistrikan</span>
+            </div>
+          </div>
+          <h3 class="project-title" data-i18n="proj-5-title">IoT Power & Cold Storage Panel</h3>
+          <p style="font-size:0.88rem; color:var(--text-secondary);" data-i18n="proj-5-desc">
+            Panel listrik kontrol cold storage yang dilengkapi pemantauan suhu dan arus berbasis IoT.
+          </p>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="glass-card project-card" onclick="openProjectModal(5)">
+          <div class="project-img-wrapper">
+            <img src="img/IMG-20230503-WA0018.jpg" alt="Forklift Simulator" class="project-img">
+            <div class="project-overlay">
+              <span class="project-tag" data-i18n="proj-6-cat">Simulator Industri</span>
+            </div>
+          </div>
+          <h3 class="project-title" data-i18n="proj-6-title">Forklift Simulator Station</h3>
+          <p style="font-size:0.88rem; color:var(--text-secondary);" data-i18n="proj-6-desc">
+            Stasiun simulator sistem pengangkut industri untuk pengujian kendali motor presisi.
+          </p>
+        </div>
       </div>
-    <!-- End photo grid -->
     </div>
-  </div>
-  <!-- End Portfolio Section -->
-  </div>
+  </section>
+
+  <!-- Skills & Certifications Section -->
+  <section class="section-padding" id="skills" style="background: var(--bg-secondary);">
+    <div class="container">
+      <h2 class="section-title" data-i18n="skills-title">Keahlian Teknis & Sertifikasi</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="skills-sub">
+        Kompetensi utama di bidang teknik elektro, otomasi, dan cloud
+      </p>
+
+      <div class="skills-grid">
+        <!-- Cold Storage & Electrical -->
+        <div class="glass-card">
+          <h3 class="skill-category-title">
+            <i class="fa fa-snowflake-o"></i> <span data-i18n="skill-cat-eng">Keahlian Pendingin & Industri</span>
+          </h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-info"><span>Cold Storage & Refrigeration</span><span>95%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:95%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>3-Phase Electrical Panel Design</span><span>90%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:90%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>PLC & SCADA Programming</span><span>88%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:88%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Robotics & Control -->
+        <div class="glass-card">
+          <h3 class="skill-category-title">
+            <i class="fa fa-android"></i> <span data-i18n="skill-cat-rob">Robotika & Sistem Kendali</span>
+          </h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-info"><span>Multi-Agent System & Formation</span><span>92%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:92%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>ROS & Autonomous SLAM Navigation</span><span>88%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:88%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>Fuzzy PID & APF Control</span><span>85%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:85%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Programming & Cloud -->
+        <div class="glass-card">
+          <h3 class="skill-category-title">
+            <i class="fa fa-code"></i> <span data-i18n="skill-cat-prog">Pemrograman & Software</span>
+          </h3>
+          <div class="skill-items">
+            <div class="skill-item">
+              <div class="skill-info"><span>Python & MATLAB</span><span>90%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:90%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>Google Cloud Platform (GCP)</span><span>85%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:85%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>C++ & Microcontroller (Arduino/ESP)</span><span>88%</span></div>
+              <div class="skill-bar"><div class="skill-progress" style="width:88%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications Cards -->
+      <div class="cert-grid">
+        <div class="glass-card cert-card">
+          <i class="fa fa-cloud cert-icon"></i>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;" data-i18n="cert-google">Google Cloud Certified Professional Cloud Engineer</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Issued: May 2023 - May 2026</div>
+          </div>
+        </div>
+
+        <div class="glass-card cert-card">
+          <i class="fa fa-server cert-icon" style="color:var(--accent-purple);"></i>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;" data-i18n="cert-sysadmin">System Administration and IT Infrastructure Services</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Coursera / Google Cert</div>
+          </div>
+        </div>
+
+        <div class="glass-card cert-card">
+          <i class="fa fa-cogs cert-icon" style="color:var(--accent-emerald);"></i>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;" data-i18n="cert-auto">Automation Maintenance Junior Engineer</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Certified 2022 - 2025</div>
+          </div>
+        </div>
+
+        <div class="glass-card cert-card">
+          <i class="fa fa-bolt cert-icon" style="color:var(--accent-amber);"></i>
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;" data-i18n="cert-elec">Electricity Maintenance / Industrial Electricity</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Certified 2021 - 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Contact Section -->
-  <div class="w3-padding-64 w3-content w3-text-black" id="contact">
-    <h2 class="w3-text-black">Contact Me</h2>
-    <hr style="width:200px" class="w3-opacity">
+  <section class="section-padding" id="contact">
+    <div class="container">
+      <h2 class="section-title" data-i18n="contact-title">Hubungi Saya</h2>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="contact-sub">
+        Diskusi proyek cold storage, konsultasi teknis, atau kolaborasi riset robotika
+      </p>
 
-    <div class="w3-section">
-      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Bandung, West java</p>
-      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: naufaldo1301@gmail.com</p>
-    </div><br>
+      <div class="contact-grid">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fa fa-map-marker"></i></div>
+            <div class="contact-text">
+              <h4 data-i18n="contact-loc-title">Lokasi Utama</h4>
+              <p data-i18n="contact-loc-desc">Bandung, Jawa Barat, Indonesia</p>
+            </div>
+          </div>
 
-    <!--
-    <p>Let's get in touch. Send me a message:</p>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fa fa-envelope"></i></div>
+            <div class="contact-text">
+              <h4 data-i18n="contact-email-title">Email Rekayasa</h4>
+              <p>naufaldo1301@gmail.com</p>
+            </div>
+          </div>
 
-   
-  </div>
-  
-  <-- Footer -->
-  <footer class="w3-content w3-padding-64 w3-text-black w3-xlarge">
-    <a href = "https://www.instagram.com/nau136/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-    <a href="https://www.youtube.com/channel/UCfcdchzhztPIqN_TO-n6XPQ"><i class="fa fa-youtube w3-hover-opacity"></i></a>
-    <a href="https://twitter.com/nau136" ><i class="fa fa-twitter w3-hover-opacity"></i></a>
-    <a href="https://www.linkedin.com/in/naufaldo-do-80b39b1a5/?locale=en_US" ><i class="fa fa-linkedin w3-hover-opacity"></i></a>
-    <p class="w3-medium">Created by Naufaldo</a></p>
-  <!-- End footer -->
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fa fa-whatsapp"></i></div>
+            <div class="contact-text">
+              <h4 data-i18n="contact-wa-title">WhatsApp Direct</h4>
+              <p>+62 813-2060-8283</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fa fa-building"></i></div>
+            <div class="contact-text">
+              <h4 data-i18n="contact-company-title">Perusahaan</h4>
+              <p data-i18n="contact-company-desc">CV. Dingin Lestari Teknik</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Form -->
+        <div class="glass-card">
+          <form id="contactForm" style="display:flex; flex-direction:column; gap:1rem;">
+            <div class="form-group">
+              <input type="text" class="form-control" id="cfName" placeholder="Nama Anda" required data-i18n-ph="contact-form-name">
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" id="cfEmail" placeholder="Email Anda" required data-i18n-ph="contact-form-email">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="cfSubject" placeholder="Subjek Pesan" required data-i18n-ph="contact-form-subject">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" id="cfMessage" rows="4" placeholder="Tuliskan Pesan Anda..." required data-i18n-ph="contact-form-message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-paper-plane"></i> <span data-i18n="contact-form-btn">Kirim Pesan WhatsApp</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/naufaldo-do-80b39b1a5/?locale=en_US" target="_blank" class="social-icon" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+        <a href="https://www.researchgate.net/profile/Naufaldo-2" target="_blank" class="social-icon" title="ResearchGate"><i class="fa fa-book"></i></a>
+        <a href="https://github.com/Naufaldo" target="_blank" class="social-icon" title="GitHub"><i class="fa fa-github"></i></a>
+        <a href="https://www.instagram.com/nau136/" target="_blank" class="social-icon" title="Instagram"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCfcdchzhztPIqN_TO-n6XPQ" target="_blank" class="social-icon" title="YouTube"><i class="fa fa-youtube-play"></i></a>
+      </div>
+      <p style="font-size:0.9rem; color:var(--text-secondary);" data-i18n="footer-text">
+        Dibuat oleh Naufaldo, M.Sc. | Hak Cipta Dilindungi.
+      </p>
+    </div>
   </footer>
 
-<!-- END PAGE CONTENT -->
-</div>
+  <!-- Modal Lightbox for Projects -->
+  <div class="modal-overlay" id="projectModal" onclick="closeProjectModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      <div class="modal-img-wrapper">
+        <img src="" id="modalImg" alt="Project Image" class="modal-img">
+      </div>
+      <div class="modal-body">
+        <span class="project-tag" id="modalCat">Category</span>
+        <h2 id="modalTitle" style="margin: 0.5rem 0 1rem 0; font-size: 1.5rem;">Title</h2>
+        <p id="modalDesc" style="color:var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6;">Description</p>
+        <div id="modalTags" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Main JavaScript Engine -->
+  <script src="js/app.js"></script>
 </body>
 </html>
