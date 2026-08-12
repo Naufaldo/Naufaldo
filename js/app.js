@@ -190,6 +190,43 @@ const i18n = {
     "proj-4-cat": "Otomasi Industri",
     "proj-4-desc": "Modul simulasi Distributed Control System (DCS) untuk pelatihan kontrol proses industri.",
 
+    // Robotics Sim Page (Bilingual)
+    "sim-page-badge": "Lab Simulasi Robotika Interaktif",
+    "sim-page-title": "Lab Simulasi Robotika & Kinematika Interaktif",
+    "sim-page-desc": "Simulasi interaktif publikasi ilmiah Naufaldo, M.Sc. mencakup kendali formasi multi-agent, kinematika unicycle diferensial, path vs trajectory tracking, visi OpenCV visual servoing, swarm drone flocking, dan 2D LiDAR SLAM.",
+    "sim-tab1": "1. Multi-Agent APF & PID",
+    "sim-tab2": "2. Kinematika & PID Tracking",
+    "sim-tab3": "3. Path vs Trajectory",
+    "sim-tab4": "4. Visi Kamera OpenCV",
+    "sim-tab5": "5. Swarm Drone Flocking",
+    "sim-tab6": "6. Eksplorasi Indoor SLAM",
+    "sim-tab7": "7. Navigasi LiDAR SLAM",
+
+    // Module 6 Bilingual Keys
+    "sim6-title": "Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",
+    "sim6-desc": "Simulasi pemetaan otonom ruangan yang belum diketahui (<em>unknown environment</em>) menggunakan sensor <strong>2D LiDAR</strong> & <strong>Occupancy Grid SLAM</strong>. Robot memancarkan sinar laser untuk mengungkap area tersembunyi (<em>Fog-of-War</em>), mendeteksi sel perbatasan (<em>Frontiers</em>), dan merencanakan rute terpendek via A*.",
+    "sim6-label-map": "Lingkungan Uji (Paper Map):",
+    "sim6-label-algo": "Algoritma Eksplorasi:",
+    "sim6-label-speed": "Kecepatan Eksplorasi:",
+    "sim6-metric-comp": "Kelengkapan Peta (Map Completeness):",
+    "sim6-btn-start": "Mulai Eksplorasi LiDAR",
+    "sim6-btn-pause": "Jeda / Lanjutkan",
+    "sim6-btn-reset": "Reset Peta",
+    "sim6-opt-phoenix": "🗺 Phoenix World (Labirin Kompleks - Frontier 57.6% Lebih Cepat)",
+    "sim6-opt-zee": "⚡ Complex Zee World (Skala Luas - Frontier 60% Lebih Cepat)",
+    "sim6-opt-mememan": "🏛 Mememan World (Ruangan Bundar & Rintangan Simpel)",
+    "sim6-algo-frontier": "Frontier-Based (A* Path)",
+    "sim6-algo-floodfill": "Floodfill (BFS Murni)",
+
+    // Module 7 Bilingual Keys
+    "sim7-title": "Modul 7: Navigasi Otonom & Pemetaan LiDAR SLAM (IJRA 2024)",
+    "sim7-desc": "Simulasi LiDAR 360° dengan 3 mode kontrol: Mouse | TurtleBot WASD | Auto-Navigation (Reactive).",
+    "sim7-btn-mouse": "🖱 Kontrol Mouse",
+    "sim7-btn-wasd": "⌨ TurtleBot WASD",
+    "sim7-btn-auto": "🤖 Auto-Navigation",
+    "sim7-label-world": "Denah Ruangan Indoor & Sinar LiDAR (World View)",
+    "sim7-label-polar": "Onboard LiDAR Polar Scope (Pandangan Robot)",
+
     // Contact
     "contact-title": "Hubungi Saya",
     "contact-sub": "Diskusi proyek cold storage, sertifikasi & sertifikasi kompetensi, atau kolaborasi riset robotika",
@@ -391,6 +428,43 @@ const i18n = {
     "proj-4-title": "DCS Industrial Training System",
     "proj-4-cat": "Industrial Automation",
     "proj-4-desc": "Distributed Control System (DCS) training rig for process control simulation.",
+
+    // Robotics Sim Page (Bilingual EN)
+    "sim-page-badge": "Interactive Simulation Lab",
+    "sim-page-title": "Interactive Robotics Lab & Kinematic Simulations",
+    "sim-page-desc": "Interactive simulation of scientific publications by Naufaldo, M.Sc. featuring multi-agent formation control, differential unicycle kinematics, path vs trajectory tracking, OpenCV visual servoing, swarm drone flocking, and 2D LiDAR SLAM.",
+    "sim-tab1": "1. Multi-Agent APF & PID",
+    "sim-tab2": "2. Kinematics & PID Tracking",
+    "sim-tab3": "3. Path vs Trajectory",
+    "sim-tab4": "4. OpenCV Vision Follower",
+    "sim-tab5": "5. Swarm Drone Flocking",
+    "sim-tab6": "6. Indoor LiDAR SLAM Exploration",
+    "sim-tab7": "7. LiDAR SLAM Navigation",
+
+    // Module 6 Bilingual Keys (EN)
+    "sim6-title": "Module 6: Autonomous Indoor Exploration via 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",
+    "sim6-desc": "Simulation of autonomous unknown environment mapping using <strong>2D LiDAR</strong> & <strong>Occupancy Grid SLAM</strong>. The robot shoots laser rays to uncover the <em>Fog-of-War</em>, extract <em>Frontier</em> boundaries, and plan collision-free shortest paths via A*.",
+    "sim6-label-map": "Test Environment (Paper Map):",
+    "sim6-label-algo": "Exploration Algorithm:",
+    "sim6-label-speed": "Exploration Speed:",
+    "sim6-metric-comp": "Map Completeness:",
+    "sim6-btn-start": "Start LiDAR Exploration",
+    "sim6-btn-pause": "Pause / Resume",
+    "sim6-btn-reset": "Reset Map",
+    "sim6-opt-phoenix": "🗺 Phoenix World (Intricate Maze - Frontier 57.6% Faster)",
+    "sim6-opt-zee": "⚡ Complex Zee World (Large Scale - Frontier 60% Faster)",
+    "sim6-opt-mememan": "🏛 Mememan World (Circular Perimeter & Simple Obstacles)",
+    "sim6-algo-frontier": "Frontier-Based (A* Path)",
+    "sim6-algo-floodfill": "Floodfill (BFS Wavefront)",
+
+    // Module 7 Bilingual Keys (EN)
+    "sim7-title": "Module 7: Autonomous Navigation & LiDAR SLAM Mapping (IJRA 2024)",
+    "sim7-desc": "360° LiDAR simulation with 3 control modes: Mouse | TurtleBot WASD | Auto-Navigation (Reactive).",
+    "sim7-btn-mouse": "🖱 Mouse Control",
+    "sim7-btn-wasd": "⌨ TurtleBot WASD",
+    "sim7-btn-auto": "🤖 Auto-Navigation",
+    "sim7-label-world": "Indoor Room Floorplan & LiDAR Rays (World View)",
+    "sim7-label-polar": "Onboard LiDAR Polar Scope (Robot's View)",
 
     // Contact
     "contact-title": "Contact Me",

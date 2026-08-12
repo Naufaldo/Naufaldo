@@ -6,6 +6,21 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.12] — 2026-08-12
+
+### Performance / Performa
+- **`perf(indoor-exploration)`**: Optimasi performa dan efisiensi CPU pada simulasi Modul 6 (Eksplorasi Indoor):
+  - Grid dioptimalkan ke resolusi $32 \times 18$ sel dengan kalkulasi raycasting cepat berjarak 5px.
+  - Sinar pemindaian laser diringankan ke 28 berkas laser dengan *frame-throttling* otomatis selama navigasi sehingga simulasi berjalan mulus di 60 FPS dengan beban CPU sangat rendah (< 1%).
+  - Algoritma pencarian jalur $A^*$ dioptimalkan dengan heuristik Manhattan dan batas iterasi aman.
+
+### Added / Ditambahkan
+- **`feat(i18n-bilingual)`**: Dukungan dwibahasa penuh (**Bahasa Indonesia 🇮🇩 / English 🇬🇧**) pada halaman `robotics-sim.html`:
+  - Kamus terjemahan `i18n.id` dan `i18n.en` di `js/app.js` dilengkapi untuk seluruh banner hero, judul dan deskripsi 7 modul, label kontrol, selector lingkungan uji, dashboard telemetri, dan tombol aksi.
+  - Penambahan atribut `data-i18n` pada seluruh elemen interaktif simulasi dengan persistensi bahasa via `localStorage`.
+
+---
+
 ## [v2026.08.12.11] — 2026-08-12
 
 ### Added / Ditambahkan

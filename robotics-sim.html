@@ -95,21 +95,21 @@
   <!-- Banner Section -->
   <section class="section-padding" style="padding-top: 8rem; padding-bottom: 2rem;">
     <div class="container text-center">
-      <h1 class="section-title">Laboratorium Simulasi Robotika Interaktif</h1>
+      <h1 class="section-title" data-i18n="sim-page-title">Laboratorium Simulasi Robotika Interaktif</h1>
       <div class="divider"></div>
-      <p class="section-subtitle">
+      <p class="section-subtitle" data-i18n="sim-page-desc">
         Jelajahi algoritma kendali robotika otonom, sistem multi-agent, vision follower, drone swarm, dan navigasi LiDAR SLAM secara real-time
       </p>
 
       <!-- Tabs Navigation -->
       <div class="proj-filter-tags">
-        <button class="filter-btn active" data-tab="tab1"><i class="fa fa-cogs"></i> 1. Fuzzy PID & APF (ICCAS 2025)</button>
-        <button class="filter-btn" data-tab="tab2"><i class="fa fa-calculator"></i> 2. Model Kinematika</button>
-        <button class="filter-btn" data-tab="tab3"><i class="fa fa-map-signs"></i> 3. Path vs Trajectory</button>
-        <button class="filter-btn" data-tab="tab4"><i class="fa fa-eye"></i> 4. Vision Follower Camera</button>
-        <button class="filter-btn" data-tab="tab5"><i class="fa fa-plane"></i> 5. Drone Swarm 3D (SICE 2025)</button>
-        <button class="filter-btn" data-tab="tab6"><i class="fa fa-compass"></i> 6. Eksplorasi Indoor (ICCAS 2024)</button>
-        <button class="filter-btn" data-tab="tab7"><i class="fa fa-crosshairs"></i> 7. LiDAR SLAM (IJRA 2024)</button>
+        <button class="filter-btn active" data-tab="tab1"><i class="fa fa-cogs"></i> <span data-i18n="sim-tab1">1. Fuzzy PID & APF</span></button>
+        <button class="filter-btn" data-tab="tab2"><i class="fa fa-calculator"></i> <span data-i18n="sim-tab2">2. Model Kinematika</span></button>
+        <button class="filter-btn" data-tab="tab3"><i class="fa fa-map-signs"></i> <span data-i18n="sim-tab3">3. Path vs Trajectory</span></button>
+        <button class="filter-btn" data-tab="tab4"><i class="fa fa-eye"></i> <span data-i18n="sim-tab4">4. Visi Kamera OpenCV</span></button>
+        <button class="filter-btn" data-tab="tab5"><i class="fa fa-plane"></i> <span data-i18n="sim-tab5">5. Swarm Drone Flocking</span></button>
+        <button class="filter-btn" data-tab="tab6"><i class="fa fa-compass"></i> <span data-i18n="sim-tab6">6. Eksplorasi Indoor SLAM</span></button>
+        <button class="filter-btn" data-tab="tab7"><i class="fa fa-crosshairs"></i> <span data-i18n="sim-tab7">7. Navigasi LiDAR SLAM</span></button>
       </div>
     </div>
   </section>
@@ -439,7 +439,7 @@
 
               <div class="theory-subheading"><i class="fa fa-line-chart"></i> 3. Modulasi Ketinggian Sinusoidal 3D &amp; Dynamic Goal-Shifting</div>
               <div class="math-eq-card">
-                <div class="math-eq-title">Profil Ketinggian Bergelombang &amp; Trigger Goal (Eq. 30-33 Paper)</div>
+            <div class="math-eq-title">Profil Ketinggian Bergelombang &amp; Trigger Goal (Eq. 30-33 Paper)</div>
                 $$z_{id} = z_{\min} + \frac{z_{\max} - z_{\min}}{2}(1 + \sin\theta_i), \quad p_{id}^{\text{goal}} \leftarrow p_{id}^{\text{next}} \quad \text{jika } n_{\text{near}} \ge 2$$
                 $$\mathbf{F}_i^{\text{total}} = K_{\text{att}} \mathbf{F}_i^{\text{att}} + K_{\text{rep}} \mathbf{F}_i^{\text{rep}} + \mathbf{F}_{\text{flock},i}$$
               </div>
@@ -452,38 +452,38 @@
       <div class="sim-tab-content" id="tab6" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;">
-            <h3 style="color:var(--accent-emerald);margin-bottom:0;">Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM &amp; Frontier vs Floodfill (ICCAS 2024)</h3>
+            <h3 style="color:var(--accent-emerald);margin-bottom:0;" data-i18n="sim6-title">Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM &amp; Frontier vs Floodfill (ICCAS 2024)</h3>
             <span class="paper-meta-badge" style="margin-bottom:0;"><i class="fa fa-book"></i> ICCAS 2024 (IEEE Xplore)</span>
           </div>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.85rem;">
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.85rem;" data-i18n="sim6-desc">
             Simulasi pemetaan otonom ruangan yang belum diketahui (<em>unknown environment</em>) menggunakan sensor <strong>2D LiDAR</strong> &amp; <strong>Occupancy Grid SLAM</strong>. Robot memancarkan sinar laser untuk mengungkap area tersembunyi (<em>Fog-of-War</em>), mendeteksi sel perbatasan (<em>Frontiers</em>), dan merencanakan rute terpendek via A*.
           </p>
 
           <!-- Top Control Bar: Environment Preset & Algorithm Selector -->
           <div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;background:rgba(0,0,0,0.35);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:1rem;">
             <div>
-              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;">Lingkungan Uji (Paper Map):</label><br>
+              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;" data-i18n="sim6-label-map">Lingkungan Uji (Paper Map):</label><br>
               <select id="selectExploreMap6" style="margin-top:0.25rem;padding:0.4rem 0.6rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
-                <option value="phoenix">🗺 Phoenix World (Labirin Kompleks - Frontier 57.6% Lebih Cepat)</option>
-                <option value="complex_zee">⚡ Complex Zee World (Skala Luas - Frontier 60% Lebih Cepat)</option>
-                <option value="mememan">🏛 Mememan World (Ruangan Bundar &amp; Rintangan Simpel)</option>
+                <option value="phoenix" data-i18n="sim6-opt-phoenix">🗺 Phoenix World (Labirin Kompleks - Frontier 57.6% Lebih Cepat)</option>
+                <option value="complex_zee" data-i18n="sim6-opt-zee">⚡ Complex Zee World (Skala Luas - Frontier 60% Lebih Cepat)</option>
+                <option value="mememan" data-i18n="sim6-opt-mememan">🏛 Mememan World (Ruangan Bundar &amp; Rintangan Simpel)</option>
               </select>
             </div>
             <div>
-              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;">Algoritma Eksplorasi:</label><br>
+              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;" data-i18n="sim6-label-algo">Algoritma Eksplorasi:</label><br>
               <div style="display:flex;gap:0.85rem;margin-top:0.4rem;">
                 <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.82rem;color:var(--accent-amber);">
                   <input type="radio" name="exploreAlgo6" id="radioFrontier6" value="frontier" checked>
-                  <strong>Frontier-Based (A* Path)</strong>
+                  <strong data-i18n="sim6-algo-frontier">Frontier-Based (A* Path)</strong>
                 </label>
                 <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.82rem;color:var(--primary-cyan);">
                   <input type="radio" name="exploreAlgo6" id="radioFloodfill6" value="floodfill">
-                  <strong>Floodfill (BFS Murni)</strong>
+                  <strong data-i18n="sim6-algo-floodfill">Floodfill (BFS Murni)</strong>
                 </label>
               </div>
             </div>
             <div>
-              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;">Kecepatan Eksplorasi: <span id="exploreSpeedLabel6" style="color:var(--primary-cyan);">1.5×</span></label><br>
+              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim6-label-speed">Kecepatan Eksplorasi:</span> <span id="exploreSpeedLabel6" style="color:var(--primary-cyan);">1.5×</span></label><br>
               <input type="range" id="sliderExploreSpeed6" min="1" max="40" value="15" style="width:130px;margin-top:0.3rem;">
             </div>
           </div>
@@ -492,7 +492,7 @@
           <div style="background:rgba(15,23,42,0.85);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:1rem;">
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.45rem;">
               <div style="font-size:0.84rem;font-weight:600;color:#fff;">
-                <i class="fa fa-pie-chart" style="color:var(--primary-cyan);"></i> Kelengkapan Peta (Map Completeness): <span id="exploreCompleteness6" style="color:var(--primary-cyan);font-size:1.05rem;font-family:monospace;">0.0%</span>
+                <i class="fa fa-pie-chart" style="color:var(--primary-cyan);"></i> <span data-i18n="sim6-metric-comp">Kelengkapan Peta (Map Completeness):</span> <span id="exploreCompleteness6" style="color:var(--primary-cyan);font-size:1.05rem;font-family:monospace;">0.0%</span>
               </div>
               <div style="font-size:0.82rem;color:var(--text-secondary);font-family:monospace;">
                 Waktu: <strong id="exploreTimer6" style="color:var(--accent-amber);font-size:0.95rem;">0.0s</strong> | Status: <strong id="exploreStatus6" style="color:#10b981;">SIAP</strong>
@@ -516,9 +516,9 @@
 
           <!-- Control Buttons -->
           <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
-            <button class="btn btn-primary btn-sm" id="btnStartExplore6"><i class="fa fa-play"></i> Mulai Eksplorasi LiDAR</button>
-            <button class="btn btn-outline btn-sm" id="btnPauseExplore6"><i class="fa fa-pause"></i> Jeda / Lanjutkan</button>
-            <button class="btn btn-outline btn-sm" id="btnResetExplore6"><i class="fa fa-refresh"></i> Reset Peta</button>
+            <button class="btn btn-primary btn-sm" id="btnStartExplore6"><i class="fa fa-play"></i> <span data-i18n="sim6-btn-start">Mulai Eksplorasi LiDAR</span></button>
+            <button class="btn btn-outline btn-sm" id="btnPauseExplore6"><i class="fa fa-pause"></i> <span data-i18n="sim6-btn-pause">Jeda / Lanjutkan</span></button>
+            <button class="btn btn-outline btn-sm" id="btnResetExplore6"><i class="fa fa-refresh"></i> <span data-i18n="sim6-btn-reset">Reset Peta</span></button>
           </div>
 
           <!-- Scientific Paper Theory & Formula Box -->
@@ -577,18 +577,18 @@
       <!-- ===== TAB 7: LiDAR SLAM ===== -->
       <div class="sim-tab-content" id="tab7" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;">Modul 7: Navigasi Otonom &amp; Pemetaan LiDAR SLAM (IJRA 2024)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;">Simulasi LiDAR 360° dengan 3 mode kontrol: Mouse | TurtleBot WASD | Auto-Navigation (Reactive).</p>
+          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;" data-i18n="sim7-title">Modul 7: Navigasi Otonom &amp; Pemetaan LiDAR SLAM (IJRA 2024)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;" data-i18n="sim7-desc">Simulasi LiDAR 360° dengan 3 mode kontrol: Mouse | TurtleBot WASD | Auto-Navigation (Reactive).</p>
           <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;">
-            <button class="btn btn-primary btn-sm sim-mode-btn" id="btnModeMouse7" data-mode="mouse">🖱 Mouse Control</button>
-            <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeWASD7" data-mode="wasd">⌨ TurtleBot WASD</button>
-            <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeAuto7" data-mode="auto">🤖 Auto-Navigation</button>
+            <button class="btn btn-primary btn-sm sim-mode-btn" id="btnModeMouse7" data-mode="mouse" data-i18n="sim7-btn-mouse">🖱 Mouse Control</button>
+            <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeWASD7" data-mode="wasd" data-i18n="sim7-btn-wasd">⌨ TurtleBot WASD</button>
+            <button class="btn btn-outline btn-sm sim-mode-btn" id="btnModeAuto7" data-mode="auto" data-i18n="sim7-btn-auto">🤖 Auto-Navigation</button>
           </div>
           <div class="lidar-sim-grid" style="display:grid;grid-template-columns:1fr 270px;gap:1rem;align-items:start;margin-bottom:1rem;">
             <!-- Main World Room Canvas -->
             <div>
               <div style="font-size:0.8rem;font-weight:600;color:var(--primary-cyan);margin-bottom:0.4rem;display:flex;justify-content:space-between;align-items:center;">
-                <span><i class="fa fa-map"></i> Denah Ruangan Indoor &amp; Sinar LiDAR (World View)</span>
+                <span data-i18n="sim7-label-world"><i class="fa fa-map"></i> Denah Ruangan Indoor &amp; Sinar LiDAR (World View)</span>
                 <span style="font-size:0.74rem;color:var(--text-secondary);font-weight:normal;">LiDAR Head 360° Spin (Bodi Robot Stabil)</span>
               </div>
               <div class="sim-canvas-wrapper" style="position:relative;height:360px;">

@@ -505,8 +505,9 @@ class IndoorExplorationSimulation {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
 
-    this.cols = 44;
-    this.rows = 24;
+    // Optimized grid resolution for maximum smoothness & minimal CPU
+    this.cols = 32;
+    this.rows = 18;
     this.cellW = this.width / this.cols;
     this.cellH = this.height / this.rows;
 
@@ -517,17 +518,18 @@ class IndoorExplorationSimulation {
     this.isPaused = false;
     this.completeness = 0;
     this.elapsedTime = 0;
-    this.lidarRange = 135;
-    this.lidarRays = 48;
+    this.frameCount = 0;
+    this.lidarRange = 125;
+    this.lidarRays = 28; // Lightweight ray count
     this.lidarSpinAngle = 0;
 
     this.robot = {
       x: 0,
       y: 0,
-      r: 3,
-      c: 3,
+      r: 2,
+      c: 2,
       heading: 0,
-      radius: 9,
+      radius: 8,
       targetPath: [],
       trail: []
     };
@@ -577,51 +579,48 @@ class IndoorExplorationSimulation {
       return;
     }
     this.isPaused = !this.isPaused;
-    this.updateStatus(this.isPaused ? "DIJEDA (PAUSED)" : "MENJELAJAH & MEMETAKAN");
+    const isEn = typeof currentLang !== "undefined" && currentLang === "en";
+    this.updateStatus(this.isPaused ? (isEn ? "PAUSED" : "DIJEDA (PAUSED)") : (isEn ? "EXPLORING & MAPPING" : "MENJELAJAH & MEMETAKAN"));
   }
 
   initMap(mapType) {
     this.isExploring = false;
     this.isPaused = false;
     this.elapsedTime = 0;
+    this.frameCount = 0;
     this.robot.targetPath = [];
     this.robot.trail = [];
     this.frontiers = [];
 
-    // 1. Build Ground Truth Maze based on Paper Benchmarks
+    // 1. Build Ground Truth Maze based on Paper Benchmarks (Optimized 32x18)
     this.trueGrid = [];
     this.knownGrid = [];
 
     for (let r = 0; r < this.rows; r++) {
       const tRow = [], kRow = [];
       for (let c = 0; c < this.cols; c++) {
-        // Outer perimeter walls
         let isWall = (r === 0 || r === this.rows - 1 || c === 0 || c === this.cols - 1);
 
         if (!isWall) {
           if (mapType === "phoenix") {
             // Phoenix World: Intricate maze with sharp corridors & dead ends
-            if (c === 14 && (r < 9 || r > 14)) isWall = true;
-            if (c === 28 && (r > 5 && r < 19)) isWall = true;
-            if (r === 8 && ((c > 4 && c < 12) || (c > 16 && c < 26))) isWall = true;
-            if (r === 16 && ((c > 8 && c < 22) || (c > 30 && c < 40))) isWall = true;
-            if (c === 36 && (r > 4 && r < 14)) isWall = true;
-            if ((r === 4 || r === 12) && c > 18 && c < 24) isWall = true;
+            if (c === 10 && (r < 7 || r > 10)) isWall = true;
+            if (c === 20 && (r > 4 && r < 14)) isWall = true;
+            if (r === 6 && ((c > 3 && c < 9) || (c > 12 && c < 19))) isWall = true;
+            if (r === 12 && ((c > 6 && c < 16) || (c > 22 && c < 29))) isWall = true;
+            if (c === 26 && (r > 3 && r < 11)) isWall = true;
           } else if (mapType === "complex_zee") {
-            // Complex Zee: Long Z-shaped halls spanning across full map
-            if (r === 7 && c < 34) isWall = true;
-            if (r === 15 && c > 10) isWall = true;
-            if (c === 18 && (r > 8 && r < 14)) isWall = true;
-            if (c === 28 && (r > 1 && r < 6)) isWall = true;
-            if (c === 34 && (r > 16 && r < 22)) isWall = true;
+            // Complex Zee: Long Z-shaped halls
+            if (r === 5 && c < 24) isWall = true;
+            if (r === 11 && c > 7) isWall = true;
+            if (c === 14 && (r > 6 && r < 11)) isWall = true;
+            if (c === 22 && (r > 1 && r < 5)) isWall = true;
           } else if (mapType === "mememan") {
-            // Mememan World: Curved room perimeter + central pillar clusters
+            // Mememan World: Curved room perimeter + central pillar
             const cx = this.cols / 2, cy = this.rows / 2;
-            const distFromCenter = Math.hypot((c - cx) * 0.7, r - cy);
-            if (distFromCenter > 10.5) isWall = true;
-            if (Math.abs(r - cy) < 3 && Math.abs(c - cx) < 4) isWall = true;
-            if (r === 6 && c === 12) isWall = true;
-            if (r === 18 && c === 32) isWall = true;
+            const distFromCenter = Math.hypot((c - cx) * 0.75, r - cy);
+            if (distFromCenter > 8.2) isWall = true;
+            if (Math.abs(r - cy) < 2 && Math.abs(c - cx) < 3) isWall = true;
           }
         }
 
@@ -633,14 +632,14 @@ class IndoorExplorationSimulation {
     }
 
     // Set starting position
-    this.robot.r = 3;
-    this.robot.c = 3;
+    this.robot.r = 2;
+    this.robot.c = 2;
     this.trueGrid[this.robot.r][this.robot.c] = 0;
     this.robot.x = (this.robot.c + 0.5) * this.cellW;
     this.robot.y = (this.robot.r + 0.5) * this.cellH;
     this.robot.heading = 0;
 
-    // Count reachable free cells for completeness calculation
+    // Count reachable free cells
     let count = 0;
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.cols; c++) {
@@ -649,25 +648,27 @@ class IndoorExplorationSimulation {
     }
     this.totalReachableCells = count || 1;
 
-    // Initial 360 LiDAR Scan around Start Position
+    // Initial scan
     this.performLiDARScan();
-    this.updateStatus("SIAP");
+    const isEn = typeof currentLang !== "undefined" && currentLang === "en";
+    this.updateStatus(isEn ? "READY" : "SIAP");
     this.draw();
   }
 
   startExploration() {
-    if (this.completeness >= 98.5) this.initMap(this.mapType);
+    if (this.completeness >= 98.0) this.initMap(this.mapType);
     this.isExploring = true;
     this.isPaused = false;
-    this.updateStatus("MENJELAJAH & MEMETAKAN");
+    const isEn = typeof currentLang !== "undefined" && currentLang === "en";
+    this.updateStatus(isEn ? "EXPLORING & MAPPING" : "MENJELAJAH & MEMETAKAN");
     this.planNextStep();
   }
 
   performLiDARScan() {
-    // 360 Ray-Casting to carve out Fog-of-War (SLAM Mapping)
+    // Fast Ray-Casting to carve out Fog-of-War (SLAM Mapping)
     for (let i = 0; i < this.lidarRays; i++) {
       const angle = i * (Math.PI * 2 / this.lidarRays);
-      for (let d = 0; d < this.lidarRange; d += 3.5) {
+      for (let d = 0; d < this.lidarRange; d += 5) {
         const rx = this.robot.x + Math.cos(angle) * d;
         const ry = this.robot.y + Math.sin(angle) * d;
         const c = Math.floor(rx / this.cellW);
@@ -676,12 +677,10 @@ class IndoorExplorationSimulation {
         if (r < 0 || r >= this.rows || c < 0 || c >= this.cols) break;
 
         if (this.trueGrid[r][c] === 1) {
-          // Obstacle Wall Discovered
-          this.knownGrid[r][c] = 100;
+          this.knownGrid[r][c] = 100; // Wall
           break;
         } else {
-          // Free Space Discovered
-          this.knownGrid[r][c] = 0;
+          this.knownGrid[r][c] = 0;   // Free space
         }
       }
     }
@@ -694,14 +693,12 @@ class IndoorExplorationSimulation {
       for (let c = 1; c < this.cols - 1; c++) {
         if (this.knownGrid[r][c] === 0) {
           discoveredFree++;
-          // Check 4-neighbors for unknown cells (-1)
-          const hasUnknownNeighbor = (
+          if (
             this.knownGrid[r - 1][c] === -1 ||
             this.knownGrid[r + 1][c] === -1 ||
             this.knownGrid[r][c - 1] === -1 ||
             this.knownGrid[r][c + 1] === -1
-          );
-          if (hasUnknownNeighbor) {
+          ) {
             this.frontiers.push({ r, c, x: (c + 0.5) * this.cellW, y: (r + 0.5) * this.cellH });
           }
         }
@@ -723,9 +720,10 @@ class IndoorExplorationSimulation {
   planNextStep() {
     if (!this.isExploring || this.isPaused) return;
 
-    if (this.completeness >= 98.0 || this.frontiers.length === 0) {
+    if (this.completeness >= 97.5 || this.frontiers.length === 0) {
       this.isExploring = false;
-      this.updateStatus("EKSPLORASI SELESAI (100%)");
+      const isEn = typeof currentLang !== "undefined" && currentLang === "en";
+      this.updateStatus(isEn ? "100% EXPLORATION COMPLETE" : "EKSPLORASI SELESAI (100%)");
       return;
     }
 
@@ -734,8 +732,8 @@ class IndoorExplorationSimulation {
     if (this.mode === "frontier") {
       // Frontier-Based: Sort candidate frontiers by distance to robot
       this.frontiers.sort((a, b) => {
-        const da = Math.hypot(a.r - this.robot.r, a.c - this.robot.c);
-        const db = Math.hypot(b.r - this.robot.r, b.c - this.robot.c);
+        const da = Math.abs(a.r - this.robot.r) + Math.abs(a.c - this.robot.c);
+        const db = Math.abs(b.r - this.robot.r) + Math.abs(b.c - this.robot.c);
         return da - db;
       });
       targetCell = this.frontiers[0];
@@ -757,7 +755,6 @@ class IndoorExplorationSimulation {
             if (!visited.has(key)) {
               visited.add(key);
               if (this.knownGrid[n.r][n.c] === 0) {
-                // If this known cell has unknown neighbors, set as target
                 if (this.frontiers.some(f => f.r === n.r && f.c === n.c)) {
                   targetCell = n;
                   break;
@@ -771,13 +768,12 @@ class IndoorExplorationSimulation {
       }
     }
 
-    if (!targetCell) {
-      // Fallback: pick any frontier
+    if (!targetCell && this.frontiers.length > 0) {
       targetCell = this.frontiers[0];
     }
 
     if (targetCell) {
-      // A* Pathfinding through known free space (knownGrid === 0)
+      // Fast A* Pathfinding through known free space (knownGrid === 0)
       this.robot.targetPath = this.findAStarPath(
         { r: this.robot.r, c: this.robot.c },
         { r: targetCell.r, c: targetCell.c }
@@ -793,16 +789,16 @@ class IndoorExplorationSimulation {
 
     const nodeKey = (n) => `${n.r},${n.c}`;
     gScore.set(nodeKey(start), 0);
-    fScore.set(nodeKey(start), Math.hypot(start.r - goal.r, start.c - goal.c));
+    fScore.set(nodeKey(start), Math.abs(start.r - goal.r) + Math.abs(start.c - goal.c));
 
-    while (openSet.length > 0) {
-      // Get lowest fScore node
-      openSet.sort((a, b) => (fScore.get(nodeKey(a)) || 99999) - (fScore.get(nodeKey(b)) || 99999));
+    let iterations = 0;
+    while (openSet.length > 0 && iterations < 300) {
+      iterations++;
+      openSet.sort((a, b) => (fScore.get(nodeKey(a)) || 9999) - (fScore.get(nodeKey(b)) || 9999));
       const current = openSet.shift();
       const currKey = nodeKey(current);
 
       if (current.r === goal.r && current.c === goal.c) {
-        // Reconstruct path
         const path = [current];
         let curr = current;
         while (cameFrom.has(nodeKey(curr))) {
@@ -819,15 +815,15 @@ class IndoorExplorationSimulation {
 
       for (const n of neighbors) {
         if (n.r < 0 || n.r >= this.rows || n.c < 0 || n.c >= this.cols) continue;
-        if (this.knownGrid[n.r][n.c] === 100) continue; // Obstacle
+        if (this.knownGrid[n.r][n.c] === 100) continue; // Wall
 
         const tentativeG = (gScore.get(currKey) || 0) + 1;
         const nKey = nodeKey(n);
 
-        if (tentativeG < (gScore.get(nKey) || 99999)) {
+        if (tentativeG < (gScore.get(nKey) || 9999)) {
           cameFrom.set(nKey, current);
           gScore.set(nKey, tentativeG);
-          fScore.set(nKey, tentativeG + Math.hypot(n.r - goal.r, n.c - goal.c));
+          fScore.set(nKey, tentativeG + Math.abs(n.r - goal.r) + Math.abs(n.c - goal.c));
 
           if (!openSet.some(item => item.r === n.r && item.c === n.c)) {
             openSet.push(n);
@@ -836,7 +832,7 @@ class IndoorExplorationSimulation {
       }
     }
 
-    return [goal]; // Fallback direct target
+    return [goal];
   }
 
   updateStatus(msg) {
@@ -845,7 +841,8 @@ class IndoorExplorationSimulation {
   }
 
   update() {
-    this.lidarSpinAngle = (this.lidarSpinAngle + 0.18) % (Math.PI * 2);
+    this.frameCount++;
+    this.lidarSpinAngle = (this.lidarSpinAngle + 0.16) % (Math.PI * 2);
 
     if (!this.isExploring || this.isPaused) return;
 
@@ -860,29 +857,34 @@ class IndoorExplorationSimulation {
       const dy = targetY - this.robot.y;
       const dist = Math.hypot(dx, dy);
 
-      if (dist < 3.5) {
+      if (dist < 4.0) {
         // Waypoint reached
         this.robot.r = nextNode.r;
         this.robot.c = nextNode.c;
         this.robot.x = targetX;
         this.robot.y = targetY;
         this.robot.trail.push({ x: targetX, y: targetY });
-        if (this.robot.trail.length > 80) this.robot.trail.shift();
+        if (this.robot.trail.length > 50) this.robot.trail.shift();
 
         this.robot.targetPath.shift();
 
-        // Perform LiDAR scan at every new grid step
+        // Perform fast LiDAR scan
         this.performLiDARScan();
 
         if (this.robot.targetPath.length === 0) {
           this.planNextStep();
         }
       } else {
-        // Move towards waypoint
-        const speed = 2.2 * this.simSpeed;
+        // Smoothly glide towards next waypoint
+        const speed = 2.4 * this.simSpeed;
         this.robot.heading = Math.atan2(dy, dx);
         this.robot.x += (dx / dist) * Math.min(speed, dist);
         this.robot.y += (dy / dist) * Math.min(speed, dist);
+
+        // Throttle scan during movement
+        if (this.frameCount % 2 === 0) {
+          this.performLiDARScan();
+        }
       }
     } else {
       this.planNextStep();
@@ -893,27 +895,27 @@ class IndoorExplorationSimulation {
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.width, this.height);
 
-    // 1. Render SLAM Occupancy Grid Map (Fog of War)
+    // 1. Dark Unknown Background
+    ctx.fillStyle = "#040812";
+    ctx.fillRect(0, 0, this.width, this.height);
+
+    // 2. Explored Cells & Walls (Optimized single pass)
     for (let r = 0; r < this.rows; r++) {
       for (let c = 0; c < this.cols; c++) {
         const state = this.knownGrid[r][c];
+        if (state === -1) continue;
+
         const x = c * this.cellW, y = r * this.cellH;
 
-        if (state === -1) {
-          // Unexplored / Fog of War
-          ctx.fillStyle = "#040812";
-          ctx.fillRect(x, y, this.cellW, this.cellH);
-          ctx.fillStyle = "rgba(0, 242, 254, 0.04)";
-          ctx.fillRect(x + 1, y + 1, this.cellW - 2, this.cellH - 2);
-        } else if (state === 0) {
-          // Explored Free Space
-          ctx.fillStyle = "rgba(15, 23, 42, 0.95)";
+        if (state === 0) {
+          // Free space
+          ctx.fillStyle = "rgba(15, 23, 42, 0.9)";
           ctx.fillRect(x, y, this.cellW, this.cellH);
           ctx.strokeStyle = "rgba(0, 242, 254, 0.08)";
           ctx.lineWidth = 0.5;
           ctx.strokeRect(x, y, this.cellW, this.cellH);
         } else if (state === 100) {
-          // Discovered Wall
+          // Wall
           ctx.fillStyle = "#1e293b";
           ctx.fillRect(x, y, this.cellW, this.cellH);
           ctx.strokeStyle = "#38bdf8";
@@ -923,7 +925,7 @@ class IndoorExplorationSimulation {
       }
     }
 
-    // 2. Highlight Active Frontiers (Glowing Amber Dots)
+    // 3. Highlight Active Frontiers
     this.frontiers.forEach(f => {
       ctx.fillStyle = "rgba(245, 158, 11, 0.85)";
       ctx.beginPath();
@@ -931,7 +933,7 @@ class IndoorExplorationSimulation {
       ctx.fill();
     });
 
-    // 3. Draw A* Planned Navigation Path
+    // 4. Draw A* Planned Navigation Path
     if (this.robot.targetPath && this.robot.targetPath.length > 0) {
       ctx.strokeStyle = "#10b981";
       ctx.lineWidth = 2;
@@ -945,9 +947,9 @@ class IndoorExplorationSimulation {
       ctx.setLineDash([]);
     }
 
-    // 4. Draw Traversed Robot Trail
+    // 5. Draw Traversed Robot Trail
     if (this.robot.trail.length > 1) {
-      ctx.strokeStyle = "rgba(0, 242, 254, 0.25)";
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.22)";
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       this.robot.trail.forEach((pt, i) => {
@@ -957,12 +959,12 @@ class IndoorExplorationSimulation {
       ctx.stroke();
     }
 
-    // 5. Draw 360 LiDAR Laser Scan Rays from Robot
+    // 6. Draw 28 LiDAR Laser Scan Rays from Robot
     for (let i = 0; i < this.lidarRays; i++) {
       const angle = i * (Math.PI * 2 / this.lidarRays);
       let rayDist = this.lidarRange;
 
-      for (let d = 4; d < this.lidarRange; d += 4) {
+      for (let d = 4; d < this.lidarRange; d += 6) {
         const rx = this.robot.x + Math.cos(angle) * d;
         const ry = this.robot.y + Math.sin(angle) * d;
         const c = Math.floor(rx / this.cellW);
@@ -977,7 +979,7 @@ class IndoorExplorationSimulation {
       const hx = this.robot.x + Math.cos(angle) * rayDist;
       const hy = this.robot.y + Math.sin(angle) * rayDist;
 
-      ctx.strokeStyle = "rgba(0, 242, 254, 0.15)";
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.14)";
       ctx.lineWidth = 0.8;
       ctx.beginPath();
       ctx.moveTo(this.robot.x, this.robot.y);
@@ -990,7 +992,7 @@ class IndoorExplorationSimulation {
       ctx.fill();
     }
 
-    // 6. Draw Robot (TurtleBot Chassis + Spinning LiDAR)
+    // 7. Draw Robot (TurtleBot Chassis + Spinning LiDAR)
     ctx.save();
     ctx.translate(this.robot.x, this.robot.y);
     ctx.rotate(this.robot.heading);
@@ -1004,7 +1006,7 @@ class IndoorExplorationSimulation {
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Direction arrow
+    // Direction pointer
     ctx.fillStyle = "#00f2fe";
     ctx.beginPath();
     ctx.moveTo(this.robot.radius + 3, 0);
