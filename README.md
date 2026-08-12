@@ -15,22 +15,58 @@
 
 I am a Mechatronics & Automation Engineer working at the intersection of **industrial refrigeration, professional competency assessment, enterprise software, green tech innovation, and advanced robotics research**. 
 
-- 🏅 **Official Competency Assessor**: Certified Assessor at **PT. LSP TPTU** (Lembaga Sertifikasi Profesi Teknik Pendingin dan Tata Udara) — **No. Reg. MET.000.002933 2026**.
-- ❄️ **Technical Refrigeration Specialist**: Holder of **Sertifikasi Teknis Teknik Refrigerasi F-Gas Tingkat 4** (Level 4 Certified Technical Refrigeration Engineer).
-- 🧊 **Industrial Engineering**: Director at **CV. Dingin Lestari Teknik** ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), leading engineering design and energy optimization for industrial cold rooms (Freezer, Chiller, ABF). Developer of **DLT ERP** SaaS platform for HVAC operations ([demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)).
-- 🍃 **Patent & Innovation**: Developer of Direct Air Capture (DAC) CO₂ capture systems using biochar, holding a **Registered Software Patent for MATLAB Telemetry & Control Logic**.
-- 🤖 **Academic Research**: M.Sc. in Mechatronics Engineering from **National Taipei University of Technology (NTUT), Taiwan**, researching **Multi-Agent Formation Control, Swarm Quadcopters (SICE FES 2025), APF Obstacle Avoidance, and LiDAR SLAM Autonomous Navigation**.
+- 🧊 **Managing Director at CV. Dingin Lestari Teknik** ([dinginlestariteknik.com](https://dinginlestariteknik.com/)): Leading industrial refrigeration design, 3-phase electrical panel fabrication, compressor sizing (Bitzer/Copeland), and commissioning for Freezer Rooms, Chiller Rooms, & Air Blast Freezers (ABF) in Bandung, Indonesia.
+- 🏅 **Official Competency Assessor at PT. LSP TPTU**: Registered Professional Assessor for HVAC & Refrigeration Engineering (**Reg. MET.000.002933 2026**).
+- ❄️ **Technical Refrigeration Specialist**: Holder of **Sertifikasi Teknis Teknik Refrigerasi F-Gas Tingkat 4**.
+- 💻 **ERP SaaS Founder**: Developer of **DLT ERP** enterprise platform for HVAC and cold room field service operations ([demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)).
+- 🍃 **Patent Holder**: Creator of Direct Air Capture (DAC) CO₂ systems using biochar, holding an official **Registered Software Patent for MATLAB Control Logic & Telemetry**.
+- 🎓 **M.Sc. Mechatronics Engineering**: Graduate of **National Taipei University of Technology (NTUT), Taiwan**, researching **Multi-Agent Formation Control, Swarm Quadcopters (SICE FES 2025), APF Obstacle Avoidance, and LiDAR SLAM Autonomous Navigation**.
+
+---
+
+## 💼 Professional Experience
+
+| Period | Role / Title | Company / Organization | Key Responsibilities |
+| :---: | :--- | :--- | :--- |
+| **June 2025 – Present** | **Managing Director** | **CV. Dingin Lestari Teknik** | Leading company strategy, thermodynamic engineering, compressor/evaporator selection, energy optimization, & managing Freezer, Chiller, & ABF projects. |
+| **Nov 2018 – June 2025** | **Industrial Electrician** | **CV. Dingin Lestari Teknik** | Designing 3-phase electrical control panels, industrial wiring, panel installation, troubleshooting, and HVAC projects. |
+| **2026 – Present** | **Official Competency Assessor** | **PT. LSP TPTU** | Professional competency assessor for HVAC and industrial refrigeration engineering certifications (**Reg. MET.000.002933 2026**). |
+| **Sept 2023 – Nov 2024** | **Co-founder & Hardware Lead** | **Beantrack** | Smart agriculture startup developing solar-powered IoT coffee dryer systems. |
+| **Feb 2023 – July 2023** | **Cloud Computing Fellow** | **Bangkit Academy (Google, GoTo, Traveloka)** | Completed Cloud Computing track with **Distinction**. Capstone project selected in **TOP 20** & business incubation. |
+| **2018 & 2022** | **Engineer Intern** | **Asperio & CV Akuratama** | Mechanical/electrical CAD design, project inventory control, & Water Treatment Plant (WTP) panel wiring. |
+
+---
+
+## 🎓 Education Background
+
+| Period | Degree & Major | Institution | Thesis / Focus |
+| :---: | :--- | :--- | :--- |
+| **2024 – 2025** | **Master of Science (M.Sc.)** in Mechatronics Engineering | **National Taipei University of Technology (NTUT), Taiwan** | Thesis: *Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation*. Focus on autonomous indoor exploration & multi-agent systems. |
+| **2019 – 2023** | **Bachelor of Applied Engineering (S.Tr.T)** in Automation | **Politeknik Manufaktur Bandung (POLMAN), Indonesia** | Thesis: *Hexa-Legged SAR Robot Autonomous Navigation System Using LiDAR Sensor via SLAM Method*. |
+| **2017 – 2019** | **Vocational Diploma (SMK)** in Industrial Automation | **SMKN 4 Bandung** | Industrial electricity fundamentals, motor control wiring, and PLC automation. |
 
 ---
 
 ## 🎖️ Professional Credentials & Certifications
 
-| Certification / License | Issuing Body & Reg. Number | Key Field of Competency |
-| :--- | :--- | :--- |
-| **Sertifikat Asesor Kompetensi** | **PT. LSP TPTU** · Reg. **MET.000.002933 2026** | Professional Assessor for HVAC & Industrial Refrigeration Engineers |
-| **Teknik Refrigerasi F-Gas (Tingkat 4)** | **LSP TPTU / BNSP** | Level 4 High-Capacity Industrial Refrigeration, F-Gas Fluid Handling & Energy Efficiency |
-| **Hak Cipta Paten Software MATLAB** | **Kemenkumham RI** | Direct Air Capture (DAC) Biochar Telemetry & Process Control Algorithm |
-| **Google Cloud Certified** | **Google Cloud Platform** | Professional Cloud Engineer Credentials (2023 – 2026) |
+| Certification / License | Issuing Body & Reg. Number | Validity / Year |
+| :--- | :--- | :---: |
+| **Sertifikat Asesor Kompetensi** | **PT. LSP TPTU** · Reg. **MET.000.002933 2026** | **2026 – Present** |
+| **Teknik Refrigerasi F-Gas (Tingkat 4)** | **LSP TPTU / BNSP** | **Active** |
+| **Google Cloud Engineer Certified** | **Google Cloud Platform** | **May 2023 – May 2026** |
+| **Hak Cipta Paten Software MATLAB** | **Kemenkumham RI** | **Official Registered Patent** |
+| **Automation Maintenance Junior Engineer** | **BNSP** | **Nov 2022 – Nov 2025** |
+| **Electricity Maintenance / Industrial Electricity** | **BNSP** | **July 2021 – July 2024** |
+| **System Administration & IT Infrastructure Services** | **Google / Coursera** | **March 2023** |
+
+---
+
+## 🏆 Awards & Honors
+
+- 🏆 **Graduate with Distinction** — Bangkit Academy by Google, GoTo, Traveloka (July 2023)
+- 🏆 **Top 20 Capstone Project** — Bangkit Academy Business Incubation (July 2023)
+- 🤖 **Participant, 2023 National Indonesian SAR Robot Contest** — Puspresnas Dikti (July 2023)
+- 🥈 **2nd Place, Provincial LKS Industrial Control Competition** (October 2018)
 
 ---
 
