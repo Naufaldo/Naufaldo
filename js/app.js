@@ -1,30 +1,28 @@
 /* ==========================================================================
    Naufaldo Portfolio - Main JavaScript & Interactive Engines
-   Bilingual System (ID/EN), Multi-Agent Robotics Simulation, Cold Storage Calculator
+   Bilingual System (ID/EN), Multi-Agent Robotics Simulation, Cold Storage Calculator,
+   Projects Lightbox with Video & Image Support, ERP & DAC Patent Showcase
    ========================================================================== */
 
 // --- Translations Dictionary (ID & EN) ---
 const i18n = {
   id: {
-    // Nav
+    // Nav (Simplified & Compact)
     "nav-home": "Beranda",
     "nav-about": "Tentang",
-    "nav-sim": "Simulasi Robotika",
-    "nav-calc": "Kalkulator Pendingin",
-    "nav-exp": "Pengalaman",
-    "nav-edu": "Pendidikan",
-    "nav-pub": "Publikasi",
+    "nav-tools": "Fitur & Tool",
     "nav-projects": "Proyek",
-    "nav-skills": "Keahlian",
+    "nav-pub": "Publikasi",
     "nav-contact": "Kontak",
 
     // Hero
     "hero-badge": "Magister Teknik Mekatronika (M.Sc.)",
     "hero-title-prefix": "Halo, Saya ",
     "hero-subtitle": "Cold Storage & Automation Engineer | Peneliti Robotika",
-    "hero-desc": "Direktur CV. Dingin Lestari Teknik & Lulusan NTUT Taiwan. Berpengalaman dalam perancangan sistem cold storage industri, otomatisasi panel kontrol, serta riset kendali robot multi-agent dan navigasi otonom.",
+    "hero-desc": "Direktur CV. Dingin Lestari Teknik & Lulusan NTUT Taiwan. Pengembang Sistem ERP Cold Storage, Pemegang Hak Cipta Paten Software MATLAB Direct Air Capture (DAC), dan Peneliti Robotika Multi-Agent & Swarm Drone.",
     "hero-btn-contact": "Hubungi Saya",
     "hero-btn-calc": "Kalkulator Cold Storage",
+    "hero-btn-erp": "Demo Web ERP",
     "hero-btn-sim": "Uji Simulasi Robot",
     "stat-exp": "Tahun Pengalaman",
     "stat-pub": "Publikasi Ilmiah",
@@ -33,8 +31,12 @@ const i18n = {
     // About
     "about-title": "Profil & Keahlian Utama",
     "about-sub": "Menggabungkan pengalaman praktis industri pendingin dengan riset akademik robotika tingkat lanjut",
-    "about-text-1": "Saya adalah seorang insinyur mekatronika dan otomatisasi yang berfokus pada dua bidang utama: rekayasa sistem cold storage industri dan riset sistem kendali robotika otonom. Saat ini saya memimpin **CV. Dingin Lestari Teknik** di Bandung, mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF).",
-    "about-text-2": "Di bidang akademik, saya meraih gelar Magister Sains (M.Sc.) Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Riset saya berfokus pada kendali formasi robot multi-agent, penghindaran rintangan cerdas, dan navigasi otonom berbasis LiDAR & SLAM.",
+    "about-text-1": "Saya adalah seorang insinyur mekatronika dan otomatisasi yang berfokus pada rekayasa cold storage industri, sistem kendali robotika otonom, serta pengembangan perangkat lunak ERP industri. Saat ini saya memimpin **CV. Dingin Lestari Teknik** di Bandung ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF). Saya juga mengembangkan platform digital ERP khusus industri pendingin di **[demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)**.",
+    "about-text-2": "Di bidang akademik & inovasi, saya meraih gelar M.Sc. Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Saya memegang **Hak Cipta Paten Program MATLAB** untuk kontrol sistem Direct Air Capture (DAC) penangkap CO₂ udara, serta meriset kendali formasi robot multi-agent dan swarm drone (SICE FES 2025).",
+
+    // Tools Section (Sim + Calc)
+    "tools-title": "Fitur Interaktif & Kalkulator Teknik",
+    "tools-sub": "Cobalah alat kalkulasi beban pendingin dan kanvas simulasi kendali formasi robotika kami di bawah ini",
 
     // Multi-Agent Simulation
     "sim-title": "Simulasi Robotika Multi-Agent",
@@ -71,15 +73,15 @@ const i18n = {
     "calc-res-load-kw": "Beban Pendingin (kW):",
     "calc-res-load-btu": "Kapasitas BTU/hr:",
     "calc-res-hp": "Rekomendasi Kompresor:",
-    "calc-res-note": "* Estimasi standar rekayasa CV. Dingin Lestari Teknik. Hubungi kami untuk konsultasi teknis & detail spesifikasi kompresor Bitzer/Copeland.",
+    "calc-res-note": "* Estimasi standar rekayasa CV. Dingin Lestari Teknik. Hubungi kami di dinginlestariteknik.com untuk konsultasi teknis & detail spesifikasi.",
 
     // Work Experience
     "exp-title": "Pengalaman Kerja Industri",
     "exp-sub": "Rekam jejak kepemimpinan eksekutif dan pengerjaan teknis di bidang kelistrikan & otomatisasi",
-    "exp-1-title": "Direktur",
+    "exp-1-title": "Direktur Utama",
     "exp-1-company": "CV. Dingin Lestari Teknik | Bandung",
     "exp-1-date": "Juni 2025 - Sekarang",
-    "exp-1-desc": "Memimpin dan mengarahkan strategi perusahaan keluarga di bidang sistem pendingin industri & cold storage. Bertanggung jawab atas desain sistem termal, pemilihan kompresor & evaporator, optimasi efisiensi energi, manajemen proyek dari commissioning hingga pemeliharaan.",
+    "exp-1-desc": "Memimpin dan mengarahkan strategi perusahaan di bidang sistem pendingin industri & cold storage. Mengembangkan Web ERP operasional di demo.dinginlestariteknik.com dan mengelola proyek Freezer Room, Chiller Room, & ABF.",
     
     "exp-2-title": "Industrial Electrician (Project-Based)",
     "exp-2-company": "CV. Dingin Lestari Teknik",
@@ -107,7 +109,7 @@ const i18n = {
     "edu-1-title": "Magister Sains (M.Sc.) Teknik Mekatronika",
     "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
     "edu-1-date": "2024 - 2025",
-    "edu-1-desc": "Fokus Riset: Multi-Agent System Robot Formation Control, Mobile Robotics, dan Autonomous Navigation. Tesis: Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation.",
+    "edu-1-desc": "Fokus Riset: Multi-Agent System Robot Formation Control, Swarm Quadcopters, dan Autonomous Navigation. Tesis: Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation.",
 
     "edu-2-title": "Sarjana Terapan Teknik (S.Tr.T) Teknik Otomasi",
     "edu-2-school": "Politeknik Manufaktur Bandung (POLMAN)",
@@ -130,8 +132,30 @@ const i18n = {
     "pub-btn-copy": "Salin Sitasi",
 
     // Projects
-    "proj-title": "Galeri Proyek Rekayasa",
-    "proj-sub": "Dokumentasi portofolio fisik robot, panel kelistrikan, dan simulator",
+    "proj-title": "Galeri Proyek & Inovasi Rekayasa",
+    "proj-sub": "Portofolio sistem cold storage terbaru, paten Direct Air Capture (DAC), riset swarm drone, dan web ERP industri",
+    "proj-filter-all": "Semua Proyek",
+    "proj-filter-cs": "Cold Storage & ERP",
+    "proj-filter-dac": "Direct Air Capture (Paten)",
+    "proj-filter-swarm": "Robotika & Swarm Drone",
+    "proj-filter-auto": "Otomasi & Panel",
+
+    "proj-cs-title": "Industrial Cold Storage Systems",
+    "proj-cs-cat": "Cold Storage & Engineering",
+    "proj-cs-desc": "Perancangan, pemilihan kompresor Bitzer/Copeland, perakitan panel kelistrikan, dan commissioning sistem Freezer Room, Chiller Room, & ABF. Lihat portofolio lengkap di dinginlestariteknik.com.",
+
+    "proj-dac-title": "Direct Air Capture (DAC) CO₂ System with Biochar",
+    "proj-dac-cat": "Green Tech & Hak Cipta Paten",
+    "proj-dac-desc": "Perancangan fisik sistem penangkap CO₂ di udara menggunakan media biochar, pembuatan instrumen hardware, pemrograman kendali telemetri terintegrasi MATLAB, dan memiliki Hak Cipta Paten untuk Software MATLAB.",
+
+    "proj-swarm-title": "Swarm Quadcopters Flight Control (SICE FES 2025)",
+    "proj-swarm-cat": "Riset Swarm Drone & Flocking",
+    "proj-swarm-desc": "Riset kendali terbang kawanan quadcopter (Swarm Drone) dengan dinamika flocking, penyesuaian target dinamis, dan modulasi ketinggian sinusoidal. Tonton video eksperimennya langsung di modal lightbox!",
+
+    "proj-erp-title": "DLT ERP Platform (demo.dinginlestariteknik.com)",
+    "proj-erp-cat": "SaaS & Web Software",
+    "proj-erp-desc": "Sistem Enterprise Resource Planning (ERP) khusus operasional perusahaan pendingin & HVAC mencakup manajemen teknisi, jadwal servis, inventaris spare part, estimasi biaya, & penagihan.",
+
     "proj-1-title": "Hexapod Search & Rescue Robot",
     "proj-1-cat": "Robotika & SLAM",
     "proj-1-desc": "Robot berkaki enam berfasilitas LiDAR SLAM untuk pemetaan lingkungan dan navigasi otonom medan berat.",
@@ -174,8 +198,10 @@ const i18n = {
     "contact-loc-desc": "Bandung, Jawa Barat, Indonesia",
     "contact-email-title": "Email Rekayasa",
     "contact-wa-title": "WhatsApp Direct",
-    "contact-company-title": "Perusahaan",
-    "contact-company-desc": "CV. Dingin Lestari Teknik",
+    "contact-company-title": "Perusahaan Utama",
+    "contact-company-desc": "CV. Dingin Lestari Teknik (dinginlestariteknik.com)",
+    "contact-erp-title": "Demo ERP System",
+    "contact-erp-desc": "demo.dinginlestariteknik.com",
     "contact-form-name": "Nama Anda",
     "contact-form-email": "Email Anda",
     "contact-form-subject": "Subjek Pesan",
@@ -185,25 +211,22 @@ const i18n = {
   },
 
   en: {
-    // Nav
+    // Nav (Simplified & Compact)
     "nav-home": "Home",
     "nav-about": "About",
-    "nav-sim": "Robotics Sim",
-    "nav-calc": "Cold Storage Calc",
-    "nav-exp": "Experience",
-    "nav-edu": "Education",
-    "nav-pub": "Publications",
+    "nav-tools": "Tools & Sim",
     "nav-projects": "Projects",
-    "nav-skills": "Skills",
+    "nav-pub": "Publications",
     "nav-contact": "Contact",
 
     // Hero
     "hero-badge": "M.Sc. Mechatronics Engineering",
     "hero-title-prefix": "Hi, I am ",
     "hero-subtitle": "Cold Storage & Automation Engineer | Robotics Researcher",
-    "hero-desc": "Director of CV. Dingin Lestari Teknik & M.Sc. Graduate from NTUT Taiwan. Specialized in industrial refrigeration design, electrical control panels, multi-agent robotics control, and autonomous navigation.",
+    "hero-desc": "Director of CV. Dingin Lestari Teknik & M.Sc. Graduate from NTUT Taiwan. Developer of Cold Storage ERP Software, Software Patent Holder for MATLAB Direct Air Capture (DAC) Control, and Multi-Agent Robotics & Swarm Drone Researcher.",
     "hero-btn-contact": "Contact Me",
     "hero-btn-calc": "Cold Storage Calculator",
+    "hero-btn-erp": "Web ERP Demo",
     "hero-btn-sim": "Try Robotics Sim",
     "stat-exp": "Years Experience",
     "stat-pub": "Scientific Papers",
@@ -212,8 +235,12 @@ const i18n = {
     // About
     "about-title": "Profile & Core Expertise",
     "about-sub": "Bridging practical industrial refrigeration engineering with advanced academic robotics research",
-    "about-text-1": "I am a Mechatronics and Automation Engineer specializing in industrial cold storage engineering and autonomous robotics control. I currently serve as Director of **CV. Dingin Lestari Teknik** in Bandung, leading refrigeration system design, installation, and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF).",
-    "about-text-2": "In academia, I earned my Master of Science (M.Sc.) in Mechatronics Engineering from National Taipei University of Technology (NTUT), Taiwan. My research centers on multi-agent system formation control, APF obstacle avoidance, and LiDAR SLAM-based autonomous navigation.",
+    "about-text-1": "I am a Mechatronics and Automation Engineer specializing in industrial cold storage engineering, autonomous robotics control, and enterprise software engineering. I currently serve as Director of **CV. Dingin Lestari Teknik** in Bandung ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), leading refrigeration design and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF). I also developed an industrial ERP platform live at **[demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)**.",
+    "about-text-2": "In academia & innovation, I earned my M.Sc. in Mechatronics Engineering from National Taipei University of Technology (NTUT), Taiwan. I hold a **Registered Software Patent for MATLAB Control Logic** in Direct Air Capture (DAC) CO₂ systems, and conduct research on multi-agent formation control and swarm quadcopters (SICE FES 2025).",
+
+    // Tools Section (Sim + Calc)
+    "tools-title": "Interactive Tools & Engineering Calculators",
+    "tools-sub": "Explore our interactive cooling load calculator and multi-agent robotics formation simulator canvas below",
 
     // Multi-Agent Simulation
     "sim-title": "Multi-Agent Robotics Simulation",
@@ -250,7 +277,7 @@ const i18n = {
     "calc-res-load-kw": "Cooling Load (kW):",
     "calc-res-load-btu": "Capacity (BTU/hr):",
     "calc-res-hp": "Recommended Compressor:",
-    "calc-res-note": "* Standard engineering estimation by CV. Dingin Lestari Teknik. Contact us for detailed Bitzer/Copeland compressor sizing & design.",
+    "calc-res-note": "* Standard engineering estimation by CV. Dingin Lestari Teknik. Visit dinginlestariteknik.com for detailed Bitzer/Copeland compressor sizing.",
 
     // Work Experience
     "exp-title": "Industrial Experience",
@@ -258,7 +285,7 @@ const i18n = {
     "exp-1-title": "Director",
     "exp-1-company": "CV. Dingin Lestari Teknik | Bandung",
     "exp-1-date": "June 2025 - Present",
-    "exp-1-desc": "Lead and expand family business specializing in industrial refrigeration & cold storage systems. Responsible for thermodynamic design, compressor/evaporator selection, energy efficiency, and full project lifecycle.",
+    "exp-1-desc": "Lead company operations in refrigeration & cold storage engineering. Built live web ERP at demo.dinginlestariteknik.com and managed Freezer Room, Chiller Room, & ABF turnkey projects.",
     
     "exp-2-title": "Industrial Electrician (Project-Based)",
     "exp-2-company": "CV. Dingin Lestari Teknik",
@@ -286,7 +313,7 @@ const i18n = {
     "edu-1-title": "M.Sc. in Mechatronics Engineering",
     "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
     "edu-1-date": "2024 - 2025",
-    "edu-1-desc": "Research focus: Multi-Agent System Robot Formation Control, Mobile Robotics, & Autonomous Navigation. Thesis: Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation.",
+    "edu-1-desc": "Research focus: Multi-Agent System Robot Formation Control, Swarm Quadcopters, & Autonomous Navigation. Thesis: Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation.",
 
     "edu-2-title": "Bachelor of Engineering (S.Tr.T) Automation Engineering",
     "edu-2-school": "Politeknik Manufaktur Bandung (POLMAN)",
@@ -309,8 +336,30 @@ const i18n = {
     "pub-btn-copy": "Copy Citation",
 
     // Projects
-    "proj-title": "Engineering Projects",
-    "proj-sub": "Visual showcase of physical robots, control panels, and simulation stations",
+    "proj-title": "Engineering Projects & Innovations",
+    "proj-sub": "Featured cold storage projects, Direct Air Capture (DAC) patent, swarm drone research, and industrial web ERP",
+    "proj-filter-all": "All Projects",
+    "proj-filter-cs": "Cold Storage & ERP",
+    "proj-filter-dac": "Direct Air Capture (Patent)",
+    "proj-filter-swarm": "Robotics & Swarm Drone",
+    "proj-filter-auto": "Automation & Panels",
+
+    "proj-cs-title": "Industrial Cold Storage Systems",
+    "proj-cs-cat": "Cold Storage & Engineering",
+    "proj-cs-desc": "Thermodynamic design, Bitzer/Copeland compressor sizing, 3-phase electrical panel integration, and commissioning for Freezer & Chiller rooms. Explore full portfolio at dinginlestariteknik.com.",
+
+    "proj-dac-title": "Direct Air Capture (DAC) CO₂ System with Biochar",
+    "proj-dac-cat": "Green Tech & Software Patent",
+    "proj-dac-desc": "Physical system engineering for ambient CO₂ capture via biochar, hardware fabrication, telemetry control system connected to MATLAB, holding a Registered Software Patent for MATLAB Control Logic.",
+
+    "proj-swarm-title": "Swarm Quadcopters Flight Control (SICE FES 2025)",
+    "proj-swarm-cat": "Swarm Drone Research",
+    "proj-swarm-desc": "Research on quadcopter swarm flight control featuring flocking dynamics, dynamic goal shifting, and sinusoidal altitude modulation. Watch the experiment video directly in the modal lightbox!",
+
+    "proj-erp-title": "DLT ERP Platform (demo.dinginlestariteknik.com)",
+    "proj-erp-cat": "SaaS & Enterprise Web",
+    "proj-erp-desc": "Enterprise Resource Planning (ERP) platform custom-built for HVAC and cold storage operations covering technician dispatch, service scheduling, spare parts inventory, costing, and invoicing.",
+
     "proj-1-title": "Hexapod Search & Rescue Robot",
     "proj-1-cat": "Robotics & SLAM",
     "proj-1-desc": "LiDAR SLAM hexa-legged robot designed for indoor exploration and rough terrain navigation.",
@@ -349,12 +398,14 @@ const i18n = {
     // Contact
     "contact-title": "Contact Me",
     "contact-sub": "Discuss cold storage engineering, technical consulting, or robotics research collaboration",
-    "contact-loc-title": "Location",
+    "contact-loc-title": "Main Location",
     "contact-loc-desc": "Bandung, West Java, Indonesia",
     "contact-email-title": "Engineering Email",
     "contact-wa-title": "WhatsApp Direct",
-    "contact-company-title": "Company",
-    "contact-company-desc": "CV. Dingin Lestari Teknik",
+    "contact-company-title": "Main Company",
+    "contact-company-desc": "CV. Dingin Lestari Teknik (dinginlestariteknik.com)",
+    "contact-erp-title": "ERP System Demo",
+    "contact-erp-desc": "demo.dinginlestariteknik.com",
     "contact-form-name": "Your Name",
     "contact-form-email": "Your Email",
     "contact-form-subject": "Subject",
@@ -406,9 +457,9 @@ class MultiAgentSimulation {
     
     // Leader Robot
     this.leader = {
-      x: this.width * 0.4,
+      x: this.width * 0.35,
       y: this.height * 0.5,
-      targetX: this.width * 0.6,
+      targetX: this.width * 0.65,
       targetY: this.height * 0.5,
       angle: 0,
       speed: 2.2,
@@ -635,7 +686,7 @@ class MultiAgentSimulation {
     });
 
     // Draw Follower Robots
-    this.followers.forEach((fol, idx) => {
+    this.followers.forEach((fol) => {
       this.ctx.save();
       this.ctx.translate(fol.x, fol.y);
       this.ctx.rotate(fol.angle);
@@ -655,7 +706,7 @@ class MultiAgentSimulation {
       this.ctx.restore();
     });
 
-    // Draw Leader Robot (Gold/Cyan Glow)
+    // Draw Leader Robot
     this.ctx.save();
     this.ctx.translate(this.leader.x, this.leader.y);
     this.ctx.rotate(this.leader.angle);
@@ -713,7 +764,7 @@ function calculateCoolingLoad() {
 
   // Temp delta factor
   const deltaT = ambient - targetTemp;
-  const totalWatts = volume * baseHeatGainWPerM3 * (deltaT / 30) * 1.2; // 1.2 Safety Factor
+  const totalWatts = volume * baseHeatGainWPerM3 * (deltaT / 30) * 1.2;
   const btuHr = totalWatts * 3.412;
   const hpEstimate = (btuHr / 9000).toFixed(1);
   const kwEstimate = (totalWatts / 1000).toFixed(2);
@@ -801,7 +852,7 @@ function renderPublications(filterCategory = "all", searchQuery = "") {
         <span class="pub-venue"><i class="fa fa-book"></i> ${pub.venue}</span>
         <span class="badge badge-purple">${pub.year}</span>
       </div>
-      <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem;">
+      <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap;">
         <a href="${pub.doi}" target="_blank" class="btn btn-outline btn-sm">
           <i class="fa fa-external-link"></i> DOI Article
         </a>
@@ -820,51 +871,146 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects Modal Lightbox Engine ---
+// --- Projects & Innovations Gallery Engine ---
 const projectsData = [
+  // Cold Storage CS_1~3
+  {
+    titleKey: "proj-cs-title",
+    catKey: "proj-cs-cat",
+    descKey: "proj-cs-desc",
+    img: "img/New/CS_1.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["Cold Storage", "Refrigeration", "Freezer Room", "Chiller", "ABF", "Bitzer/Copeland"],
+    link: "https://dinginlestariteknik.com/",
+    linkText: "dinginlestariteknik.com"
+  },
+
+  // Direct Air Capture DAC_1~2 (Patent)
+  {
+    titleKey: "proj-dac-title",
+    catKey: "proj-dac-cat",
+    descKey: "proj-dac-desc",
+    img: "img/New/DAC_1.jpg",
+    isVideo: false,
+    category: "dac",
+    tags: ["Direct Air Capture", "CO2 Capture", "Biochar", "MATLAB Software Patent", "Hardware Design"],
+    link: "https://www.researchgate.net/profile/Naufaldo-2",
+    linkText: "Patent & Research Details"
+  },
+
+  // Drone Swarm Video (SICE FES 2025)
+  {
+    titleKey: "proj-swarm-title",
+    catKey: "proj-swarm-cat",
+    descKey: "proj-swarm-desc",
+    img: "img/Header.jpeg",
+    videoSrc: "img/New/Drone_Swarm.avi",
+    isVideo: true,
+    category: "swarm",
+    tags: ["Swarm Drone", "Flight Control", "Flocking Dynamics", "SICE FES 2025", "Simulink"],
+    link: "https://doi.org/10.23919/SICEFES67750.2025.11236621",
+    linkText: "SICE FES 2025 Paper"
+  },
+
+  // DLT ERP Software Demo
+  {
+    titleKey: "proj-erp-title",
+    catKey: "proj-erp-cat",
+    descKey: "proj-erp-desc",
+    img: "img/IMG-20230503-WA0015.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["ERP Software", "SaaS Platform", "HVAC Operations", "Field Service", "Cloud"],
+    link: "https://demo.dinginlestariteknik.com/",
+    linkText: "demo.dinginlestariteknik.com"
+  },
+
+  // Hexapod
   {
     titleKey: "proj-1-title",
     catKey: "proj-1-cat",
     descKey: "proj-1-desc",
     img: "img/IMG-20230503-WA0016.jpg",
+    isVideo: false,
+    category: "swarm",
     tags: ["ROS", "LiDAR", "SLAM", "Hexapod", "Arduino"]
   },
+
+  // Ice Cream Robot
   {
     titleKey: "proj-2-title",
     catKey: "proj-2-cat",
     descKey: "proj-2-desc",
     img: "img/IMG-20230503-WA0017.jpg",
+    isVideo: false,
+    category: "auto",
     tags: ["Robotics", "Servo Control", "Automation", "PLC"]
   },
+
+  // BAS Simulator
   {
     titleKey: "proj-3-title",
     catKey: "proj-3-cat",
     descKey: "proj-3-desc",
     img: "img/IMG-20230503-WA0019.jpg",
+    isVideo: false,
+    category: "auto",
     tags: ["BAS", "HVAC", "Building Automation", "SCADA"]
   },
+
+  // DCS Training System
   {
     titleKey: "proj-4-title",
     catKey: "proj-4-cat",
     descKey: "proj-4-desc",
     img: "img/IMG-20230503-WA0021.jpg",
+    isVideo: false,
+    category: "auto",
     tags: ["DCS", "Process Control", "Modbus", "PLC"]
-  },
-  {
-    titleKey: "proj-5-title",
-    catKey: "proj-5-cat",
-    descKey: "proj-5-desc",
-    img: "img/IMG-20230503-WA0015.jpg",
-    tags: ["IoT", "3-Phase Panel", "Cold Storage", "ESP32"]
-  },
-  {
-    titleKey: "proj-6-title",
-    catKey: "proj-6-cat",
-    descKey: "proj-6-desc",
-    img: "img/IMG-20230503-WA0018.jpg",
-    tags: ["Simulator", "VFD Drive", "Industrial Motor", "Safety"]
   }
 ];
+
+function renderProjects(filterCategory = "all") {
+  const grid = document.getElementById("projectsGrid");
+  if (!grid) return;
+
+  const filtered = projectsData.filter(p => filterCategory === "all" || p.category === filterCategory);
+
+  grid.innerHTML = filtered.map((p, idx) => {
+    const realIndex = projectsData.indexOf(p);
+    const title = i18n[currentLang][p.titleKey] || p.titleKey;
+    const cat = i18n[currentLang][p.catKey] || p.catKey;
+    const desc = i18n[currentLang][p.descKey] || p.descKey;
+
+    return `
+      <div class="glass-card project-card" onclick="openProjectModal(${realIndex})">
+        <div class="project-img-wrapper">
+          ${p.isVideo ? `
+            <video src="${p.videoSrc}" muted loop autoplay playsinline class="project-img" style="object-fit:cover;"></video>
+            <div style="position:absolute; top:10px; right:10px; background:rgba(239, 68, 68, 0.9); color:#fff; padding:0.25rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:700;">
+              <i class="fa fa-play-circle"></i> VIDEO
+            </div>
+          ` : `
+            <img src="${p.img}" alt="${title}" class="project-img">
+          `}
+          <div class="project-overlay">
+            <span class="project-tag">${cat}</span>
+          </div>
+        </div>
+        <h3 class="project-title">${title}</h3>
+        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">${desc}</p>
+        ${p.link ? `
+          <div style="margin-top:0.75rem;">
+            <a href="${p.link}" target="_blank" onclick="event.stopPropagation();" class="badge badge-purple" style="font-size:0.78rem;">
+              <i class="fa fa-external-link"></i> ${p.linkText}
+            </a>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }).join("");
+}
 
 function openProjectModal(index) {
   const p = projectsData[index];
@@ -872,22 +1018,48 @@ function openProjectModal(index) {
 
   const modal = document.getElementById("projectModal");
   const modalImg = document.getElementById("modalImg");
+  const modalVideo = document.getElementById("modalVideo");
   const modalTitle = document.getElementById("modalTitle");
   const modalCat = document.getElementById("modalCat");
   const modalDesc = document.getElementById("modalDesc");
   const modalTags = document.getElementById("modalTags");
+  const modalLinkBox = document.getElementById("modalLinkBox");
 
-  modalImg.src = p.img;
+  if (p.isVideo && p.videoSrc) {
+    modalImg.style.display = "none";
+    modalVideo.style.display = "block";
+    modalVideo.src = p.videoSrc;
+    modalVideo.play().catch(() => {});
+  } else {
+    modalVideo.style.display = "none";
+    if (modalVideo.src) modalVideo.pause();
+    modalImg.style.display = "block";
+    modalImg.src = p.img;
+  }
+
   modalTitle.textContent = i18n[currentLang][p.titleKey] || p.titleKey;
   modalCat.textContent = i18n[currentLang][p.catKey] || p.catKey;
   modalDesc.textContent = i18n[currentLang][p.descKey] || p.descKey;
   modalTags.innerHTML = p.tags.map(t => `<span class="badge">${t}</span>`).join(" ");
+
+  if (p.link) {
+    modalLinkBox.style.display = "block";
+    modalLinkBox.innerHTML = `
+      <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm">
+        <i class="fa fa-external-link"></i> ${p.linkText}
+      </a>
+    `;
+  } else {
+    modalLinkBox.style.display = "none";
+  }
 
   modal.classList.add("active");
 }
 
 function closeProjectModal() {
   const modal = document.getElementById("projectModal");
+  const modalVideo = document.getElementById("modalVideo");
+  if (modalVideo) modalVideo.pause();
   if (modal) modal.classList.remove("active");
 }
 
@@ -902,6 +1074,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const nextLang = currentLang === "id" ? "en" : "id";
       updateLanguage(nextLang);
       renderPublications();
+      renderProjects(document.querySelector(".proj-filter-tags .filter-btn.active")?.dataset.cat || "all");
     });
   }
 
@@ -937,6 +1110,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Projects Render & Filter
+  renderProjects("all");
+
+  document.querySelectorAll(".proj-filter-tags .filter-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      document.querySelectorAll(".proj-filter-tags .filter-btn").forEach(b => b.classList.remove("active"));
+      e.target.classList.add("active");
+      renderProjects(e.target.dataset.cat);
+    });
+  });
+
   // Contact Form Submission (Redirects to WhatsApp)
   document.getElementById("contactForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -949,22 +1133,47 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open(`https://wa.me/6281320608283?text=${waText}`, "_blank");
   });
 
-  // Mobile Navigation Menu Toggle
+  // Mobile Navigation Menu Toggle & Auto Close on Click
   const navToggle = document.getElementById("mobileNavToggle");
   const navLinks = document.getElementById("navLinks");
   if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
       navLinks.classList.toggle("active");
     });
+
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+      });
+    });
   }
 
-  // Sticky Navbar Blur on Scroll
+  // Sticky Navbar Blur on Scroll & Active Section Spy
+  const sections = document.querySelectorAll("section[id]");
   window.addEventListener("scroll", () => {
     const navbar = document.getElementById("navbar");
     if (window.scrollY > 50) {
       navbar.classList.add("scrolled");
     } else {
       navbar.classList.remove("scrolled");
+    }
+
+    let currentSectionId = "";
+    sections.forEach(sec => {
+      const secTop = sec.offsetTop - 100;
+      const secHeight = sec.offsetHeight;
+      if (window.scrollY >= secTop && window.scrollY < secTop + secHeight) {
+        currentSectionId = sec.getAttribute("id");
+      }
+    });
+
+    if (currentSectionId) {
+      document.querySelectorAll(".nav-link").forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${currentSectionId}`) {
+          link.classList.add("active");
+        }
+      });
     }
   });
 });
