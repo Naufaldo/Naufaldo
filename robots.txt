@@ -1,4 +1,6 @@
+# Robots.txt for Naufaldo Portfolio Website
 User-agent: *
 Allow: /
 
+# XML Sitemap Location
 Sitemap: https://naufaldo.github.io/Naufaldo/sitemap.xml

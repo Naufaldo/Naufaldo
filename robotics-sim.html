@@ -3,21 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robotics Simulation Lab | Naufaldo, M.Sc.</title>
   
-  <meta name="description" content="Laboratorium Simulasi Interaktif Robotika Multi-Agent, Model Matematika Kinematika, Vision Follower Camera, Drone Swarm, dan LiDAR SLAM oleh Naufaldo, M.Sc.">
+  <!-- Primary SEO Meta Tags -->
+  <title>Laboratorium Simulasi Robotika Interaktif | Naufaldo, M.Sc.</title>
+  <meta name="title" content="Laboratorium Simulasi Robotika Interaktif | Naufaldo, M.Sc.">
+  <meta name="description" content="Simulasi robotika fisik interaktif 2D/3D: Fuzzy PID DDMR, Model Kinematika KaTeX, Path vs Trajectory Tracking, Vision OpenCV Follower, Swarm Drone, Floodfill vs Frontier, & LiDAR SLAM.">
+  <meta name="keywords" content="Simulasi Robotika Web, Fuzzy PID DDMR, Kinematika Differential Drive, Path Tracking vs Trajectory Tracking, Pure Pursuit, Vision Follower OpenCV, Swarm Drone Simulation 3D, LiDAR SLAM Web Simulator">
   <meta name="author" content="Naufaldo, M.Sc.">
-  
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://naufaldo.github.io/Naufaldo/robotics-sim.html">
+
+  <!-- Geo Location Meta Tags -->
+  <meta name="geo.region" content="ID-JB">
+  <meta name="geo.placename" content="Bandung">
+  <meta name="geo.position" content="-6.9175;107.6191">
+  <meta name="ICBM" content="-6.9175, 107.6191">
+
+  <!-- Open Graph / Facebook Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naufaldo.github.io/Naufaldo/robotics-sim.html">
+  <meta property="og:site_name" content="Naufaldo, M.Sc. Portfolio">
+  <meta property="og:title" content="Laboratorium Simulasi Robotika Interaktif | Naufaldo, M.Sc.">
+  <meta property="og:description" content="Simulasi robotika interaktif: PID DDMR, Kinematika KaTeX, Path vs Trajectory, Vision Follower, Swarm Drone, & LiDAR SLAM.">
+  <meta property="og:image" content="https://naufaldo.github.io/Naufaldo/img/Pas%20Fotos.JPG">
+
+  <!-- Twitter Card Meta -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://naufaldo.github.io/Naufaldo/robotics-sim.html">
+  <meta name="twitter:title" content="Laboratorium Simulasi Robotika Interaktif | Naufaldo, M.Sc.">
+  <meta name="twitter:description" content="Simulasi robotika interaktif: PID DDMR, Kinematika KaTeX, Path vs Trajectory, Vision Follower, Swarm Drone, & LiDAR SLAM.">
+  <meta name="twitter:image" content="https://naufaldo.github.io/Naufaldo/img/Pas%20Fotos.JPG">
+
   <!-- Favicon & Icons -->
   <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
-  <!-- KaTeX LaTeX Math Equations CDN -->
+  <!-- KaTeX LaTeX Stylesheet -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 
   <!-- Custom Modern Design System -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Laboratorium Simulasi Robotika Interaktif Naufaldo, M.Sc.",
+    "url": "https://naufaldo.github.io/Naufaldo/robotics-sim.html",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "author": {
+      "@type": "Person",
+      "name": "Naufaldo",
+      "honorificSuffix": "M.Sc."
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -50,259 +92,157 @@
     </div>
   </nav>
 
-  <!-- Header Banner -->
+  <!-- Banner Section -->
   <section class="section-padding" style="padding-top: 8rem; padding-bottom: 2rem;">
     <div class="container text-center">
-      <span class="badge badge-purple" style="margin-bottom: 1rem;">M.Sc. Research & Robotics Lab</span>
       <h1 class="section-title">Laboratorium Simulasi Robotika Interaktif</h1>
       <div class="divider"></div>
       <p class="section-subtitle">
-        Uji coba interaktif modul kendali robotika & model matematika dari riset tesis & publikasi jurnal internasional Naufaldo (IJCAS, ICCAS, SICE FES, IJRA)
+        Jelajahi algoritma kendali robotika otonom, sistem multi-agent, vision follower, drone swarm, dan navigasi LiDAR SLAM secara real-time
       </p>
 
-      <!-- Simulation Tabs Switcher -->
-      <div class="pub-filter-tags" style="margin-top: 2rem;">
-        <button class="filter-btn active" onclick="switchSimTab('tab-pid')">1. PID DDMR & Formasi (ICCAS 2025)</button>
-        <button class="filter-btn" onclick="switchSimTab('tab-math')">2. Model Matematika Kinematika</button>
-        <button class="filter-btn" onclick="switchSimTab('tab-tracking')">3. Path vs Trajectory Tracking</button>
-        <button class="filter-btn" onclick="switchSimTab('tab-vision')">4. Vision Follower (OpenCV)</button>
-        <button class="filter-btn" onclick="switchSimTab('tab-swarm')">5. Drone Swarm (SICE FES 2025)</button>
-        <button class="filter-btn" onclick="switchSimTab('tab-exploration')">6. Indoor Exploration (ICCAS 2024)</button>
-        <button class="filter-btn" onclick="switchSimTab('tab-slam')">7. LiDAR SLAM (IJRA 2024)</button>
+      <!-- Tabs Navigation -->
+      <div class="proj-filter-tags">
+        <button class="filter-btn active" data-tab="tab1"><i class="fa fa-cogs"></i> 1. Fuzzy PID & APF (ICCAS 2025)</button>
+        <button class="filter-btn" data-tab="tab2"><i class="fa fa-calculator"></i> 2. Model Kinematika</button>
+        <button class="filter-btn" data-tab="tab3"><i class="fa fa-map-signs"></i> 3. Path vs Trajectory</button>
+        <button class="filter-btn" data-tab="tab4"><i class="fa fa-eye"></i> 4. Vision Follower Camera</button>
+        <button class="filter-btn" data-tab="tab5"><i class="fa fa-plane"></i> 5. Drone Swarm 3D (SICE 2025)</button>
+        <button class="filter-btn" data-tab="tab6"><i class="fa fa-compass"></i> 6. Eksplorasi Indoor (ICCAS 2024)</button>
+        <button class="filter-btn" data-tab="tab7"><i class="fa fa-crosshairs"></i> 7. LiDAR SLAM (IJRA 2024)</button>
       </div>
     </div>
   </section>
 
-  <!-- Simulation Content Container -->
-  <section class="section-padding" style="padding-top: 1rem;">
-    <div class="container">
-      
-      <!-- TAB 1: Fuzzy PID DDMR Multi-Agent Formation (ICCAS 2025 / IJCAS 2026) -->
-      <div class="sim-tab-content active" id="tab-pid">
-        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
-          <h3 style="color:var(--primary-cyan); margin-bottom: 0.5rem;">
-            <i class="fa fa-cogs"></i> Modul 1: Fuzzy PID DDMR & Multi-Agent Formation Control (ICCAS 2025)
-          </h3>
-          <p style="color:var(--text-secondary); font-size:0.92rem;">
-            Simulasi kendali trajektori robot roda diferensial (DDMR) Leader-Follower dengan algoritma Artificial Potential Field (APF) untuk penghindaran rintangan dinamis.
-          </p>
-        </div>
+  <!-- Simulation Canvas Section -->
+  <section class="section-padding" style="padding-top: 0;">
+    <div class="container" style="max-width: 1000px;">
 
-        <div class="sim-container">
+      <!-- Tab 1: Fuzzy PID & APF -->
+      <div class="sim-tab-content active" id="tab1">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem;">Modul 1: Fuzzy PID DDMR & Multi-Agent Formation Control (ICCAS 2025)</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Simulasi kendali robot roda diferensial (DDMR) menggunakan pengontrol PID berparameter Fuzzy logic dengan penghindaran rintangan dinamis Artificial Potential Field (APF). Klik pada kanvas untuk menentukan lokasi target baru!
+          </p>
           <div class="sim-canvas-wrapper">
-            <canvas id="pidCanvas"></canvas>
+            <canvas id="canvasSim1"></canvas>
           </div>
-          <div class="sim-controls-panel">
-            <div class="sim-control-group">
-              <label>Formasi Robot DDMR</label>
-              <div class="sim-btn-grid">
-                <button class="btn btn-outline btn-sm" id="btnTriangle">Formasi Segitiga</button>
-                <button class="btn btn-outline btn-sm" id="btnCircle">Formasi Lingkaran</button>
-                <button class="btn btn-outline btn-sm" id="btnLine">Formasi Garis</button>
-              </div>
-            </div>
-            <div class="sim-control-group">
-              <label>Aksi Interaktif</label>
-              <div class="sim-btn-grid">
-                <button class="btn btn-primary btn-sm" id="btnAddObs">Tambah Rintangan APF</button>
-                <button class="btn btn-outline btn-sm" id="btnResetSim">Reset Position</button>
-              </div>
-            </div>
-            <p style="font-size:0.8rem; color:var(--text-dim);">
-              * Klik pada area kanvas untuk menentukan lokasi target pergerakan robot Leader.
-            </p>
+          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-sm" id="btnResetSim1"><i class="fa fa-refresh"></i> Reset Posisi Robot</button>
+            <button class="btn btn-outline btn-sm" id="btnToggleObstacle1"><i class="fa fa-shield"></i> Toggle Rintangan APF</button>
           </div>
         </div>
       </div>
 
-      <!-- TAB 2: Model Matematika Kinematika DDMR (LaTeX Rendered) -->
-      <div class="sim-tab-content" id="tab-math" style="display:none;">
-        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
-          <h3 style="color:var(--accent-emerald); margin-bottom: 0.5rem;">
-            <i class="fa fa-calculator"></i> Modul 2: Model Matematika Kinematika ke Simulasi 2D
-          </h3>
-          <div style="background: rgba(15, 23, 42, 0.7); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; font-size:1.05rem;">
-            <div style="margin-bottom:0.5rem; color:var(--primary-cyan); font-weight:700;">Persamaan Matriks Kinematika DDMR:</div>
-            <div id="latexEq1" style="margin-bottom:0.75rem;"></div>
-            <div id="latexEq2"></div>
-          </div>
-          <p style="color:var(--text-secondary); font-size:0.92rem;">
-            Atur kecepatan sudut roda kanan (\(\omega_r\)) dan roda kiri (\(\omega_l\)) menggunakan slider di samping untuk mengamati trajektori linier (\(v\)) dan rotasi (\(\omega\)) secara langsung!
+      <!-- Tab 2: Model Kinematika Matematika -->
+      <div class="sim-tab-content" id="tab2" style="display:none;">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--accent-emerald); margin-bottom: 0.5rem;">Modul 2: Model Matematika Kinematika ke Simulasi 2D</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Mengubah persamaan diferensial linier dan angular roda ke dalam trajektori spasial 2D secara real-time.
           </p>
-        </div>
 
-        <div class="sim-container">
-          <div class="sim-canvas-wrapper">
-            <canvas id="mathCanvas"></canvas>
+          <!-- KaTeX LaTeX Math Container -->
+          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem; overflow-x: auto; text-align: center;">
+            <div id="katexFormula1" style="font-size: 1.1rem; color: var(--primary-cyan); margin-bottom: 0.75rem;"></div>
+            <div id="katexFormula2" style="font-size: 1rem; color: var(--accent-emerald);"></div>
           </div>
-          <div class="sim-controls-panel">
-            <div class="sim-control-group">
-              <label>Kecepatan Roda Kanan (\(\omega_r\))</label>
-              <input type="range" id="mathWr" min="-5" max="8" step="0.2" value="3.0" oninput="updateMathSim()">
+
+          <div class="sim-canvas-wrapper">
+            <canvas id="canvasSim2"></canvas>
+          </div>
+          <div style="margin-top: 1rem; display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
+            <div>
+              <label style="font-size: 0.82rem; color: var(--text-secondary);">Kecepatan Roda Kanan ($\omega_r$):</label>
+              <input type="range" id="sliderWr" min="0" max="100" value="60" style="width: 130px;">
             </div>
-            <div class="sim-control-group">
-              <label>Kecepatan Roda Kiri (\(\omega_l\))</label>
-              <input type="range" id="mathWl" min="-5" max="8" step="0.2" value="2.0" oninput="updateMathSim()">
+            <div>
+              <label style="font-size: 0.82rem; color: var(--text-secondary);">Kecepatan Roda Kiri ($\omega_l$):</label>
+              <input type="range" id="sliderWl" min="0" max="100" value="40" style="width: 130px;">
             </div>
-            <button class="btn btn-outline btn-sm" onclick="window.mathSim.resetTrajectory()">Reset Trajektori</button>
-            <div class="sim-status-box" style="margin-top: 1rem;">
-              <div>V Linear (\(v\)): <span id="mathTelV" style="color:var(--primary-cyan);">0.13 m/s</span></div>
-              <div>W Angular (\(\omega\)): <span id="mathTelW" style="color:var(--accent-purple);">0.20 rad/s</span></div>
-            </div>
+            <button class="btn btn-outline btn-sm" id="btnResetSim2"><i class="fa fa-refresh"></i> Reset Trajektori</button>
           </div>
         </div>
       </div>
 
-      <!-- TAB 3: Path Tracking vs Trajectory Tracking -->
-      <div class="sim-tab-content" id="tab-tracking" style="display:none;">
-        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
-          <h3 style="color:var(--accent-purple); margin-bottom: 0.5rem;">
-            <i class="fa fa-map-signs"></i> Modul 3: Path Tracking vs. Trajectory Tracking
-          </h3>
-          <div class="skills-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-            <div style="background: rgba(15, 23, 42, 0.7); padding: 1rem; border-radius: 8px;">
-              <h4 style="color:var(--primary-cyan); margin-bottom:0.4rem;">1. Path Tracking (Pelacakan Jalur Spasial)</h4>
-              <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
-                Robot mengendalikan kemudi untuk mengikuti geometri koordinat ruang \((x,y)\) <strong>tanpa terikat waktu \(t\)</strong>. Robot dapat melambat pada tikungan tajam untuk menjaga presisi kontur spasial. Contoh: <em>Pure Pursuit</em>, <em>Stanley Controller</em>.
+      <!-- Tab 3: Path Tracking vs Trajectory Tracking -->
+      <div class="sim-tab-content" id="tab3" style="display:none;">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--accent-purple); margin-bottom: 0.5rem;">Modul 3: Perbandingan Path Tracking vs Trajectory Tracking</h3>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+            <div style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: var(--radius-md); padding: 1rem;">
+              <h4 style="color: var(--accent-purple); font-size: 0.95rem; margin-bottom: 0.35rem;"><i class="fa fa-map-signs"></i> Path Tracking (Pure Pursuit)</h4>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
+                Robot mengikuti kontur geometri lintasan $(x,y)$ tanpa terikat kendala waktu $t$. Kecepatan linier $v$ menyesuaikan tingkat kelengkungan tikungan untuk meminimalkan *cross-track error*.
               </p>
             </div>
-            <div style="background: rgba(15, 23, 42, 0.7); padding: 1rem; border-radius: 8px;">
-              <h4 style="color:var(--accent-purple); margin-bottom:0.4rem;">2. Trajectory Tracking (Pelacakan Waktu & Posisi)</h4>
-              <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">
-                Robot <strong>terikat secara waktu \(t\)</strong> untuk berada pada titik \((x(t), y(t))\) pada detik ke-\(t\) dengan profil kecepatan \(v(t)\) dan \(\omega(t)\) yang tersinkronisasi. Contoh: <em>Feedback Linearization</em>, <em>Fuzzy-PID Control</em>.
+            <div style="background: rgba(0, 242, 254, 0.08); border: 1px solid rgba(0, 242, 254, 0.2); border-radius: var(--radius-md); padding: 1rem;">
+              <h4 style="color: var(--primary-cyan); font-size: 0.95rem; margin-bottom: 0.35rem;"><i class="fa fa-clock-o"></i> Trajectory Tracking (Time-Sync)</h4>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4;">
+                Robot **terikat kendala waktu $t$** untuk berada pada titik $(x(t), y(t))$ pada detik ke-$t$. Robot akan memutus sudut atau mempercepat daya motor jika tertinggal dari profil trajektori acuan.
               </p>
             </div>
           </div>
-        </div>
 
-        <div class="sim-container">
           <div class="sim-canvas-wrapper">
-            <canvas id="trackingCanvas"></canvas>
+            <canvas id="canvasSim3"></canvas>
           </div>
-          <div class="sim-controls-panel">
-            <div class="sim-control-group">
-              <label>Mode Simulator Pelacakan</label>
-              <div class="sim-btn-grid">
-                <button class="btn btn-primary btn-sm" onclick="setTrackingMode('trajectory')">Trajectory Tracking (Time-Sync)</button>
-                <button class="btn btn-outline btn-sm" onclick="setTrackingMode('path')">Path Tracking (Spatial Only)</button>
-              </div>
-            </div>
-            <div class="sim-status-box">
-              <div style="font-weight:700; color:#fff;">MODE KENDALI AKTIF:</div>
-              <div id="trackingStatus" style="color:var(--accent-purple); font-weight:700;">TRAJECTORY TRACKING (Time t)</div>
-            </div>
+          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn btn-primary btn-sm" id="btnRestartSim3"><i class="fa fa-play"></i> Jalankan Ulang Simulasi</button>
           </div>
         </div>
       </div>
 
-      <!-- TAB 4: Vision-Based Leader Follower (OpenCV) -->
-      <div class="sim-tab-content" id="tab-vision" style="display:none;">
-        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
-          <h3 style="color:var(--accent-amber); margin-bottom: 0.5rem;">
-            <i class="fa fa-eye"></i> Modul 4: Vision-Based Leader Follower (OpenCV Camera Tracking)
-          </h3>
-          <p style="color:var(--text-secondary); font-size:0.92rem;">
-            Simulasi pelacakan visual jarak robot depan menggunakan kamera & pustaka OpenCV. Kerucut FOV kamera mendeteksi bounding box target dan mengukur estimasi jarak piksel secara real-time.
+      <!-- Tab 4: Vision Follower Camera -->
+      <div class="sim-tab-content" id="tab4" style="display:none;">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--accent-amber); margin-bottom: 0.5rem;">Modul 4: Robot Following Kamera Vision (OpenCV Bounding Box)</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Simulasi sensor visual kamera onboard robot pengikut. Kamera mengkalkulasi selisih lebar piksel Bounding Box target untuk mengendalikan jarak robot pengikut secara otomatis.
           </p>
-        </div>
-
-        <div class="sim-container">
           <div class="sim-canvas-wrapper">
-            <canvas id="visionCanvas"></canvas>
-          </div>
-          <div class="sim-controls-panel">
-            <div class="sim-status-box">
-              <div style="font-weight:700; color:#fff;">OPENCV CAMERA SENSOR:</div>
-              <div>Status: <span id="visionStatus" style="color:var(--accent-emerald);">TRACKING</span></div>
-              <div>Jarak Terdeteksi: <span id="visionDist" style="color:var(--primary-cyan);">70 px</span></div>
-            </div>
-            <p style="font-size:0.8rem; color:var(--text-dim);">
-              * Gerakkan kursor mouse di atas kanvas untuk memindahkan lokasi Robot Target Leader.
-            </p>
+            <canvas id="canvasSim4"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- TAB 5: Drone Swarm Flocking (SICE FES 2025) -->
-      <div class="sim-tab-content" id="tab-swarm" style="display:none;">
-        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
-          <h3 style="color:var(--accent-purple); margin-bottom: 0.5rem;">
-            <i class="fa fa-plane"></i> Modul 5: Drone Swarm Flocking & Altitude Modulation (SICE FES 2025)
-          </h3>
-          <p style="color:var(--text-secondary); font-size:0.92rem;">
-            Simulasi kawanan quadcopter (Swarm Drone) dengan dinamika boids (kohesi, separasi), penyesuaian target dinamis, dan modulasi ketinggian sinusoidal.
+      <!-- Tab 5: Drone Swarm 3D -->
+      <div class="sim-tab-content" id="tab5" style="display:none;">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--primary-cyan); margin-bottom: 0.5rem;">Modul 5: Drone Swarm Sinusoidal Altitude Flocking (SICE FES 2025)</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Visualisasi kawanan quadcopter terbang dalam formasi 3D terkoordinasi dengan modulasi ketinggian sinusoidal.
           </p>
-        </div>
-
-        <div class="sim-container">
           <div class="sim-canvas-wrapper">
-            <canvas id="swarmCanvas"></canvas>
-          </div>
-          <div class="sim-controls-panel">
-            <div class="sim-status-box">
-              <div style="font-weight:700; color:#fff;">STATUS DRONE SWARM:</div>
-              <div>Jumlah Drone: <span style="color:var(--primary-cyan);">12 Quadcopters</span></div>
-              <div>Modulasi Ketinggian: <span style="color:var(--accent-emerald);">SINUSOIDAL ACTIVE</span></div>
-            </div>
-            <p style="font-size:0.8rem; color:var(--text-dim);">
-              * Klik pada kanvas untuk menentukan lokasi target pergerakan kawanan drone.
-            </p>
+            <canvas id="canvasSim5"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- TAB 6: Indoor Exploration (ICCAS 2024) -->
-      <div class="sim-tab-content" id="tab-exploration" style="display:none;">
-        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
-          <h3 style="color:var(--accent-emerald); margin-bottom: 0.5rem;">
-            <i class="fa fa-map"></i> Modul 6: Indoor Exploration: Floodfill vs. Frontier-Based (ICCAS 2024)
-          </h3>
-          <p style="color:var(--text-secondary); font-size:0.92rem;">
-            Simulasi perbandingan strategi pemetaan area indoor otonom antara Algoritma Floodfill vs. Metode Frontier-Based.
+      <!-- Tab 6: Eksplorasi Indoor -->
+      <div class="sim-tab-content" id="tab6" style="display:none;">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--accent-emerald); margin-bottom: 0.5rem;">Modul 6: Strategi Eksplorasi Indoor (Floodfill vs Frontier) (ICCAS 2024)</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Perbandingan algoritma eksplorasi labirin indoor: pencarian petakFloodfill berbasis grid vs pemetaan perbatasan Frontier-based method.
           </p>
-        </div>
-
-        <div class="sim-container">
           <div class="sim-canvas-wrapper">
-            <canvas id="exploreCanvas"></canvas>
-          </div>
-          <div class="sim-controls-panel">
-            <div class="sim-control-group">
-              <label>Pilih Metode Eksplorasi</label>
-              <div class="sim-btn-grid">
-                <button class="btn btn-outline btn-sm" id="btnFrontier">Frontier-Based</button>
-                <button class="btn btn-outline btn-sm" id="btnFloodfill">Floodfill</button>
-              </div>
-            </div>
-            <button class="btn btn-primary" id="btnStartExplore">Mulai Eksplorasi</button>
+            <canvas id="canvasSim6"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- TAB 7: LiDAR SLAM Nav (IJRA 2024) -->
-      <div class="sim-tab-content" id="tab-slam" style="display:none;">
-        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
-          <h3 style="color:var(--primary-cyan); margin-bottom: 0.5rem;">
-            <i class="fa fa-bullseye"></i> Modul 7: LiDAR SLAM Autonomous Navigation (IJRA 2024)
-          </h3>
-          <p style="color:var(--text-secondary); font-size:0.92rem;">
-            Simulasi pemindaian sinar laser 360° LiDAR dan pemetaan Point Cloud pada robot Hexapod Search & Rescue.
+      <!-- Tab 7: LiDAR SLAM -->
+      <div class="sim-tab-content" id="tab7" style="display:none;">
+        <div class="glass-card" style="margin-bottom: 1.5rem;">
+          <h3 style="color: var(--accent-purple); margin-bottom: 0.5rem;">Modul 7: Navigasi Otonom & Pemetaan LiDAR SLAM (IJRA 2024)</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Simulasi pemindaian sinar laser LiDAR 360° dan pemetaan lingkungan bertahap (Occupancy Grid Mapping) untuk robot SAR berkaki enam.
           </p>
-        </div>
-
-        <div class="sim-container">
           <div class="sim-canvas-wrapper">
-            <canvas id="slamCanvas"></canvas>
-          </div>
-          <div class="sim-controls-panel">
-            <div class="sim-status-box">
-              <div style="font-weight:700; color:#fff;">TELEMETRI LIDAR:</div>
-              <div>Rays: <span style="color:var(--primary-cyan);">36 Sinar Laser 360°</span></div>
-              <div>Mode: <span style="color:var(--accent-purple);">Real-time Point Cloud</span></div>
-            </div>
-            <p style="font-size:0.8rem; color:var(--text-dim);">
-              * Gerakkan kursor mouse di atas kanvas untuk menggerakkan posisi robot Hexapod dan mengamati hasil scan LiDAR.
-            </p>
+            <canvas id="canvasSim7"></canvas>
           </div>
         </div>
       </div>
@@ -312,81 +252,24 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container text-center">
+    <div class="container">
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/naufaldo-do-80b39b1a5/?locale=en_US" target="_blank" rel="noopener" class="social-icon" title="LinkedIn"><i class="fa fa-linkedin"></i></a>
+        <a href="https://www.researchgate.net/profile/Naufaldo-2" target="_blank" rel="noopener" class="social-icon" title="ResearchGate"><i class="fa fa-book"></i></a>
+        <a href="https://github.com/Naufaldo" target="_blank" rel="noopener" class="social-icon" title="GitHub"><i class="fa fa-github"></i></a>
+        <a href="https://www.instagram.com/nau136/" target="_blank" rel="noopener" class="social-icon" title="Instagram"><i class="fa fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCfcdchzhztPIqN_TO-n6XPQ" target="_blank" rel="noopener" class="social-icon" title="YouTube"><i class="fa fa-youtube-play"></i></a>
+      </div>
       <p style="font-size:0.9rem; color:var(--text-secondary);" data-i18n="footer-text">
         Dibuat oleh Naufaldo, M.Sc. | Hak Cipta Dilindungi.
       </p>
     </div>
   </footer>
 
-  <!-- Scripts -->
+  <!-- KaTeX LaTeX Script -->
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
   <script src="js/app.js"></script>
   <script src="js/robotics-sim.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      window.pidSim = new ICCASPIDDDMRSimulation("pidCanvas");
-      window.mathSim = new MathModelSimulation("mathCanvas");
-      window.trackingSim = new TrackingComparisonSimulation("trackingCanvas");
-      window.visionSim = new OpenCVVisionSimulation("visionCanvas");
-      window.swarmSim = new DroneSwarmSimulation("swarmCanvas");
-      window.exploreSim = new IndoorExplorationSimulation("exploreCanvas");
-      window.slamSim = new LiDARSLAMSimulation("slamCanvas");
-
-      // Render KaTeX Math Equations
-      if (window.katex) {
-        katex.render("\\begin{bmatrix} \\dot{x} \\\\ \\dot{y} \\\\ \\dot{\\theta} \\end{bmatrix} = \\begin{bmatrix} \\cos\\theta & 0 \\\\ \\sin\\theta & 0 \\\\ 0 & 1 \\end{bmatrix} \\begin{bmatrix} v \\\\ \\omega \\end{bmatrix}", document.getElementById("latexEq1"));
-        katex.render("v = \\frac{r}{2} (\\omega_r + \\omega_l), \\quad \\omega = \\frac{r}{L} (\\omega_r - \\omega_l)", document.getElementById("latexEq2"));
-      }
-
-      // Bind PID Buttons
-      document.getElementById("btnTriangle")?.addEventListener("click", () => window.pidSim.setFormation("triangle"));
-      document.getElementById("btnCircle")?.addEventListener("click", () => window.pidSim.setFormation("circle"));
-      document.getElementById("btnLine")?.addEventListener("click", () => window.pidSim.setFormation("line"));
-      document.getElementById("btnAddObs")?.addEventListener("click", () => window.pidSim.addObstacle());
-      document.getElementById("btnResetSim")?.addEventListener("click", () => window.pidSim.reset());
-
-      // Bind Exploration Buttons
-      document.getElementById("btnFrontier")?.addEventListener("click", () => window.exploreSim.setMode("frontier"));
-      document.getElementById("btnFloodfill")?.addEventListener("click", () => window.exploreSim.setMode("floodfill"));
-      document.getElementById("btnStartExplore")?.addEventListener("click", () => window.exploreSim.startExploration());
-    });
-
-    function updateMathSim() {
-      const wr = document.getElementById("mathWr")?.value || 3.0;
-      const wl = document.getElementById("mathWl")?.value || 2.0;
-      if (window.mathSim) window.mathSim.setWheelVelocities(wr, wl);
-    }
-
-    function setTrackingMode(mode) {
-      if (window.trackingSim) window.trackingSim.setMode(mode);
-      const status = document.getElementById("trackingStatus");
-      if (status) {
-        status.textContent = mode === "trajectory" ? "TRAJECTORY TRACKING (Time-Sync t)" : "PATH TRACKING (Spatial Pursuit)";
-        status.style.color = mode === "trajectory" ? "var(--accent-purple)" : "var(--primary-cyan)";
-      }
-    }
-
-    function switchSimTab(tabId) {
-      document.querySelectorAll(".sim-tab-content").forEach(el => el.style.display = "none");
-      document.querySelectorAll(".pub-filter-tags .filter-btn").forEach(btn => btn.classList.remove("active"));
-      
-      const target = document.getElementById(tabId);
-      if (target) {
-        target.style.display = "block";
-        // Trigger Canvas Resize to Fill Wrapper 100%
-        const canvas = target.querySelector("canvas");
-        if (canvas) {
-          if (tabId === 'tab-pid' && window.pidSim) window.pidSim.resize();
-          if (tabId === 'tab-math' && window.mathSim) window.mathSim.resize();
-          if (tabId === 'tab-tracking' && window.trackingSim) window.trackingSim.resize();
-          if (tabId === 'tab-vision' && window.visionSim) window.visionSim.resize();
-          if (tabId === 'tab-swarm' && window.swarmSim) window.swarmSim.resize();
-          if (tabId === 'tab-exploration' && window.exploreSim) window.exploreSim.resize();
-          if (tabId === 'tab-slam' && window.slamSim) window.slamSim.resize();
-        }
-      }
-      event.currentTarget.classList.add("active");
-    }
-  </script>
 </body>
 </html>
