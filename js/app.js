@@ -1,7 +1,7 @@
 /* ==========================================================================
    Naufaldo Portfolio - Main JavaScript & Interactive Engines
-   Bilingual System (ID/EN), Performance Optimized Multi-Page Engine,
-   Safe DOM Manipulation, Cold Storage Sizing Calculator
+   Bilingual System (ID/EN), YouTube Embedded Video Support,
+   Multi-Page Engine & Cold Storage Sizing Calculator
    ========================================================================== */
 
 // --- Translations Dictionary (ID & EN) ---
@@ -95,7 +95,15 @@ const i18n = {
 
     "proj-swarm-title": "Swarm Quadcopters Flight Control (SICE FES 2025)",
     "proj-swarm-cat": "Riset Swarm Drone & Flocking",
-    "proj-swarm-desc": "Riset kendali terbang kawanan quadcopter (Swarm Drone) dengan dinamika flocking, penyesuaian target dinamis, dan modulasi ketinggian sinusoidal. Tonton video eksperimennya langsung di modal lightbox!",
+    "proj-swarm-desc": "Video riset kendali terbang kawanan quadcopter dengan dinamika flocking, penyesuaian target dinamis, dan modulasi ketinggian sinusoidal. Tonton video eksperimennya langsung di modal lightbox!",
+
+    "proj-lemniscate-title": "Multi-Agent Lemniscate Formation Control (M.Sc. Thesis)",
+    "proj-lemniscate-cat": "Riset Tesis M.Sc. NTUT Taiwan",
+    "proj-lemniscate-desc": "Video eksperimen kendali formasi robot multi-agent mengikuti trajektori Lemniscate (angka 8) pada riset Tesis Magister NTUT Taiwan.",
+
+    "proj-circular-title": "Multi-Agent Circular Formation Control (M.Sc. Thesis)",
+    "proj-circular-cat": "Riset Tesis M.Sc. NTUT Taiwan",
+    "proj-circular-desc": "Video eksperimen kendali formasi robot multi-agent mengikuti trajektori melingkar (circular trajectory) pada riset Tesis Magister NTUT Taiwan.",
 
     "proj-erp-title": "DLT ERP Platform (demo.dinginlestariteknik.com)",
     "proj-erp-cat": "SaaS & Web Software",
@@ -233,7 +241,15 @@ const i18n = {
 
     "proj-swarm-title": "Swarm Quadcopters Flight Control (SICE FES 2025)",
     "proj-swarm-cat": "Swarm Drone Research",
-    "proj-swarm-desc": "Research on quadcopter swarm flight control featuring flocking dynamics, dynamic goal shifting, and sinusoidal altitude modulation. Watch the experiment video directly in the modal lightbox!",
+    "proj-swarm-desc": "Research video on quadcopter swarm flight control featuring flocking dynamics and sinusoidal altitude modulation. Watch the experiment video in the modal lightbox!",
+
+    "proj-lemniscate-title": "Multi-Agent Lemniscate Formation Control (M.Sc. Thesis)",
+    "proj-lemniscate-cat": "M.Sc. Thesis Research NTUT",
+    "proj-lemniscate-desc": "Experimental video of multi-agent robot formation control tracking a Lemniscate (8-figure) trajectory from M.Sc. thesis research.",
+
+    "proj-circular-title": "Multi-Agent Circular Formation Control (M.Sc. Thesis)",
+    "proj-circular-cat": "M.Sc. Thesis Research NTUT",
+    "proj-circular-desc": "Experimental video of multi-agent robot formation control tracking a circular trajectory from M.Sc. thesis research.",
 
     "proj-erp-title": "DLT ERP Platform (demo.dinginlestariteknik.com)",
     "proj-erp-cat": "SaaS & Enterprise Web",
@@ -283,12 +299,6 @@ const i18n = {
   }
 };
 
-// Safe HTML sanitizer & setter to prevent linter warnings
-function setElementHTML(el, textContent) {
-  if (!el) return;
-  el.textContent = textContent;
-}
-
 // --- Language Switching Engine ---
 let currentLang = localStorage.getItem("naufaldo_lang") || "id";
 
@@ -299,7 +309,6 @@ function updateLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (i18n[lang] && i18n[lang][key]) {
-      // Safe text node assignment for text-only translations
       if (i18n[lang][key].includes("<")) {
         el.innerHTML = i18n[lang][key];
       } else {
@@ -501,9 +510,51 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects Data ---
+// --- Projects & Innovations Gallery Engine (With YouTube Embedded Video Support) ---
 const projectsData = [
-  // CS_1
+  // Swarm Drone YouTube Video (SICE FES 2025)
+  {
+    titleKey: "proj-swarm-title",
+    catKey: "proj-swarm-cat",
+    descKey: "proj-swarm-desc",
+    img: "https://img.youtube.com/vi/JKuoD_4qvYw/hqdefault.jpg",
+    youtubeId: "JKuoD_4qvYw",
+    isVideo: true,
+    category: "swarm",
+    tags: ["Swarm Drone", "Flight Control", "Flocking Dynamics", "SICE FES 2025", "YouTube Video"],
+    link: "https://doi.org/10.23919/SICEFES67750.2025.11236621",
+    linkText: "SICE FES 2025 Paper"
+  },
+
+  // M.Sc. Thesis YouTube Video #1 - Lemniscate Trajectory
+  {
+    titleKey: "proj-lemniscate-title",
+    catKey: "proj-lemniscate-cat",
+    descKey: "proj-lemniscate-desc",
+    img: "https://img.youtube.com/vi/SJYSznTkrM0/hqdefault.jpg",
+    youtubeId: "SJYSznTkrM0",
+    isVideo: true,
+    category: "swarm",
+    tags: ["Leader-Follower", "Lemniscate Trajectory", "M.Sc. Thesis", "NTUT Taiwan", "YouTube Video"],
+    link: "https://doi.org/10.1007/s12555-026-00119-1",
+    linkText: "IJCAS 2026 Paper"
+  },
+
+  // M.Sc. Thesis YouTube Video #2 - Circular Trajectory
+  {
+    titleKey: "proj-circular-title",
+    catKey: "proj-circular-cat",
+    descKey: "proj-circular-desc",
+    img: "https://img.youtube.com/vi/iG-kYV0TVr8/hqdefault.jpg",
+    youtubeId: "iG-kYV0TVr8",
+    isVideo: true,
+    category: "swarm",
+    tags: ["Leader-Follower", "Circular Formation", "M.Sc. Thesis", "NTUT Taiwan", "YouTube Video"],
+    link: "https://doi.org/10.1080/02533839.2025.2503867",
+    linkText: "JCIE 2025 Paper"
+  },
+
+  // Cold Storage CS_1
   {
     titleKey: "proj-cs1-title",
     catKey: "proj-cs1-cat",
@@ -563,20 +614,6 @@ const projectsData = [
     tags: ["MATLAB Software Patent", "Telemetry Control", "CO2 Sensor", "Paten Resmi"],
     link: "https://www.researchgate.net/profile/Naufaldo-2",
     linkText: "Patent Document"
-  },
-
-  // Drone Swarm Video (SICE FES 2025)
-  {
-    titleKey: "proj-swarm-title",
-    catKey: "proj-swarm-cat",
-    descKey: "proj-swarm-desc",
-    img: "img/Header.jpeg",
-    videoSrc: "img/New/Drone_Swarm.avi",
-    isVideo: true,
-    category: "swarm",
-    tags: ["Swarm Drone", "Flight Control", "Flocking Dynamics", "SICE FES 2025", "Simulink"],
-    link: "https://doi.org/10.23919/SICEFES67750.2025.11236621",
-    linkText: "SICE FES 2025 Paper"
   },
 
   // DLT ERP Software Demo
@@ -668,7 +705,7 @@ function renderProjects(filterCategory = "all") {
     if (p.isVideo) {
       const vidBadge = document.createElement("div");
       vidBadge.style.cssText = "position:absolute; top:10px; right:10px; background:rgba(239, 68, 68, 0.9); color:#fff; padding:0.25rem 0.68rem; border-radius:20px; font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:4px; box-shadow:0 0 10px rgba(239, 68, 68, 0.5);";
-      vidBadge.innerHTML = `<i class="fa fa-play-circle"></i> VIDEO DEMO`;
+      vidBadge.innerHTML = `<i class="fa fa-youtube-play"></i> YOUTUBE`;
       imgWrapper.appendChild(vidBadge);
     }
 
@@ -723,14 +760,27 @@ function openProjectModal(index) {
   const modalTags = document.getElementById("modalTags");
   const modalLinkBox = document.getElementById("modalLinkBox");
 
-  if (p.isVideo && p.videoSrc) {
+  const modalImgWrapper = document.querySelector(".modal-img-wrapper");
+
+  if (p.youtubeId) {
     modalImg.style.display = "none";
-    modalVideo.style.display = "block";
-    modalVideo.src = p.videoSrc;
-    modalVideo.play().catch(() => {});
-  } else {
     modalVideo.style.display = "none";
-    if (modalVideo.src) modalVideo.pause();
+    
+    // Remove previous iframe if any
+    const prevIframe = modalImgWrapper.querySelector("iframe");
+    if (prevIframe) prevIframe.remove();
+
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${p.youtubeId}?autoplay=1&mute=1&loop=1&playlist=${p.youtubeId}`;
+    iframe.style.cssText = "width:100%; height:400px; border:none;";
+    iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+    iframe.allowFullscreen = true;
+    modalImgWrapper.appendChild(iframe);
+  } else {
+    const prevIframe = modalImgWrapper.querySelector("iframe");
+    if (prevIframe) prevIframe.remove();
+
+    modalVideo.style.display = "none";
     modalImg.style.display = "block";
     modalImg.src = p.img;
   }
@@ -739,7 +789,7 @@ function openProjectModal(index) {
   modalCat.textContent = i18n[currentLang][p.catKey] || p.catKey;
   modalDesc.textContent = i18n[currentLang][p.descKey] || p.descKey;
 
-  // Safe DOM creation for tags
+  // Tags
   modalTags.replaceChildren();
   p.tags.forEach(t => {
     const badge = document.createElement("span");
@@ -748,7 +798,7 @@ function openProjectModal(index) {
     modalTags.appendChild(badge);
   });
 
-  // Safe DOM creation for link box
+  // Link Box
   modalLinkBox.replaceChildren();
   if (p.link) {
     modalLinkBox.style.display = "block";
@@ -767,10 +817,10 @@ function openProjectModal(index) {
 
 function closeProjectModal() {
   const modal = document.getElementById("projectModal");
-  const modalVideo = document.getElementById("modalVideo");
-  if (modalVideo) {
-    modalVideo.pause();
-    modalVideo.removeAttribute("src");
+  const modalImgWrapper = document.querySelector(".modal-img-wrapper");
+  if (modalImgWrapper) {
+    const iframe = modalImgWrapper.querySelector("iframe");
+    if (iframe) iframe.remove();
   }
   if (modal) modal.classList.remove("active");
 }
