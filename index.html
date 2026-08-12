@@ -122,10 +122,14 @@
         <li><a href="robotics-sim.html" class="nav-link" data-i18n="nav-tools">Fitur & Tool</a></li>
         <li><a href="projects.html" class="nav-link" data-i18n="nav-projects">Proyek</a></li>
         <li><a href="publications.html" class="nav-link" data-i18n="nav-pub">Publikasi</a></li>
+        <li><a href="#blog" class="nav-link">Blogspot</a></li>
         <li><a href="#contact" class="nav-link" data-i18n="nav-contact">Kontak</a></li>
       </ul>
 
       <div class="nav-actions">
+        <button onclick="openCmsModal()" class="btn btn-outline btn-sm" style="border-color:var(--accent-purple); color:var(--accent-purple);" title="Admin CMS Portal">
+          <i class="fa fa-lock"></i> Admin CMS
+        </button>
         <button class="lang-toggle-btn" id="langToggleBtn" title="Switch Language">
           <span>🇮🇩</span> ID
         </button>
@@ -419,177 +423,16 @@
     </div>
   </section>
 
-  <!-- Certifications & Licenses Full List Section -->
-  <section class="section-padding" id="certifications">
+  <!-- Blogspot & Technical Article Section -->
+  <section class="section-padding" id="blog">
     <div class="container">
-      <h2 class="section-title" data-i18n="cert-title">Sertifikasi Profesi & Lisensi Resmi</h2>
+      <h2 class="section-title" data-i18n="blog-title">Artikel Teknis & Blogspot</h2>
       <div class="divider"></div>
-      <p class="section-subtitle">
-        Lisensi keahlian resmi terverifikasi di bidang asesor kompetensi, kelistrikan industri, cloud computing, dan otomasi
+      <p class="section-subtitle" data-i18n="blog-sub">
+        Tulisan ilmiah, analisis rekayasa cold storage, serta jurnal riset robotika oleh Naufaldo, M.Sc.
       </p>
 
-      <div class="skills-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-        <div class="glass-card" style="border-top: 3px solid var(--accent-amber);">
-          <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.35rem;">Asesor Kompetensi LSP TPTU</div>
-          <div style="font-size:0.8rem; color:var(--accent-amber); font-weight:600; margin-bottom:0.5rem;">Reg. MET.000.002933 2026</div>
-          <p style="font-size:0.82rem; color:var(--text-secondary); margin:0;">Penguji lisensi kompetensi profesi insinyur teknik pendingin dan tata udara.</p>
-        </div>
-
-        <div class="glass-card" style="border-top: 3px solid var(--primary-cyan);">
-          <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.35rem;">Teknik Refrigerasi F-Gas (Tingkat 4)</div>
-          <div style="font-size:0.8rem; color:var(--primary-cyan); font-weight:600; margin-bottom:0.5rem;">Sertifikasi BNSP / LSP TPTU</div>
-          <p style="font-size:0.82rem; color:var(--text-secondary); margin:0;">Keahlian teknis tingkat tinggi penanganan sistem refrigerasi industri & efisiensi energi.</p>
-        </div>
-
-        <div class="glass-card" style="border-top: 3px solid var(--accent-purple);">
-          <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.35rem;">Google Cloud Certified Engineer</div>
-          <div style="font-size:0.8rem; color:var(--accent-purple); font-weight:600; margin-bottom:0.5rem;">May 2023 – May 2026</div>
-          <p style="font-size:0.82rem; color:var(--text-secondary); margin:0;">Sertifikasi resmi Google Cloud Platform Professional Cloud Engineer.</p>
-        </div>
-
-        <div class="glass-card" style="border-top: 3px solid var(--accent-emerald);">
-          <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.35rem;">Automation Maintenance Junior Engineer</div>
-          <div style="font-size:0.8rem; color:var(--accent-emerald); font-weight:600; margin-bottom:0.5rem;">Nov 2022 – Nov 2025</div>
-          <p style="font-size:0.82rem; color:var(--text-secondary); margin:0;">Pemeliharaan & troubleshooting sistem otomatisasi industri.</p>
-        </div>
-
-        <div class="glass-card" style="border-top: 3px solid var(--primary-cyan);">
-          <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.35rem;">Electricity Maintenance / Industrial Electricity</div>
-          <div style="font-size:0.8rem; color:var(--primary-cyan); font-weight:600; margin-bottom:0.5rem;">July 2021 – July 2024</div>
-          <p style="font-size:0.82rem; color:var(--text-secondary); margin:0;">Pemeliharaan & pengkabelan kelistrikan panel 3-phase industri.</p>
-        </div>
-
-        <div class="glass-card" style="border-top: 3px solid var(--accent-purple);">
-          <div style="font-weight:700; color:#fff; font-size:1rem; margin-bottom:0.35rem;">System Administration & IT Services</div>
-          <div style="font-size:0.8rem; color:var(--accent-purple); font-weight:600; margin-bottom:0.5rem;">Google / Coursera (March 2023)</div>
-          <p style="font-size:0.82rem; color:var(--text-secondary); margin:0;">Sertifikasi administrasi sistem IT & infrastruktur jaringan.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills & Competencies Progress Section -->
-  <section class="section-padding" id="skills" style="background: var(--bg-secondary);">
-    <div class="container">
-      <h2 class="section-title" data-i18n="skills-title">Keahlian Teknis & Skill</h2>
-      <div class="divider"></div>
-      <p class="section-subtitle">
-        Penguasaan teknologi pendingin industri, otomatisasi kendali, pemrograman software, dan robotika otonom
-      </p>
-
-      <div class="skills-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
-        
-        <!-- Skill Category 1 -->
-        <div class="glass-card">
-          <h3 style="font-size:1.2rem; color:var(--primary-cyan); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
-            <i class="fa fa-snowflake-o"></i> Cold Storage & Otomasi Industri
-          </h3>
-          <div class="skill-items" style="display:flex; flex-direction:column; gap:1rem;">
-            <div>
-              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.35rem;">
-                <span>Sistem Pendingin Cold Storage & Desain Panel Listrik</span>
-                <span style="color:var(--primary-cyan); font-weight:700;">95%</span>
-              </div>
-              <div style="background:rgba(255,255,255,0.08); height:8px; border-radius:4px; overflow:hidden;">
-                <div style="background:var(--primary-cyan); width:95%; height:100%; border-radius:4px;"></div>
-              </div>
-            </div>
-
-            <div>
-              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.35rem;">
-                <span>PLC Programming, SCADA, & Pneumatik</span>
-                <span style="color:var(--primary-cyan); font-weight:700;">92%</span>
-              </div>
-              <div style="background:rgba(255,255,255,0.08); height:8px; border-radius:4px; overflow:hidden;">
-                <div style="background:var(--primary-cyan); width:92%; height:100%; border-radius:4px;"></div>
-              </div>
-            </div>
-
-            <div>
-              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.35rem;">
-                <span>Maintenance & Perbaikan Sistem Kelistrikan</span>
-                <span style="color:var(--primary-cyan); font-weight:700;">90%</span>
-              </div>
-              <div style="background:rgba(255,255,255,0.08); height:8px; border-radius:4px; overflow:hidden;">
-                <div style="background:var(--primary-cyan); width:90%; height:100%; border-radius:4px;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Skill Category 2 -->
-        <div class="glass-card">
-          <h3 style="font-size:1.2rem; color:var(--accent-purple); margin-bottom:1.25rem; display:flex; align-items:center; gap:0.5rem;">
-            <i class="fa fa-android"></i> Robotika, Software & Cloud Computing
-          </h3>
-          <div class="skill-items" style="display:flex; flex-direction:column; gap:1rem;">
-            <div>
-              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.35rem;">
-                <span>ROS, Sistem Navigasi SLAM, & Swarm Drone</span>
-                <span style="color:var(--accent-purple); font-weight:700;">92%</span>
-              </div>
-              <div style="background:rgba(255,255,255,0.08); height:8px; border-radius:4px; overflow:hidden;">
-                <div style="background:var(--accent-purple); width:92%; height:100%; border-radius:4px;"></div>
-              </div>
-            </div>
-
-            <div>
-              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.35rem;">
-                <span>Cloud Computing (Google Cloud Engineer Certified)</span>
-                <span style="color:var(--accent-purple); font-weight:700;">90%</span>
-              </div>
-              <div style="background:rgba(255,255,255,0.08); height:8px; border-radius:4px; overflow:hidden;">
-                <div style="background:var(--accent-purple); width:90%; height:100%; border-radius:4px;"></div>
-              </div>
-            </div>
-
-            <div>
-              <div style="display:flex; justify-content:space-between; font-size:0.88rem; margin-bottom:0.35rem;">
-                <span>Python, MATLAB (Paten DAC), Mikrokontroler, & DLT ERP</span>
-                <span style="color:var(--accent-purple); font-weight:700;">90%</span>
-              </div>
-              <div style="background:rgba(255,255,255,0.08); height:8px; border-radius:4px; overflow:hidden;">
-                <div style="background:var(--accent-purple); width:90%; height:100%; border-radius:4px;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Robotics Lab Preview Section -->
-  <section class="section-padding">
-    <div class="container text-center">
-      <h2 class="section-title">Laboratorium Simulasi Robotika</h2>
-      <div class="divider"></div>
-      <p class="section-subtitle">
-        Jelajahi modul simulasi fisik interaktif riset robotika Naufaldo: PID DDMR, Model Kinematika, Path vs Trajectory, Vision Follower, Swarm Drone, dan LiDAR SLAM
-      </p>
-
-      <div class="skills-grid" style="margin-bottom: 2rem;">
-        <div class="glass-card text-left">
-          <h3 style="color:var(--primary-cyan); font-size:1.1rem; margin-bottom:0.5rem;"><i class="fa fa-cogs"></i> 1. PID DDMR & Formasi</h3>
-          <p style="font-size:0.88rem; color:var(--text-secondary);">Simulasi kendali trajektori robot roda diferensial & penghindaran rintangan APF (ICCAS 2025).</p>
-        </div>
-        <div class="glass-card text-left">
-          <h3 style="color:var(--accent-emerald); font-size:1.1rem; margin-bottom:0.5rem;"><i class="fa fa-calculator"></i> 2. Model Matematika Kinematika</h3>
-          <p style="font-size:0.88rem; color:var(--text-secondary);">Visualisasi persamaan kinematika DDMR dari rumus matematika ke trajektori 2D instan.</p>
-        </div>
-        <div class="glass-card text-left">
-          <h3 style="color:var(--accent-purple); font-size:1.1rem; margin-bottom:0.5rem;"><i class="fa fa-map-signs"></i> 3. Path vs Trajectory</h3>
-          <p style="font-size:0.88rem; color:var(--text-secondary);">Perbandingan interaktif pelacakan jalur spasial vs pelacakan trajektori terikat waktu t.</p>
-        </div>
-        <div class="glass-card text-left">
-          <h3 style="color:var(--accent-amber); font-size:1.1rem; margin-bottom:0.5rem;"><i class="fa fa-eye"></i> 4. Vision Follower Camera</h3>
-          <p style="font-size:0.88rem; color:var(--text-secondary);">Pelacakan visual bounding box OpenCV & deteksi jarak piksel objek target.</p>
-        </div>
-      </div>
-
-      <a href="robotics-sim.html" class="btn btn-primary">
-        <i class="fa fa-gamepad"></i> Buka Lab Simulasi Robotika Lengkap &rarr;
-      </a>
+      <div class="blog-grid" id="blogContainer"></div>
     </div>
   </section>
 
@@ -805,6 +648,115 @@
         <p id="modalDesc" style="color:var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6;">Description</p>
         <div id="modalTags" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom: 1rem;"></div>
         <div id="modalLinkBox"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Admin CMS Portal Modal -->
+  <div class="modal-overlay" id="cmsModal" onclick="closeCmsModal()">
+    <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 680px;">
+      <button class="modal-close" onclick="closeCmsModal()">&times;</button>
+      <div class="modal-body">
+        
+        <!-- CMS Login Screen -->
+        <div id="cmsLoginBox">
+          <div class="text-center" style="margin-bottom: 1.5rem;">
+            <i class="fa fa-user-secret fa-3x" style="color: var(--primary-cyan);"></i>
+            <h2 style="margin-top:0.5rem;">Admin CMS Portal</h2>
+            <p style="font-size:0.85rem; color:var(--text-secondary);">Masuk untuk mengelola foto, galeri proyek, pengalaman kerja, & blogspot secara langsung</p>
+          </div>
+
+          <form id="cmsLoginForm" style="display:flex; flex-direction:column; gap:1rem;">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" class="form-control" id="cmsUser" value="naufaldo" required>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" id="cmsPass" value="admin123" required>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-sign-in"></i> Masuk Dashboard Admin
+            </button>
+          </form>
+        </div>
+
+        <!-- CMS Dashboard Portal -->
+        <div id="cmsDashboard" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+            <h2 style="font-size:1.3rem; color:var(--primary-cyan);"><i class="fa fa-sliders"></i> Panel Pengelolaan Konten</h2>
+            <span class="badge badge-purple">Admin Logged In</span>
+          </div>
+
+          <div class="cms-tabs">
+            <button class="cms-tab-btn active" data-target="cmsTabProjects"><i class="fa fa-th"></i> Galeri Proyek</button>
+            <button class="cms-tab-btn" data-target="cmsTabBlog"><i class="fa fa-pencil"></i> Artikel Blogspot</button>
+          </div>
+
+          <!-- Tab 1: Galeri Proyek -->
+          <div class="cms-tab-content" id="cmsTabProjects">
+            <form id="cmsAddProjForm" style="display:flex; flex-direction:column; gap:1rem;">
+              <div class="form-group">
+                <label>Judul Proyek / Riset Baru</label>
+                <input type="text" class="form-control" id="cmsProjTitle" placeholder="Contoh: Instalasai ABF 5 Ton Bitzer" required>
+              </div>
+              <div class="form-group">
+                <label>Kategori Proyek</label>
+                <select class="form-select" id="cmsProjCat">
+                  <option value="cs">Cold Storage & Engineering</option>
+                  <option value="dac">Direct Air Capture (Paten)</option>
+                  <option value="swarm">Robotika & Swarm Drone</option>
+                  <option value="auto">Otomasi & Kelistrikan</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Deskripsi Singkat</label>
+                <textarea class="form-control" id="cmsProjDesc" rows="3" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>URL Gambar / Poster Proyek</label>
+                <input type="text" class="form-control" id="cmsProjImg" placeholder="img/New/CS_1.jpg">
+              </div>
+              <div class="form-group">
+                <label>ID Video YouTube Unlisted (Opsional)</label>
+                <input type="text" class="form-control" id="cmsProjYt" placeholder="Contoh: JKuoD_4qvYw">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus-circle"></i> Terbitkan Proyek Baru
+              </button>
+            </form>
+          </div>
+
+          <!-- Tab 2: Blogspot -->
+          <div class="cms-tab-content" id="cmsTabBlog" style="display:none;">
+            <form id="cmsAddBlogForm" style="display:flex; flex-direction:column; gap:1rem;">
+              <div class="form-group">
+                <label>Judul Artikel Blogspot</label>
+                <input type="text" class="form-control" id="cmsBlogTitle" placeholder="Contoh: Strategi Efisiensi Energi Chiller Room" required>
+              </div>
+              <div class="form-group">
+                <label>Kategori Tulisan</label>
+                <input type="text" class="form-control" id="cmsBlogCat" value="Cold Storage & Automation" required>
+              </div>
+              <div class="form-group">
+                <label>Ringkasan Artikel (Excerpt)</label>
+                <textarea class="form-control" id="cmsBlogExcerpt" rows="2" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Isi Artikel Lengkap</label>
+                <textarea class="form-control" id="cmsBlogContent" rows="5" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>URL Gambar Header Artikel</label>
+                <input type="text" class="form-control" id="cmsBlogImg" value="img/New/CS_1.jpg">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fa fa-paper-plane"></i> Publikasikan Artikel Blogspot
+              </button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

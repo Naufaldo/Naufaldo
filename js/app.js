@@ -1,6 +1,7 @@
 /* ==========================================================================
    Naufaldo Portfolio - Main JavaScript & Interactive Engines
    Bilingual System (ID/EN), Official CV Integrated Dataset,
+   Blogspot & Technical Article System, Interactive Admin CMS Engine,
    YouTube Embedded Video Support, Multi-Page Engine & Cold Storage Calculator
    ========================================================================== */
 
@@ -36,7 +37,6 @@ const i18n = {
 
     // Experience Items
     "exp-title": "Pengalaman Kerja",
-    
     "exp-1-role": "Direktur Utama",
     "exp-1-org": "CV. Dingin Lestari Teknik (Bandung)",
     "exp-1-date": "Juni 2025 – Sekarang",
@@ -69,7 +69,6 @@ const i18n = {
 
     // Education Items
     "edu-title": "Riwayat Pendidikan",
-    
     "edu-1-degree": "Magister Sains (M.Sc.) — Teknik Mekatronika",
     "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
     "edu-1-date": "2024 – 2025",
@@ -85,10 +84,12 @@ const i18n = {
     "edu-3-date": "2017 – 2019",
     "edu-3-desc": "Dasar kelistrikan industri, perakitan kontrol motor, dan kelistrikan otomasi.",
 
-    // Awards & Certifications
+    // Awards & Certifications & Blog
     "awards-title": "Penghargaan & Prestasi",
     "cert-title": "Sertifikasi Profesi & Lisensi",
     "skills-title": "Keahlian Teknis & Skill",
+    "blog-title": "Artikel Teknis & Blogspot",
+    "blog-sub": "Tulisan ilmiah, analisis rekayasa cold storage, serta jurnal riset robotika oleh Naufaldo, M.Sc.",
 
     // Cold Storage Calculator
     "calc-title": "Kalkulator Estimasi Cold Storage",
@@ -176,7 +177,7 @@ const i18n = {
     "proj-1-title": "Hexapod Search & Rescue Robot",
     "proj-1-cat": "Robotika & SLAM",
     "proj-1-desc": "Robot berkaki enam berfasilitas LiDAR SLAM untuk pemetaan lingkungan dan navigasi otonom medan berat.",
-    
+
     "proj-2-title": "Ice Cream Service Robot",
     "proj-2-cat": "Robotika Servis",
     "proj-2-desc": "Sistem lengan robotik otomatis untuk penyajian es krim secara presisi.",
@@ -188,14 +189,6 @@ const i18n = {
     "proj-4-title": "DCS Industrial Training System",
     "proj-4-cat": "Otomasi Industri",
     "proj-4-desc": "Modul simulasi Distributed Control System (DCS) untuk pelatihan kontrol proses industri.",
-
-    "proj-5-title": "IoT Power & Cold Storage Panel",
-    "proj-5-cat": "IoT & Kelistrikan",
-    "proj-5-desc": "Panel listrik kontrol cold storage yang dilengkapi pemantauan suhu dan arus berbasis IoT.",
-
-    "proj-6-title": "Forklift Simulator Station",
-    "proj-6-cat": "Simulator Industri",
-    "proj-6-desc": "Stasiun simulator sistem pengangkut industri untuk pengujian kendali motor presisi.",
 
     // Contact
     "contact-title": "Hubungi Saya",
@@ -246,7 +239,6 @@ const i18n = {
 
     // Experience Items
     "exp-title": "Work Experience",
-
     "exp-1-role": "Managing Director",
     "exp-1-org": "CV. Dingin Lestari Teknik (Bandung)",
     "exp-1-date": "June 2025 – Present",
@@ -279,7 +271,6 @@ const i18n = {
 
     // Education Items
     "edu-title": "Education Background",
-
     "edu-1-degree": "Master of Science (M.Sc.) — Mechatronics Engineering",
     "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
     "edu-1-date": "2024 – 2025",
@@ -295,10 +286,12 @@ const i18n = {
     "edu-3-date": "2017 – 2019",
     "edu-3-desc": "Industrial electrical fundamentals, motor control wiring, and automation systems.",
 
-    // Awards & Certifications
+    // Awards & Certifications & Blog
     "awards-title": "Awards & Honors",
     "cert-title": "Professional Certifications",
     "skills-title": "Technical Skills & Competencies",
+    "blog-title": "Technical Articles & Blogspot",
+    "blog-sub": "Scientific publications, cold storage energy engineering analysis, and robotics research notes by Naufaldo, M.Sc.",
 
     // Cold Storage Calculator
     "calc-title": "Cold Storage Sizing Calculator",
@@ -399,14 +392,6 @@ const i18n = {
     "proj-4-cat": "Industrial Automation",
     "proj-4-desc": "Distributed Control System (DCS) training rig for process control simulation.",
 
-    "proj-5-title": "IoT Power & Cold Storage Panel",
-    "proj-5-cat": "IoT & Electrical",
-    "proj-5-desc": "Industrial control panel integrated with IoT telemetry for cold room temperature monitoring.",
-
-    "proj-6-title": "Forklift Simulator Station",
-    "proj-6-cat": "Simulator Rig",
-    "proj-6-desc": "Heavy machinery control simulator for precision motor control evaluation.",
-
     // Contact
     "contact-title": "Contact Me",
     "contact-sub": "Discuss cold storage engineering, technical consulting, or robotics research collaboration",
@@ -501,7 +486,7 @@ function calculateCoolingLoad() {
   if (resHp) resHp.textContent = `${hpEstimate} HP`;
 }
 
-// --- Publications Data & Filter Search Engine ---
+// --- Publications Data Engine ---
 const publicationsData = [
   {
     title: "Robot Coordination in Multi-agent Systems: Leader-Dependent Following Configuration Control of Mecanum Wheeled Drive Robots",
@@ -634,8 +619,108 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects & Innovations Gallery Engine ---
-const projectsData = [
+// --- Blogspot Article Dataset Engine ---
+let blogPostsData = JSON.parse(localStorage.getItem("naufaldo_blog_posts")) || [
+  {
+    id: 1,
+    title: "Panduan Optimasi Efisiensi Energi pada Freezer Room & Air Blast Freezer (ABF)",
+    date: "10 Agustus 2026",
+    author: "Naufaldo, M.Sc. (Direktur CV. Dingin Lestari Teknik)",
+    category: "Cold Storage Engineering",
+    excerpt: "Analisis perhitungan beban termal, teknik isolasi polyurethane panel 150mm, pemilihan kompresor Bitzer 2-stage, dan strategi efisiensi daya listrik pada kamar beku industri.",
+    content: "Di industri pendingin makanan beku dan Cold Chain Logistics, konsumsi energi listrik merupakan komponen operasional terbesar. Untuk menekan biaya OPEX pada Freezer Room (-20°C) maupun Air Blast Freezer (-40°C), terdapat 3 parameter rekayasa utama yang harus diperhatikan:\n\n1. Pemilihan Kompresor & Evaporator Presisi: Menggunakan kompresor semi-hermetik Bitzer atau Copeland dengan pengaturan inverter/frequency drive untuk menyesuaikan siklus pendinginan saat beban puncak.\n2. Kualitas Polyurethane (PU) Panel: Ketebalan panel 150mm berkerapatan 40-42 kg/m³ menjamin insulasi termal maksimum tanpa kebocoran suhu.\n3. Defrost Management: Menggunakan sistem elektrik defrost atau hot gas defrost terprogram via controller digital untuk mencegah penumpukan es pada sirip evaporator.",
+    image: "img/New/CS_1.jpg"
+  },
+  {
+    id: 2,
+    title: "Riset Formasi Swarm Quadcopters dengan Sinusoidal Altitude Modulation (SICE FES 2025)",
+    date: "25 Juli 2026",
+    author: "Naufaldo, M.Sc.",
+    category: "Robotics & Swarm Drone",
+    excerpt: "Bagaimana algoritma flocking dinamik dan modulasi ketinggian sinusoidal memungkinkan kawanan drone terbang secara stabil dalam formasi 3D tanpa bertabrakan.",
+    content: "Penerbitan artikel riset kami pada konferensi internasional SICE FES 2025 membahas tentang pengontrolan kawanan drone (Swarm Quadcopters). Dalam riset ini, kami menggabungkan aturan Flocking Boids (seperti gerakan kawanan burung di udara) dengan modulasi ketinggian sinusoidal.\n\nSetiap unit quadcopter berkomunikasi secara nirkabel untuk mempertahankan jarak antar drone (distance keeping) sekaligus menghindari tabrakan secara real-time. Video penerbangan riset ini dapat ditonton langsung pada galeri proyek portofolio kami!",
+    image: "https://img.youtube.com/vi/JKuoD_4qvYw/hqdefault.jpg"
+  },
+  {
+    title: "Pengembangan Sistem Direct Air Capture (DAC) & Hak Cipta Paten Software MATLAB",
+    date: "15 Juni 2026",
+    author: "Naufaldo, M.Sc.",
+    category: "Green Tech & Software Patent",
+    excerpt: "Inovasi penangkapan gas CO₂ dari udara menggunakan media filter biochar dan pemrograman kendali telemetri presisi tinggi terintegrasi MATLAB.",
+    content: "Direct Air Capture (DAC) merupakan teknologi kunci dalam mengurangi jejak karbon atmosferik. Solusi yang kami kembangkan menggunakan media absorpsi berbasis biochar terbaharukan yang dikombinasikan dengan sistem kontrol otomatisasi.\n\nSoftware kendali telemetri berbasis MATLAB yang kami rancang secara khusus mampu mencatat laju penyerapan gas, mengontrol aliran udara blower, dan mengatur siklus desorpsi termal secara presisi. Program software kontrol ini telah resmi terdaftar dengan Hak Cipta Paten Resmi di Kemenkumham RI.",
+    image: "img/New/DAC_1.jpg"
+  }
+];
+
+function renderBlogPosts() {
+  const container = document.getElementById("blogContainer");
+  if (!container) return;
+
+  container.replaceChildren();
+
+  blogPostsData.forEach((post, index) => {
+    const card = document.createElement("div");
+    card.className = "glass-card blog-card";
+
+    const title = document.createElement("h3");
+    title.className = "blog-title";
+    title.textContent = post.title;
+
+    const meta = document.createElement("div");
+    meta.className = "blog-meta";
+    meta.innerHTML = `<i class="fa fa-calendar"></i> ${post.date} &bull; <i class="fa fa-folder"></i> ${post.category}`;
+
+    const excerpt = document.createElement("p");
+    excerpt.className = "blog-excerpt";
+    excerpt.textContent = post.excerpt;
+
+    const btn = document.createElement("button");
+    btn.className = "btn btn-outline btn-sm";
+    btn.innerHTML = `<i class="fa fa-file-text-o"></i> Baca Artikel Selengkapnya`;
+    btn.addEventListener("click", () => openBlogModal(index));
+
+    card.appendChild(title);
+    card.appendChild(meta);
+    card.appendChild(excerpt);
+    card.appendChild(btn);
+
+    container.appendChild(card);
+  });
+}
+
+function openBlogModal(index) {
+  const post = blogPostsData[index];
+  if (!post) return;
+
+  const modal = document.getElementById("projectModal");
+  const modalImg = document.getElementById("modalImg");
+  const modalVideo = document.getElementById("modalVideo");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalCat = document.getElementById("modalCat");
+  const modalDesc = document.getElementById("modalDesc");
+  const modalTags = document.getElementById("modalTags");
+  const modalLinkBox = document.getElementById("modalLinkBox");
+
+  const modalImgWrapper = document.querySelector(".modal-img-wrapper");
+  const prevIframe = modalImgWrapper.querySelector("iframe");
+  if (prevIframe) prevIframe.remove();
+
+  modalVideo.style.display = "none";
+  modalImg.style.display = "block";
+  modalImg.src = post.image || "img/New/CS_1.jpg";
+
+  modalTitle.textContent = post.title;
+  modalCat.textContent = `${post.category} | ${post.date}`;
+  modalDesc.innerHTML = `<div style="white-space:pre-line;">${post.content}</div><br><em>Oleh: ${post.author}</em>`;
+
+  modalTags.replaceChildren();
+  modalLinkBox.style.display = "none";
+
+  modal.classList.add("active");
+}
+
+// --- Projects Data Engine ---
+let projectsData = JSON.parse(localStorage.getItem("naufaldo_projects")) || [
   // Swarm Drone YouTube Video (SICE FES 2025)
   {
     titleKey: "proj-swarm-title",
@@ -649,8 +734,6 @@ const projectsData = [
     link: "https://doi.org/10.23919/SICEFES67750.2025.11236621",
     linkText: "SICE FES 2025 Paper"
   },
-
-  // Gazebo OpenCV Robot Following
   {
     titleKey: "proj-gazebo-follow-title",
     catKey: "proj-gazebo-follow-cat",
@@ -663,8 +746,6 @@ const projectsData = [
     link: "https://www.youtube.com/watch?v=tfDiMlBXNsY",
     linkText: "Watch on YouTube"
   },
-
-  // Gazebo OpenCV Ball Tracking
   {
     titleKey: "proj-gazebo-ball-title",
     catKey: "proj-gazebo-ball-cat",
@@ -677,8 +758,6 @@ const projectsData = [
     link: "https://www.youtube.com/watch?v=AqM-iCrh1rQ",
     linkText: "Watch on YouTube"
   },
-
-  // M.Sc. Thesis YouTube Video #1 - Lemniscate Trajectory
   {
     titleKey: "proj-lemniscate-title",
     catKey: "proj-lemniscate-cat",
@@ -691,8 +770,6 @@ const projectsData = [
     link: "https://doi.org/10.1007/s12555-026-00119-1",
     linkText: "IJCAS 2026 Paper"
   },
-
-  // M.Sc. Thesis YouTube Video #2 - Circular Trajectory
   {
     titleKey: "proj-circular-title",
     catKey: "proj-circular-cat",
@@ -705,8 +782,6 @@ const projectsData = [
     link: "https://doi.org/10.1080/02533839.2025.2503867",
     linkText: "JCIE 2025 Paper"
   },
-
-  // Cold Storage CS_1
   {
     titleKey: "proj-cs1-title",
     catKey: "proj-cs1-cat",
@@ -718,7 +793,6 @@ const projectsData = [
     link: "https://dinginlestariteknik.com/",
     linkText: "dinginlestariteknik.com"
   },
-  // CS_2
   {
     titleKey: "proj-cs2-title",
     catKey: "proj-cs2-cat",
@@ -730,7 +804,6 @@ const projectsData = [
     link: "https://dinginlestariteknik.com/",
     linkText: "dinginlestariteknik.com"
   },
-  // CS_3
   {
     titleKey: "proj-cs3-title",
     catKey: "proj-cs3-cat",
@@ -742,8 +815,6 @@ const projectsData = [
     link: "https://dinginlestariteknik.com/",
     linkText: "dinginlestariteknik.com"
   },
-
-  // DAC_1
   {
     titleKey: "proj-dac1-title",
     catKey: "proj-dac1-cat",
@@ -755,7 +826,6 @@ const projectsData = [
     link: "https://www.researchgate.net/profile/Naufaldo-2",
     linkText: "ResearchGate Details"
   },
-  // DAC_2
   {
     titleKey: "proj-dac2-title",
     catKey: "proj-dac2-cat",
@@ -767,8 +837,6 @@ const projectsData = [
     link: "https://www.researchgate.net/profile/Naufaldo-2",
     linkText: "Patent Document"
   },
-
-  // DLT ERP Software Demo
   {
     titleKey: "proj-erp-title",
     catKey: "proj-erp-cat",
@@ -779,50 +847,6 @@ const projectsData = [
     tags: ["ERP Software", "SaaS Platform", "HVAC Operations", "Field Service", "Cloud"],
     link: "https://demo.dinginlestariteknik.com/",
     linkText: "demo.dinginlestariteknik.com"
-  },
-
-  // Hexapod
-  {
-    titleKey: "proj-1-title",
-    catKey: "proj-1-cat",
-    descKey: "proj-1-desc",
-    img: "img/IMG-20230503-WA0016.jpg",
-    isVideo: false,
-    category: "swarm",
-    tags: ["ROS", "LiDAR", "SLAM", "Hexapod", "Arduino"]
-  },
-
-  // Ice Cream Robot
-  {
-    titleKey: "proj-2-title",
-    catKey: "proj-2-cat",
-    descKey: "proj-2-desc",
-    img: "img/IMG-20230503-WA0017.jpg",
-    isVideo: false,
-    category: "auto",
-    tags: ["Robotics", "Servo Control", "Automation", "PLC"]
-  },
-
-  // BAS Simulator
-  {
-    titleKey: "proj-3-title",
-    catKey: "proj-3-cat",
-    descKey: "proj-3-desc",
-    img: "img/IMG-20230503-WA0019.jpg",
-    isVideo: false,
-    category: "auto",
-    tags: ["BAS", "HVAC", "Building Automation", "SCADA"]
-  },
-
-  // DCS Training System
-  {
-    titleKey: "proj-4-title",
-    catKey: "proj-4-cat",
-    descKey: "proj-4-desc",
-    img: "img/IMG-20230503-WA0021.jpg",
-    isVideo: false,
-    category: "auto",
-    tags: ["DCS", "Process Control", "Modbus", "PLC"]
   }
 ];
 
@@ -836,9 +860,9 @@ function renderProjects(filterCategory = "all") {
 
   filtered.forEach((p) => {
     const realIndex = projectsData.indexOf(p);
-    const title = i18n[currentLang][p.titleKey] || p.titleKey;
-    const cat = i18n[currentLang][p.catKey] || p.catKey;
-    const desc = i18n[currentLang][p.descKey] || p.descKey;
+    const title = i18n[currentLang][p.titleKey] || p.titleKey || p.title;
+    const cat = i18n[currentLang][p.catKey] || p.catKey || p.category;
+    const desc = i18n[currentLang][p.descKey] || p.descKey || p.desc;
 
     const card = document.createElement("div");
     card.className = "glass-card project-card";
@@ -889,7 +913,7 @@ function renderProjects(filterCategory = "all") {
       linkAnchor.target = "_blank";
       linkAnchor.className = "badge badge-purple";
       linkAnchor.style.fontSize = "0.78rem";
-      linkAnchor.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText}`;
+      linkAnchor.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText || "Link Details"}`;
       linkAnchor.addEventListener("click", (e) => e.stopPropagation());
       linkDiv.appendChild(linkAnchor);
       card.appendChild(linkDiv);
@@ -936,20 +960,20 @@ function openProjectModal(index) {
     modalImg.src = p.img;
   }
 
-  modalTitle.textContent = i18n[currentLang][p.titleKey] || p.titleKey;
-  modalCat.textContent = i18n[currentLang][p.catKey] || p.catKey;
-  modalDesc.textContent = i18n[currentLang][p.descKey] || p.descKey;
+  modalTitle.textContent = i18n[currentLang][p.titleKey] || p.titleKey || p.title;
+  modalCat.textContent = i18n[currentLang][p.catKey] || p.catKey || p.category;
+  modalDesc.textContent = i18n[currentLang][p.descKey] || p.descKey || p.desc;
 
-  // Tags
   modalTags.replaceChildren();
-  p.tags.forEach(t => {
-    const badge = document.createElement("span");
-    badge.className = "badge";
-    badge.textContent = t;
-    modalTags.appendChild(badge);
-  });
+  if (p.tags) {
+    p.tags.forEach(t => {
+      const badge = document.createElement("span");
+      badge.className = "badge";
+      badge.textContent = t;
+      modalTags.appendChild(badge);
+    });
+  }
 
-  // Link Box
   modalLinkBox.replaceChildren();
   if (p.link) {
     modalLinkBox.style.display = "block";
@@ -957,7 +981,7 @@ function openProjectModal(index) {
     linkBtn.href = p.link;
     linkBtn.target = "_blank";
     linkBtn.className = "btn btn-primary btn-sm";
-    linkBtn.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText}`;
+    linkBtn.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText || "Details"}`;
     modalLinkBox.appendChild(linkBtn);
   } else {
     modalLinkBox.style.display = "none";
@@ -976,6 +1000,17 @@ function closeProjectModal() {
   if (modal) modal.classList.remove("active");
 }
 
+// --- Admin CMS Interactive Modal Portal Engine ---
+function openCmsModal() {
+  const modal = document.getElementById("cmsModal");
+  if (modal) modal.classList.add("active");
+}
+
+function closeCmsModal() {
+  const modal = document.getElementById("cmsModal");
+  if (modal) modal.classList.remove("active");
+}
+
 // --- Initialization & Event Binding ---
 document.addEventListener("DOMContentLoaded", () => {
   // Initialize Language
@@ -987,6 +1022,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const nextLang = currentLang === "id" ? "en" : "id";
       updateLanguage(nextLang);
       renderPublications();
+      renderBlogPosts();
       renderProjects(document.querySelector(".proj-filter-tags .filter-btn.active")?.dataset.cat || "all");
     });
   }
@@ -1022,6 +1058,9 @@ document.addEventListener("DOMContentLoaded", () => {
       renderProjects(e.currentTarget.dataset.cat);
     });
   });
+
+  // Blog Posts Render
+  renderBlogPosts();
 
   // Contact Form Submission (Redirects to WhatsApp)
   document.getElementById("contactForm")?.addEventListener("submit", (e) => {
@@ -1060,5 +1099,97 @@ document.addEventListener("DOMContentLoaded", () => {
         navbar.classList.remove("scrolled");
       }
     }
+  });
+
+  // --- Admin CMS Auth & Form Handler ---
+  const cmsLoginForm = document.getElementById("cmsLoginForm");
+  const cmsDashboard = document.getElementById("cmsDashboard");
+  const cmsLoginBox = document.getElementById("cmsLoginBox");
+
+  if (localStorage.getItem("naufaldo_cms_logged_in") === "true") {
+    if (cmsLoginBox) cmsLoginBox.style.display = "none";
+    if (cmsDashboard) cmsDashboard.style.display = "block";
+  }
+
+  cmsLoginForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const user = document.getElementById("cmsUser").value;
+    const pass = document.getElementById("cmsPass").value;
+
+    if (user === "naufaldo" && pass === "admin123") {
+      localStorage.setItem("naufaldo_cms_logged_in", "true");
+      cmsLoginBox.style.display = "none";
+      cmsDashboard.style.display = "block";
+      alert("Login Admin CMS Berhasil! Selamat datang Naufaldo, M.Sc.");
+    } else {
+      alert("Username atau Password Admin CMS salah!");
+    }
+  });
+
+  // CMS Tab Switching
+  document.querySelectorAll(".cms-tab-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      document.querySelectorAll(".cms-tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".cms-tab-content").forEach(c => c.style.display = "none");
+      e.currentTarget.classList.add("active");
+      const targetId = e.currentTarget.dataset.target;
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) targetEl.style.display = "block";
+    });
+  });
+
+  // CMS Add Project Form
+  document.getElementById("cmsAddProjForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = document.getElementById("cmsProjTitle").value;
+    const cat = document.getElementById("cmsProjCat").value;
+    const desc = document.getElementById("cmsProjDesc").value;
+    const img = document.getElementById("cmsProjImg").value;
+    const yt = document.getElementById("cmsProjYt").value;
+
+    const newProj = {
+      title: title,
+      titleKey: title,
+      catKey: cat,
+      descKey: desc,
+      category: cat === "cs" ? "cs" : cat === "dac" ? "dac" : "swarm",
+      img: yt ? `https://img.youtube.com/vi/${yt}/hqdefault.jpg` : (img || "img/New/CS_1.jpg"),
+      youtubeId: yt || null,
+      isVideo: !!yt,
+      tags: ["Admin CMS Upload", cat.toUpperCase()]
+    };
+
+    projectsData.unshift(newProj);
+    localStorage.setItem("naufaldo_projects", JSON.stringify(projectsData));
+    renderProjects();
+    alert("Proyek baru berhasil diterbitkan di galeri portofolio!");
+    e.target.reset();
+  });
+
+  // CMS Add Blog Post Form
+  document.getElementById("cmsAddBlogForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = document.getElementById("cmsBlogTitle").value;
+    const cat = document.getElementById("cmsBlogCat").value;
+    const excerpt = document.getElementById("cmsBlogExcerpt").value;
+    const content = document.getElementById("cmsBlogContent").value;
+    const img = document.getElementById("cmsBlogImg").value;
+
+    const newPost = {
+      id: Date.now(),
+      title: title,
+      date: new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }),
+      author: "Naufaldo, M.Sc.",
+      category: cat,
+      excerpt: excerpt,
+      content: content,
+      image: img || "img/New/CS_1.jpg"
+    };
+
+    blogPostsData.unshift(newPost);
+    localStorage.setItem("naufaldo_blog_posts", JSON.stringify(blogPostsData));
+    renderBlogPosts();
+    alert("Artikel Blogspot baru berhasil diterbitkan!");
+    e.target.reset();
   });
 });
