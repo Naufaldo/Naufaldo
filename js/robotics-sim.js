@@ -603,124 +603,437 @@ class LiDARSLAMSimulation {
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext("2d");
     resizeCanvasToWrapper(this.canvas);
-    this.width=this.canvas.width; this.height=this.canvas.height;
-    this.robot={x:this.width*0.3,y:this.height*0.5,angle:0};
-    this.obstacles=[
-      {x:this.width*0.5,y:this.height*0.3,w:100,h:20},
-      {x:this.width*0.5,y:this.height*0.7,w:20,h:100},
-      {x:this.width*0.7,y:this.height*0.5,w:60,h:60}
-    ];
-    this.rays=36; this.scanData=[];
-    this.ctrlMode="mouse";
-    this.linearSpeed=2.5; this.rotSpeed=0.04;
-    this.keys={w:false,s:false,a:false,d:false,q:false,e:false};
-    this.bindEvents(); this.loop();
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+
+    // Polar Radar Canvas for Robot Point-of-View
+    this.polarCanvas = document.getElementById("canvasLidarPolar");
+    this.polarCtx = this.polarCanvas ? this.polarCanvas.getContext("2d") : null;
+
+    // Robot state (chassis heading distinct from spinning LiDAR sensor)
+    this.robot = {
+      x: this.width * 0.22,
+      y: this.height * 0.50,
+      heading: 0,       // Orientation of robot body (chassis)
+      radius: 12
+    };
+
+    this.targetMouse = { x: this.robot.x, y: this.robot.y };
+    this.lidarSpinAngle = 0; // Spinning laser turret angle
+    this.rays = 72;          // High-resolution 360 LiDAR rays
+    this.maxRange = 240;     // Max scan range in pixels
+    this.scanData = [];
+    this.ctrlMode = "mouse";
+    this.linearSpeed = 2.2;
+    this.rotSpeed = 0.045;
+    this.keys = { w: false, s: false, a: false, d: false, q: false, e: false };
+
+    this.initRoomObstacles();
+    this.bindEvents();
+    this.loop();
   }
 
-  resize() { resizeCanvasToWrapper(this.canvas); this.width=this.canvas.width; this.height=this.canvas.height; }
+  resize() {
+    resizeCanvasToWrapper(this.canvas);
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    this.initRoomObstacles();
+  }
 
-  setMode(mode) { this.ctrlMode=mode; this.keys={w:false,s:false,a:false,d:false,q:false,e:false}; }
+  initRoomObstacles() {
+    const w = this.width, h = this.height;
+    // Realistic Indoor Room Floorplan: Outer Walls, Partitions, Doors, Pillars, Desks
+    this.obstacles = [
+      // Outer boundary walls (thickness 8px)
+      { x: 8, y: 8, w: w - 16, h: 8 },                 // Top wall
+      { x: 8, y: h - 16, w: w - 16, h: 8 },             // Bottom wall
+      { x: 8, y: 8, w: 8, h: h - 16 },                 // Left wall
+      { x: w - 16, y: 8, w: 8, h: h - 16 },             // Right wall
+
+      // Room 1 Partition (Control Room - Left) with doorway opening
+      { x: w * 0.34, y: 8, w: 8, h: h * 0.38 },         // Top partition
+      { x: w * 0.34, y: h * 0.58, w: 8, h: h * 0.40 },  // Bottom partition (Doorway in between)
+
+      // Room 2 Partition (Lab / Office - Right) with doorway
+      { x: w * 0.68, y: 8, w: 8, h: h * 0.48 },         // Divider
+      { x: w * 0.68, y: h * 0.68, w: w * 0.30, h: 8 },  // Horizontal divider
+
+      // Concrete Columns / Structural Pillars
+      { x: w * 0.18, y: h * 0.72, w: 20, h: 20 },
+      { x: w * 0.52, y: h * 0.28, w: 20, h: 20 },
+
+      // Equipment Desks / Server Racks
+      { x: w * 0.80, y: h * 0.25, w: 38, h: 22 },
+      { x: w * 0.12, y: h * 0.25, w: 30, h: 30 }
+    ];
+
+    // Room Label Coordinates for blueprint aesthetic
+    this.roomLabels = [
+      { name: "OFFICE LAB 1", x: w * 0.16, y: h * 0.18 },
+      { name: "CENTRAL CORRIDOR", x: w * 0.51, y: h * 0.54 },
+      { name: "RESEARCH ROOM 2", x: w * 0.82, y: h * 0.16 },
+      { name: "STORAGE BAY", x: w * 0.82, y: h * 0.84 }
+    ];
+  }
+
+  setMode(mode) {
+    this.ctrlMode = mode;
+    this.keys = { w: false, s: false, a: false, d: false, q: false, e: false };
+    this.targetMouse.x = this.robot.x;
+    this.targetMouse.y = this.robot.y;
+  }
 
   bindEvents() {
-    this.canvas.addEventListener("mousemove",(e)=>{
-      if(this.ctrlMode!=="mouse") return;
-      const rect=this.canvas.getBoundingClientRect();
-      this.robot.x=e.clientX-rect.left; this.robot.y=e.clientY-rect.top;
+    this.canvas.addEventListener("mousemove", (e) => {
+      if (this.ctrlMode !== "mouse") return;
+      const rect = this.canvas.getBoundingClientRect();
+      this.targetMouse.x = e.clientX - rect.left;
+      this.targetMouse.y = e.clientY - rect.top;
     });
-    document.addEventListener("keydown",(e)=>{
-      if(this.ctrlMode!=="wasd") return;
-      const k=e.key.toLowerCase();
-      if(["w","a","s","d","q","e"].includes(k)){this.keys[k]=true; e.preventDefault();}
-      if(e.key==="ArrowUp"){this.keys.w=true;e.preventDefault();}
-      if(e.key==="ArrowDown"){this.keys.s=true;e.preventDefault();}
-      if(e.key==="ArrowLeft"){this.keys.a=true;e.preventDefault();}
-      if(e.key==="ArrowRight"){this.keys.d=true;e.preventDefault();}
+
+    document.addEventListener("keydown", (e) => {
+      if (this.ctrlMode !== "wasd") return;
+      const k = e.key.toLowerCase();
+      if (["w", "a", "s", "d", "q", "e"].includes(k)) { this.keys[k] = true; e.preventDefault(); }
+      if (e.key === "ArrowUp") { this.keys.w = true; e.preventDefault(); }
+      if (e.key === "ArrowDown") { this.keys.s = true; e.preventDefault(); }
+      if (e.key === "ArrowLeft") { this.keys.a = true; e.preventDefault(); }
+      if (e.key === "ArrowRight") { this.keys.d = true; e.preventDefault(); }
     });
-    document.addEventListener("keyup",(e)=>{
-      const k=e.key.toLowerCase();
-      if(["w","a","s","d","q","e"].includes(k)) this.keys[k]=false;
-      if(e.key==="ArrowUp") this.keys.w=false; if(e.key==="ArrowDown") this.keys.s=false;
-      if(e.key==="ArrowLeft") this.keys.a=false; if(e.key==="ArrowRight") this.keys.d=false;
+
+    document.addEventListener("keyup", (e) => {
+      const k = e.key.toLowerCase();
+      if (["w", "a", "s", "d", "q", "e"].includes(k)) this.keys[k] = false;
+      if (e.key === "ArrowUp") this.keys.w = false;
+      if (e.key === "ArrowDown") this.keys.s = false;
+      if (e.key === "ArrowLeft") this.keys.a = false;
+      if (e.key === "ArrowRight") this.keys.d = false;
     });
   }
 
-  moveForward(dir) {
-    const nx=this.robot.x+Math.cos(this.robot.angle)*this.linearSpeed*dir;
-    const ny=this.robot.y+Math.sin(this.robot.angle)*this.linearSpeed*dir;
-    if(nx>10&&nx<this.width-10) this.robot.x=nx;
-    if(ny>10&&ny<this.height-10) this.robot.y=ny;
+  checkWallCollision(x, y, radius) {
+    for (let i = 0; i < this.obstacles.length; i++) {
+      const obs = this.obstacles[i];
+      const closestX = Math.max(obs.x, Math.min(x, obs.x + obs.w));
+      const closestY = Math.max(obs.y, Math.min(y, obs.y + obs.h));
+      const dist = Math.hypot(x - closestX, y - closestY);
+      if (dist < radius) return true;
+    }
+    return false;
+  }
+
+  moveForward(dir, speed = this.linearSpeed) {
+    const nx = this.robot.x + Math.cos(this.robot.heading) * speed * dir;
+    const ny = this.robot.y + Math.sin(this.robot.heading) * speed * dir;
+    if (!this.checkWallCollision(nx, ny, this.robot.radius + 2)) {
+      this.robot.x = nx;
+      this.robot.y = ny;
+    }
   }
 
   update() {
-    if(this.ctrlMode==="mouse"){
-      this.robot.angle+=0.02;
-    } else if(this.ctrlMode==="wasd"){
-      if(this.keys.w) this.moveForward(1);
-      if(this.keys.s) this.moveForward(-1);
-      if(this.keys.a||this.keys.q) this.robot.angle-=this.rotSpeed*1.5;
-      if(this.keys.d||this.keys.e) this.robot.angle+=this.rotSpeed*1.5;
-      this.robot.angle+=0.012;
-    } else if(this.ctrlMode==="auto"){
-      // Compute front rays first (from previous scanData)
-      const getFrontDist=()=>{
-        const front=this.scanData.filter(r=>{let d=r.angle-this.robot.angle;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;return Math.abs(d)<0.45;});
-        return front.length>0?Math.min(...front.map(r=>r.dist)):200;
+    // 1. Update spinning LiDAR turret (continuous 360 scan)
+    this.lidarSpinAngle = (this.lidarSpinAngle + 0.16) % (Math.PI * 2);
+
+    // 2. Robot body movement according to control mode (ROBOT DOES NOT SPIN UNLESS STEERED)
+    if (this.ctrlMode === "mouse") {
+      const dx = this.targetMouse.x - this.robot.x;
+      const dy = this.targetMouse.y - this.robot.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist > 8) {
+        const targetHeading = Math.atan2(dy, dx);
+        let hDiff = targetHeading - this.robot.heading;
+        while (hDiff > Math.PI) hDiff -= 2 * Math.PI;
+        while (hDiff < -Math.PI) hDiff += 2 * Math.PI;
+        this.robot.heading += hDiff * 0.12; // Smooth rotation to face movement direction
+        this.moveForward(1, Math.min(dist * 0.08, 2.4));
+      }
+    } else if (this.ctrlMode === "wasd") {
+      if (this.keys.w) this.moveForward(1, 2.2);
+      if (this.keys.s) this.moveForward(-1, 1.6);
+      if (this.keys.a || this.keys.q) this.robot.heading -= this.rotSpeed;
+      if (this.keys.d || this.keys.e) this.robot.heading += this.rotSpeed;
+    } else if (this.ctrlMode === "auto") {
+      // Reactive Navigation: analyze front, left, and right LiDAR clearance
+      const getSectorMin = (minAngle, maxAngle) => {
+        const matching = this.scanData.filter(r => {
+          let diff = r.angle - this.robot.heading;
+          while (diff > Math.PI) diff -= 2 * Math.PI;
+          while (diff < -Math.PI) diff += 2 * Math.PI;
+          return diff >= minAngle && diff <= maxAngle;
+        });
+        return matching.length > 0 ? Math.min(...matching.map(r => r.dist)) : this.maxRange;
       };
-      const frontD=getFrontDist();
-      if(frontD<70){
-        // Check which side is clearer
-        const leftD=this.scanData.filter(r=>{let d=r.angle-(this.robot.angle-Math.PI/2);while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;return Math.abs(d)<0.5;});
-        const rightD=this.scanData.filter(r=>{let d=r.angle-(this.robot.angle+Math.PI/2);while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;return Math.abs(d)<0.5;});
-        const lDist=leftD.length>0?Math.min(...leftD.map(r=>r.dist)):200;
-        const rDist=rightD.length>0?Math.min(...rightD.map(r=>r.dist)):200;
-        this.robot.angle+=lDist>rDist?-this.rotSpeed*2.2:this.rotSpeed*2.2;
+
+      const frontDist = getSectorMin(-0.45, 0.45);
+      const leftDist  = getSectorMin(-1.40, -0.45);
+      const rightDist = getSectorMin(0.45, 1.40);
+
+      if (frontDist < 65) {
+        // Steer away toward side with maximum clearance
+        const steerDir = leftDist > rightDist ? -this.rotSpeed * 1.5 : this.rotSpeed * 1.5;
+        this.robot.heading += steerDir;
+        if (frontDist > 30) this.moveForward(1, 0.8);
       } else {
-        this.moveForward(1); this.robot.angle+=0.012;
+        this.moveForward(1, 1.8);
       }
     }
 
-    // LiDAR ray casting
-    this.scanData=[];
-    for(let i=0;i<this.rays;i++){
-      const angle=this.robot.angle+(i*(Math.PI*2/this.rays));
-      let rayDist=200;
-      for(let d=0;d<200;d+=4){
-        const rx=this.robot.x+Math.cos(angle)*d, ry=this.robot.y+Math.sin(angle)*d;
-        if(rx<0||rx>this.width||ry<0||ry>this.height){rayDist=d;break;}
-        if(this.obstacles.some(o=>rx>=o.x&&rx<=o.x+o.w&&ry>=o.y&&ry<=o.y+o.h)){rayDist=d;break;}
+    // Keep heading normalized [-PI, PI]
+    while (this.robot.heading > Math.PI) this.robot.heading -= 2 * Math.PI;
+    while (this.robot.heading < -Math.PI) this.robot.heading += 2 * Math.PI;
+
+    // 3. 360-Degree LiDAR Ray Casting against all room walls and obstacles
+    this.scanData = [];
+    for (let i = 0; i < this.rays; i++) {
+      const rayAngle = (i * (Math.PI * 2 / this.rays));
+      let rayDist = this.maxRange;
+
+      // Fast ray marching
+      for (let d = 4; d <= this.maxRange; d += 3.5) {
+        const rx = this.robot.x + Math.cos(rayAngle) * d;
+        const ry = this.robot.y + Math.sin(rayAngle) * d;
+
+        let hit = false;
+        for (let j = 0; j < this.obstacles.length; j++) {
+          const obs = this.obstacles[j];
+          if (rx >= obs.x && rx <= obs.x + obs.w && ry >= obs.y && ry <= obs.y + obs.h) {
+            hit = true;
+            break;
+          }
+        }
+        if (hit) {
+          rayDist = d;
+          break;
+        }
       }
-      this.scanData.push({angle,dist:rayDist});
+
+      // Compute angle relative to robot body heading (for on-board robot view)
+      let relAngle = rayAngle - this.robot.heading;
+      while (relAngle > Math.PI) relAngle -= 2 * Math.PI;
+      while (relAngle < -Math.PI) relAngle += 2 * Math.PI;
+
+      this.scanData.push({
+        angle: rayAngle,
+        dist: rayDist,
+        relAngle: relAngle
+      });
     }
 
-    // HUD update
-    const hudX=document.getElementById("lidarX"), hudY=document.getElementById("lidarY");
-    const hudH=document.getElementById("lidarHeading"), hudM=document.getElementById("lidarMode");
-    if(hudX) hudX.textContent=Math.round(this.robot.x);
-    if(hudY) hudY.textContent=Math.round(this.robot.y);
-    if(hudH) hudH.textContent=`${(((this.robot.angle*180/Math.PI)%360+360)%360).toFixed(0)}°`;
-    if(hudM) hudM.textContent=this.ctrlMode.toUpperCase();
+    // 4. Update HUD and Sensor Metrics
+    this.updateHUDAndMetrics();
+  }
+
+  updateHUDAndMetrics() {
+    const hudX = document.getElementById("lidarX"), hudY = document.getElementById("lidarY");
+    const hudH = document.getElementById("lidarHeading"), hudM = document.getElementById("lidarMode");
+    if (hudX) hudX.textContent = Math.round(this.robot.x);
+    if (hudY) hudY.textContent = Math.round(this.robot.y);
+    if (hudH) hudH.textContent = `${(((this.robot.heading * 180 / Math.PI) % 360 + 360) % 360).toFixed(0)}°`;
+    if (hudM) hudM.textContent = this.ctrlMode.toUpperCase();
+
+    // Helper for relative sector distance in meters (1 px = 0.02m scale)
+    const getRelAvg = (minA, maxA) => {
+      const subset = this.scanData.filter(r => r.relAngle >= minA && r.relAngle <= maxA);
+      if (subset.length === 0) return "--";
+      const avg = subset.reduce((acc, r) => acc + r.dist, 0) / subset.length;
+      return (avg * 0.02).toFixed(2) + " m";
+    };
+
+    const dF = document.getElementById("lidarDistF");
+    const dL = document.getElementById("lidarDistL");
+    const dR = document.getElementById("lidarDistR");
+    const dB = document.getElementById("lidarDistB");
+
+    if (dF) dF.textContent = getRelAvg(-0.35, 0.35);
+    if (dL) dL.textContent = getRelAvg(-1.85, -1.25);
+    if (dR) dR.textContent = getRelAvg(1.25, 1.85);
+    if (dB) dB.textContent = getRelAvg(2.70, 3.14) || getRelAvg(-3.14, -2.70);
   }
 
   draw() {
-    const ctx=this.ctx;
-    ctx.clearRect(0,0,this.width,this.height);
-    ctx.fillStyle="#475569"; this.obstacles.forEach(o=>ctx.fillRect(o.x,o.y,o.w,o.h));
-    this.scanData.forEach(ray=>{
-      const hx=this.robot.x+Math.cos(ray.angle)*ray.dist, hy=this.robot.y+Math.sin(ray.angle)*ray.dist;
-      ctx.strokeStyle="rgba(0,242,254,0.15)"; ctx.lineWidth=1;
-      ctx.beginPath(); ctx.moveTo(this.robot.x,this.robot.y); ctx.lineTo(hx,hy); ctx.stroke();
-      ctx.fillStyle="#00f2fe"; ctx.beginPath(); ctx.arc(hx,hy,2.5,0,Math.PI*2); ctx.fill();
+    // 1. Draw World Room Canvas
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    // Blueprint grid background
+    ctx.strokeStyle = "rgba(0, 242, 254, 0.04)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < this.width; x += 30) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.height); ctx.stroke();
+    }
+    for (let y = 0; y < this.height; y += 30) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.width, y); ctx.stroke();
+    }
+
+    // Room Blueprint Labels
+    ctx.fillStyle = "rgba(0, 242, 254, 0.15)";
+    ctx.font = "bold 9px monospace";
+    this.roomLabels.forEach(lbl => ctx.fillText(lbl.name, lbl.x, lbl.y));
+
+    // Draw Room Walls and Furniture
+    this.obstacles.forEach(o => {
+      ctx.fillStyle = "#1e293b";
+      ctx.fillRect(o.x, o.y, o.w, o.h);
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 1.2;
+      ctx.strokeRect(o.x, o.y, o.w, o.h);
     });
-    ctx.save(); ctx.translate(this.robot.x,this.robot.y); ctx.rotate(this.robot.angle);
-    ctx.fillStyle="#f59e0b"; ctx.beginPath(); ctx.arc(0,0,10,0,Math.PI*2); ctx.fill();
-    ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(16,0); ctx.stroke();
+
+    // Draw 360 LiDAR Laser Rays (Cyan / Emerald beam lines)
+    this.scanData.forEach(ray => {
+      const hx = this.robot.x + Math.cos(ray.angle) * ray.dist;
+      const hy = this.robot.y + Math.sin(ray.angle) * ray.dist;
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.12)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(this.robot.x, this.robot.y);
+      ctx.lineTo(hx, hy);
+      ctx.stroke();
+
+      // Return point hit on wall
+      ctx.fillStyle = "#00f2fe";
+      ctx.beginPath();
+      ctx.arc(hx, hy, 2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Draw Robot Body (TurtleBot Chassis) facing this.robot.heading
+    ctx.save();
+    ctx.translate(this.robot.x, this.robot.y);
+    ctx.rotate(this.robot.heading);
+
+    // Left and Right Drive Wheels
+    ctx.fillStyle = "#0f172a";
+    ctx.fillRect(-6, -this.robot.radius - 3, 12, 4);
+    ctx.fillRect(-6, this.robot.radius - 1, 12, 4);
+
+    // Robot Main Chassis Circle
+    ctx.fillStyle = "#1e293b";
+    ctx.beginPath();
+    ctx.arc(0, 0, this.robot.radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Front Direction Pointer Arrow (Chassis Heading)
+    ctx.fillStyle = "#00f2fe";
+    ctx.beginPath();
+    ctx.moveTo(this.robot.radius + 3, 0);
+    ctx.lineTo(this.robot.radius - 5, -4);
+    ctx.lineTo(this.robot.radius - 5, 4);
+    ctx.closePath();
+    ctx.fill();
+
+    // Spinning LiDAR Turret Dome on top of robot (Spins 360 without spinning robot body!)
+    ctx.rotate(this.lidarSpinAngle - this.robot.heading);
+    ctx.fillStyle = "#090d16";
+    ctx.beginPath();
+    ctx.arc(0, 0, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#f59e0b";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Laser Emitter Diode (Spinning beam indicator)
+    ctx.fillStyle = "#ef4444";
+    ctx.beginPath();
+    ctx.arc(4, 0, 2, 0, Math.PI * 2);
+    ctx.fill();
+
     ctx.restore();
-    ctx.fillStyle="rgba(255,255,255,0.35)"; ctx.font="11px monospace";
-    ctx.fillText(`LiDAR SLAM | ${this.ctrlMode.toUpperCase()}${this.ctrlMode==="wasd"?" | W/S=Fwd/Back A/D=Turn":this.ctrlMode==="auto"?" | Reactive Auto-Nav Active":""}`, 8, 18);
+
+    // 2. Draw Onboard LiDAR Polar Radar Scope Preview (Robot Point of View)
+    this.drawPolarScope();
   }
 
-  loop() { this.update(); this.draw(); requestAnimationFrame(()=>this.loop()); }
+  drawPolarScope() {
+    if (!this.polarCtx || !this.polarCanvas) return;
+    const pctx = this.polarCtx;
+    const cw = this.polarCanvas.width, ch = this.polarCanvas.height;
+    const cx = cw / 2, cy = ch / 2, maxR = cx - 12;
+
+    pctx.clearRect(0, 0, cw, ch);
+
+    // Polar Grid Background Rings
+    pctx.lineWidth = 1;
+    [0.25, 0.50, 0.75, 1.0].forEach((ratio, idx) => {
+      const r = maxR * ratio;
+      pctx.strokeStyle = "rgba(0, 242, 254, 0.18)";
+      pctx.beginPath();
+      pctx.arc(cx, cy, r, 0, Math.PI * 2);
+      pctx.stroke();
+
+      pctx.fillStyle = "rgba(0, 242, 254, 0.4)";
+      pctx.font = "8px monospace";
+      pctx.fillText(`${(ratio * 4.8).toFixed(1)}m`, cx + 3, cy - r + 9);
+    });
+
+    // Azimuth Crosshair Axes
+    pctx.strokeStyle = "rgba(0, 242, 254, 0.25)";
+    pctx.beginPath();
+    pctx.moveTo(cx, 8); pctx.lineTo(cx, ch - 8);
+    pctx.moveTo(8, cy); pctx.lineTo(cw - 8, cy);
+    pctx.stroke();
+
+    // Azimuth Direction Labels (FWD, LEFT, RIGHT, BACK relative to Robot Chassis)
+    pctx.fillStyle = "#00f2fe";
+    pctx.font = "bold 8px monospace";
+    pctx.fillText("FWD", cx - 7, 10);
+    pctx.fillText("BACK", cx - 10, ch - 2);
+    pctx.fillText("L", 2, cy + 3);
+    pctx.fillText("R", cw - 8, cy + 3);
+
+    // Sweeping Radar Beam (Angle in Polar relative frame)
+    const sweepRelAngle = this.lidarSpinAngle - this.robot.heading;
+    pctx.save();
+    pctx.translate(cx, cy);
+    pctx.rotate(sweepRelAngle - Math.PI / 2);
+    const grad = pctx.createRadialGradient(0, 0, 0, 0, 0, maxR);
+    grad.addColorStop(0, "rgba(0, 242, 254, 0.35)");
+    grad.addColorStop(1, "rgba(0, 242, 254, 0.0)");
+    pctx.fillStyle = grad;
+    pctx.beginPath();
+    pctx.moveTo(0, 0);
+    pctx.arc(0, 0, maxR, -0.2, 0.2);
+    pctx.closePath();
+    pctx.fill();
+    pctx.restore();
+
+    // Plot Point Cloud Returns in Polar Coordinates relative to Robot Front
+    this.scanData.forEach(ray => {
+      const r = (ray.dist / this.maxRange) * maxR;
+      // relAngle: 0 = FWD (Up in canvas: y-axis negative)
+      const px = cx + r * Math.sin(ray.relAngle);
+      const py = cy - r * Math.cos(ray.relAngle);
+
+      pctx.fillStyle = ray.dist < 80 ? "#ef4444" : "#10b981";
+      pctx.beginPath();
+      pctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      pctx.fill();
+    });
+
+    // Center Robot Icon in Scope
+    pctx.fillStyle = "#f59e0b";
+    pctx.beginPath();
+    pctx.arc(cx, cy, 4, 0, Math.PI * 2);
+    pctx.fill();
+    pctx.strokeStyle = "#fff";
+    pctx.lineWidth = 1.5;
+    pctx.beginPath();
+    pctx.moveTo(cx, cy);
+    pctx.lineTo(cx, cy - 8);
+    pctx.stroke();
+  }
+
+  loop() {
+    this.update();
+    this.draw();
+    requestAnimationFrame(() => this.loop());
+  }
 }
+
 
 // ============================================================
 // INITIALIZATION — Wire all controls on DOMContentLoaded

@@ -6,6 +6,17 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.10] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(lidar-slam)`**: Peningkatan arsitektur simulasi LiDAR SLAM (Modul 7) di `robotics-sim.html` & `js/robotics-sim.js`:
+  - **Denah Ruangan Realistis (Indoor Multi-Room Layout)**: Menggantikan balok sederhana dengan denah arsitektural indoor lengkap (dinding perimeter, sekat ruangan Lab/Office/Storage, pintu koridor, pilar struktural, dan meja peralatan) dengan estetika blueprint.
+  - **Onboard LiDAR Polar Radar Scope Preview**: Menambahkan kanvas radar polar 360° yang merepresentasikan sudut pandang sensor robot (*robot's point-of-view*), lengkap dengan cincin jarak $(0.5\text{m} - 2.0\text{m})$, sumbu azimuth, berkas sapuan radar berputar, dan telemetri jarak real-time (Depan, Kiri, Kanan, Belakang).
+  - **Pemisahan Orientasi Bodi Robot vs Putaran Sensor LiDAR**: Bodi robot (*chassis heading*) kini stabil dan hanya berputar saat dikemudikan (WASD / Mouse / Auto-Nav), sementara kepala sensor laser LiDAR di atas robot berputar mandiri 360° berkecepatan tinggi.
+- **`css/style.css`**: Menambahkan layout responsif `.lidar-sim-grid` untuk adaptasi layar mobile dan desktop.
+
+---
+
 ## [v2026.08.12.9] — 2026-08-12
 
 ### Added / Ditambahkan

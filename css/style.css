@@ -1086,4 +1086,11 @@ input[type="range"] {
   background: rgba(255, 255, 255, 0.02);
 }
 
+@media (max-width: 820px) {
+  .lidar-sim-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
 
