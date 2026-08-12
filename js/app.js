@@ -28,11 +28,42 @@ const i18n = {
     "stat-pub": "Publikasi Ilmiah",
     "stat-proj": "Proyek Rekayasa",
 
-    // About (Clean HTML Markup)
-    "about-title": "Profil & Lisensi Sertifikasi",
-    "about-sub": "Menggabungkan kompetensi asesor teknik pendingin resmi, rekayasa cold storage industri, dan riset robotika",
+    // About
+    "about-title": "Profil, Pengalaman & Keahlian",
+    "about-sub": "Rekam jejak profesional sebagai insinyur cold storage, asesor kompetensi resmi, dan peneliti robotika",
     "about-text-1": "Saya adalah seorang insinyur mekatronika, otomatisasi, dan <strong>Asesor Kompetensi Resmi PT. LSP TPTU (No. Reg. MET.000.002933 2026)</strong> dengan <strong>Sertifikasi Teknis Teknik Refrigerasi F-Gas Tingkat 4</strong>. Saat ini saya memimpin <strong>CV. Dingin Lestari Teknik</strong> di Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF). Saya juga mengembangkan platform digital ERP khusus industri pendingin di <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
     "about-text-2": "Di bidang akademik & inovasi, saya meraih gelar M.Sc. Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Saya memegang <strong>Hak Cipta Paten Program MATLAB</strong> untuk kontrol sistem Direct Air Capture (DAC) penangkap CO₂ udara, serta meriset kendali formasi robot multi-agent dan swarm drone (SICE FES 2025).",
+
+    // Experience & Education & Awards
+    "exp-title": "Pengalaman Kerja",
+    "exp-1-role": "Direktur Utama",
+    "exp-1-org": "CV. Dingin Lestari Teknik (Bandung)",
+    "exp-1-date": "2023 - Sekarang",
+    "exp-1-desc": "Memimpin perancangan termodinamika, perakitan panel listrik 3-phase, kompresor Bitzer/Copeland, dan pengembangan platform DLT ERP.",
+
+    "exp-2-role": "Asesor Kompetensi Resmi",
+    "exp-2-org": "PT. LSP TPTU (Lembaga Sertifikasi Profesi)",
+    "exp-2-date": "2026 - Sekarang",
+    "exp-2-desc": "Penguji dan asesor lisensi kompetensi profesi insinyur teknik pendingin dan tata udara (Reg. MET.000.002933 2026).",
+
+    "exp-3-role": "Peneliti Robotika & Asisten Riset",
+    "exp-3-org": "NTUT Taiwan — Lab Mekatronika",
+    "exp-3-date": "2024 - 2025",
+    "exp-3-desc": "Meriset kendali formasi multi-agent, swarm quadcopters (SICE FES 2025), APF obstacle avoidance, & LiDAR SLAM navigation.",
+
+    "edu-title": "Riwayat Pendidikan",
+    "edu-1-degree": "Magister Teknik (M.Sc.) — Mechatronics Engineering",
+    "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
+    "edu-1-date": "2024 - 2025",
+    "edu-1-desc": "Fokus riset: Multi-Agent Systems, Leader-Follower Formation Control, Swarm Quadcopters, & APF Avoidance.",
+
+    "edu-2-degree": "Sarjana Terapan Teknik (S.Tr.T) — Otomasi Bangunan",
+    "edu-2-school": "Politeknik Manufaktur Bandung (POLMAN)",
+    "edu-2-date": "2019 - 2023",
+    "edu-2-desc": "Fokus: Otomasi Industri, PLC/SCADA, Sistem BAS, Mikroprosesor, & Control Systems.",
+
+    "awards-title": "Penghargaan, Lisensi & Paten",
+    "skills-title": "Keahlian Teknis & Skill",
 
     // Cold Storage Calculator
     "calc-title": "Kalkulator Estimasi Cold Storage",
@@ -143,7 +174,7 @@ const i18n = {
 
     // Contact
     "contact-title": "Hubungi Saya",
-    "contact-sub": "Diskusi proyek cold storage, konsultasi teknis, atau kolaborasi riset robotika",
+    "contact-sub": "Diskusi proyek cold storage, sertifikasi & sertifikasi kompetensi, atau kolaborasi riset robotika",
     "contact-loc-title": "Lokasi Utama",
     "contact-loc-desc": "Bandung, Jawa Barat, Indonesia",
     "contact-email-title": "Email Rekayasa",
@@ -183,10 +214,41 @@ const i18n = {
     "stat-proj": "Engineering Projects",
 
     // About
-    "about-title": "Profile & Certified Licenses",
-    "about-sub": "Combining official refrigeration competency assessor credentials, industrial cold storage engineering, and robotics research",
+    "about-title": "Profile, Experience & Expertise",
+    "about-sub": "Professional track record as cold storage engineer, official competency assessor, and robotics researcher",
     "about-text-1": "I am a Mechatronics and Automation Engineer, and an <strong>Official Competency Assessor at PT. LSP TPTU (Reg. No. MET.000.002933 2026)</strong> holding <strong>F-Gas Level 4 Technical Refrigeration Certification</strong>. I currently serve as Director of <strong>CV. Dingin Lestari Teknik</strong> in Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), leading refrigeration design and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF). I also developed an industrial ERP platform live at <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
     "about-text-2": "In academia & innovation, I earned my M.Sc. in Mechatronics Engineering from National Taipei University of Technology (NTUT), Taiwan. I hold a <strong>Registered Software Patent for MATLAB Control Logic</strong> in Direct Air Capture (DAC) CO₂ systems, and conduct research on multi-agent formation control and swarm quadcopters (SICE FES 2025).",
+
+    // Experience & Education & Awards
+    "exp-title": "Work Experience",
+    "exp-1-role": "Managing Director",
+    "exp-1-org": "CV. Dingin Lestari Teknik (Bandung)",
+    "exp-1-date": "2023 - Present",
+    "exp-1-desc": "Directing thermodynamic engineering, 3-phase electrical panel fabrication, Bitzer/Copeland compressor sizing, and DLT ERP SaaS platform development.",
+
+    "exp-2-role": "Official Competency Assessor",
+    "exp-2-org": "PT. LSP TPTU (Professional Certification Body)",
+    "exp-2-date": "2026 - Present",
+    "exp-2-desc": "Official examiner and competency assessor for HVAC and industrial refrigeration engineering certifications (Reg. MET.000.002933 2026).",
+
+    "exp-3-role": "Robotics Researcher & Research Assistant",
+    "exp-3-org": "NTUT Taiwan — Mechatronics Lab",
+    "exp-3-date": "2024 - 2025",
+    "exp-3-desc": "Researching multi-agent formation control, swarm quadcopters (SICE FES 2025), APF obstacle avoidance, & LiDAR SLAM navigation.",
+
+    "edu-title": "Education Background",
+    "edu-1-degree": "Master of Science (M.Sc.) — Mechatronics Engineering",
+    "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
+    "edu-1-date": "2024 - 2025",
+    "edu-1-desc": "Research Focus: Multi-Agent Systems, Leader-Follower Formation Control, Swarm Quadcopters, & APF Avoidance.",
+
+    "edu-2-degree": "Bachelor of Applied Engineering (S.Tr.T) — Building Automation",
+    "edu-2-school": "Politeknik Manufaktur Bandung (POLMAN)",
+    "edu-2-date": "2019 - 2023",
+    "edu-2-desc": "Focus: Industrial Automation, PLC/SCADA, BAS Systems, Microprocessors, & Control Systems.",
+
+    "awards-title": "Awards, Licenses & Patents",
+    "skills-title": "Technical Skills & Competencies",
 
     // Cold Storage Calculator
     "calc-title": "Cold Storage Sizing Calculator",
