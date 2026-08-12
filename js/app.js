@@ -16,10 +16,10 @@ const i18n = {
     "nav-contact": "Kontak",
 
     // Hero
-    "hero-badge": "Magister Teknik Mekatronika (M.Sc.)",
+    "hero-badge": "Magister Teknik Mekatronika (M.Sc.) | Asesor LSP TPTU",
     "hero-title-prefix": "Halo, Saya ",
-    "hero-subtitle": "Cold Storage & Automation Engineer | Peneliti Robotika",
-    "hero-desc": "Direktur CV. Dingin Lestari Teknik & Lulusan NTUT Taiwan. Pengembang Sistem ERP Cold Storage, Pemegang Hak Cipta Paten Software MATLAB Direct Air Capture (DAC), dan Peneliti Robotika Multi-Agent & Swarm Drone.",
+    "hero-subtitle": "Cold Storage & Automation Engineer | Asesor LSP TPTU | Peneliti Robotika",
+    "hero-desc": "Direktur CV. Dingin Lestari Teknik & Asesor Kompetensi PT. LSP TPTU (No. Reg. MET.000.002933 2026). Pemegang Sertifikasi Teknis Refrigerasi F-Gas Tingkat 4, Paten Software MATLAB Direct Air Capture (DAC), & Lulusan M.Sc. NTUT Taiwan.",
     "hero-btn-contact": "Hubungi Saya",
     "hero-btn-calc": "Kalkulator Cold Storage",
     "hero-btn-erp": "Demo Web ERP",
@@ -28,10 +28,10 @@ const i18n = {
     "stat-pub": "Publikasi Ilmiah",
     "stat-proj": "Proyek Rekayasa",
 
-    // About (Clean HTML Markup - No raw markdown brackets/asterisks)
-    "about-title": "Profil & Keahlian Utama",
-    "about-sub": "Menggabungkan pengalaman praktis industri pendingin dengan riset akademik robotika tingkat lanjut",
-    "about-text-1": "Saya adalah seorang insinyur mekatronika dan otomatisasi yang berfokus pada rekayasa cold storage industri, sistem kendali robotika otonom, serta pengembangan perangkat lunak ERP industri. Saat ini saya memimpin <strong>CV. Dingin Lestari Teknik</strong> di Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF). Saya juga mengembangkan platform digital ERP khusus industri pendingin di <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
+    // About (Clean HTML Markup)
+    "about-title": "Profil & Lisensi Sertifikasi",
+    "about-sub": "Menggabungkan kompetensi asesor teknik pendingin resmi, rekayasa cold storage industri, dan riset robotika",
+    "about-text-1": "Saya adalah seorang insinyur mekatronika, otomatisasi, dan <strong>Asesor Kompetensi Resmi PT. LSP TPTU (No. Reg. MET.000.002933 2026)</strong> dengan <strong>Sertifikasi Teknis Teknik Refrigerasi F-Gas Tingkat 4</strong>. Saat ini saya memimpin <strong>CV. Dingin Lestari Teknik</strong> di Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF). Saya juga mengembangkan platform digital ERP khusus industri pendingin di <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
     "about-text-2": "Di bidang akademik & inovasi, saya meraih gelar M.Sc. Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Saya memegang <strong>Hak Cipta Paten Program MATLAB</strong> untuk kontrol sistem Direct Air Capture (DAC) penangkap CO₂ udara, serta meriset kendali formasi robot multi-agent dan swarm drone (SICE FES 2025).",
 
     // Cold Storage Calculator
@@ -170,10 +170,10 @@ const i18n = {
     "nav-contact": "Contact",
 
     // Hero
-    "hero-badge": "M.Sc. Mechatronics Engineering",
+    "hero-badge": "M.Sc. Mechatronics Engineering | LSP TPTU Assessor",
     "hero-title-prefix": "Hi, I am ",
-    "hero-subtitle": "Cold Storage & Automation Engineer | Robotics Researcher",
-    "hero-desc": "Director of CV. Dingin Lestari Teknik & M.Sc. Graduate from NTUT Taiwan. Developer of Cold Storage ERP Software, Software Patent Holder for MATLAB Direct Air Capture (DAC) Control, and Multi-Agent Robotics & Swarm Drone Researcher.",
+    "hero-subtitle": "Cold Storage & Automation Engineer | LSP TPTU Assessor | Robotics Researcher",
+    "hero-desc": "Director of CV. Dingin Lestari Teknik & Official Competency Assessor at PT. LSP TPTU (Reg. MET.000.002933 2026). Holder of F-Gas Level 4 Technical Refrigeration Certification, MATLAB Software Patent for Direct Air Capture (DAC), & M.Sc. from NTUT Taiwan.",
     "hero-btn-contact": "Contact Me",
     "hero-btn-calc": "Cold Storage Calculator",
     "hero-btn-erp": "Web ERP Demo",
@@ -182,10 +182,10 @@ const i18n = {
     "stat-pub": "Scientific Papers",
     "stat-proj": "Engineering Projects",
 
-    // About (Clean HTML Markup)
-    "about-title": "Profile & Core Expertise",
-    "about-sub": "Bridging practical industrial refrigeration engineering with advanced academic robotics research",
-    "about-text-1": "I am a Mechatronics and Automation Engineer specializing in industrial cold storage engineering, autonomous robotics control, and enterprise software engineering. I currently serve as Director of <strong>CV. Dingin Lestari Teknik</strong> in Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), leading refrigeration design and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF). I also developed an industrial ERP platform live at <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
+    // About
+    "about-title": "Profile & Certified Licenses",
+    "about-sub": "Combining official refrigeration competency assessor credentials, industrial cold storage engineering, and robotics research",
+    "about-text-1": "I am a Mechatronics and Automation Engineer, and an <strong>Official Competency Assessor at PT. LSP TPTU (Reg. No. MET.000.002933 2026)</strong> holding <strong>F-Gas Level 4 Technical Refrigeration Certification</strong>. I currently serve as Director of <strong>CV. Dingin Lestari Teknik</strong> in Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), leading refrigeration design and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF). I also developed an industrial ERP platform live at <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
     "about-text-2": "In academia & innovation, I earned my M.Sc. in Mechatronics Engineering from National Taipei University of Technology (NTUT), Taiwan. I hold a <strong>Registered Software Patent for MATLAB Control Logic</strong> in Direct Air Capture (DAC) CO₂ systems, and conduct research on multi-agent formation control and swarm quadcopters (SICE FES 2025).",
 
     // Cold Storage Calculator
@@ -522,7 +522,7 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects & Innovations Gallery Engine (With 5 YouTube Embedded Videos) ---
+// --- Projects & Innovations Gallery Engine ---
 const projectsData = [
   // Swarm Drone YouTube Video (SICE FES 2025)
   {
