@@ -202,6 +202,18 @@ const i18n = {
     "sim-tab6": "6. Eksplorasi Indoor SLAM",
     "sim-tab7": "7. Navigasi LiDAR SLAM",
 
+    // Module 1 Bilingual Keys (ID)
+    "sim1-title": "Modul 1: Fuzzy PID DDMR & Multi-Agent Formation Control (ICCAS 2025)",
+    "sim1-desc": "Kendali formasi multi-robot berbasis Leader-Follower dengan Fuzzy-tuned PID & penghindaran rintangan APF (Artificial Potential Field). Dukungan kendali trajektori Lemniscate (8), Melingkar (Circular), dan Manual.",
+    "sim1-label-mode": "Mode Gerak Leader:",
+    "sim1-mode-manual": "🎯 Manual (Klik Target)",
+    "sim1-mode-lemniscate": "♾ Trajektori Lemniscate (8)",
+    "sim1-mode-circular": "⭕ Trajektori Circular (Melingkar)",
+    "sim1-label-form": "Formasi Swarm:",
+    "sim1-btn-reset": "↺ Reset Robot & Rintangan",
+    "sim1-btn-add-obs": "+ Tambah Rintangan APF",
+    "sim1-btn-clear-obs": "🗑 Hapus Semua Rintangan",
+
     // Module 6 Bilingual Keys
     "sim6-title": "Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",
     "sim6-desc": "Simulasi pemetaan otonom ruangan yang belum diketahui (<em>unknown environment</em>) menggunakan sensor <strong>2D LiDAR</strong> & <strong>Occupancy Grid SLAM</strong>. Robot memancarkan sinar laser untuk mengungkap area tersembunyi (<em>Fog-of-War</em>), mendeteksi sel perbatasan (<em>Frontiers</em>), dan merencanakan rute terpendek via A*.",
@@ -441,6 +453,18 @@ const i18n = {
     "sim-tab5": "5. Swarm Drone Flocking",
     "sim-tab6": "6. Indoor LiDAR SLAM Exploration",
     "sim-tab7": "7. LiDAR SLAM Navigation",
+
+    // Module 1 Bilingual Keys (EN)
+    "sim1-title": "Module 1: Fuzzy PID DDMR & Multi-Agent Formation Control (ICCAS 2025)",
+    "sim1-desc": "Multi-robot formation control via Leader-Follower architecture with Fuzzy-tuned PID & APF obstacle avoidance. Supports Lemniscate (figure-8), Circular, and Manual trajectory tracking.",
+    "sim1-label-mode": "Leader Motion Mode:",
+    "sim1-mode-manual": "🎯 Manual (Click Target)",
+    "sim1-mode-lemniscate": "♾ Lemniscate Trajectory (8)",
+    "sim1-mode-circular": "⭕ Circular Trajectory",
+    "sim1-label-form": "Swarm Formation:",
+    "sim1-btn-reset": "↺ Reset Robots & Obstacles",
+    "sim1-btn-add-obs": "+ Add APF Obstacle",
+    "sim1-btn-clear-obs": "🗑 Clear All Obstacles",
 
     // Module 6 Bilingual Keys (EN)
     "sim6-title": "Module 6: Autonomous Indoor Exploration via 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",

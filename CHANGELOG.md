@@ -6,6 +6,20 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.15] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(formation-control)`**: Pilihan Kendali Trajektori (Lemniscate, Circular, Manual) & APF Swarm Formation pada Modul 1 (ICCAS 2025):
+  - **Mode Gerak Trajektori**: Menambahkan opsi navigasi Virtual Leader:
+    1. `🎯 Manual (Klik Target)`: Leader menuju titik koordinat tujuan yang diklik oleh pengguna.
+    2. `♾ Trajektori Lemniscate (8)`: Leader mengikuti trajektori kontinu angka-delapan Bernoulli Lemniscate ($X_{\text{ref}} = cx + A\sin t, Y_{\text{ref}} = cy + \frac{B}{2}\sin 2t$).
+    3. `⭕ Trajektori Circular (Melingkar)`: Leader mengikuti trajektori orbital melingkar berotasi halus.
+  - **Penghindaran Rintangan APF Multi-Robot**: Robot pengikut (*followers*) secara dinamis menjaga formasi (Segitiga, Lingkaran, Garis) relatif terhadap leader sambil membelok dan menepis (*repel*) rintangan APF serta mencegah tabrakan antar-robot.
+  - **Visualisasi Lintasan & Halo Rintangan**: Menggambar garis proyeksi referensi trajektori putus-putus, halo gaya tolak potensial rintangan, tether formasi, dan jejak (*trail*) pergerakan setiap agen secara real-time.
+  - **Kontrol Tambahan**: Tombol Hapus Semua Rintangan (`#btnClearObstacles1`) dan dukungan dwibahasa ID/EN lengkap.
+
+---
+
 ## [v2026.08.12.14] — 2026-08-12
 
 ### Fixed / Diperbaiki

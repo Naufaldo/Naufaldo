@@ -121,19 +121,31 @@
       <!-- ===== TAB 1: Fuzzy PID DDMR & APF ===== -->
       <div class="sim-tab-content active" id="tab1">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;">Modul 1: Fuzzy PID DDMR &amp; Multi-Agent Formation Control (ICCAS 2025)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">Kendali PID Fuzzy dengan penghindaran rintangan APF. Klik kanvas untuk set target baru. Pilih formasi swarm di bawah!</p>
+          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;" data-i18n="sim1-title">Modul 1: Fuzzy PID DDMR &amp; Multi-Agent Formation Control (ICCAS 2025)</h3>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;" data-i18n="sim1-desc">Kendali formasi multi-robot berbasis Leader-Follower dengan Fuzzy-tuned PID &amp; penghindaran rintangan APF (Artificial Potential Field). Dukungan kendali trajektori Lemniscate (8), Melingkar (Circular), dan Manual.</p>
           <div class="sim-canvas-wrapper"><canvas id="canvasSim1"></canvas></div>
           <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
-            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.65rem;">
-              <span style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;min-width:55px;">Formasi:</span>
+            <!-- Trajectory Control Mode Row -->
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.75rem;">
+              <span style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;min-width:70px;" data-i18n="sim1-label-mode">Mode Gerak:</span>
+              <button class="btn btn-primary btn-sm sim-traj-btn1" id="btnModeManual1" data-mode="manual" data-i18n="sim1-mode-manual">🎯 Manual (Klik Target)</button>
+              <button class="btn btn-outline btn-sm sim-traj-btn1" id="btnModeLemniscate1" data-mode="lemniscate" data-i18n="sim1-mode-lemniscate">♾ Trajektori Lemniscate (8)</button>
+              <button class="btn btn-outline btn-sm sim-traj-btn1" id="btnModeCircular1" data-mode="circular" data-i18n="sim1-mode-circular">⭕ Trajektori Circular (Melingkar)</button>
+            </div>
+
+            <!-- Formation Shape Row -->
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;margin-bottom:0.75rem;">
+              <span style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;min-width:70px;" data-i18n="sim1-label-form">Formasi Swarm:</span>
               <button class="sim-form-btn active" id="btnFormTriangle" data-form="triangle">▲ Triangle</button>
               <button class="sim-form-btn" id="btnFormCircle" data-form="circle">● Circle</button>
               <button class="sim-form-btn" id="btnFormLine" data-form="line">― Line</button>
             </div>
-            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-              <button class="btn btn-primary btn-sm" id="btnResetSim1"><i class="fa fa-refresh"></i> Reset Robot</button>
-              <button class="btn btn-outline btn-sm" id="btnToggleObstacle1"><i class="fa fa-shield"></i> Tambah Obstacle APF</button>
+
+            <!-- Action Buttons Row -->
+            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+              <button class="btn btn-primary btn-sm" id="btnResetSim1"><i class="fa fa-refresh"></i> <span data-i18n="sim1-btn-reset">Reset Robot &amp; Rintangan</span></button>
+              <button class="btn btn-outline btn-sm" id="btnToggleObstacle1"><i class="fa fa-shield"></i> <span data-i18n="sim1-btn-add-obs">+ Tambah Rintangan APF</span></button>
+              <button class="btn btn-outline btn-sm" id="btnClearObstacles1" style="color:var(--text-secondary);"><i class="fa fa-trash"></i> <span data-i18n="sim1-btn-clear-obs">Hapus Semua Rintangan</span></button>
             </div>
           </div>
 

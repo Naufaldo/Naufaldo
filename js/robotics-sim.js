@@ -19,129 +19,438 @@ class ICCASPIDDDMRSimulation {
     resizeCanvasToWrapper(this.canvas);
     this.width = this.canvas.width;
     this.height = this.canvas.height;
+
     this.formation = "triangle";
+    this.trajMode = "manual"; // "manual" | "lemniscate" | "circular"
+    this.t = 0;
+    this.simSpeed = 1.0;
+
     this.leader = {
-      x: this.width * 0.35, y: this.height * 0.5,
-      targetX: this.width * 0.65, targetY: this.height * 0.5,
-      angle: 0, speed: 2.2, radius: 14
+      x: this.width * 0.35,
+      y: this.height * 0.5,
+      targetX: this.width * 0.65,
+      targetY: this.height * 0.5,
+      angle: 0,
+      speed: 2.2,
+      radius: 14,
+      trail: []
     };
+
     this.followers = [
-      { x: this.leader.x - 40, y: this.leader.y - 40, angle: 0, radius: 10, color: "#00f2fe" },
-      { x: this.leader.x - 40, y: this.leader.y + 40, angle: 0, radius: 10, color: "#4facfe" },
-      { x: this.leader.x - 70, y: this.leader.y,       angle: 0, radius: 10, color: "#8b5cf6" }
+      { x: this.leader.x - 45, y: this.leader.y - 35, angle: 0, radius: 10, color: "#00f2fe", trail: [] },
+      { x: this.leader.x - 45, y: this.leader.y + 35, angle: 0, radius: 10, color: "#4facfe", trail: [] },
+      { x: this.leader.x - 80, y: this.leader.y,       angle: 0, radius: 10, color: "#a855f7", trail: [] }
     ];
+
     this.obstacles = [
-      { x: this.width * 0.5, y: this.height * 0.35, radius: 25 },
-      { x: this.width * 0.5, y: this.height * 0.65, radius: 22 }
+      { x: this.width * 0.45, y: this.height * 0.35, radius: 24 },
+      { x: this.width * 0.55, y: this.height * 0.65, radius: 22 }
     ];
-    this.kp = 0.12;
+
+    this.kp = 0.16;
     this.bindEvents();
     this.loop();
   }
 
-  resize() { resizeCanvasToWrapper(this.canvas); this.width = this.canvas.width; this.height = this.canvas.height; }
+  resize() {
+    resizeCanvasToWrapper(this.canvas);
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+  }
 
   bindEvents() {
     this.canvas.addEventListener("click", (e) => {
       const rect = this.canvas.getBoundingClientRect();
-      this.leader.targetX = e.clientX - rect.left;
-      this.leader.targetY = e.clientY - rect.top;
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      if (this.trajMode === "manual") {
+        this.leader.targetX = clickX;
+        this.leader.targetY = clickY;
+      }
     });
   }
 
-  setFormation(type) { this.formation = type; }
+  setMotionMode(mode) {
+    this.trajMode = mode;
+    this.t = 0;
+    this.leader.trail = [];
+    this.followers.forEach(f => f.trail = []);
+  }
+
+  setFormation(type) {
+    this.formation = type;
+  }
 
   addObstacle() {
     this.obstacles.push({
-      x: Math.random() * (this.width - 100) + 50,
-      y: Math.random() * (this.height - 100) + 50,
-      radius: Math.floor(Math.random() * 15) + 15
+      x: Math.random() * (this.width - 120) + 60,
+      y: Math.random() * (this.height - 120) + 60,
+      radius: Math.floor(Math.random() * 12) + 18
     });
   }
 
+  clearObstacles() {
+    this.obstacles = [];
+  }
+
   reset() {
+    this.t = 0;
+    this.leader.x = this.width * 0.30;
+    this.leader.y = this.height * 0.50;
+    this.leader.targetX = this.width * 0.70;
+    this.leader.targetY = this.height * 0.50;
+    this.leader.angle = 0;
+    this.leader.trail = [];
+
+    this.followers.forEach((f, idx) => {
+      f.x = this.leader.x - 40 - idx * 20;
+      f.y = this.leader.y + (idx === 0 ? -30 : idx === 1 ? 30 : 0);
+      f.angle = 0;
+      f.trail = [];
+    });
+
     this.obstacles = [
-      { x: this.width * 0.5, y: this.height * 0.35, radius: 25 },
-      { x: this.width * 0.5, y: this.height * 0.65, radius: 22 }
+      { x: this.width * 0.45, y: this.height * 0.35, radius: 24 },
+      { x: this.width * 0.55, y: this.height * 0.65, radius: 22 }
     ];
-    this.leader.x = this.width * 0.3; this.leader.y = this.height * 0.5;
-    this.leader.targetX = this.width * 0.7; this.leader.targetY = this.height * 0.5;
   }
 
   getFormationOffsets() {
-    const dist = 45;
-    if (this.formation === "triangle") return [
-      { dx: -dist, dy: -dist * 0.8 }, { dx: -dist, dy: dist * 0.8 }, { dx: -dist * 1.7, dy: 0 }
+    const dist = 48;
+    if (this.formation === "triangle") {
+      return [
+        { dx: -dist, dy: -dist * 0.85 },
+        { dx: -dist, dy:  dist * 0.85 },
+        { dx: -dist * 1.75, dy: 0 }
+      ];
+    }
+    if (this.formation === "circle") {
+      return [
+        { dx: Math.cos(0) * dist,             dy: Math.sin(0) * dist },
+        { dx: Math.cos((2 * Math.PI) / 3) * dist, dy: Math.sin((2 * Math.PI) / 3) * dist },
+        { dx: Math.cos((4 * Math.PI) / 3) * dist, dy: Math.sin((4 * Math.PI) / 3) * dist }
+      ];
+    }
+    // Line formation (Abreast)
+    return [
+      { dx: -dist * 0.6, dy: -dist * 1.1 },
+      { dx: -dist * 0.6, dy:  dist * 1.1 },
+      { dx: -dist * 1.2, dy: 0 }
     ];
-    if (this.formation === "circle") return [
-      { dx: Math.cos(0) * dist,             dy: Math.sin(0) * dist },
-      { dx: Math.cos((2*Math.PI)/3) * dist, dy: Math.sin((2*Math.PI)/3) * dist },
-      { dx: Math.cos((4*Math.PI)/3) * dist, dy: Math.sin((4*Math.PI)/3) * dist }
-    ];
-    return [{ dx: -dist, dy: 0 }, { dx: -dist*2, dy: 0 }, { dx: -dist*3, dy: 0 }];
+  }
+
+  getTrajectoryPoint(t) {
+    const cx = this.width * 0.5;
+    const cy = this.height * 0.5;
+
+    if (this.trajMode === "lemniscate") {
+      // Bernoulli Lemniscate (Figure-8)
+      const A = this.width * 0.34;
+      const B = this.height * 0.28;
+      return {
+        x: cx + A * Math.sin(t),
+        y: cy + (B / 2) * Math.sin(2 * t)
+      };
+    }
+    if (this.trajMode === "circular") {
+      // Circular Orbital Trajectory
+      const R = Math.min(this.width, this.height) * 0.32;
+      return {
+        x: cx + R * Math.cos(t),
+        y: cy + R * Math.sin(t)
+      };
+    }
+    return { x: this.leader.targetX, y: this.leader.targetY };
   }
 
   update() {
-    const dx = this.leader.targetX - this.leader.x;
-    const dy = this.leader.targetY - this.leader.y;
-    if (Math.hypot(dx, dy) > 3) {
-      this.leader.angle = Math.atan2(dy, dx);
-      let mx = Math.cos(this.leader.angle) * this.leader.speed;
-      let my = Math.sin(this.leader.angle) * this.leader.speed;
+    // 1. Leader Motion (Manual Target vs Continuous Trajectory)
+    if (this.trajMode === "manual") {
+      const dx = this.leader.targetX - this.leader.x;
+      const dy = this.leader.targetY - this.leader.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist > 4) {
+        this.leader.angle = Math.atan2(dy, dx);
+        let mx = Math.cos(this.leader.angle) * this.leader.speed;
+        let my = Math.sin(this.leader.angle) * this.leader.speed;
+
+        // Leader APF Obstacle Avoidance
+        this.obstacles.forEach(obs => {
+          const odx = this.leader.x - obs.x;
+          const ody = this.leader.y - obs.y;
+          const od = Math.hypot(odx, ody);
+          const min = obs.radius + this.leader.radius + 35;
+          if (od < min && od > 0) {
+            const f = Math.pow((min - od) / min, 2) * 4.2;
+            mx += (odx / od) * f;
+            my += (ody / od) * f;
+          }
+        });
+
+        this.leader.x += mx;
+        this.leader.y += my;
+        this.leader.angle = Math.atan2(my, mx);
+      }
+    } else {
+      // Trajectory Tracking (Lemniscate / Circular)
+      this.t += 0.016 * this.simSpeed;
+      const refPt = this.getTrajectoryPoint(this.t);
+      const nextRefPt = this.getTrajectoryPoint(this.t + 0.05);
+
+      const dx = refPt.x - this.leader.x;
+      const dy = refPt.y - this.leader.y;
+
+      let mx = dx * 0.12 + (nextRefPt.x - refPt.x) * 1.5;
+      let my = dy * 0.12 + (nextRefPt.y - refPt.y) * 1.5;
+
+      // Leader APF Obstacle Avoidance along trajectory
       this.obstacles.forEach(obs => {
-        const odx = this.leader.x - obs.x, ody = this.leader.y - obs.y;
-        const od = Math.hypot(odx, ody), min = obs.radius + this.leader.radius + 35;
-        if (od < min && od > 0) { const f = (min-od)/min*3.8; mx += odx/od*f; my += ody/od*f; }
+        const odx = this.leader.x - obs.x;
+        const ody = this.leader.y - obs.y;
+        const od = Math.hypot(odx, ody);
+        const min = obs.radius + this.leader.radius + 35;
+        if (od < min && od > 0) {
+          const f = Math.pow((min - od) / min, 2) * 4.5;
+          mx += (odx / od) * f;
+          my += (ody / od) * f;
+        }
       });
-      this.leader.x += mx; this.leader.y += my;
+
+      this.leader.x += mx;
+      this.leader.y += my;
+      this.leader.angle = Math.atan2(my, mx);
     }
+
+    // Leader trail update
+    if (this.leader.trail.length === 0 || Math.hypot(this.leader.x - this.leader.trail[this.leader.trail.length - 1].x, this.leader.y - this.leader.trail[this.leader.trail.length - 1].y) > 6) {
+      this.leader.trail.push({ x: this.leader.x, y: this.leader.y });
+      if (this.leader.trail.length > 60) this.leader.trail.shift();
+    }
+
+    // 2. Followers Swarm Formation Control + APF Obstacle Avoidance
     const offs = this.getFormationOffsets();
+    const ca = Math.cos(this.leader.angle);
+    const sa = Math.sin(this.leader.angle);
+
     this.followers.forEach((fol, idx) => {
-      const off = offs[idx], ca = Math.cos(this.leader.angle), sa = Math.sin(this.leader.angle);
-      const tx = this.leader.x + off.dx*ca - off.dy*sa, ty = this.leader.y + off.dx*sa + off.dy*ca;
-      const fdx = tx - fol.x, fdy = ty - fol.y;
-      let fx = fdx*(this.kp*1.5), fy = fdy*(this.kp*1.5);
+      const off = offs[idx];
+      // Target position in world coordinates
+      const tx = this.leader.x + off.dx * ca - off.dy * sa;
+      const ty = this.leader.y + off.dx * sa + off.dy * ca;
+
+      const fdx = tx - fol.x;
+      const fdy = ty - fol.y;
+
+      // PID Formation Attraction
+      let fx = fdx * (this.kp * 1.4);
+      let fy = fdy * (this.kp * 1.4);
+
+      // APF Obstacle Repulsion
       this.obstacles.forEach(obs => {
-        const odx = fol.x-obs.x, ody = fol.y-obs.y, od = Math.hypot(odx,ody), min = obs.radius+fol.radius+25;
-        if (od < min && od > 0) { const f=(min-od)/min*3.0; fx+=odx/od*f; fy+=ody/od*f; }
+        const odx = fol.x - obs.x;
+        const ody = fol.y - obs.y;
+        const od = Math.hypot(odx, ody);
+        const min = obs.radius + fol.radius + 30;
+        if (od < min && od > 0) {
+          const repForce = Math.pow((min - od) / min, 2) * 4.0;
+          fx += (odx / od) * repForce;
+          fy += (ody / od) * repForce;
+        }
       });
-      fol.x += fx; fol.y += fy; fol.angle = Math.atan2(fdy, fdx);
+
+      // Inter-Follower Collision Avoidance
+      this.followers.forEach((otherFol, oIdx) => {
+        if (idx !== oIdx) {
+          const cdx = fol.x - otherFol.x;
+          const cdy = fol.y - otherFol.y;
+          const cd = Math.hypot(cdx, cdy);
+          const safeDist = fol.radius + otherFol.radius + 12;
+          if (cd < safeDist && cd > 0) {
+            const sepForce = ((safeDist - cd) / safeDist) * 2.0;
+            fx += (cdx / cd) * sepForce;
+            fy += (cdy / cd) * sepForce;
+          }
+        }
+      });
+
+      fol.x += fx;
+      fol.y += fy;
+      fol.angle = Math.atan2(fy, fx);
+
+      // Follower trail update
+      if (fol.trail.length === 0 || Math.hypot(fol.x - fol.trail[fol.trail.length - 1].x, fol.y - fol.trail[fol.trail.length - 1].y) > 6) {
+        fol.trail.push({ x: fol.x, y: fol.y });
+        if (fol.trail.length > 40) fol.trail.shift();
+      }
     });
   }
 
   draw() {
     const ctx = this.ctx;
-    ctx.clearRect(0,0,this.width,this.height);
-    ctx.strokeStyle="rgba(255,255,255,0.03)"; ctx.lineWidth=1;
-    for(let x=0;x<this.width;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,this.height);ctx.stroke();}
-    for(let y=0;y<this.height;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(this.width,y);ctx.stroke();}
-    ctx.strokeStyle="#00f2fe"; ctx.lineWidth=2; ctx.setLineDash([4,4]);
-    ctx.beginPath(); ctx.arc(this.leader.targetX,this.leader.targetY,14,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
-    this.obstacles.forEach(obs=>{
-      ctx.fillStyle="rgba(239,68,68,0.25)"; ctx.strokeStyle="#ef4444"; ctx.lineWidth=2;
-      ctx.beginPath(); ctx.arc(obs.x,obs.y,obs.radius,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    // 1. Grid Background
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
+    ctx.lineWidth = 1;
+    for (let x = 0; x < this.width; x += 30) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.height); ctx.stroke();
+    }
+    for (let y = 0; y < this.height; y += 30) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.width, y); ctx.stroke();
+    }
+
+    // 2. Reference Trajectory Path (for Lemniscate / Circular)
+    if (this.trajMode === "lemniscate" || this.trajMode === "circular") {
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.22)";
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      for (let s = 0; s <= Math.PI * 2 + 0.1; s += 0.08) {
+        const pt = this.getTrajectoryPoint(s);
+        if (s === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    } else {
+      // Draw Manual Click Target
+      ctx.strokeStyle = "#00f2fe";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.arc(this.leader.targetX, this.leader.targetY, 12, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // 3. Draw APF Obstacles
+    this.obstacles.forEach(obs => {
+      // APF Potential Zone Halo
+      ctx.fillStyle = "rgba(239, 68, 68, 0.10)";
+      ctx.beginPath();
+      ctx.arc(obs.x, obs.y, obs.radius + 28, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Obstacle Body
+      ctx.fillStyle = "rgba(239, 68, 68, 0.28)";
+      ctx.strokeStyle = "#ef4444";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(obs.x, obs.y, obs.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
     });
-    this.followers.forEach(fol=>{
-      ctx.strokeStyle="rgba(0,242,254,0.35)"; ctx.lineWidth=1.5;
-      ctx.beginPath(); ctx.moveTo(this.leader.x,this.leader.y); ctx.lineTo(fol.x,fol.y); ctx.stroke();
+
+    // 4. Draw Trails
+    this.followers.forEach(fol => {
+      if (fol.trail.length > 1) {
+        ctx.strokeStyle = "rgba(0, 242, 254, 0.18)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        fol.trail.forEach((pt, i) => {
+          if (i === 0) ctx.moveTo(pt.x, pt.y);
+          else ctx.lineTo(pt.x, pt.y);
+        });
+        ctx.stroke();
+      }
     });
-    this.followers.forEach(fol=>{
-      ctx.save(); ctx.translate(fol.x,fol.y); ctx.rotate(fol.angle);
-      ctx.fillStyle="#64748b"; ctx.fillRect(-7,-13,14,4); ctx.fillRect(-7,9,14,4);
-      ctx.fillStyle=fol.color; ctx.beginPath(); ctx.arc(0,0,fol.radius,0,Math.PI*2); ctx.fill();
+
+    if (this.leader.trail.length > 1) {
+      ctx.strokeStyle = "rgba(245, 158, 11, 0.35)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      this.leader.trail.forEach((pt, i) => {
+        if (i === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.stroke();
+    }
+
+    // 5. Draw Formation Tether Lines (Leader to Followers)
+    this.followers.forEach(fol => {
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.4)";
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      ctx.moveTo(this.leader.x, this.leader.y);
+      ctx.lineTo(fol.x, fol.y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+
+    // 6. Draw Followers (DWMR)
+    this.followers.forEach(fol => {
+      ctx.save();
+      ctx.translate(fol.x, fol.y);
+      ctx.rotate(fol.angle);
+
+      // Differential Wheels
+      ctx.fillStyle = "#64748b";
+      ctx.fillRect(-7, -13, 14, 4);
+      ctx.fillRect(-7, 9, 14, 4);
+
+      // Follower Chassis
+      ctx.fillStyle = fol.color;
+      ctx.beginPath();
+      ctx.arc(0, 0, fol.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Heading indicator
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.moveTo(fol.radius + 3, 0);
+      ctx.lineTo(fol.radius - 3, -3);
+      ctx.lineTo(fol.radius - 3, 3);
+      ctx.closePath();
+      ctx.fill();
+
       ctx.restore();
     });
-    ctx.save(); ctx.translate(this.leader.x,this.leader.y); ctx.rotate(this.leader.angle);
-    ctx.shadowColor="#00f2fe"; ctx.shadowBlur=12;
-    ctx.fillStyle="#f59e0b"; ctx.beginPath(); ctx.arc(0,0,this.leader.radius,0,Math.PI*2); ctx.fill();
-    ctx.shadowBlur=0; ctx.fillStyle="#fff";
-    ctx.beginPath(); ctx.moveTo(this.leader.radius+5,0); ctx.lineTo(-4,-5); ctx.lineTo(-4,5); ctx.fill();
+
+    // 7. Draw Virtual Leader (Gold with Glow)
+    ctx.save();
+    ctx.translate(this.leader.x, this.leader.y);
+    ctx.rotate(this.leader.angle);
+
+    ctx.shadowColor = "#f59e0b";
+    ctx.shadowBlur = 14;
+    ctx.fillStyle = "#f59e0b";
+    ctx.beginPath();
+    ctx.arc(0, 0, this.leader.radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Leader Direction Arrow
+    ctx.fillStyle = "#fff";
+    ctx.beginPath();
+    ctx.moveTo(this.leader.radius + 6, 0);
+    ctx.lineTo(-4, -6);
+    ctx.lineTo(-4, 6);
+    ctx.closePath();
+    ctx.fill();
+
     ctx.restore();
-    ctx.fillStyle="rgba(255,255,255,0.45)"; ctx.font="11px monospace";
-    ctx.fillText(`Formation: ${this.formation.toUpperCase()} | Obstacles: ${this.obstacles.length}`, 8, 18);
+
+    // 8. HUD Overlay
+    ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+    ctx.font = "11px monospace";
+    ctx.fillText(
+      `Mode: ${this.trajMode.toUpperCase()} | Formasi: ${this.formation.toUpperCase()} | Obstacles: ${this.obstacles.length}`,
+      10,
+      18
+    );
   }
 
-  loop() { this.update(); this.draw(); requestAnimationFrame(()=>this.loop()); }
+  loop() {
+    this.update();
+    this.draw();
+    requestAnimationFrame(() => this.loop());
+  }
 }
 
 // ── MODULE 2: Mathematical Kinematic Model + PID Trajectory Control ──────────
@@ -1508,6 +1817,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── MODULE 1: Fuzzy PID DDMR ─────────────────────────────
   const sim1 = new ICCASPIDDDMRSimulation("canvasSim1");
 
+  // Trajectory Control Mode
+  const setSim1MotionMode = (mode) => {
+    sim1?.setMotionMode(mode);
+    document.querySelectorAll(".sim-traj-btn1").forEach(b => {
+      b.className = "btn btn-outline btn-sm sim-traj-btn1";
+    });
+    const activeBtn = document.getElementById(`btnMode${mode.charAt(0).toUpperCase() + mode.slice(1)}1`);
+    if (activeBtn) activeBtn.className = "btn btn-primary btn-sm sim-traj-btn1";
+  };
+  document.getElementById("btnModeManual1")?.addEventListener("click", () => setSim1MotionMode("manual"));
+  document.getElementById("btnModeLemniscate1")?.addEventListener("click", () => setSim1MotionMode("lemniscate"));
+  document.getElementById("btnModeCircular1")?.addEventListener("click", () => setSim1MotionMode("circular"));
+
+  // Formation Switcher
   document.querySelectorAll(".sim-form-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".sim-form-btn").forEach(b => b.classList.remove("active"));
@@ -1515,8 +1838,11 @@ document.addEventListener("DOMContentLoaded", () => {
       sim1?.setFormation(btn.dataset.form);
     });
   });
+
+  // Action Buttons
   document.getElementById("btnResetSim1")?.addEventListener("click", () => sim1?.reset());
   document.getElementById("btnToggleObstacle1")?.addEventListener("click", () => sim1?.addObstacle());
+  document.getElementById("btnClearObstacles1")?.addEventListener("click", () => sim1?.clearObstacles());
 
   // ── MODULE 2: Math Model + PID ────────────────────────────
   const sim2 = new MathModelSimulation("canvasSim2");
