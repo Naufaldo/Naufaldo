@@ -412,6 +412,13 @@ const i18n = {
   }
 };
 
+// --- Safe DOM HTML Parser Helper ---
+function setSafeHTML(element, htmlContent) {
+  const parser = new DOMParser();
+  const parsed = parser.parseFromString(htmlContent, 'text/html');
+  element.replaceChildren(...parsed.body.childNodes);
+}
+
 // --- Language Switching Engine ---
 let currentLang = localStorage.getItem("naufaldo_lang") || "id";
 
@@ -422,7 +429,7 @@ function updateLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (i18n[lang] && i18n[lang][key]) {
-      el.innerHTML = i18n[lang][key];
+      setSafeHTML(el, i18n[lang][key]);
     }
   });
 
@@ -575,7 +582,10 @@ function renderPublications(filterCategory = "all", searchQuery = "") {
     
     const venueSpan = document.createElement("span");
     venueSpan.className = "pub-venue";
-    venueSpan.innerHTML = `<i class="fa fa-book"></i> ${pub.venue}`;
+    const bookIcon = document.createElement("i");
+    bookIcon.className = "fa fa-book";
+    venueSpan.appendChild(bookIcon);
+    venueSpan.appendChild(document.createTextNode(` ${pub.venue}`));
 
     const yearBadge = document.createElement("span");
     yearBadge.className = "badge badge-purple";
@@ -594,11 +604,17 @@ function renderPublications(filterCategory = "all", searchQuery = "") {
     doiLink.href = pub.doi;
     doiLink.target = "_blank";
     doiLink.className = "btn btn-outline btn-sm";
-    doiLink.innerHTML = `<i class="fa fa-external-link"></i> DOI Article`;
+    const extIcon = document.createElement("i");
+    extIcon.className = "fa fa-external-link";
+    doiLink.appendChild(extIcon);
+    doiLink.appendChild(document.createTextNode(" DOI Article"));
 
     const copyBtn = document.createElement("button");
     copyBtn.className = "btn btn-outline btn-sm";
-    copyBtn.innerHTML = `<i class="fa fa-copy"></i> ${i18n[currentLang]["pub-btn-copy"]}`;
+    const copyIcon = document.createElement("i");
+    copyIcon.className = "fa fa-copy";
+    copyBtn.appendChild(copyIcon);
+    copyBtn.appendChild(document.createTextNode(` ${i18n[currentLang]["pub-btn-copy"]}`));
     copyBtn.addEventListener("click", () => copyCitation(pub.title, pub.venue));
 
     btnRow.appendChild(doiLink);
@@ -642,6 +658,7 @@ let blogPostsData = JSON.parse(localStorage.getItem("naufaldo_blog_posts")) || [
     image: "https://img.youtube.com/vi/JKuoD_4qvYw/hqdefault.jpg"
   },
   {
+    id: 3,
     title: "Pengembangan Sistem Direct Air Capture (DAC) & Hak Cipta Paten Software MATLAB",
     date: "15 Juni 2026",
     author: "Naufaldo, M.Sc.",
@@ -668,7 +685,14 @@ function renderBlogPosts() {
 
     const meta = document.createElement("div");
     meta.className = "blog-meta";
-    meta.innerHTML = `<i class="fa fa-calendar"></i> ${post.date} &bull; <i class="fa fa-folder"></i> ${post.category}`;
+    const calIcon = document.createElement("i");
+    calIcon.className = "fa fa-calendar";
+    const folderIcon = document.createElement("i");
+    folderIcon.className = "fa fa-folder";
+    meta.appendChild(calIcon);
+    meta.appendChild(document.createTextNode(` ${post.date} \u2022 `));
+    meta.appendChild(folderIcon);
+    meta.appendChild(document.createTextNode(` ${post.category}`));
 
     const excerpt = document.createElement("p");
     excerpt.className = "blog-excerpt";
@@ -676,7 +700,10 @@ function renderBlogPosts() {
 
     const btn = document.createElement("button");
     btn.className = "btn btn-outline btn-sm";
-    btn.innerHTML = `<i class="fa fa-file-text-o"></i> Baca Artikel Selengkapnya`;
+    const fileIcon = document.createElement("i");
+    fileIcon.className = "fa fa-file-text-o";
+    btn.appendChild(fileIcon);
+    btn.appendChild(document.createTextNode(" Baca Artikel Selengkapnya"));
     btn.addEventListener("click", () => openBlogModal(index));
 
     card.appendChild(title);
@@ -711,7 +738,16 @@ function openBlogModal(index) {
 
   modalTitle.textContent = post.title;
   modalCat.textContent = `${post.category} | ${post.date}`;
-  modalDesc.innerHTML = `<div style="white-space:pre-line;">${post.content}</div><br><em>Oleh: ${post.author}</em>`;
+
+  modalDesc.replaceChildren();
+  const contentDiv = document.createElement("div");
+  contentDiv.style.whiteSpace = "pre-line";
+  contentDiv.textContent = post.content;
+  const authorEm = document.createElement("em");
+  authorEm.textContent = `Oleh: ${post.author}`;
+  modalDesc.appendChild(contentDiv);
+  modalDesc.appendChild(document.createElement("br"));
+  modalDesc.appendChild(authorEm);
 
   modalTags.replaceChildren();
   modalLinkBox.style.display = "none";
@@ -721,7 +757,6 @@ function openBlogModal(index) {
 
 // --- Projects Data Engine ---
 let projectsData = JSON.parse(localStorage.getItem("naufaldo_projects")) || [
-  // Swarm Drone YouTube Video (SICE FES 2025)
   {
     titleKey: "proj-swarm-title",
     catKey: "proj-swarm-cat",
@@ -881,7 +916,10 @@ function renderProjects(filterCategory = "all") {
     if (p.isVideo) {
       const vidBadge = document.createElement("div");
       vidBadge.style.cssText = "position:absolute; top:10px; right:10px; background:rgba(239, 68, 68, 0.9); color:#fff; padding:0.25rem 0.68rem; border-radius:20px; font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:4px; box-shadow:0 0 10px rgba(239, 68, 68, 0.5);";
-      vidBadge.innerHTML = `<i class="fa fa-youtube-play"></i> YOUTUBE`;
+      const ytIcon = document.createElement("i");
+      ytIcon.className = "fa fa-youtube-play";
+      vidBadge.appendChild(ytIcon);
+      vidBadge.appendChild(document.createTextNode(" YOUTUBE"));
       imgWrapper.appendChild(vidBadge);
     }
 
@@ -913,7 +951,10 @@ function renderProjects(filterCategory = "all") {
       linkAnchor.target = "_blank";
       linkAnchor.className = "badge badge-purple";
       linkAnchor.style.fontSize = "0.78rem";
-      linkAnchor.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText || "Link Details"}`;
+      const extIcon = document.createElement("i");
+      extIcon.className = "fa fa-external-link";
+      linkAnchor.appendChild(extIcon);
+      linkAnchor.appendChild(document.createTextNode(` ${p.linkText || "Link Details"}`));
       linkAnchor.addEventListener("click", (e) => e.stopPropagation());
       linkDiv.appendChild(linkAnchor);
       card.appendChild(linkDiv);
@@ -981,7 +1022,10 @@ function openProjectModal(index) {
     linkBtn.href = p.link;
     linkBtn.target = "_blank";
     linkBtn.className = "btn btn-primary btn-sm";
-    linkBtn.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText || "Details"}`;
+    const extIcon = document.createElement("i");
+    extIcon.className = "fa fa-external-link";
+    linkBtn.appendChild(extIcon);
+    linkBtn.appendChild(document.createTextNode(` ${p.linkText || "Details"}`));
     modalLinkBox.appendChild(linkBtn);
   } else {
     modalLinkBox.style.display = "none";
