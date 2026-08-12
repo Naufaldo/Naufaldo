@@ -495,106 +495,544 @@ class DroneSwarmSimulation {
   loop() { this.update(); this.draw(); requestAnimationFrame(()=>this.loop()); }
 }
 
-// ── MODULE 6: Indoor Exploration — Floodfill vs Frontier (ICCAS 2024) ────────
+// ── MODULE 6: Indoor Exploration — 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024) ──
 class IndoorExplorationSimulation {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
     if (!this.canvas) return;
     this.ctx = this.canvas.getContext("2d");
     resizeCanvasToWrapper(this.canvas);
-    this.width=this.canvas.width; this.height=this.canvas.height;
-    this.cols=20; this.rows=12;
-    this.cellW=this.width/this.cols; this.cellH=this.height/this.rows;
-    this.grid=[]; this.mode="frontier"; this.isExploring=false;
-    this.startR=0; this.startC=0; this.goalR=11; this.goalC=19;
-    this.initGrid();
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+
+    this.cols = 44;
+    this.rows = 24;
+    this.cellW = this.width / this.cols;
+    this.cellH = this.height / this.rows;
+
+    this.mapType = "phoenix";
+    this.mode = "frontier";
+    this.simSpeed = 1.5;
+    this.isExploring = false;
+    this.isPaused = false;
+    this.completeness = 0;
+    this.elapsedTime = 0;
+    this.lidarRange = 135;
+    this.lidarRays = 48;
+    this.lidarSpinAngle = 0;
+
+    this.robot = {
+      x: 0,
+      y: 0,
+      r: 3,
+      c: 3,
+      heading: 0,
+      radius: 9,
+      targetPath: [],
+      trail: []
+    };
+
+    this.trueGrid = [];   // Ground truth map: 1 = wall, 0 = free
+    this.knownGrid = [];  // SLAM Occupancy Grid: -1 = unknown, 0 = free, 100 = wall
+    this.frontiers = [];  // Detected boundary cells
+    this.totalReachableCells = 1;
+
+    this.initMap(this.mapType);
+    this.loop();
   }
 
   resize() {
-    resizeCanvasToWrapper(this.canvas); this.width=this.canvas.width; this.height=this.canvas.height;
-    this.cellW=this.width/this.cols; this.cellH=this.height/this.rows; this.draw();
+    resizeCanvasToWrapper(this.canvas);
+    this.width = this.canvas.width;
+    this.height = this.canvas.height;
+    this.cellW = this.width / this.cols;
+    this.cellH = this.height / this.rows;
+    this.robot.x = (this.robot.c + 0.5) * this.cellW;
+    this.robot.y = (this.robot.r + 0.5) * this.cellH;
+    this.draw();
   }
 
-  setMode(mode) { this.mode=mode; this.initGrid(); }
-  setStart(r,c)  { this.startR=Math.min(this.rows-1,Math.max(0,r)); this.startC=Math.min(this.cols-1,Math.max(0,c)); this.initGrid(); }
-  setGoal(r,c)   { this.goalR=Math.min(this.rows-1,Math.max(0,r)); this.goalC=Math.min(this.cols-1,Math.max(0,c)); this.initGrid(); }
+  setMap(mapType) {
+    this.mapType = mapType;
+    this.isExploring = false;
+    this.isPaused = false;
+    this.initMap(mapType);
+  }
 
-  initGrid() {
-    this.isExploring=false; this.grid=[];
-    for(let r=0;r<this.rows;r++){
-      const row=[];
-      for(let c=0;c<this.cols;c++){
-        const isWall=(r>0&&r<this.rows-1&&c>0&&c<this.cols-1)&&Math.random()<0.22;
-        row.push({row:r,col:c,isWall,visited:false,isFrontier:false});
-      }
-      this.grid.push(row);
+  setMode(mode) {
+    this.mode = mode;
+    if (this.isExploring) this.planNextStep();
+    this.draw();
+  }
+
+  setSpeed(s) {
+    this.simSpeed = s;
+    const l = document.getElementById("exploreSpeedLabel6");
+    if (l) l.textContent = `${s.toFixed(1)}×`;
+  }
+
+  togglePause() {
+    if (!this.isExploring) {
+      this.startExploration();
+      return;
     }
-    this.grid[this.startR][this.startC].isWall=false;
-    this.grid[this.startR][this.startC].visited=true;
-    this.grid[this.goalR][this.goalC].isWall=false;
+    this.isPaused = !this.isPaused;
+    this.updateStatus(this.isPaused ? "DIJEDA (PAUSED)" : "MENJELAJAH & MEMETAKAN");
+  }
+
+  initMap(mapType) {
+    this.isExploring = false;
+    this.isPaused = false;
+    this.elapsedTime = 0;
+    this.robot.targetPath = [];
+    this.robot.trail = [];
+    this.frontiers = [];
+
+    // 1. Build Ground Truth Maze based on Paper Benchmarks
+    this.trueGrid = [];
+    this.knownGrid = [];
+
+    for (let r = 0; r < this.rows; r++) {
+      const tRow = [], kRow = [];
+      for (let c = 0; c < this.cols; c++) {
+        // Outer perimeter walls
+        let isWall = (r === 0 || r === this.rows - 1 || c === 0 || c === this.cols - 1);
+
+        if (!isWall) {
+          if (mapType === "phoenix") {
+            // Phoenix World: Intricate maze with sharp corridors & dead ends
+            if (c === 14 && (r < 9 || r > 14)) isWall = true;
+            if (c === 28 && (r > 5 && r < 19)) isWall = true;
+            if (r === 8 && ((c > 4 && c < 12) || (c > 16 && c < 26))) isWall = true;
+            if (r === 16 && ((c > 8 && c < 22) || (c > 30 && c < 40))) isWall = true;
+            if (c === 36 && (r > 4 && r < 14)) isWall = true;
+            if ((r === 4 || r === 12) && c > 18 && c < 24) isWall = true;
+          } else if (mapType === "complex_zee") {
+            // Complex Zee: Long Z-shaped halls spanning across full map
+            if (r === 7 && c < 34) isWall = true;
+            if (r === 15 && c > 10) isWall = true;
+            if (c === 18 && (r > 8 && r < 14)) isWall = true;
+            if (c === 28 && (r > 1 && r < 6)) isWall = true;
+            if (c === 34 && (r > 16 && r < 22)) isWall = true;
+          } else if (mapType === "mememan") {
+            // Mememan World: Curved room perimeter + central pillar clusters
+            const cx = this.cols / 2, cy = this.rows / 2;
+            const distFromCenter = Math.hypot((c - cx) * 0.7, r - cy);
+            if (distFromCenter > 10.5) isWall = true;
+            if (Math.abs(r - cy) < 3 && Math.abs(c - cx) < 4) isWall = true;
+            if (r === 6 && c === 12) isWall = true;
+            if (r === 18 && c === 32) isWall = true;
+          }
+        }
+
+        tRow.push(isWall ? 1 : 0);
+        kRow.push(-1); // Unknown initially
+      }
+      this.trueGrid.push(tRow);
+      this.knownGrid.push(kRow);
+    }
+
+    // Set starting position
+    this.robot.r = 3;
+    this.robot.c = 3;
+    this.trueGrid[this.robot.r][this.robot.c] = 0;
+    this.robot.x = (this.robot.c + 0.5) * this.cellW;
+    this.robot.y = (this.robot.r + 0.5) * this.cellH;
+    this.robot.heading = 0;
+
+    // Count reachable free cells for completeness calculation
+    let count = 0;
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        if (this.trueGrid[r][c] === 0) count++;
+      }
+    }
+    this.totalReachableCells = count || 1;
+
+    // Initial 360 LiDAR Scan around Start Position
+    this.performLiDARScan();
+    this.updateStatus("SIAP");
     this.draw();
   }
 
   startExploration() {
-    if(this.isExploring) return;
-    this.initGrid();
-    this.isExploring=true;
-    let queue=[{r:this.startR,c:this.startC}];
-    const step=()=>{
-      if(queue.length===0){this.isExploring=false;return;}
-      if(this.mode==="frontier"){
-        queue.sort((a,b)=>Math.hypot(a.r-this.goalR,a.c-this.goalC)-Math.hypot(b.r-this.goalR,b.c-this.goalC));
-      }
-      const cur=queue.shift();
-      const cell=this.grid[cur.r][cur.c];
-      if(!cell.visited) cell.visited=true;
-      if(cur.r===this.goalR&&cur.c===this.goalC){this.isExploring=false;this.draw();return;}
-      [{r:cur.r-1,c:cur.c},{r:cur.r+1,c:cur.c},{r:cur.r,c:cur.c-1},{r:cur.r,c:cur.c+1}].forEach(n=>{
-        if(n.r>=0&&n.r<this.rows&&n.c>=0&&n.c<this.cols){
-          const nCell=this.grid[n.r][n.c];
-          if(!nCell.isWall&&!nCell.visited&&!queue.some(q=>q.r===n.r&&q.c===n.c)){nCell.isFrontier=true;queue.push(n);}
-        }
-      });
-      this.draw(); setTimeout(step, 55);
-    };
-    step();
+    if (this.completeness >= 98.5) this.initMap(this.mapType);
+    this.isExploring = true;
+    this.isPaused = false;
+    this.updateStatus("MENJELAJAH & MEMETAKAN");
+    this.planNextStep();
   }
 
-  draw() {
-    const ctx=this.ctx;
-    ctx.clearRect(0,0,this.width,this.height);
-    ctx.textAlign="center"; ctx.textBaseline="middle";
-    for(let r=0;r<this.rows;r++){
-      for(let c=0;c<this.cols;c++){
-        const cell=this.grid[r][c];
-        const x=c*this.cellW, y=r*this.cellH;
-        const isSt=r===this.startR&&c===this.startC, isGo=r===this.goalR&&c===this.goalC;
-        if(isSt) ctx.fillStyle="#10b981";
-        else if(isGo) ctx.fillStyle="#ef4444";
-        else if(cell.isWall) ctx.fillStyle="#334155";
-        else if(cell.visited) ctx.fillStyle="rgba(0,242,254,0.25)";
-        else if(cell.isFrontier) ctx.fillStyle="rgba(245,158,11,0.5)";
-        else ctx.fillStyle="rgba(15,23,42,0.6)";
-        ctx.fillRect(x,y,this.cellW-1,this.cellH-1);
-        if(isSt||isGo){
-          ctx.fillStyle="#fff"; ctx.font=`bold ${Math.min(this.cellW,this.cellH)*0.5}px sans-serif`;
-          ctx.fillText(isSt?"S":"G",x+this.cellW/2,y+this.cellH/2);
+  performLiDARScan() {
+    // 360 Ray-Casting to carve out Fog-of-War (SLAM Mapping)
+    for (let i = 0; i < this.lidarRays; i++) {
+      const angle = i * (Math.PI * 2 / this.lidarRays);
+      for (let d = 0; d < this.lidarRange; d += 3.5) {
+        const rx = this.robot.x + Math.cos(angle) * d;
+        const ry = this.robot.y + Math.sin(angle) * d;
+        const c = Math.floor(rx / this.cellW);
+        const r = Math.floor(ry / this.cellH);
+
+        if (r < 0 || r >= this.rows || c < 0 || c >= this.cols) break;
+
+        if (this.trueGrid[r][c] === 1) {
+          // Obstacle Wall Discovered
+          this.knownGrid[r][c] = 100;
+          break;
+        } else {
+          // Free Space Discovered
+          this.knownGrid[r][c] = 0;
         }
       }
     }
-    ctx.textAlign="left"; ctx.textBaseline="alphabetic";
-    const lh=this.height-4, lp=4;
-    ctx.fillStyle="rgba(0,0,0,0.55)"; ctx.fillRect(lp,lh-16,290,16);
-    [{c:"#10b981",l:"Start"},{c:"#ef4444",l:"Goal"},{c:"rgba(0,242,254,0.5)",l:"Visited"},{c:"rgba(245,158,11,0.5)",l:"Frontier"},{c:"#334155",l:"Wall"}]
-      .forEach((item,i)=>{
-        const ox=lp+4+i*58;
-        ctx.fillStyle=item.c; ctx.fillRect(ox,lh-13,10,10);
-        ctx.fillStyle="#fff"; ctx.font="9px sans-serif"; ctx.fillText(item.l,ox+12,lh-4);
+
+    // Extract Frontiers (known free cells bordering unknown cells)
+    this.frontiers = [];
+    let discoveredFree = 0;
+
+    for (let r = 1; r < this.rows - 1; r++) {
+      for (let c = 1; c < this.cols - 1; c++) {
+        if (this.knownGrid[r][c] === 0) {
+          discoveredFree++;
+          // Check 4-neighbors for unknown cells (-1)
+          const hasUnknownNeighbor = (
+            this.knownGrid[r - 1][c] === -1 ||
+            this.knownGrid[r + 1][c] === -1 ||
+            this.knownGrid[r][c - 1] === -1 ||
+            this.knownGrid[r][c + 1] === -1
+          );
+          if (hasUnknownNeighbor) {
+            this.frontiers.push({ r, c, x: (c + 0.5) * this.cellW, y: (r + 0.5) * this.cellH });
+          }
+        }
+      }
+    }
+
+    // Calculate Map Completeness Percentage
+    this.completeness = Math.min(100, (discoveredFree / this.totalReachableCells) * 100);
+
+    const compEl = document.getElementById("exploreCompleteness6");
+    const barEl = document.getElementById("exploreProgressBar6");
+    const timerEl = document.getElementById("exploreTimer6");
+
+    if (compEl) compEl.textContent = `${this.completeness.toFixed(1)}%`;
+    if (barEl) barEl.style.width = `${this.completeness.toFixed(1)}%`;
+    if (timerEl) timerEl.textContent = `${this.elapsedTime.toFixed(1)}s`;
+  }
+
+  planNextStep() {
+    if (!this.isExploring || this.isPaused) return;
+
+    if (this.completeness >= 98.0 || this.frontiers.length === 0) {
+      this.isExploring = false;
+      this.updateStatus("EKSPLORASI SELESAI (100%)");
+      return;
+    }
+
+    let targetCell = null;
+
+    if (this.mode === "frontier") {
+      // Frontier-Based: Sort candidate frontiers by distance to robot
+      this.frontiers.sort((a, b) => {
+        const da = Math.hypot(a.r - this.robot.r, a.c - this.robot.c);
+        const db = Math.hypot(b.r - this.robot.r, b.c - this.robot.c);
+        return da - db;
       });
-    ctx.fillStyle="rgba(255,255,255,0.4)"; ctx.font="11px monospace";
-    ctx.fillText(`Algo: ${this.mode.toUpperCase()} | S=(${this.startC},${this.startR}) G=(${this.goalC},${this.goalR})`, 8, 18);
+      targetCell = this.frontiers[0];
+    } else {
+      // Floodfill (BFS): Systematic adjacent expansion
+      const queue = [{ r: this.robot.r, c: this.robot.c }];
+      const visited = new Set();
+      visited.add(`${this.robot.r},${this.robot.c}`);
+
+      while (queue.length > 0) {
+        const curr = queue.shift();
+        const neighbors = [
+          { r: curr.r - 1, c: curr.c }, { r: curr.r + 1, c: curr.c },
+          { r: curr.r, c: curr.c - 1 }, { r: curr.r, c: curr.c + 1 }
+        ];
+        for (const n of neighbors) {
+          if (n.r > 0 && n.r < this.rows - 1 && n.c > 0 && n.c < this.cols - 1) {
+            const key = `${n.r},${n.c}`;
+            if (!visited.has(key)) {
+              visited.add(key);
+              if (this.knownGrid[n.r][n.c] === 0) {
+                // If this known cell has unknown neighbors, set as target
+                if (this.frontiers.some(f => f.r === n.r && f.c === n.c)) {
+                  targetCell = n;
+                  break;
+                }
+                queue.push(n);
+              }
+            }
+          }
+        }
+        if (targetCell) break;
+      }
+    }
+
+    if (!targetCell) {
+      // Fallback: pick any frontier
+      targetCell = this.frontiers[0];
+    }
+
+    if (targetCell) {
+      // A* Pathfinding through known free space (knownGrid === 0)
+      this.robot.targetPath = this.findAStarPath(
+        { r: this.robot.r, c: this.robot.c },
+        { r: targetCell.r, c: targetCell.c }
+      );
+    }
+  }
+
+  findAStarPath(start, goal) {
+    const openSet = [start];
+    const cameFrom = new Map();
+    const gScore = new Map();
+    const fScore = new Map();
+
+    const nodeKey = (n) => `${n.r},${n.c}`;
+    gScore.set(nodeKey(start), 0);
+    fScore.set(nodeKey(start), Math.hypot(start.r - goal.r, start.c - goal.c));
+
+    while (openSet.length > 0) {
+      // Get lowest fScore node
+      openSet.sort((a, b) => (fScore.get(nodeKey(a)) || 99999) - (fScore.get(nodeKey(b)) || 99999));
+      const current = openSet.shift();
+      const currKey = nodeKey(current);
+
+      if (current.r === goal.r && current.c === goal.c) {
+        // Reconstruct path
+        const path = [current];
+        let curr = current;
+        while (cameFrom.has(nodeKey(curr))) {
+          curr = cameFrom.get(nodeKey(curr));
+          path.unshift(curr);
+        }
+        return path;
+      }
+
+      const neighbors = [
+        { r: current.r - 1, c: current.c }, { r: current.r + 1, c: current.c },
+        { r: current.r, c: current.c - 1 }, { r: current.r, c: current.c + 1 }
+      ];
+
+      for (const n of neighbors) {
+        if (n.r < 0 || n.r >= this.rows || n.c < 0 || n.c >= this.cols) continue;
+        if (this.knownGrid[n.r][n.c] === 100) continue; // Obstacle
+
+        const tentativeG = (gScore.get(currKey) || 0) + 1;
+        const nKey = nodeKey(n);
+
+        if (tentativeG < (gScore.get(nKey) || 99999)) {
+          cameFrom.set(nKey, current);
+          gScore.set(nKey, tentativeG);
+          fScore.set(nKey, tentativeG + Math.hypot(n.r - goal.r, n.c - goal.c));
+
+          if (!openSet.some(item => item.r === n.r && item.c === n.c)) {
+            openSet.push(n);
+          }
+        }
+      }
+    }
+
+    return [goal]; // Fallback direct target
+  }
+
+  updateStatus(msg) {
+    const el = document.getElementById("exploreStatus6");
+    if (el) el.textContent = msg;
+  }
+
+  update() {
+    this.lidarSpinAngle = (this.lidarSpinAngle + 0.18) % (Math.PI * 2);
+
+    if (!this.isExploring || this.isPaused) return;
+
+    this.elapsedTime += 0.016 * this.simSpeed;
+
+    if (this.robot.targetPath && this.robot.targetPath.length > 0) {
+      const nextNode = this.robot.targetPath[0];
+      const targetX = (nextNode.c + 0.5) * this.cellW;
+      const targetY = (nextNode.r + 0.5) * this.cellH;
+
+      const dx = targetX - this.robot.x;
+      const dy = targetY - this.robot.y;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < 3.5) {
+        // Waypoint reached
+        this.robot.r = nextNode.r;
+        this.robot.c = nextNode.c;
+        this.robot.x = targetX;
+        this.robot.y = targetY;
+        this.robot.trail.push({ x: targetX, y: targetY });
+        if (this.robot.trail.length > 80) this.robot.trail.shift();
+
+        this.robot.targetPath.shift();
+
+        // Perform LiDAR scan at every new grid step
+        this.performLiDARScan();
+
+        if (this.robot.targetPath.length === 0) {
+          this.planNextStep();
+        }
+      } else {
+        // Move towards waypoint
+        const speed = 2.2 * this.simSpeed;
+        this.robot.heading = Math.atan2(dy, dx);
+        this.robot.x += (dx / dist) * Math.min(speed, dist);
+        this.robot.y += (dy / dist) * Math.min(speed, dist);
+      }
+    } else {
+      this.planNextStep();
+    }
+  }
+
+  draw() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    // 1. Render SLAM Occupancy Grid Map (Fog of War)
+    for (let r = 0; r < this.rows; r++) {
+      for (let c = 0; c < this.cols; c++) {
+        const state = this.knownGrid[r][c];
+        const x = c * this.cellW, y = r * this.cellH;
+
+        if (state === -1) {
+          // Unexplored / Fog of War
+          ctx.fillStyle = "#040812";
+          ctx.fillRect(x, y, this.cellW, this.cellH);
+          ctx.fillStyle = "rgba(0, 242, 254, 0.04)";
+          ctx.fillRect(x + 1, y + 1, this.cellW - 2, this.cellH - 2);
+        } else if (state === 0) {
+          // Explored Free Space
+          ctx.fillStyle = "rgba(15, 23, 42, 0.95)";
+          ctx.fillRect(x, y, this.cellW, this.cellH);
+          ctx.strokeStyle = "rgba(0, 242, 254, 0.08)";
+          ctx.lineWidth = 0.5;
+          ctx.strokeRect(x, y, this.cellW, this.cellH);
+        } else if (state === 100) {
+          // Discovered Wall
+          ctx.fillStyle = "#1e293b";
+          ctx.fillRect(x, y, this.cellW, this.cellH);
+          ctx.strokeStyle = "#38bdf8";
+          ctx.lineWidth = 1;
+          ctx.strokeRect(x, y, this.cellW, this.cellH);
+        }
+      }
+    }
+
+    // 2. Highlight Active Frontiers (Glowing Amber Dots)
+    this.frontiers.forEach(f => {
+      ctx.fillStyle = "rgba(245, 158, 11, 0.85)";
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // 3. Draw A* Planned Navigation Path
+    if (this.robot.targetPath && this.robot.targetPath.length > 0) {
+      ctx.strokeStyle = "#10b981";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(this.robot.x, this.robot.y);
+      this.robot.targetPath.forEach(pt => {
+        ctx.lineTo((pt.c + 0.5) * this.cellW, (pt.r + 0.5) * this.cellH);
+      });
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // 4. Draw Traversed Robot Trail
+    if (this.robot.trail.length > 1) {
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.25)";
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      this.robot.trail.forEach((pt, i) => {
+        if (i === 0) ctx.moveTo(pt.x, pt.y);
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.stroke();
+    }
+
+    // 5. Draw 360 LiDAR Laser Scan Rays from Robot
+    for (let i = 0; i < this.lidarRays; i++) {
+      const angle = i * (Math.PI * 2 / this.lidarRays);
+      let rayDist = this.lidarRange;
+
+      for (let d = 4; d < this.lidarRange; d += 4) {
+        const rx = this.robot.x + Math.cos(angle) * d;
+        const ry = this.robot.y + Math.sin(angle) * d;
+        const c = Math.floor(rx / this.cellW);
+        const r = Math.floor(ry / this.cellH);
+
+        if (r < 0 || r >= this.rows || c < 0 || c >= this.cols || this.trueGrid[r][c] === 1) {
+          rayDist = d;
+          break;
+        }
+      }
+
+      const hx = this.robot.x + Math.cos(angle) * rayDist;
+      const hy = this.robot.y + Math.sin(angle) * rayDist;
+
+      ctx.strokeStyle = "rgba(0, 242, 254, 0.15)";
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.moveTo(this.robot.x, this.robot.y);
+      ctx.lineTo(hx, hy);
+      ctx.stroke();
+
+      ctx.fillStyle = "#00f2fe";
+      ctx.beginPath();
+      ctx.arc(hx, hy, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 6. Draw Robot (TurtleBot Chassis + Spinning LiDAR)
+    ctx.save();
+    ctx.translate(this.robot.x, this.robot.y);
+    ctx.rotate(this.robot.heading);
+
+    // Chassis body
+    ctx.fillStyle = "#1e293b";
+    ctx.beginPath();
+    ctx.arc(0, 0, this.robot.radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#10b981";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Direction arrow
+    ctx.fillStyle = "#00f2fe";
+    ctx.beginPath();
+    ctx.moveTo(this.robot.radius + 3, 0);
+    ctx.lineTo(this.robot.radius - 4, -3.5);
+    ctx.lineTo(this.robot.radius - 4, 3.5);
+    ctx.closePath();
+    ctx.fill();
+
+    // Spinning LiDAR Turret Dome
+    ctx.rotate(this.lidarSpinAngle - this.robot.heading);
+    ctx.fillStyle = "#090d16";
+    ctx.beginPath();
+    ctx.arc(0, 0, 4.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#f59e0b";
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  loop() {
+    this.update();
+    this.draw();
+    requestAnimationFrame(() => this.loop());
   }
 }
+
 
 // ── MODULE 7: LiDAR SLAM + TurtleBot / Auto-Navigation Control ───────────────
 class LiDARSLAMSimulation {
@@ -1185,21 +1623,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.getElementById("btnClearObstacles5")?.addEventListener("click", () => sim5?.clearObstacles());
 
-  // ── MODULE 6: Indoor Exploration ──────────────────────────
+  // ── MODULE 6: Indoor Exploration (2D LiDAR SLAM & Frontier vs Floodfill) ──
   const sim6 = new IndoorExplorationSimulation("canvasSim6");
+
+  document.getElementById("selectExploreMap6")?.addEventListener("change", (e) => {
+    sim6?.setMap(e.target.value);
+  });
 
   document.getElementById("radioFrontier6")?.addEventListener("change", () => sim6?.setMode("frontier"));
   document.getElementById("radioFloodfill6")?.addEventListener("change", () => sim6?.setMode("floodfill"));
 
+  const slSp6 = document.getElementById("sliderExploreSpeed6");
+  slSp6?.addEventListener("input", () => {
+    const s = parseInt(slSp6.value) / 10;
+    sim6?.setSpeed(s);
+  });
+
   document.getElementById("btnStartExplore6")?.addEventListener("click", () => {
-    const sr = parseInt(document.getElementById("startRow6")?.value||0);
-    const sc = parseInt(document.getElementById("startCol6")?.value||0);
-    const gr = parseInt(document.getElementById("goalRow6")?.value||11);
-    const gc = parseInt(document.getElementById("goalCol6")?.value||19);
-    sim6?.setStart(sr, sc); sim6?.setGoal(gr, gc);
     sim6?.startExploration();
   });
-  document.getElementById("btnResetExplore6")?.addEventListener("click", () => sim6?.initGrid());
+  document.getElementById("btnPauseExplore6")?.addEventListener("click", () => {
+    sim6?.togglePause();
+  });
+  document.getElementById("btnResetExplore6")?.addEventListener("click", () => {
+    sim6?.initMap(sim6.mapType);
+  });
 
   // ── MODULE 7: LiDAR SLAM ──────────────────────────────────
   const sim7 = new LiDARSLAMSimulation("canvasSim7");

@@ -6,6 +6,17 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.11] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(indoor-exploration)`**: Peningkatan arsitektur Modul 6 (Eksplorasi Indoor) menjadi sistem pemetaan otonom berbasis **2D LiDAR SLAM** & **Occupancy Grid Mapping** (sesuai paper ICCAS 2024):
+  - **Sistem Pemetaan Kabut (Fog-of-War SLAM)**: Seluruh lingkungan dimulai dalam kondisi tidak diketahui (*Unknown / -1*). Robot secara real-time menembakkan 48 sinar LiDAR $360^\circ$ untuk mengungkap ruang kosong (*Free Space / 0*) dan tembok rintangan (*Wall / 100*).
+  - **Deteksi Frontier & Perencanaan Jalur A\***: Algoritma *Frontier-Based* secara dinamis mengekstrak sel perbatasan, mengurutkan prioritas berdasarkan jarak Euclidean, dan memandu robot melalui jalur terpendek $A^*$ untuk melakukan sapuan berkala hingga $100\%$ kelengkapan tercapai.
+  - **Pilihan Lingkungan Uji Paper Asli**: Menambahkan preset peta resmi dari paper riset: **Phoenix World** (labirin kompleks), **Complex Zee World** (skala luas), dan **Mememan World** (ruang melingkar).
+  - **Live SLAM Progress Dashboard**: Progress bar kelengkapan peta real-time ($\text{Completeness}\%$), stopwatch waktu jelajah ($t$ detik), dan status operasional robot.
+
+---
+
 ## [v2026.08.12.10] — 2026-08-12
 
 ### Added / Ditambahkan

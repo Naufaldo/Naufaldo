@@ -451,43 +451,74 @@
       <!-- ===== TAB 6: Eksplorasi Indoor ===== -->
       <div class="sim-tab-content" id="tab6" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;">Modul 6: Eksplorasi Indoor — Floodfill vs Frontier-Based (ICCAS 2024)</h3>
-          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">BFS/Frontier dari posisi <strong style="color:#10b981;">Start [S]</strong> menuju <strong style="color:#ef4444;">Goal [G]</strong>. Set koordinat grid di bawah, lalu klik Mulai.</p>
-          <div class="sim-canvas-wrapper"><canvas id="canvasSim6"></canvas></div>
-          <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:0.75rem;">
-              <div>
-                <label style="font-size:0.78rem;color:#10b981;">Start Kolom (0–19)</label>
-                <input type="number" id="startCol6" min="0" max="19" value="0" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
-              </div>
-              <div>
-                <label style="font-size:0.78rem;color:#10b981;">Start Baris (0–11)</label>
-                <input type="number" id="startRow6" min="0" max="11" value="0" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
-              </div>
-              <div>
-                <label style="font-size:0.78rem;color:#ef4444;">Goal Kolom (0–19)</label>
-                <input type="number" id="goalCol6" min="0" max="19" value="19" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
-              </div>
-              <div>
-                <label style="font-size:0.78rem;color:#ef4444;">Goal Baris (0–11)</label>
-                <input type="number" id="goalRow6" min="0" max="11" value="11" style="width:100%;margin-top:0.25rem;padding:0.35rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;">
+            <h3 style="color:var(--accent-emerald);margin-bottom:0;">Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM &amp; Frontier vs Floodfill (ICCAS 2024)</h3>
+            <span class="paper-meta-badge" style="margin-bottom:0;"><i class="fa fa-book"></i> ICCAS 2024 (IEEE Xplore)</span>
+          </div>
+          <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.85rem;">
+            Simulasi pemetaan otonom ruangan yang belum diketahui (<em>unknown environment</em>) menggunakan sensor <strong>2D LiDAR</strong> &amp; <strong>Occupancy Grid SLAM</strong>. Robot memancarkan sinar laser untuk mengungkap area tersembunyi (<em>Fog-of-War</em>), mendeteksi sel perbatasan (<em>Frontiers</em>), dan merencanakan rute terpendek via A*.
+          </p>
+
+          <!-- Top Control Bar: Environment Preset & Algorithm Selector -->
+          <div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;background:rgba(0,0,0,0.35);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:1rem;">
+            <div>
+              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;">Lingkungan Uji (Paper Map):</label><br>
+              <select id="selectExploreMap6" style="margin-top:0.25rem;padding:0.4rem 0.6rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
+                <option value="phoenix">🗺 Phoenix World (Labirin Kompleks - Frontier 57.6% Lebih Cepat)</option>
+                <option value="complex_zee">⚡ Complex Zee World (Skala Luas - Frontier 60% Lebih Cepat)</option>
+                <option value="mememan">🏛 Mememan World (Ruangan Bundar &amp; Rintangan Simpel)</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;">Algoritma Eksplorasi:</label><br>
+              <div style="display:flex;gap:0.85rem;margin-top:0.4rem;">
+                <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.82rem;color:var(--accent-amber);">
+                  <input type="radio" name="exploreAlgo6" id="radioFrontier6" value="frontier" checked>
+                  <strong>Frontier-Based (A* Path)</strong>
+                </label>
+                <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.82rem;color:var(--primary-cyan);">
+                  <input type="radio" name="exploreAlgo6" id="radioFloodfill6" value="floodfill">
+                  <strong>Floodfill (BFS Murni)</strong>
+                </label>
               </div>
             </div>
-            <div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;margin-bottom:0.75rem;">
-              <span style="font-size:0.8rem;color:var(--text-secondary);">Algoritma:</span>
-              <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
-                <input type="radio" name="exploreAlgo6" id="radioFrontier6" value="frontier" checked>
-                <span style="font-size:0.82rem;color:var(--accent-amber);">🗺 Frontier-Based (Greedy-Goal)</span>
-              </label>
-              <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
-                <input type="radio" name="exploreAlgo6" id="radioFloodfill6" value="floodfill">
-                <span style="font-size:0.82rem;color:var(--primary-cyan);">🌊 Floodfill (BFS Murni)</span>
-              </label>
+            <div>
+              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;">Kecepatan Eksplorasi: <span id="exploreSpeedLabel6" style="color:var(--primary-cyan);">1.5×</span></label><br>
+              <input type="range" id="sliderExploreSpeed6" min="1" max="40" value="15" style="width:130px;margin-top:0.3rem;">
             </div>
-            <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
-              <button class="btn btn-primary btn-sm" id="btnStartExplore6"><i class="fa fa-play"></i> Mulai Eksplorasi</button>
-              <button class="btn btn-outline btn-sm" id="btnResetExplore6"><i class="fa fa-refresh"></i> Reset Grid</button>
+          </div>
+
+          <!-- Live SLAM Map Progress Dashboard -->
+          <div style="background:rgba(15,23,42,0.85);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:1rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.45rem;">
+              <div style="font-size:0.84rem;font-weight:600;color:#fff;">
+                <i class="fa fa-pie-chart" style="color:var(--primary-cyan);"></i> Kelengkapan Peta (Map Completeness): <span id="exploreCompleteness6" style="color:var(--primary-cyan);font-size:1.05rem;font-family:monospace;">0.0%</span>
+              </div>
+              <div style="font-size:0.82rem;color:var(--text-secondary);font-family:monospace;">
+                Waktu: <strong id="exploreTimer6" style="color:var(--accent-amber);font-size:0.95rem;">0.0s</strong> | Status: <strong id="exploreStatus6" style="color:#10b981;">SIAP</strong>
+              </div>
             </div>
+            <div style="width:100%;height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;">
+              <div id="exploreProgressBar6" style="width:0%;height:100%;background:linear-gradient(90deg, #00f2fe, #10b981);transition:width 0.15s ease;"></div>
+            </div>
+          </div>
+
+          <!-- Canvas Display -->
+          <div class="sim-canvas-wrapper" style="height:380px;position:relative;">
+            <canvas id="canvasSim6"></canvas>
+            <div style="position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.7);border:1px solid var(--border-color);border-radius:6px;padding:4px 8px;font-size:0.72rem;font-family:monospace;color:var(--text-secondary);pointer-events:none;display:flex;gap:0.8rem;align-items:center;">
+              <span><span style="display:inline-block;width:8px;height:8px;background:#050b14;border:1px solid #334155;margin-right:3px;"></span> Unexplored</span>
+              <span><span style="display:inline-block;width:8px;height:8px;background:rgba(0,242,254,0.25);border:1px solid #00f2fe;margin-right:3px;"></span> Free Space</span>
+              <span><span style="display:inline-block;width:8px;height:8px;background:#38bdf8;margin-right:3px;"></span> Wall</span>
+              <span><span style="display:inline-block;width:8px;height:8px;background:#f59e0b;border-radius:50%;margin-right:3px;"></span> Frontier</span>
+            </div>
+          </div>
+
+          <!-- Control Buttons -->
+          <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+            <button class="btn btn-primary btn-sm" id="btnStartExplore6"><i class="fa fa-play"></i> Mulai Eksplorasi LiDAR</button>
+            <button class="btn btn-outline btn-sm" id="btnPauseExplore6"><i class="fa fa-pause"></i> Jeda / Lanjutkan</button>
+            <button class="btn btn-outline btn-sm" id="btnResetExplore6"><i class="fa fa-refresh"></i> Reset Peta</button>
           </div>
 
           <!-- Scientific Paper Theory & Formula Box -->
