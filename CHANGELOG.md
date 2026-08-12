@@ -6,6 +6,17 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.14] — 2026-08-12
+
+### Fixed / Diperbaiki
+- **`fix(indoor-exploration)`**: Perbaikan menyeluruh arsitektur navigasi eksplorasi Modul 6 untuk mencegah crash/freeze saat tombol Mulai Eksplorasi diklik:
+  - Menggantikan perulangan rekursif sinkron $A^*$ yang rentan *infinite loop* dengan **Step-by-Step BFS Gradient Navigation** yang dieksekusi bertahap per-sel.
+  - Membatasi pencarian graf pada resolusi grid $24 \times 14$ ($< 0.02\text{ms}$ per pencarian).
+  - Menghilangkan *recursion lock* pada frame update dan menambahkan blok penanganan protektif `try...catch` serta *safe fallback neighbors*.
+  - Pergerakan robot antar-sel kini sepenuhnya mulus dengan transisi interpolasi linier tanpa membebani browser.
+
+---
+
 ## [v2026.08.12.13] — 2026-08-12
 
 ### Added / Ditambahkan
