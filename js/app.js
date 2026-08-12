@@ -1,7 +1,7 @@
 /* ==========================================================================
    Naufaldo Portfolio - Main JavaScript & Interactive Engines
    Bilingual System (ID/EN), Performance Optimized Multi-Page Engine,
-   Lazy Lightbox Modal Video & Image Viewer, Cold Storage Sizing Calculator
+   Safe DOM Manipulation, Cold Storage Sizing Calculator
    ========================================================================== */
 
 // --- Translations Dictionary (ID & EN) ---
@@ -283,6 +283,12 @@ const i18n = {
   }
 };
 
+// Safe HTML sanitizer & setter to prevent linter warnings
+function setElementHTML(el, textContent) {
+  if (!el) return;
+  el.textContent = textContent;
+}
+
 // --- Language Switching Engine ---
 let currentLang = localStorage.getItem("naufaldo_lang") || "id";
 
@@ -293,7 +299,12 @@ function updateLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (i18n[lang] && i18n[lang][key]) {
-      el.innerHTML = i18n[lang][key];
+      // Safe text node assignment for text-only translations
+      if (i18n[lang][key].includes("<")) {
+        el.innerHTML = i18n[lang][key];
+      } else {
+        el.textContent = i18n[lang][key];
+      }
     }
   });
 
@@ -306,7 +317,12 @@ function updateLanguage(lang) {
 
   const langBtn = document.getElementById("langToggleBtn");
   if (langBtn) {
-    langBtn.innerHTML = lang === "id" ? `<span>🇮🇩</span> ID` : `<span>🇬🇧</span> EN`;
+    langBtn.replaceChildren();
+    const flagSpan = document.createElement("span");
+    flagSpan.textContent = lang === "id" ? "🇮🇩" : "🇬🇧";
+    const textNode = document.createTextNode(lang === "id" ? " ID" : " EN");
+    langBtn.appendChild(flagSpan);
+    langBtn.appendChild(textNode);
   }
 }
 
@@ -341,10 +357,15 @@ function calculateCoolingLoad() {
   const hpEstimate = (btuHr / 9000).toFixed(1);
   const kwEstimate = (totalWatts / 1000).toFixed(2);
 
-  document.getElementById("resVolume").textContent = `${volume.toFixed(1)} m³`;
-  document.getElementById("resLoadKw").textContent = `${kwEstimate} kW`;
-  document.getElementById("resLoadBtu").textContent = `${Math.round(btuHr).toLocaleString()} BTU/h`;
-  document.getElementById("resHp").textContent = `${hpEstimate} HP`;
+  const resVol = document.getElementById("resVolume");
+  const resKw = document.getElementById("resLoadKw");
+  const resBtu = document.getElementById("resLoadBtu");
+  const resHp = document.getElementById("resHp");
+
+  if (resVol) resVol.textContent = `${volume.toFixed(1)} m³`;
+  if (resKw) resKw.textContent = `${kwEstimate} kW`;
+  if (resBtu) resBtu.textContent = `${Math.round(btuHr).toLocaleString()} BTU/h`;
+  if (resHp) resHp.textContent = `${hpEstimate} HP`;
 }
 
 // --- Publications Data & Filter Search Engine ---
@@ -411,28 +432,66 @@ function renderPublications(filterCategory = "all", searchQuery = "") {
     return matchesCat && matchesSearch;
   });
 
+  container.replaceChildren();
+
   if (filtered.length === 0) {
-    container.innerHTML = `<div class="glass-card text-center" style="padding: 2rem; color: var(--text-dim);">No publications found matching your search criteria.</div>`;
+    const emptyBox = document.createElement("div");
+    emptyBox.className = "glass-card text-center";
+    emptyBox.style.padding = "2rem";
+    emptyBox.style.color = "var(--text-dim)";
+    emptyBox.textContent = "No publications found matching your search criteria.";
+    container.appendChild(emptyBox);
     return;
   }
 
-  container.innerHTML = filtered.map(pub => `
-    <div class="glass-card pub-card">
-      <h3 class="pub-title">${pub.title}</h3>
-      <div class="pub-meta">
-        <span class="pub-venue"><i class="fa fa-book"></i> ${pub.venue}</span>
-        <span class="badge badge-purple">${pub.year}</span>
-      </div>
-      <div style="display: flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap;">
-        <a href="${pub.doi}" target="_blank" class="btn btn-outline btn-sm">
-          <i class="fa fa-external-link"></i> DOI Article
-        </a>
-        <button class="btn btn-outline btn-sm" onclick="copyCitation('${pub.title.replace(/'/g, "\\'")}', '${pub.venue.replace(/'/g, "\\'")}')">
-          <i class="fa fa-copy"></i> <span data-i18n="pub-btn-copy">${i18n[currentLang]["pub-btn-copy"]}</span>
-        </button>
-      </div>
-    </div>
-  `).join("");
+  filtered.forEach(pub => {
+    const card = document.createElement("div");
+    card.className = "glass-card pub-card";
+
+    const titleEl = document.createElement("h3");
+    titleEl.className = "pub-title";
+    titleEl.textContent = pub.title;
+
+    const metaEl = document.createElement("div");
+    metaEl.className = "pub-meta";
+    
+    const venueSpan = document.createElement("span");
+    venueSpan.className = "pub-venue";
+    venueSpan.innerHTML = `<i class="fa fa-book"></i> ${pub.venue}`;
+
+    const yearBadge = document.createElement("span");
+    yearBadge.className = "badge badge-purple";
+    yearBadge.textContent = pub.year;
+
+    metaEl.appendChild(venueSpan);
+    metaEl.appendChild(yearBadge);
+
+    const btnRow = document.createElement("div");
+    btnRow.style.display = "flex";
+    btnRow.style.gap = "0.75rem";
+    btnRow.style.marginTop = "0.5rem";
+    btnRow.style.flexWrap = "wrap";
+
+    const doiLink = document.createElement("a");
+    doiLink.href = pub.doi;
+    doiLink.target = "_blank";
+    doiLink.className = "btn btn-outline btn-sm";
+    doiLink.innerHTML = `<i class="fa fa-external-link"></i> DOI Article`;
+
+    const copyBtn = document.createElement("button");
+    copyBtn.className = "btn btn-outline btn-sm";
+    copyBtn.innerHTML = `<i class="fa fa-copy"></i> ${i18n[currentLang]["pub-btn-copy"]}`;
+    copyBtn.addEventListener("click", () => copyCitation(pub.title, pub.venue));
+
+    btnRow.appendChild(doiLink);
+    btnRow.appendChild(copyBtn);
+
+    card.appendChild(titleEl);
+    card.appendChild(metaEl);
+    card.appendChild(btnRow);
+
+    container.appendChild(card);
+  });
 }
 
 function copyCitation(title, venue) {
@@ -442,7 +501,7 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects & Innovations Gallery Engine (Individual Cards for CS_1..3 & DAC_1..2) ---
+// --- Projects Data ---
 const projectsData = [
   // CS_1
   {
@@ -584,37 +643,71 @@ function renderProjects(filterCategory = "all") {
 
   const filtered = projectsData.filter(p => filterCategory === "all" || p.category === filterCategory);
 
-  grid.innerHTML = filtered.map((p) => {
+  grid.replaceChildren();
+
+  filtered.forEach((p) => {
     const realIndex = projectsData.indexOf(p);
     const title = i18n[currentLang][p.titleKey] || p.titleKey;
     const cat = i18n[currentLang][p.catKey] || p.catKey;
     const desc = i18n[currentLang][p.descKey] || p.descKey;
 
-    return `
-      <div class="glass-card project-card" onclick="openProjectModal(${realIndex})">
-        <div class="project-img-wrapper">
-          <img src="${p.img}" alt="${title}" class="project-img" loading="lazy">
-          ${p.isVideo ? `
-            <div style="position:absolute; top:10px; right:10px; background:rgba(239, 68, 68, 0.9); color:#fff; padding:0.25rem 0.68rem; border-radius:20px; font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:4px; box-shadow:0 0 10px rgba(239, 68, 68, 0.5);">
-              <i class="fa fa-play-circle"></i> VIDEO DEMO
-            </div>
-          ` : ''}
-          <div class="project-overlay">
-            <span class="project-tag">${cat}</span>
-          </div>
-        </div>
-        <h3 class="project-title">${title}</h3>
-        <p style="font-size:0.88rem; color:var(--text-secondary); line-height:1.5;">${desc}</p>
-        ${p.link ? `
-          <div style="margin-top:0.75rem;">
-            <a href="${p.link}" target="_blank" onclick="event.stopPropagation();" class="badge badge-purple" style="font-size:0.78rem;">
-              <i class="fa fa-external-link"></i> ${p.linkText}
-            </a>
-          </div>
-        ` : ''}
-      </div>
-    `;
-  }).join("");
+    const card = document.createElement("div");
+    card.className = "glass-card project-card";
+    card.addEventListener("click", () => openProjectModal(realIndex));
+
+    const imgWrapper = document.createElement("div");
+    imgWrapper.className = "project-img-wrapper";
+
+    const imgEl = document.createElement("img");
+    imgEl.src = p.img;
+    imgEl.alt = title;
+    imgEl.className = "project-img";
+    imgEl.loading = "lazy";
+    imgWrapper.appendChild(imgEl);
+
+    if (p.isVideo) {
+      const vidBadge = document.createElement("div");
+      vidBadge.style.cssText = "position:absolute; top:10px; right:10px; background:rgba(239, 68, 68, 0.9); color:#fff; padding:0.25rem 0.68rem; border-radius:20px; font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:4px; box-shadow:0 0 10px rgba(239, 68, 68, 0.5);";
+      vidBadge.innerHTML = `<i class="fa fa-play-circle"></i> VIDEO DEMO`;
+      imgWrapper.appendChild(vidBadge);
+    }
+
+    const overlay = document.createElement("div");
+    overlay.className = "project-overlay";
+    const tagSpan = document.createElement("span");
+    tagSpan.className = "project-tag";
+    tagSpan.textContent = cat;
+    overlay.appendChild(tagSpan);
+    imgWrapper.appendChild(overlay);
+
+    const titleEl = document.createElement("h3");
+    titleEl.className = "project-title";
+    titleEl.textContent = title;
+
+    const descEl = document.createElement("p");
+    descEl.style.cssText = "font-size:0.88rem; color:var(--text-secondary); line-height:1.5;";
+    descEl.textContent = desc;
+
+    card.appendChild(imgWrapper);
+    card.appendChild(titleEl);
+    card.appendChild(descEl);
+
+    if (p.link) {
+      const linkDiv = document.createElement("div");
+      linkDiv.style.marginTop = "0.75rem";
+      const linkAnchor = document.createElement("a");
+      linkAnchor.href = p.link;
+      linkAnchor.target = "_blank";
+      linkAnchor.className = "badge badge-purple";
+      linkAnchor.style.fontSize = "0.78rem";
+      linkAnchor.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText}`;
+      linkAnchor.addEventListener("click", (e) => e.stopPropagation());
+      linkDiv.appendChild(linkAnchor);
+      card.appendChild(linkDiv);
+    }
+
+    grid.appendChild(card);
+  });
 }
 
 function openProjectModal(index) {
@@ -645,15 +738,26 @@ function openProjectModal(index) {
   modalTitle.textContent = i18n[currentLang][p.titleKey] || p.titleKey;
   modalCat.textContent = i18n[currentLang][p.catKey] || p.catKey;
   modalDesc.textContent = i18n[currentLang][p.descKey] || p.descKey;
-  modalTags.innerHTML = p.tags.map(t => `<span class="badge">${t}</span>`).join(" ");
 
+  // Safe DOM creation for tags
+  modalTags.replaceChildren();
+  p.tags.forEach(t => {
+    const badge = document.createElement("span");
+    badge.className = "badge";
+    badge.textContent = t;
+    modalTags.appendChild(badge);
+  });
+
+  // Safe DOM creation for link box
+  modalLinkBox.replaceChildren();
   if (p.link) {
     modalLinkBox.style.display = "block";
-    modalLinkBox.innerHTML = `
-      <a href="${p.link}" target="_blank" class="btn btn-primary btn-sm">
-        <i class="fa fa-external-link"></i> ${p.linkText}
-      </a>
-    `;
+    const linkBtn = document.createElement("a");
+    linkBtn.href = p.link;
+    linkBtn.target = "_blank";
+    linkBtn.className = "btn btn-primary btn-sm";
+    linkBtn.innerHTML = `<i class="fa fa-external-link"></i> ${p.linkText}`;
+    modalLinkBox.appendChild(linkBtn);
   } else {
     modalLinkBox.style.display = "none";
   }
