@@ -211,15 +211,28 @@ const i18n = {
     "sim1-mode-circular": "⭕ Trajektori Circular (Melingkar)",
     "sim1-label-form": "Formasi Swarm:",
     "sim1-param-followers": "Jumlah Follower:",
-    "sim1-param-spacing": "Jarak Spasi Formasi (d):",
+    "sim1-param-spacing": "Jarak Spasi (d):",
     "sim1-param-kp": "PID Gain (Kp):",
-    "sim1-param-speed": "Kecepatan Gerak:",
+    "sim1-param-speed": "Kecepatan:",
     "sim1-param-apf": "Gaya Tolak APF:",
     "sim1-btn-reset": "↺ Reset Robot & Rintangan",
     "sim1-btn-add-obs": "+ Tambah Rintangan APF",
     "sim1-btn-clear-obs": "🗑 Hapus Semua Rintangan",
     "sim1-theory-title": "Landasan Teori & Persamaan Matematis (Paper ICCAS 2025)",
     "sim1-paper-meta": "Publikasi Asli: 25th ICCAS 2025, Songdo Convensia, Incheon, Korea (IEEE / ICROS)",
+    "sim1-paper-lead": "<strong>Judul Paper:</strong> <em>Fuzzy-Tuned PID Control for Dynamic Formation of Differential-Wheeled Mobile Robots with APF-Based Obstacle Avoidance</em> (Naufaldo &amp; Hsiu-Ming Wu, 2025).",
+    "sim1-subhead-1": "<i class=\"fa fa-code-fork\"></i> 1. Model Kinematika Diferensial DWMR",
+    "sim1-p1": "Setiap robot dimodelkan sebagai unicycle beroda diferensial dengan radius roda r dan jarak sumbu roda b. Kecepatan maju linier V dan laju yaw ω dirumuskan:",
+    "sim1-eq1-title": "Persamaan Kinematika Diferensial &amp; Ruang Keadaan",
+    "sim1-subhead-2": "<i class=\"fa fa-circle-o-notch\"></i> 2. Formasi Dinamis Relatif thd Virtual Leader",
+    "sim1-p2": "Posisi target q_di(t) untuk robot follower i dihitung dari orientasi virtual leader θ_L(t) dengan offset berotasi o_i(t):",
+    "sim1-eq2-title": "Offset Formasi Berputar &amp; Transformasi Global",
+    "sim1-subhead-3": "<i class=\"fa fa-shield\"></i> 3. Artificial Potential Field (APF) Multi-Agent",
+    "sim1-p3": "Medan potensial total U(q_i) menggabungkan gaya tarik atraktif ke titik formasi dan gaya tolak repulsif dari rintangan statis serta tetangga agent:",
+    "sim1-eq3-title": "Potensial Gabungan &amp; Vektor Gaya APF",
+    "sim1-subhead-4": "<i class=\"fa fa-sliders\"></i> 4. Hukum Kendali Fuzzy-Tuned PID &amp; APF Steering",
+    "sim1-eq4-title": "Perintah Kecepatan Linier &amp; Angular Adaptif",
+    "sim1-p4": "Gain K_pi dan K_ai diskalakan secara real-time oleh <em>Mamdani Fuzzy Inference System</em> berdasarkan error posisi (e_p, e_dot_p) dan orientasi (e_theta, e_dot_theta).",
 
     // Module 2 Bilingual Keys (ID)
     "sim2-title": "Modul 2: Model Matematika Kinematika Mecanum (MWDR) & Trajectory Tracking",
@@ -228,6 +241,14 @@ const i18n = {
     "sim2-btn-pid": "🎯 PID Trajectory",
     "sim2-theory-title": "Landasan Teori Kinematika Mecanum (Paper IJCAS 2026 / Springer)",
     "sim2-paper-meta": "Publikasi Asli: International Journal of Control, Automation, and Systems (IJCAS 2026 / Springer Nature)",
+    "sim2-paper-lead": "<strong>Judul Paper:</strong> <em>Robot Coordination in Multi-agent Systems: Leader-Dependent Following Configuration Control of Mecanum Wheeled Drive Robots</em> (Naufaldo, Hsiu-Ming Wu, Muhammad Qomaruz Zaman, 2026).",
+    "sim2-subhead-1": "<i class=\"fa fa-cogs\"></i> 1. Matriks Kinematika Invers Roda Mecanum (MWDR)",
+    "sim2-p1": "Pemetaan dari kecepatan bodi robot [VxR, VyR, ωz]^T ke kecepatan sudut 4 roda Mecanum (ω1, ω2, ω3, ω4):",
+    "sim2-eq1-title": "Persamaan Invers Kinematika MWDR (Eq. 1 Paper)",
+    "sim2-subhead-2": "<i class=\"fa fa-refresh\"></i> 2. Matriks Kinematika Maju / Forward Kinematics",
+    "sim2-eq2-title": "Persamaan Direct Kinematika MWDR (Eq. 2 Paper)",
+    "sim2-subhead-3": "<i class=\"fa fa-compass\"></i> 3. Trajectory Tracking &amp; Kendali PD Leader-Dependent",
+    "sim2-eq3-title": "Persamaan Trajektori Sirkular &amp; Lemniscate (Eq. 3-4 Paper)",
 
     // Module 3 Bilingual Keys (ID)
     "sim3-title": "Modul 3: Path Tracking vs Trajectory Tracking",
@@ -236,17 +257,33 @@ const i18n = {
     "sim3-mode-path": "Path Tracking (Pure Pursuit)",
     "sim3-mode-traj": "Trajectory Tracking (Time-Sync)",
     "sim3-theory-title": "Landasan Teori Path vs Trajectory Tracking",
+    "sim3-subhead-1": "<i class=\"fa fa-map-signs\"></i> 1. Path Tracking (Pure Pursuit — Bebas Batasan Waktu)",
+    "sim3-p1": "Robot bertugas mengikuti bentuk geometris lintasan f(x,y)=0 tanpa kendala kapan harus mencapai titik tertentu. Kecepatan linier menyesuaikan kelengkungan kurva untuk meminimalkan cross-track error:",
+    "sim3-eq1-title": "Formulasi Pure Pursuit &amp; Cross-Track Error",
+    "sim3-subhead-2": "<i class=\"fa fa-clock-o\"></i> 2. Trajectory Tracking (Time-Sync Parameterized)",
+    "sim3-p2": "Robot <strong>terikat secara tegas oleh parameter waktu t</strong>. Pada detik ke-t_k, robot wajib berada pada titik target tertentu (x_ref, y_ref).",
+    "sim3-eq2-title": "Vektor Error Spatiotemporal Trajectory",
 
     // Module 4 Bilingual Keys (ID)
     "sim4-title": "Modul 4: Target Tracking Kamera OpenCV & Visual Servoing (SICE FES 2025)",
     "sim4-desc": "Simulasi visual tracking HSV & kalkulasi error offset piksel (ex, ey) untuk mengendalikan aktuator gimbal kamera 2-DOF.",
     "sim4-theory-title": "Landasan Teori Visual Servoing (Paper SICE FES 2025)",
     "sim4-paper-meta": "Publikasi Asli: SICE FES 2025, Hiroshima, Japan",
+    "sim4-subhead-1": "<i class=\"fa fa-camera\"></i> 1. Estimasi Jarak berbasis Dimensi Bounding Box Piksel",
+    "sim4-p1": "Berdasarkan model kamera lubang jarum (pinhole camera model), jarak metrik diestimasi dari rasio lebar piksel objek terhadap lebar fisik target:",
+    "sim4-eq1-title": "Estimasi Jarak Pinhole Model &amp; Sudut Deviasi Horizontal",
+    "sim4-subhead-2": "<i class=\"fa fa-crosshairs\"></i> 2. Hukum Kendali Kecepatan Image-Based Visual Servoing (IBVS)",
+    "sim4-eq2-title": "Kontrol Kecepatan Linier &amp; Angular Kamera Onboard",
 
     // Module 5 Bilingual Keys (ID)
     "sim5-title": "Modul 5: Swarm Drone Flocking & 3D APF Formation",
     "sim5-desc": "Simulasi flocking multi-UAV menggunakan aturan Reynolds (Cohesion, Separation, Alignment) dengan gaya tarik goal APF.",
     "sim5-theory-title": "Landasan Teori Swarm Flocking Reynolds & APF 3D",
+    "sim5-paper-meta": "Publikasi Asli: 2025 SICE Festival with Annual Conference (SICE FES 2025, Chiang Mai, Thailand)",
+    "sim5-paper-lead": "<strong>Judul Paper:</strong> <em>Dynamic Goal-Shifting and Sinusoidal Altitude Modulation for Flight Control of a Swarm of Quadcopters with Flocking Dynamics</em> (Naufaldo, Hsiu-Ming Wu, Muhammad Qomaruz Zaman, 2025).",
+    "sim5-subhead-1": "<i class=\"fa fa-sitemap\"></i> 1. Model Konsensus Multi-Agent Graph Laplacian",
+    "sim5-p1": "Topologi komunikasi kawanan drone dimodelkan sebagai graf tak berarah. Matriks derajat D, ketetanggaan A, dan Laplacian L mengatur konsensus posisi:",
+    "sim5-eq1-title": "Persamaan Dinamika Laplacian &amp; Konsensus Flocking",
 
     // Module 6 Bilingual Keys
     "sim6-title": "Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",
@@ -265,6 +302,15 @@ const i18n = {
     "sim6-algo-floodfill": "Floodfill (BFS Murni)",
     "sim6-theory-title": "Landasan Teori Eksplorasi Labirin (Paper ICCAS 2024 / IEEE)",
     "sim6-paper-meta": "Publikasi Asli: 24th ICCAS 2024, Jeju Shinhwa World, Jeju, Korea (IEEE / ICROS)",
+    "sim6-paper-lead": "<strong>Judul Paper:</strong> <em>Comparative Analysis of Autonomous Indoor Exploration Strategies: Floodfill algorithm vs. Frontier-Based Method</em> (Naufaldo &amp; Hsiu-Ming Wu, 2024).",
+    "sim6-subhead-1": "<i class=\"fa fa-bar-chart\"></i> 1. Metrik Kelengkapan Peta (Map Completeness)",
+    "sim6-eq1-title": "Formula Kelengkapan Peta (Eq. 1 Paper)",
+    "sim6-subhead-2": "<i class=\"fa fa-table\"></i> 2. Perbandingan Kinerja Eksperimental Paper Asli",
+    "sim6-table-th1": "Lingkungan Uji",
+    "sim6-table-th2": "Waktu Floodfill",
+    "sim6-table-th3": "Waktu Frontier-Based",
+    "sim6-table-th4": "Peningkatan Efisiensi",
+    "sim6-takeaway": "Hasil riset membuktikan bahwa algoritma <strong>Frontier-Based</strong> unggul signifikan pada peta kompleks berskala luas karena memprioritaskan sel perbatasan (<em>frontiers</em>) dan merencanakan rute terpendek via A* &amp; DWA.",
 
     // Module 7 Bilingual Keys
     "sim7-title": "Modul 7: Navigasi Otonom & Pemetaan LiDAR SLAM (IJRA 2024)",
@@ -277,6 +323,12 @@ const i18n = {
     "sim7-label-polar": "Onboard LiDAR Polar Scope (Pandangan Robot)",
     "sim7-theory-title": "Landasan Teori Pemetaan LiDAR SLAM & Log-Odds Grid (Paper IJRA 2024)",
     "sim7-paper-meta": "Publikasi Asli: International Journal of Robotics and Automation (IJRA 2024 / MDPI)",
+    "sim7-paper-lead": "<strong>Fokus Riset:</strong> <em>Autonomous Exploration and LiDAR SLAM with Reactive Navigation for Search and Rescue Hexapod &amp; Mobile Robots</em>.",
+    "sim7-subhead-1": "<i class=\"fa fa-rss\"></i> 1. Occupancy Grid Mapping (Bentuk Log-Odds)",
+    "sim7-p1": "Setiap berkas sinar laser LiDAR mengupdate probabilitas okupansi sel grid menggunakan update rekursif Bayesian log-odds:",
+    "sim7-eq1-title": "Persamaan Update Log-Odds Occupancy Grid",
+    "sim7-subhead-2": "<i class=\"fa fa-arrows\"></i> 2. Model Ray-Casting &amp; Navigasi Reaktif TurtleBot",
+    "sim7-eq2-title": "Model Berkas Sinar LiDAR 2D &amp; Kemudi Reaktif",
 
     // Contact
     "contact-title": "Hubungi Saya",
@@ -510,6 +562,19 @@ const i18n = {
     "sim1-btn-clear-obs": "🗑 Clear All Obstacles",
     "sim1-theory-title": "Theoretical Foundations & Mathematical Formulas (Paper ICCAS 2025)",
     "sim1-paper-meta": "Original Publication: 25th ICCAS 2025, Songdo Convensia, Incheon, Korea (IEEE / ICROS)",
+    "sim1-paper-lead": "<strong>Paper Title:</strong> <em>Fuzzy-Tuned PID Control for Dynamic Formation of Differential-Wheeled Mobile Robots with APF-Based Obstacle Avoidance</em> (Naufaldo &amp; Hsiu-Ming Wu, 2025).",
+    "sim1-subhead-1": "<i class=\"fa fa-code-fork\"></i> 1. DWMR Differential Kinematic Model",
+    "sim1-p1": "Each mobile robot is modeled as a differential-wheeled unicycle with wheel radius r and wheelbase track b. Linear forward velocity V and yaw rate ω are formulated as:",
+    "sim1-eq1-title": "Differential Kinematic &amp; State-Space Equations",
+    "sim1-subhead-2": "<i class=\"fa fa-circle-o-notch\"></i> 2. Dynamic Formation Relative to Virtual Leader",
+    "sim1-p2": "The target pose q_di(t) for follower robot i is calculated from the virtual leader's orientation θ_L(t) via rotated offset vector o_i(t):",
+    "sim1-eq2-title": "Rotated Formation Offset &amp; Global Coordinate Transformation",
+    "sim1-subhead-3": "<i class=\"fa fa-shield\"></i> 3. Multi-Agent Artificial Potential Field (APF)",
+    "sim1-p3": "Total potential field U(q_i) superimposes attractive potential toward formation goals and repulsive potential from obstacles &amp; inter-agent neighbors:",
+    "sim1-eq3-title": "Composite Potential Function &amp; APF Force Vectors",
+    "sim1-subhead-4": "<i class=\"fa fa-sliders\"></i> 4. Fuzzy-Tuned PID &amp; APF Steering Control Law",
+    "sim1-eq4-title": "Adaptive Linear &amp; Angular Velocity Commands",
+    "sim1-p4": "Gains K_pi and K_ai are dynamically scaled in real time via a <em>Mamdani Fuzzy Inference System</em> based on position and heading errors.",
 
     // Module 2 Bilingual Keys (EN)
     "sim2-title": "Module 2: Mecanum Kinematics Mathematical Model (MWDR) & Trajectory Tracking",
@@ -518,6 +583,14 @@ const i18n = {
     "sim2-btn-pid": "🎯 PID Trajectory",
     "sim2-theory-title": "Mecanum Kinematics Foundations (Paper IJCAS 2026 / Springer)",
     "sim2-paper-meta": "Original Publication: International Journal of Control, Automation, and Systems (IJCAS 2026 / Springer Nature)",
+    "sim2-paper-lead": "<strong>Paper Title:</strong> <em>Robot Coordination in Multi-agent Systems: Leader-Dependent Following Configuration Control of Mecanum Wheeled Drive Robots</em> (Naufaldo, Hsiu-Ming Wu, Muhammad Qomaruz Zaman, 2026).",
+    "sim2-subhead-1": "<i class=\"fa fa-cogs\"></i> 1. Mecanum Wheel Inverse Kinematics Matrix (MWDR)",
+    "sim2-p1": "Mapping from robot body velocities [VxR, VyR, ωz]^T to four Mecanum wheel angular speeds (ω1, ω2, ω3, ω4):",
+    "sim2-eq1-title": "MWDR Inverse Kinematic Equations (Paper Eq. 1)",
+    "sim2-subhead-2": "<i class=\"fa fa-refresh\"></i> 2. Forward Kinematics Matrix",
+    "sim2-eq2-title": "MWDR Direct Forward Kinematics (Paper Eq. 2)",
+    "sim2-subhead-3": "<i class=\"fa fa-compass\"></i> 3. Trajectory Tracking &amp; Leader-Dependent PD Control",
+    "sim2-eq3-title": "Circular &amp; Lemniscate Trajectory Formulation (Paper Eq. 3-4)",
 
     // Module 3 Bilingual Keys (EN)
     "sim3-title": "Module 3: Path Tracking vs Trajectory Tracking",
@@ -526,17 +599,33 @@ const i18n = {
     "sim3-mode-path": "Path Tracking (Pure Pursuit)",
     "sim3-mode-traj": "Trajectory Tracking (Time-Sync)",
     "sim3-theory-title": "Path vs Trajectory Tracking Theory",
+    "sim3-subhead-1": "<i class=\"fa fa-map-signs\"></i> 1. Path Tracking (Pure Pursuit — Geometric Tracking)",
+    "sim3-p1": "The robot tracks geometric path curvature f(x,y)=0 without strict arrival time stamps. Forward velocity adjusts dynamically to minimize cross-track errors:",
+    "sim3-eq1-title": "Pure Pursuit Formulation &amp; Cross-Track Error",
+    "sim3-subhead-2": "<i class=\"fa fa-clock-o\"></i> 2. Trajectory Tracking (Time-Synchronized Spatiotemporal)",
+    "sim3-p2": "The robot is <strong>strictly constrained by time parameter t</strong>. At timestamp t_k, the robot must reach exact coordinates (x_ref, y_ref).",
+    "sim3-eq2-title": "Spatiotemporal Trajectory Error Vector",
 
     // Module 4 Bilingual Keys (EN)
     "sim4-title": "Module 4: OpenCV Camera Target Tracking & Visual Servoing (SICE FES 2025)",
     "sim4-desc": "Simulation of HSV visual object tracking & pixel offset error calculation (ex, ey) to drive a 2-DOF camera gimbal actuator.",
     "sim4-theory-title": "Visual Servoing Foundations (Paper SICE FES 2025)",
     "sim4-paper-meta": "Original Publication: SICE FES 2025, Hiroshima, Japan",
+    "sim4-subhead-1": "<i class=\"fa fa-camera\"></i> 1. Distance Estimation from Bounding Box Pixel Geometry",
+    "sim4-p1": "Based on the pinhole camera projection model, metric distance is estimated from target bounding box pixel width relative to known physical width:",
+    "sim4-eq1-title": "Pinhole Distance Estimation &amp; Horizontal Angle Deviation",
+    "sim4-subhead-2": "<i class=\"fa fa-crosshairs\"></i> 2. Image-Based Visual Servoing (IBVS) Velocity Control Law",
+    "sim4-eq2-title": "Onboard Gimbal Linear &amp; Angular Velocity Control",
 
     // Module 5 Bilingual Keys (EN)
     "sim5-title": "Module 5: Swarm Drone Flocking & 3D APF Formation",
     "sim5-desc": "Multi-UAV flocking simulation utilizing Reynolds rules (Cohesion, Separation, Alignment) combined with 3D APF goal attraction.",
     "sim5-theory-title": "Reynolds Swarm Flocking & 3D APF Foundations",
+    "sim5-paper-meta": "Original Publication: 2025 SICE Festival with Annual Conference (SICE FES 2025, Chiang Mai, Thailand)",
+    "sim5-paper-lead": "<strong>Paper Title:</strong> <em>Dynamic Goal-Shifting and Sinusoidal Altitude Modulation for Flight Control of a Swarm of Quadcopters with Flocking Dynamics</em> (Naufaldo, Hsiu-Ming Wu, Muhammad Qomaruz Zaman, 2025).",
+    "sim5-subhead-1": "<i class=\"fa fa-sitemap\"></i> 1. Multi-Agent Consensus &amp; Graph Laplacian Model",
+    "sim5-p1": "Multi-UAV communication topology is modeled as an undirected graph. Degree matrix D, adjacency matrix A, and Laplacian L govern positional consensus:",
+    "sim5-eq1-title": "Laplacian Dynamics &amp; Flocking Consensus Equations",
 
     // Module 6 Bilingual Keys (EN)
     "sim6-title": "Module 6: Autonomous Indoor Exploration via 2D LiDAR SLAM & Frontier vs Floodfill (ICCAS 2024)",
@@ -555,6 +644,15 @@ const i18n = {
     "sim6-algo-floodfill": "Floodfill (BFS Wavefront)",
     "sim6-theory-title": "Maze Exploration Theory (Paper ICCAS 2024 / IEEE)",
     "sim6-paper-meta": "Original Publication: 24th ICCAS 2024, Jeju Shinhwa World, Jeju, Korea (IEEE / ICROS)",
+    "sim6-paper-lead": "<strong>Paper Title:</strong> <em>Comparative Analysis of Autonomous Indoor Exploration Strategies: Floodfill algorithm vs. Frontier-Based Method</em> (Naufaldo &amp; Hsiu-Ming Wu, 2024).",
+    "sim6-subhead-1": "<i class=\"fa fa-bar-chart\"></i> 1. Map Completeness Evaluation Metric",
+    "sim6-eq1-title": "Map Completeness Formula (Paper Eq. 1)",
+    "sim6-subhead-2": "<i class=\"fa fa-table\"></i> 2. Experimental Benchmark Comparison from Original Paper",
+    "sim6-table-th1": "Test Environment",
+    "sim6-table-th2": "Floodfill Time",
+    "sim6-table-th3": "Frontier-Based Time",
+    "sim6-table-th4": "Efficiency Improvement",
+    "sim6-takeaway": "Experimental results demonstrate that <strong>Frontier-Based</strong> exploration significantly outperforms floodfill in large-scale complex mazes by prioritizing frontier cells and executing optimal shortest paths via A* &amp; DWA.",
 
     // Module 7 Bilingual Keys (EN)
     "sim7-title": "Module 7: Autonomous Navigation & LiDAR SLAM Mapping (IJRA 2024)",
@@ -567,6 +665,12 @@ const i18n = {
     "sim7-label-polar": "Onboard LiDAR Polar Scope (Robot's View)",
     "sim7-theory-title": "LiDAR SLAM Mapping & Log-Odds Grid Theory (Paper IJRA 2024)",
     "sim7-paper-meta": "Original Publication: International Journal of Robotics and Automation (IJRA 2024 / MDPI)",
+    "sim7-paper-lead": "<strong>Research Focus:</strong> <em>Autonomous Exploration and LiDAR SLAM with Reactive Navigation for Search and Rescue Hexapod &amp; Mobile Robots</em>.",
+    "sim7-subhead-1": "<i class=\"fa fa-rss\"></i> 1. Occupancy Grid Mapping (Log-Odds Bayesian Update)",
+    "sim7-p1": "Each 2D LiDAR laser beam updates grid cell occupancy probability using recursive Bayesian log-odds updates:",
+    "sim7-eq1-title": "Log-Odds Occupancy Grid Bayesian Update Formula",
+    "sim7-subhead-2": "<i class=\"fa fa-arrows\"></i> 2. Ray-Casting Range Model &amp; Reactive Navigation",
+    "sim7-eq2-title": "2D LiDAR Laser Ray-Casting Model &amp; Reactive Steering",
 
     // Contact
     "contact-title": "Contact Me",
@@ -624,6 +728,21 @@ function updateLanguage(lang) {
     const textNode = document.createTextNode(lang === "id" ? " ID" : " EN");
     langBtn.appendChild(flagSpan);
     langBtn.appendChild(textNode);
+  }
+
+  // Safe KaTeX re-render if available
+  if (typeof renderMathInElement !== "undefined") {
+    try {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false }
+        ],
+        throwOnError: false
+      });
+    } catch (e) {
+      console.warn("KaTeX render error:", e);
+    }
   }
 }
 

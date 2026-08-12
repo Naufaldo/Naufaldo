@@ -6,6 +6,23 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.17] — 2026-08-12
+
+### Added / Ditambahkan
+- **`feat(theory-i18n)`**: Penerjemahan Komprehensif Seluruh Penjelasan Teori & Formula Ilmiah (ID 🇮🇩 / EN 🇬🇧) pada Seluruh 7 Modul Simulasi:
+  - **Penerjemahan Penuh Kotak Teori**: Seluruh judul paper, subjudul penurunan rumus matematika, deskripsi kinematika, formulasi APF, persamaan State-Space, metrik evaluasi, tabel benchmark perbandingan eksperimental, serta kesimpulan analisis kini memiliki teks dwibahasa presisi.
+  - **Re-render KaTeX Dinamis**: Fungsi `updateLanguage()` kini secara otomatis memanggil renderer KaTeX (`renderMathInElement`) saat bahasa diganti, sehingga seluruh simbol matematika dan matriks LaTeX tetap ter-render tajam dan sempurna.
+  - **Cakupan Lengkap Modul 1 s/d 7**:
+    1. *Modul 1 (ICCAS 2025)*: Kinematika DWMR, Formasi Berputar Virtual Leader, APF Potensial Gabungan, & Fuzzy PID.
+    2. *Modul 2 (IJCAS 2026)*: Matriks Invers & Direct Kinematika 4 Roda Mecanum (MWDR), Trajektori Sirkular & Lemniscate.
+    3. *Modul 3*: Analisis Pure Pursuit Cross-Track Error vs Spatiotemporal Trajectory Error.
+    4. *Modul 4 (SICE FES 2025)*: Model Kamera Pinhole Jarak Piksel & Image-Based Visual Servoing (IBVS).
+    5. *Modul 5 (SICE FES 2025)*: Graf Laplacian Multi-Agent, Gaya Flocking Reynolds (Separation, Cohesion, Alignment).
+    6. *Modul 6 (ICCAS 2024)*: Metrik Kelengkapan Peta, Tabel Benchmark Phoenix/Zee/Mememan Map, & Frontier vs Floodfill.
+    7. *Modul 7 (IJRA 2024)*: Model Update Log-Odds Bayesian Occupancy Grid & Kemudi Reaktif LiDAR.
+
+---
+
 ## [v2026.08.12.16] — 2026-08-12
 
 ### Added / Ditambahkan
