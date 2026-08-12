@@ -6,6 +6,16 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.12.19] — 2026-08-12
+
+### Fixed / Diperbaiki
+- **`fix(theme-contrast)`**: Perbaikan Kontras Teks Putih pada Mode Terang (Light Mode) di Halaman Utama & Simulasi:
+  - Mengganti seluruh kode warna hardcoded `#fff` pada heading Pengalaman Kerja, nama posisi/jabatan, nama institusi pendidikan, daftar penghargaan & prestasi, serta tautan kontak di `index.html` dengan variabel adaptif `var(--text-heading)`.
+  - Memperbarui kartu dashboard progres SLAM di `robotics-sim.html` agar menggunakan `var(--math-card-bg)` dan `var(--text-heading)`.
+  - Seluruh teks kini memiliki kontras tinggi yang sangat tajam dan terbaca sempurna di kedua mode (Dark & Light).
+
+---
+
 ## [v2026.08.12.18] — 2026-08-12
 
 ### Added / Ditambahkan
