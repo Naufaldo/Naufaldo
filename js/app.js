@@ -28,11 +28,11 @@ const i18n = {
     "stat-pub": "Publikasi Ilmiah",
     "stat-proj": "Proyek Rekayasa",
 
-    // About
+    // About (Clean HTML Markup - No raw markdown brackets/asterisks)
     "about-title": "Profil & Keahlian Utama",
     "about-sub": "Menggabungkan pengalaman praktis industri pendingin dengan riset akademik robotika tingkat lanjut",
-    "about-text-1": "Saya adalah seorang insinyur mekatronika dan otomatisasi yang berfokus pada rekayasa cold storage industri, sistem kendali robotika otonom, serta pengembangan perangkat lunak ERP industri. Saat ini saya memimpin **CV. Dingin Lestari Teknik** di Bandung ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF). Saya juga mengembangkan platform digital ERP khusus industri pendingin di **[demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)**.",
-    "about-text-2": "Di bidang akademik & inovasi, saya meraih gelar M.Sc. Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Saya memegang **Hak Cipta Paten Program MATLAB** untuk kontrol sistem Direct Air Capture (DAC) penangkap CO₂ udara, serta meriset kendali formasi robot multi-agent dan swarm drone (SICE FES 2025).",
+    "about-text-1": "Saya adalah seorang insinyur mekatronika dan otomatisasi yang berfokus pada rekayasa cold storage industri, sistem kendali robotika otonom, serta pengembangan perangkat lunak ERP industri. Saat ini saya memimpin <strong>CV. Dingin Lestari Teknik</strong> di Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF). Saya juga mengembangkan platform digital ERP khusus industri pendingin di <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
+    "about-text-2": "Di bidang akademik & inovasi, saya meraih gelar M.Sc. Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Saya memegang <strong>Hak Cipta Paten Program MATLAB</strong> untuk kontrol sistem Direct Air Capture (DAC) penangkap CO₂ udara, serta meriset kendali formasi robot multi-agent dan swarm drone (SICE FES 2025).",
 
     // Cold Storage Calculator
     "calc-title": "Kalkulator Estimasi Cold Storage",
@@ -105,6 +105,14 @@ const i18n = {
     "proj-circular-cat": "Riset Tesis M.Sc. NTUT Taiwan",
     "proj-circular-desc": "Video eksperimen kendali formasi robot multi-agent mengikuti trajektori melingkar (circular trajectory) pada riset Tesis Magister NTUT Taiwan.",
 
+    "proj-gazebo-follow-title": "Robot Following Gazebo Simulation (OpenCV & ROS)",
+    "proj-gazebo-follow-cat": "Simulasi Gazebo & ROS",
+    "proj-gazebo-follow-desc": "Riset simulasi lingkungan Gazebo & ROS untuk kendali robot pengikut (Robot Following) berfasilitas pemrosesan citra kamera OpenCV.",
+
+    "proj-gazebo-ball-title": "Ball Tracking Gazebo Simulation (OpenCV & ROS)",
+    "proj-gazebo-ball-cat": "Simulasi Gazebo & ROS",
+    "proj-gazebo-ball-desc": "Riset simulasi Gazebo & ROS pelacakan & pengikutan bola warna secara otonom berbasis visi kamera OpenCV.",
+
     "proj-erp-title": "DLT ERP Platform (demo.dinginlestariteknik.com)",
     "proj-erp-cat": "SaaS & Web Software",
     "proj-erp-desc": "Sistem Enterprise Resource Planning (ERP) khusus operasional perusahaan pendingin & HVAC mencakup manajemen teknisi, jadwal servis, inventaris spare part, estimasi biaya, & penagihan.",
@@ -174,11 +182,11 @@ const i18n = {
     "stat-pub": "Scientific Papers",
     "stat-proj": "Engineering Projects",
 
-    // About
+    // About (Clean HTML Markup)
     "about-title": "Profile & Core Expertise",
     "about-sub": "Bridging practical industrial refrigeration engineering with advanced academic robotics research",
-    "about-text-1": "I am a Mechatronics and Automation Engineer specializing in industrial cold storage engineering, autonomous robotics control, and enterprise software engineering. I currently serve as Director of **CV. Dingin Lestari Teknik** in Bandung ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), leading refrigeration design and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF). I also developed an industrial ERP platform live at **[demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)**.",
-    "about-text-2": "In academia & innovation, I earned my M.Sc. in Mechatronics Engineering from National Taipei University of Technology (NTUT), Taiwan. I hold a **Registered Software Patent for MATLAB Control Logic** in Direct Air Capture (DAC) CO₂ systems, and conduct research on multi-agent formation control and swarm quadcopters (SICE FES 2025).",
+    "about-text-1": "I am a Mechatronics and Automation Engineer specializing in industrial cold storage engineering, autonomous robotics control, and enterprise software engineering. I currently serve as Director of <strong>CV. Dingin Lestari Teknik</strong> in Bandung (<a href=\"https://dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">dinginlestariteknik.com</a>), leading refrigeration design and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF). I also developed an industrial ERP platform live at <a href=\"https://demo.dinginlestariteknik.com/\" target=\"_blank\" rel=\"noopener\">demo.dinginlestariteknik.com</a>.",
+    "about-text-2": "In academia & innovation, I earned my M.Sc. in Mechatronics Engineering from National Taipei University of Technology (NTUT), Taiwan. I hold a <strong>Registered Software Patent for MATLAB Control Logic</strong> in Direct Air Capture (DAC) CO₂ systems, and conduct research on multi-agent formation control and swarm quadcopters (SICE FES 2025).",
 
     // Cold Storage Calculator
     "calc-title": "Cold Storage Sizing Calculator",
@@ -251,6 +259,14 @@ const i18n = {
     "proj-circular-cat": "M.Sc. Thesis Research NTUT",
     "proj-circular-desc": "Experimental video of multi-agent robot formation control tracking a circular trajectory from M.Sc. thesis research.",
 
+    "proj-gazebo-follow-title": "Robot Following Gazebo Simulation (OpenCV & ROS)",
+    "proj-gazebo-follow-cat": "Gazebo & ROS Simulation",
+    "proj-gazebo-follow-desc": "Gazebo & ROS simulation research for robot following control using OpenCV camera vision processing.",
+
+    "proj-gazebo-ball-title": "Ball Tracking Gazebo Simulation (OpenCV & ROS)",
+    "proj-gazebo-ball-cat": "Gazebo & ROS Simulation",
+    "proj-gazebo-ball-desc": "Gazebo & ROS simulation for autonomous colored ball tracking and following using OpenCV camera vision.",
+
     "proj-erp-title": "DLT ERP Platform (demo.dinginlestariteknik.com)",
     "proj-erp-cat": "SaaS & Enterprise Web",
     "proj-erp-desc": "Enterprise Resource Planning (ERP) platform custom-built for HVAC and cold storage operations covering technician dispatch, service scheduling, spare parts inventory, costing, and invoicing.",
@@ -309,11 +325,7 @@ function updateLanguage(lang) {
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (i18n[lang] && i18n[lang][key]) {
-      if (i18n[lang][key].includes("<")) {
-        el.innerHTML = i18n[lang][key];
-      } else {
-        el.textContent = i18n[lang][key];
-      }
+      el.innerHTML = i18n[lang][key];
     }
   });
 
@@ -510,7 +522,7 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects & Innovations Gallery Engine (With YouTube Embedded Video Support) ---
+// --- Projects & Innovations Gallery Engine (With 5 YouTube Embedded Videos) ---
 const projectsData = [
   // Swarm Drone YouTube Video (SICE FES 2025)
   {
@@ -524,6 +536,34 @@ const projectsData = [
     tags: ["Swarm Drone", "Flight Control", "Flocking Dynamics", "SICE FES 2025", "YouTube Video"],
     link: "https://doi.org/10.23919/SICEFES67750.2025.11236621",
     linkText: "SICE FES 2025 Paper"
+  },
+
+  // Gazebo OpenCV Robot Following
+  {
+    titleKey: "proj-gazebo-follow-title",
+    catKey: "proj-gazebo-follow-cat",
+    descKey: "proj-gazebo-follow-desc",
+    img: "https://img.youtube.com/vi/tfDiMlBXNsY/hqdefault.jpg",
+    youtubeId: "tfDiMlBXNsY",
+    isVideo: true,
+    category: "swarm",
+    tags: ["Gazebo", "ROS", "OpenCV", "Robot Following", "YouTube Video"],
+    link: "https://www.youtube.com/watch?v=tfDiMlBXNsY",
+    linkText: "Watch on YouTube"
+  },
+
+  // Gazebo OpenCV Ball Tracking
+  {
+    titleKey: "proj-gazebo-ball-title",
+    catKey: "proj-gazebo-ball-cat",
+    descKey: "proj-gazebo-ball-desc",
+    img: "https://img.youtube.com/vi/AqM-iCrh1rQ/hqdefault.jpg",
+    youtubeId: "AqM-iCrh1rQ",
+    isVideo: true,
+    category: "swarm",
+    tags: ["Gazebo", "ROS", "OpenCV", "Ball Tracking", "YouTube Video"],
+    link: "https://www.youtube.com/watch?v=AqM-iCrh1rQ",
+    linkText: "Watch on YouTube"
   },
 
   // M.Sc. Thesis YouTube Video #1 - Lemniscate Trajectory
@@ -766,7 +806,6 @@ function openProjectModal(index) {
     modalImg.style.display = "none";
     modalVideo.style.display = "none";
     
-    // Remove previous iframe if any
     const prevIframe = modalImgWrapper.querySelector("iframe");
     if (prevIframe) prevIframe.remove();
 
