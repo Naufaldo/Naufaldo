@@ -1007,3 +1007,117 @@ class TrackingComparisonSimulation {
     requestAnimationFrame(() => this.loop());
   }
 }
+
+// ==========================================================================
+// INITIALIZATION: Boot all simulation modules on page load
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+
+  // --- Tab switching engine ---
+  const tabBtns = document.querySelectorAll(".proj-filter-tags .filter-btn[data-tab]");
+  const tabContents = document.querySelectorAll(".sim-tab-content");
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      tabBtns.forEach(b => b.classList.remove("active"));
+      tabContents.forEach(tc => {
+        tc.classList.remove("active");
+        tc.style.display = "none";
+      });
+      btn.classList.add("active");
+      const targetId = btn.dataset.tab;
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.classList.add("active");
+        targetEl.style.display = "block";
+        // Resize canvas when tab becomes visible
+        window.dispatchEvent(new Event("resize"));
+      }
+    });
+  });
+
+  // Ensure first tab is visible on load
+  const firstTab = document.getElementById("tab1");
+  if (firstTab) {
+    firstTab.classList.add("active");
+    firstTab.style.display = "block";
+  }
+
+  // --- MODULE 1: Fuzzy PID DDMR (ICCAS 2025) ---
+  const sim1 = new ICCASPIDDDMRSimulation("canvasSim1");
+
+  document.getElementById("btnResetSim1")?.addEventListener("click", () => {
+    if (sim1) sim1.reset();
+  });
+
+  document.getElementById("btnToggleObstacle1")?.addEventListener("click", () => {
+    if (sim1) sim1.addObstacle();
+  });
+
+  // --- MODULE 2: Mathematical Kinematic Model ---
+  const sim2 = new MathModelSimulation("canvasSim2");
+
+  // Render KaTeX formulas
+  if (typeof katex !== "undefined") {
+    const f1 = document.getElementById("katexFormula1");
+    const f2 = document.getElementById("katexFormula2");
+    if (f1) katex.render("v = \\frac{r}{2}(\\omega_r + \\omega_l), \\quad \\omega = \\frac{r}{L}(\\omega_r - \\omega_l)", f1, { throwOnError: false, displayMode: true });
+    if (f2) katex.render("\\dot{x} = v\\cos\\theta, \\quad \\dot{y} = v\\sin\\theta, \\quad \\dot{\\theta} = \\omega", f2, { throwOnError: false, displayMode: true });
+  }
+
+  const sliderWr = document.getElementById("sliderWr");
+  const sliderWl = document.getElementById("sliderWl");
+  if (sliderWr && sliderWl && sim2) {
+    const updateWheels = () => {
+      const wr = (parseInt(sliderWr.value) / 10) + 0.1;
+      const wl = (parseInt(sliderWl.value) / 10) + 0.1;
+      sim2.setWheelVelocities(wr, wl);
+    };
+    sliderWr.addEventListener("input", updateWheels);
+    sliderWl.addEventListener("input", updateWheels);
+    updateWheels();
+  }
+
+  document.getElementById("btnResetSim2")?.addEventListener("click", () => {
+    if (sim2) sim2.resetTrajectory();
+  });
+
+  // --- MODULE 3 (Tab 3): Path Tracking vs Trajectory Tracking ---
+  const sim3 = new TrackingComparisonSimulation("canvasSim3");
+
+  document.getElementById("btnRestartSim3")?.addEventListener("click", () => {
+    if (sim3) sim3.setMode(sim3.mode === "path" ? "trajectory" : "path");
+    const btn = document.getElementById("btnRestartSim3");
+    if (btn && sim3) {
+      btn.textContent = sim3.mode === "path" ? "▶ Jalankan: Trajectory Tracking" : "▶ Jalankan: Path Tracking";
+    }
+  });
+
+  // --- MODULE 4 (Tab 4): Vision Follower Camera ---
+  const sim4 = new OpenCVVisionSimulation("canvasSim4");
+
+  // --- MODULE 5 (Tab 5): Drone Swarm (SICE FES 2025) ---
+  const sim5 = new DroneSwarmSimulation("canvasSim5");
+
+  // --- MODULE 6 (Tab 6): Indoor Exploration (ICCAS 2024) ---
+  const sim6 = new IndoorExplorationSimulation("canvasSim6");
+
+  document.getElementById("btnStartExplore6")?.addEventListener("click", () => {
+    if (sim6) sim6.startExploration();
+  });
+
+  document.getElementById("btnResetExplore6")?.addEventListener("click", () => {
+    if (sim6) sim6.initGrid();
+  });
+
+  // --- MODULE 7 (Tab 7): LiDAR SLAM (IJRA 2024) ---
+  const sim7 = new LiDARSLAMSimulation("canvasSim7");
+
+  // --- Global canvas resize handler ---
+  window.addEventListener("resize", () => {
+    [sim1, sim2, sim3, sim4, sim5, sim6, sim7].forEach(sim => {
+      if (sim && typeof sim.resize === "function") sim.resize();
+    });
+  });
+
+});

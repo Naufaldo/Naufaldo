@@ -858,3 +858,35 @@ a:hover {
     font-size: 1.8rem;
   }
 }
+
+/* ---- Robotics Simulation Page ---- */
+.sim-canvas-wrapper {
+  width: 100%;
+  height: 420px;
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-color);
+}
+
+.sim-canvas-wrapper canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.sim-tab-content {
+  display: none;
+}
+
+.sim-tab-content.active {
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .sim-canvas-wrapper {
+    height: 260px;
+  }
+}
