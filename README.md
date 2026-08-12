@@ -3,6 +3,7 @@
 **Cold Storage & Automation Engineer · Robotics Researcher · Director of CV. Dingin Lestari Teknik**
 
 [![Portfolio](https://img.shields.io/badge/Portfolio_Website-00F2FE?style=for-the-badge&logo=githubpages&logoColor=000)](https://naufaldo.github.io/Naufaldo/)
+[![Robotics Sim Lab](https://img.shields.io/badge/Robotics_Sim_Lab-10B981?style=for-the-badge&logo=android&logoColor=white)](https://naufaldo.github.io/Naufaldo/robotics-sim.html)
 [![Company Web](https://img.shields.io/badge/Cold_Storage_Web-00A8FF?style=for-the-badge&logo=globe&logoColor=white)](https://dinginlestariteknik.com/)
 [![ERP Demo](https://img.shields.io/badge/ERP_Demo-8B5CF6?style=for-the-badge&logo=googlechrome&logoColor=white)](https://demo.dinginlestariteknik.com/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/naufaldo-do-80b39b1a5/)
@@ -17,6 +18,17 @@ I am a Mechatronics & Automation Engineer working at the intersection of **indus
 - 🧊 **Industrial Engineering**: Director at **CV. Dingin Lestari Teknik** ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), leading engineering design and energy optimization for industrial cold rooms (Freezer, Chiller, ABF). Developer of **DLT ERP** SaaS platform for HVAC operations ([demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)).
 - 🍃 **Patent & Innovation**: Developer of Direct Air Capture (DAC) CO₂ capture systems using biochar, holding a **Registered Software Patent for MATLAB Telemetry & Control Logic**.
 - 🤖 **Academic Research**: M.Sc. in Mechatronics Engineering from **National Taipei University of Technology (NTUT), Taiwan**, researching **Multi-Agent Formation Control, Swarm Quadcopters (SICE FES 2025), APF Obstacle Avoidance, and LiDAR SLAM Autonomous Navigation**.
+
+---
+
+## 🎮 Interactive Robotics Simulation Hub (`robotics-sim.html`)
+
+Our portfolio features a dedicated **Interactive Robotics Simulation Hub** showcasing 4 core algorithms from my published research papers:
+
+1. **PID Control of DDMR + APF** (*ICCAS 2025*): Fuzzy/PID trajectory tracking for differential drive mobile robots with artificial potential field obstacle avoidance.
+2. **Drone Swarm Flight Simulation** (*SICE FES 2025*): Swarm quadcopters flocking dynamics with sinusoidal altitude modulation.
+3. **Autonomous Indoor Exploration** (*ICCAS 2024*): Comparative maze mapping using Floodfill Algorithm vs. Frontier-Based Method.
+4. **LiDAR SLAM Autonomous Navigation** (*IJRA 2024*): 360° LiDAR laser scanning and occupancy point cloud mapping for Hexapod Search & Rescue robots.
 
 ---
 

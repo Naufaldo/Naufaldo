@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publikasi Ilmiah & Jurnal | Naufaldo, M.Sc.</title>
+  
+  <meta name="description" content="Katalog publikasi ilmiah internasional terindeks Naufaldo, M.Sc. mencakup IJCAS, ICCAS, SICE FES, JCIE, JTT, dan IJRA.">
+  <meta name="author" content="Naufaldo, M.Sc.">
+  
+  <!-- Favicon & Icons -->
+  <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Custom Modern Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        Naufaldo<span class="logo-dot"></span><span style="font-size:0.85rem; color:var(--text-secondary); font-weight:600;">M.Sc.</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link" data-i18n="nav-home">Beranda</a></li>
+        <li><a href="index.html#about" class="nav-link" data-i18n="nav-about">Tentang</a></li>
+        <li><a href="robotics-sim.html" class="nav-link" data-i18n="nav-tools">Fitur & Tool</a></li>
+        <li><a href="projects.html" class="nav-link" data-i18n="nav-projects">Proyek</a></li>
+        <li><a href="publications.html" class="nav-link active" data-i18n="nav-pub">Publikasi</a></li>
+        <li><a href="index.html#contact" class="nav-link" data-i18n="nav-contact">Kontak</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="lang-toggle-btn" id="langToggleBtn" title="Switch Language">
+          <span>🇮🇩</span> ID
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Menu">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <section class="section-padding" style="padding-top: 8rem; padding-bottom: 2rem;">
+    <div class="container text-center">
+      <h1 class="section-title" data-i18n="pub-title">Publikasi Ilmiah & Jurnal</h1>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="pub-sub">
+        Karya tulis riset terpublikasi di jurnal & konferensi internasional terindeks
+      </p>
+
+      <div class="pub-toolbar" style="max-width: 800px; margin: 0 auto 2rem auto;">
+        <div class="pub-search-box">
+          <i class="fa fa-search pub-search-icon"></i>
+          <input type="text" class="pub-search-input" id="pubSearchInput" placeholder="Cari judul jurnal atau DOI..." data-i18n-ph="pub-search-ph">
+        </div>
+
+        <div class="pub-filter-tags">
+          <button class="filter-btn active" data-cat="all" data-i18n="pub-filter-all">Semua</button>
+          <button class="filter-btn" data-cat="robotics" data-i18n="pub-filter-robotics">Robotika & Multi-Agent</button>
+          <button class="filter-btn" data-cat="control" data-i18n="pub-filter-control">Kontrol & Otomasi</button>
+          <button class="filter-btn" data-cat="iot" data-i18n="pub-filter-iot">IoT & Sistem Pendingin</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- List -->
+  <section class="section-padding" style="padding-top: 0;">
+    <div class="container" style="max-width: 900px;">
+      <div class="pub-list" id="pubContainer"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p style="font-size:0.9rem; color:var(--text-secondary);" data-i18n="footer-text">
+        Dibuat oleh Naufaldo, M.Sc. | Hak Cipta Dilindungi.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

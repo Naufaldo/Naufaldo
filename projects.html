@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyek & Inovasi Rekayasa | Naufaldo, M.Sc.</title>
+  
+  <meta name="description" content="Galeri lengkap proyek Cold Storage (CS_1~3), Direct Air Capture (Paten Software MATLAB), Swarm Drone, dan DLT ERP Software oleh Naufaldo, M.Sc.">
+  <meta name="author" content="Naufaldo, M.Sc.">
+  
+  <!-- Favicon & Icons -->
+  <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Custom Modern Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        Naufaldo<span class="logo-dot"></span><span style="font-size:0.85rem; color:var(--text-secondary); font-weight:600;">M.Sc.</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link" data-i18n="nav-home">Beranda</a></li>
+        <li><a href="index.html#about" class="nav-link" data-i18n="nav-about">Tentang</a></li>
+        <li><a href="robotics-sim.html" class="nav-link" data-i18n="nav-tools">Fitur & Tool</a></li>
+        <li><a href="projects.html" class="nav-link active" data-i18n="nav-projects">Proyek</a></li>
+        <li><a href="publications.html" class="nav-link" data-i18n="nav-pub">Publikasi</a></li>
+        <li><a href="index.html#contact" class="nav-link" data-i18n="nav-contact">Kontak</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="lang-toggle-btn" id="langToggleBtn" title="Switch Language">
+          <span>🇮🇩</span> ID
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Menu">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Projects Banner -->
+  <section class="section-padding" style="padding-top: 8rem; padding-bottom: 2rem;">
+    <div class="container text-center">
+      <h1 class="section-title" data-i18n="proj-title">Galeri Proyek & Inovasi Rekayasa</h1>
+      <div class="divider"></div>
+      <p class="section-subtitle" data-i18n="proj-sub">
+        Portofolio sistem cold storage terbaru, paten Direct Air Capture (DAC), riset swarm drone, dan web ERP industri
+      </p>
+
+      <!-- Category Filter Tabs -->
+      <div class="proj-filter-tags">
+        <button class="filter-btn active" data-cat="all" data-i18n="proj-filter-all">Semua Proyek</button>
+        <button class="filter-btn" data-cat="cs" data-i18n="proj-filter-cs">Cold Storage & ERP</button>
+        <button class="filter-btn" data-cat="dac" data-i18n="proj-filter-dac">Direct Air Capture (Paten)</button>
+        <button class="filter-btn" data-cat="swarm" data-i18n="proj-filter-swarm">Robotika & Swarm Drone</button>
+        <button class="filter-btn" data-cat="auto" data-i18n="proj-filter-auto">Otomasi & Panel</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="section-padding" style="padding-top: 0;">
+    <div class="container">
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p style="font-size:0.9rem; color:var(--text-secondary);" data-i18n="footer-text">
+        Dibuat oleh Naufaldo, M.Sc. | Hak Cipta Dilindungi.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div class="modal-overlay" id="projectModal" onclick="closeProjectModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+      <div class="modal-img-wrapper">
+        <img src="" id="modalImg" alt="Project Image" class="modal-img">
+        <video id="modalVideo" controls class="modal-video" style="display:none;"></video>
+      </div>
+      <div class="modal-body">
+        <span class="project-tag" id="modalCat">Category</span>
+        <h2 id="modalTitle" style="margin: 0.5rem 0 1rem 0; font-size: 1.5rem;">Title</h2>
+        <p id="modalDesc" style="color:var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6;">Description</p>
+        <div id="modalTags" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom: 1rem;"></div>
+        <div id="modalLinkBox"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robotics Simulation Lab | Naufaldo, M.Sc.</title>
+  
+  <meta name="description" content="Laboratorium Simulasi Interaktif Robotika Multi-Agent, Drone Swarm, Kontrol PID DDMR, dan LiDAR SLAM oleh Naufaldo, M.Sc.">
+  <meta name="author" content="Naufaldo, M.Sc.">
+  
+  <!-- Favicon & Icons -->
+  <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <!-- Custom Modern Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        Naufaldo<span class="logo-dot"></span><span style="font-size:0.85rem; color:var(--text-secondary); font-weight:600;">M.Sc.</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link" data-i18n="nav-home">Beranda</a></li>
+        <li><a href="index.html#about" class="nav-link" data-i18n="nav-about">Tentang</a></li>
+        <li><a href="robotics-sim.html" class="nav-link active" data-i18n="nav-tools">Fitur & Tool</a></li>
+        <li><a href="projects.html" class="nav-link" data-i18n="nav-projects">Proyek</a></li>
+        <li><a href="publications.html" class="nav-link" data-i18n="nav-pub">Publikasi</a></li>
+        <li><a href="index.html#contact" class="nav-link" data-i18n="nav-contact">Kontak</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="lang-toggle-btn" id="langToggleBtn" title="Switch Language">
+          <span>🇮🇩</span> ID
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Menu">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header Banner -->
+  <section class="section-padding" style="padding-top: 8rem; padding-bottom: 2rem;">
+    <div class="container text-center">
+      <span class="badge badge-purple" style="margin-bottom: 1rem;">M.Sc. Research & Simulation Hub</span>
+      <h1 class="section-title">Laboratorium Simulasi Robotika Interaktif</h1>
+      <div class="divider"></div>
+      <p class="section-subtitle">
+        Uji coba interaktif 4 algoritma kendali robotika utama berdasarkan riset tesis & publikasi jurnal internasional Naufaldo (IJCAS, ICCAS, SICE FES, IJRA)
+      </p>
+
+      <!-- Simulation Tabs Switcher -->
+      <div class="pub-filter-tags" style="margin-top: 2rem;">
+        <button class="filter-btn active" onclick="switchSimTab('tab-pid')">1. PID DDMR + APF (ICCAS 2025)</button>
+        <button class="filter-btn" onclick="switchSimTab('tab-swarm')">2. Drone Swarm (SICE FES 2025)</button>
+        <button class="filter-btn" onclick="switchSimTab('tab-exploration')">3. Exploration (ICCAS 2024)</button>
+        <button class="filter-btn" onclick="switchSimTab('tab-slam')">4. LiDAR SLAM Nav (IJRA 2024)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulation Content Container -->
+  <section class="section-padding" style="padding-top: 1rem;">
+    <div class="container">
+      
+      <!-- TAB 1: PID DDMR + APF -->
+      <div class="sim-tab-content active" id="tab-pid">
+        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
+          <h3 style="color:var(--primary-cyan); margin-bottom: 0.5rem;">
+            <i class="fa fa-cogs"></i> Modul 1: Kontrol PID DDMR & APF Avoidance (ICCAS 2025)
+          </h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">
+            Simulasi kendali trajektori Differential-Drive Mobile Robot (DDMR) menggunakan Fuzzy-Tuned PID dengan algoritma Artificial Potential Field (APF) untuk penghindaran rintangan dinamis.
+          </p>
+        </div>
+
+        <div class="sim-container">
+          <div class="sim-canvas-wrapper">
+            <canvas id="pidCanvas"></canvas>
+          </div>
+          <div class="sim-controls-panel">
+            <div class="sim-control-group">
+              <label>Parameter Gain PID</label>
+              <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                <div>Kp (Proportional): <input type="range" id="pidKp" min="0.01" max="0.3" step="0.01" value="0.08"></div>
+                <div>Kd (Derivative): <input type="range" id="pidKd" min="0.01" max="0.5" step="0.01" value="0.15"></div>
+              </div>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-dim);">
+              * Klik pada kanvas untuk memindahkan target lokasi tujuan robot DDMR.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Drone Swarm Flocking (SICE FES 2025) -->
+      <div class="sim-tab-content" id="tab-swarm" style="display:none;">
+        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
+          <h3 style="color:var(--accent-purple); margin-bottom: 0.5rem;">
+            <i class="fa fa-plane"></i> Modul 2: Drone Swarm Flocking & Altitude Modulation (SICE FES 2025)
+          </h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">
+            Simulasi kawanan quadcopter (Swarm Drone) dengan dinamika boids (kohesi, separasi), penyesuaian target dinamis, dan modulasi ketinggian sinusoidal.
+          </p>
+        </div>
+
+        <div class="sim-container">
+          <div class="sim-canvas-wrapper">
+            <canvas id="swarmCanvas"></canvas>
+          </div>
+          <div class="sim-controls-panel">
+            <div class="sim-status-box">
+              <div style="font-weight:700; color:#fff;">STATUS DRONE SWARM:</div>
+              <div>Jumlah Drone: <span style="color:var(--primary-cyan);">12 Quadcopters</span></div>
+              <div>Modulasi Ketinggian: <span style="color:var(--accent-emerald);">SINUSOIDAL ACTIVE</span></div>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-dim);">
+              * Klik pada kanvas untuk menentukan lokasi target pergerakan kawanan drone.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Indoor Exploration (ICCAS 2024) -->
+      <div class="sim-tab-content" id="tab-exploration" style="display:none;">
+        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
+          <h3 style="color:var(--accent-emerald); margin-bottom: 0.5rem;">
+            <i class="fa fa-map"></i> Modul 3: Indoor Exploration: Floodfill vs. Frontier-Based (ICCAS 2024)
+          </h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">
+            Simulasi perbandingan strategi pemetaan area indoor otonom antara Algoritma Floodfill vs. Metode Frontier-Based.
+          </p>
+        </div>
+
+        <div class="sim-container">
+          <div class="sim-canvas-wrapper">
+            <canvas id="exploreCanvas"></canvas>
+          </div>
+          <div class="sim-controls-panel">
+            <div class="sim-control-group">
+              <label>Pilih Metode Eksplorasi</label>
+              <div class="sim-btn-grid">
+                <button class="btn btn-outline btn-sm" id="btnFrontier">Frontier-Based</button>
+                <button class="btn btn-outline btn-sm" id="btnFloodfill">Floodfill</button>
+              </div>
+            </div>
+            <button class="btn btn-primary" id="btnStartExplore">Mulai Eksplorasi</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: LiDAR SLAM Nav (IJRA 2024) -->
+      <div class="sim-tab-content" id="tab-slam" style="display:none;">
+        <div class="glass-card mb-4" style="margin-bottom: 1.5rem;">
+          <h3 style="color:var(--primary-cyan); margin-bottom: 0.5rem;">
+            <i class="fa fa-bullseye"></i> Modul 4: LiDAR SLAM Autonomous Navigation (IJRA 2024)
+          </h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">
+            Simulasi pemindaian sinar laser 360° LiDAR dan pemetaan Point Cloud pada robot Hexapod Search & Rescue.
+          </p>
+        </div>
+
+        <div class="sim-container">
+          <div class="sim-canvas-wrapper">
+            <canvas id="slamCanvas"></canvas>
+          </div>
+          <div class="sim-controls-panel">
+            <div class="sim-status-box">
+              <div style="font-weight:700; color:#fff;">TELEMETRI LIDAR:</div>
+              <div>Rays: <span style="color:var(--primary-cyan);">36 Sinar Laser 360°</span></div>
+              <div>Mode: <span style="color:var(--accent-purple);">Real-time Point Cloud</span></div>
+            </div>
+            <p style="font-size:0.8rem; color:var(--text-dim);">
+              * Gerakkan kursor mouse di atas kanvas untuk menggerakkan posisi robot Hexapod dan mengamati hasil scan LiDAR.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p style="font-size:0.9rem; color:var(--text-secondary);" data-i18n="footer-text">
+        Dibuat oleh Naufaldo, M.Sc. | Hak Cipta Dilindungi.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/robotics-sim.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      window.pidSim = new PIDDDMRSimulation("pidCanvas");
+      window.swarmSim = new DroneSwarmSimulation("swarmCanvas");
+      window.exploreSim = new IndoorExplorationSimulation("exploreCanvas");
+      window.slamSim = new LiDARSLAMSimulation("slamCanvas");
+
+      document.getElementById("btnFrontier")?.addEventListener("click", () => window.exploreSim.setMode("frontier"));
+      document.getElementById("btnFloodfill")?.addEventListener("click", () => window.exploreSim.setMode("floodfill"));
+      document.getElementById("btnStartExplore")?.addEventListener("click", () => window.exploreSim.startExploration());
+    });
+
+    function switchSimTab(tabId) {
+      document.querySelectorAll(".sim-tab-content").forEach(el => el.style.display = "none");
+      document.querySelectorAll(".pub-filter-tags .filter-btn").forEach(btn => btn.classList.remove("active"));
+      
+      const target = document.getElementById(tabId);
+      if (target) target.style.display = "block";
+      event.target.classList.add("active");
+    }
+  </script>
+</body>
+</html>

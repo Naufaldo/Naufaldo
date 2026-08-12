@@ -1,7 +1,7 @@
 /* ==========================================================================
    Naufaldo Portfolio - Main JavaScript & Interactive Engines
-   Bilingual System (ID/EN), Multi-Agent Robotics Simulation, Cold Storage Calculator,
-   Projects Lightbox with Video & Image Support, ERP & DAC Patent Showcase
+   Bilingual System (ID/EN), Performance Optimized Multi-Page Engine,
+   Lazy Lightbox Modal Video & Image Viewer, Cold Storage Sizing Calculator
    ========================================================================== */
 
 // --- Translations Dictionary (ID & EN) ---
@@ -23,7 +23,7 @@ const i18n = {
     "hero-btn-contact": "Hubungi Saya",
     "hero-btn-calc": "Kalkulator Cold Storage",
     "hero-btn-erp": "Demo Web ERP",
-    "hero-btn-sim": "Uji Simulasi Robot",
+    "hero-btn-sim": "Lab Simulasi Robot",
     "stat-exp": "Tahun Pengalaman",
     "stat-pub": "Publikasi Ilmiah",
     "stat-proj": "Proyek Rekayasa",
@@ -33,27 +33,6 @@ const i18n = {
     "about-sub": "Menggabungkan pengalaman praktis industri pendingin dengan riset akademik robotika tingkat lanjut",
     "about-text-1": "Saya adalah seorang insinyur mekatronika dan otomatisasi yang berfokus pada rekayasa cold storage industri, sistem kendali robotika otonom, serta pengembangan perangkat lunak ERP industri. Saat ini saya memimpin **CV. Dingin Lestari Teknik** di Bandung ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), mengelola perancangan, instalasi, dan optimasi energi untuk freezer room, chiller room, dan Air Blast Freezer (ABF). Saya juga mengembangkan platform digital ERP khusus industri pendingin di **[demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)**.",
     "about-text-2": "Di bidang akademik & inovasi, saya meraih gelar M.Sc. Mechatronics Engineering dari National Taipei University of Technology (NTUT), Taiwan. Saya memegang **Hak Cipta Paten Program MATLAB** untuk kontrol sistem Direct Air Capture (DAC) penangkap CO₂ udara, serta meriset kendali formasi robot multi-agent dan swarm drone (SICE FES 2025).",
-
-    // Tools Section (Sim + Calc)
-    "tools-title": "Fitur Interaktif & Kalkulator Teknik",
-    "tools-sub": "Cobalah alat kalkulasi beban pendingin dan kanvas simulasi kendali formasi robotika kami di bawah ini",
-
-    // Multi-Agent Simulation
-    "sim-title": "Simulasi Robotika Multi-Agent",
-    "sim-sub": "Demonstrasi interaktif algoritma kendali formasi Leader-Follower & APF Obstacle Avoidance (Sesuai Riset Tesis M.Sc. Naufaldo)",
-    "sim-label-formation": "Pilih Formasi Robot",
-    "sim-btn-triangle": "Formasi Segitiga",
-    "sim-btn-circle": "Formasi Lingkaran",
-    "sim-btn-line": "Formasi Garis",
-    "sim-label-actions": "Aksi Interaktif",
-    "sim-btn-obstacle": "Tambah Rintangan",
-    "sim-btn-reset": "Reset Simulasi",
-    "sim-btn-pause": "Jeda / Jalan",
-    "sim-status-title": "TELEMETRI SWARM:",
-    "sim-status-leader": "Posisi Leader:",
-    "sim-status-mode": "Mode Formasi:",
-    "sim-status-obs": "Rintangan Aktif:",
-    "sim-instructions": "* Klik pada area kanvas untuk menentukan lokasi target pergerakan robot Leader.",
 
     // Cold Storage Calculator
     "calc-title": "Kalkulator Estimasi Cold Storage",
@@ -74,52 +53,6 @@ const i18n = {
     "calc-res-load-btu": "Kapasitas BTU/hr:",
     "calc-res-hp": "Rekomendasi Kompresor:",
     "calc-res-note": "* Estimasi standar rekayasa CV. Dingin Lestari Teknik. Hubungi kami di dinginlestariteknik.com untuk konsultasi teknis & detail spesifikasi.",
-
-    // Work Experience
-    "exp-title": "Pengalaman Kerja Industri",
-    "exp-sub": "Rekam jejak kepemimpinan eksekutif dan pengerjaan teknis di bidang kelistrikan & otomatisasi",
-    "exp-1-title": "Direktur Utama",
-    "exp-1-company": "CV. Dingin Lestari Teknik | Bandung",
-    "exp-1-date": "Juni 2025 - Sekarang",
-    "exp-1-desc": "Memimpin dan mengarahkan strategi perusahaan di bidang sistem pendingin industri & cold storage. Mengembangkan Web ERP operasional di demo.dinginlestariteknik.com dan mengelola proyek Freezer Room, Chiller Room, & ABF.",
-    
-    "exp-2-title": "Industrial Electrician (Project-Based)",
-    "exp-2-company": "CV. Dingin Lestari Teknik",
-    "exp-2-date": "Nov 2018 - Juni 2025",
-    "exp-2-desc": "Merancang dan mendesain panel kontrol listrik industri, instalasi pengkabelan 3-phase, troubleshooting sistem kontrol freezer/chiller room, dan integrasi HVAC.",
-
-    "exp-3-title": "Co-founder",
-    "exp-3-company": "Beantrack (Smart Agriculture Startup)",
-    "exp-3-date": "Sept 2023 - Nov 2024",
-    "exp-3-desc": "Mendirikan startup pertanian cerdas. Mengembangkan produk pengering kopi berbasis energi surya yang terintegrasi dengan pemantauan sensor IoT.",
-
-    "exp-4-title": "Peserta Cloud Computing (Distinction)",
-    "exp-4-company": "Bangkit Academy by Google, GoTo, Traveloka",
-    "exp-4-date": "Feb 2023 - Juli 2023",
-    "exp-4-desc": "Lulus predikat Distinction. Memimpin arsitektur cloud untuk Capstone Project yang berhasil masuk TOP 20 Nasional dan memperoleh inkubasi bisnis.",
-
-    "exp-5-title": "Engineer Intern",
-    "exp-5-company": "Asperio",
-    "exp-5-date": "Feb 2022 - Sept 2022",
-    "exp-5-desc": "Terlibat dalam 7 proyek rekayasa mencakup desain mekanikal, elektrikal, pelatihan kontrol industri, dan manajemen inventaris alat.",
-
-    // Education
-    "edu-title": "Pendidikan Akademik",
-    "edu-sub": "Latar belakang pendidikan formal dalam Mekatronika & Otomasi Industri",
-    "edu-1-title": "Magister Sains (M.Sc.) Teknik Mekatronika",
-    "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
-    "edu-1-date": "2024 - 2025",
-    "edu-1-desc": "Fokus Riset: Multi-Agent System Robot Formation Control, Swarm Quadcopters, dan Autonomous Navigation. Tesis: Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation.",
-
-    "edu-2-title": "Sarjana Terapan Teknik (S.Tr.T) Teknik Otomasi",
-    "edu-2-school": "Politeknik Manufaktur Bandung (POLMAN)",
-    "edu-2-date": "2019 - 2023",
-    "edu-2-desc": "Fokus pada sistem kontrol otomasi industri, PLC, SCADA, dan robotika. Tugas Akhir: Sistem Navigasi Robot SAR Berkaki Enam Menggunakan Sensor LiDAR dengan Metode SLAM.",
-
-    "edu-3-title": "Teknik Otomasi Industri",
-    "edu-3-school": "SMKN 4 Bandung",
-    "edu-3-date": "2017 - 2019",
-    "edu-3-desc": "Dasar kelistrikan industri, kontrol motor listrik, pneumatik, dan aktif di Robotik Club.",
 
     // Publications
     "pub-title": "Publikasi Ilmiah & Jurnal",
@@ -180,17 +113,6 @@ const i18n = {
     "proj-6-cat": "Simulator Industri",
     "proj-6-desc": "Stasiun simulator sistem pengangkut industri untuk pengujian kendali motor presisi.",
 
-    // Skills & Certs
-    "skills-title": "Keahlian Teknis & Sertifikasi",
-    "skills-sub": "Kompetensi utama di bidang teknik elektro, otomasi, dan cloud",
-    "skill-cat-eng": "Keahlian Pendingin & Industri",
-    "skill-cat-rob": "Robotika & Sistem Kendali",
-    "skill-cat-prog": "Pemrograman & Software",
-    "cert-google": "Google Cloud Certified Professional Cloud Engineer (2023 - 2026)",
-    "cert-sysadmin": "System Administration and IT Infrastructure Services (2023)",
-    "cert-auto": "Automation Maintenance Junior Engineer (2022 - 2025)",
-    "cert-elec": "Electricity Maintenance / Industrial Electricity (2021 - 2024)",
-
     // Contact
     "contact-title": "Hubungi Saya",
     "contact-sub": "Diskusi proyek cold storage, konsultasi teknis, atau kolaborasi riset robotika",
@@ -227,7 +149,7 @@ const i18n = {
     "hero-btn-contact": "Contact Me",
     "hero-btn-calc": "Cold Storage Calculator",
     "hero-btn-erp": "Web ERP Demo",
-    "hero-btn-sim": "Try Robotics Sim",
+    "hero-btn-sim": "Robotics Sim Lab",
     "stat-exp": "Years Experience",
     "stat-pub": "Scientific Papers",
     "stat-proj": "Engineering Projects",
@@ -237,27 +159,6 @@ const i18n = {
     "about-sub": "Bridging practical industrial refrigeration engineering with advanced academic robotics research",
     "about-text-1": "I am a Mechatronics and Automation Engineer specializing in industrial cold storage engineering, autonomous robotics control, and enterprise software engineering. I currently serve as Director of **CV. Dingin Lestari Teknik** in Bandung ([dinginlestariteknik.com](https://dinginlestariteknik.com/)), leading refrigeration design and energy optimization for freezer rooms, chiller rooms, and Air Blast Freezers (ABF). I also developed an industrial ERP platform live at **[demo.dinginlestariteknik.com](https://demo.dinginlestariteknik.com/)**.",
     "about-text-2": "In academia & innovation, I earned my M.Sc. in Mechatronics Engineering from National Taipei University of Technology (NTUT), Taiwan. I hold a **Registered Software Patent for MATLAB Control Logic** in Direct Air Capture (DAC) CO₂ systems, and conduct research on multi-agent formation control and swarm quadcopters (SICE FES 2025).",
-
-    // Tools Section (Sim + Calc)
-    "tools-title": "Interactive Tools & Engineering Calculators",
-    "tools-sub": "Explore our interactive cooling load calculator and multi-agent robotics formation simulator canvas below",
-
-    // Multi-Agent Simulation
-    "sim-title": "Multi-Agent Robotics Simulation",
-    "sim-sub": "Interactive 2D demonstration of Leader-Follower Formation Control & APF Obstacle Avoidance (Based on Naufaldo's M.Sc. Thesis Research)",
-    "sim-label-formation": "Select Formation Mode",
-    "sim-btn-triangle": "Triangle Formation",
-    "sim-btn-circle": "Circle Formation",
-    "sim-btn-line": "Line Formation",
-    "sim-label-actions": "Interactive Actions",
-    "sim-btn-obstacle": "Add Obstacle",
-    "sim-btn-reset": "Reset Simulation",
-    "sim-btn-pause": "Pause / Resume",
-    "sim-status-title": "SWARM TELEMETRY:",
-    "sim-status-leader": "Leader Position:",
-    "sim-status-mode": "Formation Mode:",
-    "sim-status-obs": "Active Obstacles:",
-    "sim-instructions": "* Click anywhere on the canvas grid to set target goal destination for the Leader robot.",
 
     // Cold Storage Calculator
     "calc-title": "Cold Storage Sizing Calculator",
@@ -278,52 +179,6 @@ const i18n = {
     "calc-res-load-btu": "Capacity (BTU/hr):",
     "calc-res-hp": "Recommended Compressor:",
     "calc-res-note": "* Standard engineering estimation by CV. Dingin Lestari Teknik. Visit dinginlestariteknik.com for detailed Bitzer/Copeland compressor sizing.",
-
-    // Work Experience
-    "exp-title": "Industrial Experience",
-    "exp-sub": "Proven track record in executive leadership & engineering project execution",
-    "exp-1-title": "Director",
-    "exp-1-company": "CV. Dingin Lestari Teknik | Bandung",
-    "exp-1-date": "June 2025 - Present",
-    "exp-1-desc": "Lead company operations in refrigeration & cold storage engineering. Built live web ERP at demo.dinginlestariteknik.com and managed Freezer Room, Chiller Room, & ABF turnkey projects.",
-    
-    "exp-2-title": "Industrial Electrician (Project-Based)",
-    "exp-2-company": "CV. Dingin Lestari Teknik",
-    "exp-2-date": "Nov 2018 - June 2025",
-    "exp-2-desc": "Designed industrial control panels, 3-phase power wiring, troubleshooting cold room control logic, and HVAC maintenance.",
-
-    "exp-3-title": "Co-founder",
-    "exp-3-company": "Beantrack (Smart Agriculture Startup)",
-    "exp-3-date": "Sept 2023 - Nov 2024",
-    "exp-3-desc": "Co-founded smart agriculture startup. Developed an IoT-integrated solar dryer for coffee bean processing to optimize quality and yield.",
-
-    "exp-4-title": "Cloud Computing Participant (Distinction)",
-    "exp-4-company": "Bangkit Academy by Google, GoTo, Traveloka",
-    "exp-4-date": "Feb 2023 - July 2023",
-    "exp-4-desc": "Graduated with Distinction. Led cloud infrastructure architecture for Capstone project awarded TOP 20 National & business incubation.",
-
-    "exp-5-title": "Engineer Intern",
-    "exp-5-company": "Asperio",
-    "exp-5-date": "Feb 2022 - Sept 2022",
-    "exp-5-desc": "Engineered 7 projects covering mechanical/electrical design, user training modules, wiring, and inventory management.",
-
-    // Education
-    "edu-title": "Academic Education",
-    "edu-sub": "Formal academic degrees in Mechatronics & Industrial Automation Engineering",
-    "edu-1-title": "M.Sc. in Mechatronics Engineering",
-    "edu-1-school": "National Taipei University of Technology (NTUT), Taiwan",
-    "edu-1-date": "2024 - 2025",
-    "edu-1-desc": "Research focus: Multi-Agent System Robot Formation Control, Swarm Quadcopters, & Autonomous Navigation. Thesis: Intelligent Control Strategies for Mobile Robotics: Multi-Agent System Robot Control Formation.",
-
-    "edu-2-title": "Bachelor of Engineering (S.Tr.T) Automation Engineering",
-    "edu-2-school": "Politeknik Manufaktur Bandung (POLMAN)",
-    "edu-2-date": "2019 - 2023",
-    "edu-2-desc": "Focused on PLC, SCADA, industrial automation, and robotics. Final Project: Hexa-Legged SAR Robot Navigation System using LiDAR with SLAM.",
-
-    "edu-3-title": "Industrial Automation Engineering",
-    "edu-3-school": "SMKN 4 Bandung",
-    "edu-3-date": "2017 - 2019",
-    "edu-3-desc": "Industrial electrical fundamentals, motor control, pneumatics, and active Robotics Club member.",
 
     // Publications
     "pub-title": "Publications & Journals",
@@ -384,17 +239,6 @@ const i18n = {
     "proj-6-cat": "Simulator Rig",
     "proj-6-desc": "Heavy machinery control simulator for precision motor control evaluation.",
 
-    // Skills & Certs
-    "skills-title": "Technical Skills & Credentials",
-    "skills-sub": "Core competencies across mechatronics, refrigeration, and cloud engineering",
-    "skill-cat-eng": "Refrigeration & Industrial",
-    "skill-cat-rob": "Robotics & Control Systems",
-    "skill-cat-prog": "Programming & Languages",
-    "cert-google": "Google Cloud Certified Professional Cloud Engineer (2023 - 2026)",
-    "cert-sysadmin": "System Administration and IT Infrastructure Services (2023)",
-    "cert-auto": "Automation Maintenance Junior Engineer (2022 - 2025)",
-    "cert-elec": "Electricity Maintenance / Industrial Electricity (2021 - 2024)",
-
     // Contact
     "contact-title": "Contact Me",
     "contact-sub": "Discuss cold storage engineering, technical consulting, or robotics research collaboration",
@@ -442,308 +286,13 @@ function updateLanguage(lang) {
   }
 }
 
-// --- Multi-Agent Robotics Simulation Engine ---
-class MultiAgentSimulation {
-  constructor(canvasId) {
-    this.canvas = document.getElementById(canvasId);
-    if (!this.canvas) return;
-    this.ctx = this.canvas.getContext("2d");
-    
-    this.width = this.canvas.width = this.canvas.clientWidth;
-    this.height = this.canvas.height = this.canvas.clientHeight;
-    
-    this.isRunning = true;
-    this.formation = "triangle"; // triangle, circle, line
-    
-    // Leader Robot
-    this.leader = {
-      x: this.width * 0.35,
-      y: this.height * 0.5,
-      targetX: this.width * 0.65,
-      targetY: this.height * 0.5,
-      angle: 0,
-      speed: 2.2,
-      radius: 12
-    };
-
-    // Follower Robots (3 Followers)
-    this.followers = [
-      { x: this.leader.x - 40, y: this.leader.y - 40, angle: 0, radius: 9, color: "#00f2fe" },
-      { x: this.leader.x - 40, y: this.leader.y + 40, angle: 0, radius: 9, color: "#4facfe" },
-      { x: this.leader.x - 70, y: this.leader.y, angle: 0, radius: 9, color: "#8b5cf6" }
-    ];
-
-    // Obstacles
-    this.obstacles = [
-      { x: this.width * 0.5, y: this.height * 0.35, radius: 24 },
-      { x: this.width * 0.5, y: this.height * 0.65, radius: 20 }
-    ];
-
-    this.bindEvents();
-    this.loop();
-  }
-
-  bindEvents() {
-    window.addEventListener("resize", () => {
-      if (!this.canvas) return;
-      this.width = this.canvas.width = this.canvas.clientWidth;
-      this.height = this.canvas.height = this.canvas.clientHeight;
-    });
-
-    this.canvas.addEventListener("click", (e) => {
-      const rect = this.canvas.getBoundingClientRect();
-      this.leader.targetX = e.clientX - rect.left;
-      this.leader.targetY = e.clientY - rect.top;
-    });
-  }
-
-  setFormation(type) {
-    this.formation = type;
-    const statusMode = document.getElementById("simStatusMode");
-    if (statusMode) statusMode.textContent = type.toUpperCase();
-  }
-
-  addObstacle() {
-    this.obstacles.push({
-      x: Math.random() * (this.width - 100) + 50,
-      y: Math.random() * (this.height - 100) + 50,
-      radius: Math.floor(Math.random() * 15) + 15
-    });
-    const statusObs = document.getElementById("simStatusObs");
-    if (statusObs) statusObs.textContent = this.obstacles.length;
-  }
-
-  reset() {
-    this.obstacles = [
-      { x: this.width * 0.5, y: this.height * 0.35, radius: 24 },
-      { x: this.width * 0.5, y: this.height * 0.65, radius: 20 }
-    ];
-    this.leader.x = this.width * 0.3;
-    this.leader.y = this.height * 0.5;
-    this.leader.targetX = this.width * 0.7;
-    this.leader.targetY = this.height * 0.5;
-    const statusObs = document.getElementById("simStatusObs");
-    if (statusObs) statusObs.textContent = this.obstacles.length;
-  }
-
-  togglePause() {
-    this.isRunning = !this.isRunning;
-  }
-
-  getFormationOffsets() {
-    const dist = 45;
-    if (this.formation === "triangle") {
-      return [
-        { dx: -dist, dy: -dist * 0.8 },
-        { dx: -dist, dy: dist * 0.8 },
-        { dx: -dist * 1.7, dy: 0 }
-      ];
-    } else if (this.formation === "circle") {
-      return [
-        { dx: Math.cos(0) * dist, dy: Math.sin(0) * dist },
-        { dx: Math.cos((2*Math.PI)/3) * dist, dy: Math.sin((2*Math.PI)/3) * dist },
-        { dx: Math.cos((4*Math.PI)/3) * dist, dy: Math.sin((4*Math.PI)/3) * dist }
-      ];
-    } else { // Line formation
-      return [
-        { dx: -dist, dy: 0 },
-        { dx: -dist * 2, dy: 0 },
-        { dx: -dist * 3, dy: 0 }
-      ];
-    }
-  }
-
-  update() {
-    if (!this.isRunning) return;
-
-    // Leader movement toward target
-    const dx = this.leader.targetX - this.leader.x;
-    const dy = this.leader.targetY - this.leader.y;
-    const dist = Math.hypot(dx, dy);
-
-    if (dist > 3) {
-      this.leader.angle = Math.atan2(dy, dx);
-      let moveX = Math.cos(this.leader.angle) * this.leader.speed;
-      let moveY = Math.sin(this.leader.angle) * this.leader.speed;
-
-      // Repulsive potential field from obstacles
-      this.obstacles.forEach(obs => {
-        const odx = this.leader.x - obs.x;
-        const ody = this.leader.y - obs.y;
-        const odist = Math.hypot(odx, ody);
-        const minSafety = obs.radius + this.leader.radius + 35;
-        if (odist < minSafety && odist > 0) {
-          const force = (minSafety - odist) / minSafety * 3.5;
-          moveX += (odx / odist) * force;
-          moveY += (ody / odist) * force;
-        }
-      });
-
-      this.leader.x += moveX;
-      this.leader.y += moveY;
-    }
-
-    // Follower movement (Formation + APF)
-    const offsets = this.getFormationOffsets();
-    this.followers.forEach((fol, idx) => {
-      const off = offsets[idx];
-      // Rotate offset by leader orientation
-      const targetX = this.leader.x + (off.dx * Math.cos(this.leader.angle) - off.dy * Math.sin(this.leader.angle));
-      const targetY = this.leader.y + (off.dx * Math.sin(this.leader.angle) + off.dy * Math.cos(this.leader.angle));
-
-      const fdx = targetX - fol.x;
-      const fdy = targetY - fol.y;
-      let fMoveX = fdx * 0.1;
-      let fMoveY = fdy * 0.1;
-
-      // Obstacle repulsion for followers
-      this.obstacles.forEach(obs => {
-        const odx = fol.x - obs.x;
-        const ody = fol.y - obs.y;
-        const odist = Math.hypot(odx, ody);
-        const minSafety = obs.radius + fol.radius + 25;
-        if (odist < minSafety && odist > 0) {
-          const force = (minSafety - odist) / minSafety * 3.0;
-          fMoveX += (odx / odist) * force;
-          fMoveY += (ody / odist) * force;
-        }
-      });
-
-      fol.x += fMoveX;
-      fol.y += fMoveY;
-      fol.angle = Math.atan2(fdy, fdx);
-    });
-
-    // Update Telemetry Display
-    const statusLeader = document.getElementById("simStatusLeader");
-    if (statusLeader) {
-      statusLeader.textContent = `X:${Math.round(this.leader.x)} Y:${Math.round(this.leader.y)}`;
-    }
-  }
-
-  draw() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
-
-    // Draw Grid lines
-    this.ctx.strokeStyle = "rgba(255, 255, 255, 0.03)";
-    this.ctx.lineWidth = 1;
-    for (let x = 0; x < this.width; x += 30) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(x, 0);
-      this.ctx.lineTo(x, this.height);
-      this.ctx.stroke();
-    }
-    for (let y = 0; y < this.height; y += 30) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(0, y);
-      this.ctx.lineTo(this.width, y);
-      this.ctx.stroke();
-    }
-
-    // Draw Target Destination
-    this.ctx.strokeStyle = "#00f2fe";
-    this.ctx.lineWidth = 2;
-    this.ctx.setLineDash([4, 4]);
-    this.ctx.beginPath();
-    this.ctx.arc(this.leader.targetX, this.leader.targetY, 14, 0, Math.PI * 2);
-    this.ctx.stroke();
-    this.ctx.setLineDash([]);
-
-    // Draw Target line from Leader
-    this.ctx.strokeStyle = "rgba(0, 242, 254, 0.25)";
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.leader.x, this.leader.y);
-    this.ctx.lineTo(this.leader.targetX, this.leader.targetY);
-    this.ctx.stroke();
-
-    // Draw Obstacles
-    this.obstacles.forEach(obs => {
-      this.ctx.fillStyle = "rgba(239, 68, 68, 0.25)";
-      this.ctx.strokeStyle = "#ef4444";
-      this.ctx.lineWidth = 2;
-      this.ctx.beginPath();
-      this.ctx.arc(obs.x, obs.y, obs.radius, 0, Math.PI * 2);
-      this.ctx.fill();
-      this.ctx.stroke();
-
-      // Warning cross
-      this.ctx.beginPath();
-      this.ctx.moveTo(obs.x - 6, obs.y - 6);
-      this.ctx.lineTo(obs.x + 6, obs.y + 6);
-      this.ctx.moveTo(obs.x + 6, obs.y - 6);
-      this.ctx.lineTo(obs.x - 6, obs.y + 6);
-      this.ctx.stroke();
-    });
-
-    // Draw Formation Communication Lines
-    this.followers.forEach(fol => {
-      this.ctx.strokeStyle = "rgba(0, 242, 254, 0.35)";
-      this.ctx.lineWidth = 1.5;
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.leader.x, this.leader.y);
-      this.ctx.lineTo(fol.x, fol.y);
-      this.ctx.stroke();
-    });
-
-    // Draw Follower Robots
-    this.followers.forEach((fol) => {
-      this.ctx.save();
-      this.ctx.translate(fol.x, fol.y);
-      this.ctx.rotate(fol.angle);
-
-      this.ctx.fillStyle = fol.color;
-      this.ctx.beginPath();
-      this.ctx.arc(0, 0, fol.radius, 0, Math.PI * 2);
-      this.ctx.fill();
-
-      // Direction pointer
-      this.ctx.strokeStyle = "#fff";
-      this.ctx.beginPath();
-      this.ctx.moveTo(0, 0);
-      this.ctx.lineTo(fol.radius + 4, 0);
-      this.ctx.stroke();
-
-      this.ctx.restore();
-    });
-
-    // Draw Leader Robot
-    this.ctx.save();
-    this.ctx.translate(this.leader.x, this.leader.y);
-    this.ctx.rotate(this.leader.angle);
-
-    this.ctx.shadowColor = "#00f2fe";
-    this.ctx.shadowBlur = 12;
-    this.ctx.fillStyle = "#f59e0b";
-    this.ctx.beginPath();
-    this.ctx.arc(0, 0, this.leader.radius, 0, Math.PI * 2);
-    this.ctx.fill();
-
-    // Direction Triangle Pointer
-    this.ctx.fillStyle = "#fff";
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.leader.radius + 6, 0);
-    this.ctx.lineTo(-4, -6);
-    this.ctx.lineTo(-4, 6);
-    this.ctx.closePath();
-    this.ctx.fill();
-
-    this.ctx.restore();
-  }
-
-  loop() {
-    this.update();
-    this.draw();
-    requestAnimationFrame(() => this.loop());
-  }
-}
-
 // --- Cold Storage Sizing Calculator Engine ---
 function calculateCoolingLoad() {
-  const roomType = document.getElementById("calcRoomType").value;
-  const length = parseFloat(document.getElementById("calcLength").value) || 0;
-  const width = parseFloat(document.getElementById("calcWidth").value) || 0;
-  const height = parseFloat(document.getElementById("calcHeight").value) || 0;
-  const ambient = parseFloat(document.getElementById("calcAmbient").value) || 32;
+  const roomType = document.getElementById("calcRoomType")?.value || "chiller";
+  const length = parseFloat(document.getElementById("calcLength")?.value) || 0;
+  const width = parseFloat(document.getElementById("calcWidth")?.value) || 0;
+  const height = parseFloat(document.getElementById("calcHeight")?.value) || 0;
+  const ambient = parseFloat(document.getElementById("calcAmbient")?.value) || 32;
 
   const volume = length * width * height;
   if (volume <= 0) {
@@ -762,14 +311,12 @@ function calculateCoolingLoad() {
     targetTemp = -38;
   }
 
-  // Temp delta factor
   const deltaT = ambient - targetTemp;
   const totalWatts = volume * baseHeatGainWPerM3 * (deltaT / 30) * 1.2;
   const btuHr = totalWatts * 3.412;
   const hpEstimate = (btuHr / 9000).toFixed(1);
   const kwEstimate = (totalWatts / 1000).toFixed(2);
 
-  // Update UI outputs
   document.getElementById("resVolume").textContent = `${volume.toFixed(1)} m³`;
   document.getElementById("resLoadKw").textContent = `${kwEstimate} kW`;
   document.getElementById("resLoadBtu").textContent = `${Math.round(btuHr).toLocaleString()} BTU/h`;
@@ -871,7 +418,7 @@ function copyCitation(title, venue) {
   });
 }
 
-// --- Projects & Innovations Gallery Engine ---
+// --- Projects & Innovations Gallery Engine (Performance Optimized - Zero Auto-Video Load) ---
 const projectsData = [
   // Cold Storage CS_1~3
   {
@@ -899,12 +446,12 @@ const projectsData = [
     linkText: "Patent & Research Details"
   },
 
-  // Drone Swarm Video (SICE FES 2025)
+  // Drone Swarm Video (SICE FES 2025) - Lightweight Poster Card in Grid
   {
     titleKey: "proj-swarm-title",
     catKey: "proj-swarm-cat",
     descKey: "proj-swarm-desc",
-    img: "img/Header.jpeg",
+    img: "img/Header.jpeg", // Poster image! Fast load!
     videoSrc: "img/New/Drone_Swarm.avi",
     isVideo: true,
     category: "swarm",
@@ -977,7 +524,7 @@ function renderProjects(filterCategory = "all") {
 
   const filtered = projectsData.filter(p => filterCategory === "all" || p.category === filterCategory);
 
-  grid.innerHTML = filtered.map((p, idx) => {
+  grid.innerHTML = filtered.map((p) => {
     const realIndex = projectsData.indexOf(p);
     const title = i18n[currentLang][p.titleKey] || p.titleKey;
     const cat = i18n[currentLang][p.catKey] || p.catKey;
@@ -986,14 +533,12 @@ function renderProjects(filterCategory = "all") {
     return `
       <div class="glass-card project-card" onclick="openProjectModal(${realIndex})">
         <div class="project-img-wrapper">
+          <img src="${p.img}" alt="${title}" class="project-img" loading="lazy">
           ${p.isVideo ? `
-            <video src="${p.videoSrc}" muted loop autoplay playsinline class="project-img" style="object-fit:cover;"></video>
-            <div style="position:absolute; top:10px; right:10px; background:rgba(239, 68, 68, 0.9); color:#fff; padding:0.25rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:700;">
-              <i class="fa fa-play-circle"></i> VIDEO
+            <div style="position:absolute; top:10px; right:10px; background:rgba(239, 68, 68, 0.9); color:#fff; padding:0.25rem 0.68rem; border-radius:20px; font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:4px; box-shadow:0 0 10px rgba(239, 68, 68, 0.5);">
+              <i class="fa fa-play-circle"></i> VIDEO DEMO
             </div>
-          ` : `
-            <img src="${p.img}" alt="${title}" class="project-img">
-          `}
+          ` : ''}
           <div class="project-overlay">
             <span class="project-tag">${cat}</span>
           </div>
@@ -1028,7 +573,7 @@ function openProjectModal(index) {
   if (p.isVideo && p.videoSrc) {
     modalImg.style.display = "none";
     modalVideo.style.display = "block";
-    modalVideo.src = p.videoSrc;
+    modalVideo.src = p.videoSrc; // Set video source ONLY when user opens modal!
     modalVideo.play().catch(() => {});
   } else {
     modalVideo.style.display = "none";
@@ -1059,7 +604,10 @@ function openProjectModal(index) {
 function closeProjectModal() {
   const modal = document.getElementById("projectModal");
   const modalVideo = document.getElementById("modalVideo");
-  if (modalVideo) modalVideo.pause();
+  if (modalVideo) {
+    modalVideo.pause();
+    modalVideo.removeAttribute("src"); // Clear source to free memory!
+  }
   if (modal) modal.classList.remove("active");
 }
 
@@ -1077,17 +625,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderProjects(document.querySelector(".proj-filter-tags .filter-btn.active")?.dataset.cat || "all");
     });
   }
-
-  // Initialize Robotics Sim
-  window.simInstance = new MultiAgentSimulation("simCanvas");
-
-  // Sim Buttons
-  document.getElementById("btnTriangle")?.addEventListener("click", () => window.simInstance.setFormation("triangle"));
-  document.getElementById("btnCircle")?.addEventListener("click", () => window.simInstance.setFormation("circle"));
-  document.getElementById("btnLine")?.addEventListener("click", () => window.simInstance.setFormation("line"));
-  document.getElementById("btnAddObs")?.addEventListener("click", () => window.simInstance.addObstacle());
-  document.getElementById("btnResetSim")?.addEventListener("click", () => window.simInstance.reset());
-  document.getElementById("btnPauseSim")?.addEventListener("click", () => window.simInstance.togglePause());
 
   // Calculator Submit
   document.getElementById("calcComputeBtn")?.addEventListener("click", calculateCoolingLoad);
@@ -1148,32 +685,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Sticky Navbar Blur on Scroll & Active Section Spy
-  const sections = document.querySelectorAll("section[id]");
+  // Sticky Navbar Blur on Scroll
   window.addEventListener("scroll", () => {
     const navbar = document.getElementById("navbar");
-    if (window.scrollY > 50) {
-      navbar.classList.add("scrolled");
-    } else {
-      navbar.classList.remove("scrolled");
-    }
-
-    let currentSectionId = "";
-    sections.forEach(sec => {
-      const secTop = sec.offsetTop - 100;
-      const secHeight = sec.offsetHeight;
-      if (window.scrollY >= secTop && window.scrollY < secTop + secHeight) {
-        currentSectionId = sec.getAttribute("id");
+    if (navbar) {
+      if (window.scrollY > 50) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
       }
-    });
-
-    if (currentSectionId) {
-      document.querySelectorAll(".nav-link").forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href") === `#${currentSectionId}`) {
-          link.classList.add("active");
-        }
-      });
     }
   });
 });
