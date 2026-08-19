@@ -6,6 +6,41 @@ Format mengikuti [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) dan ve
 
 ---
 
+## [v2026.08.19] — 2026-08-19
+
+### Added / Ditambahkan
+- **`seo(all-pages)`**: Optimalisasi Komprehensif Google Search Central, Rich Snippets, & Schema.org JSON-LD `@graph`:
+  - **Google Search Console Verification**: Menambahkan meta tag verifikasi situs Google Search Console (`google53e48b176c822ec6.html` dan hash token `53e48b176c822ec6`) pada seluruh halaman (`index.html`, `projects.html`, `publications.html`, `robotics-sim.html`).
+  - **Search Engine Crawling Directives**: Menambahkan meta tag perayapan eksplisit untuk `Googlebot` dan `Bingbot` (`max-image-preview:large`, `max-snippet:-1`, `max-video-preview:-1`).
+  - **Anotasi Bahasa Internasional (hreflang)**: Menambahkan tautan alternatif dwibahasa `hreflang="id"`, `hreflang="en"`, dan `hreflang="x-default"` pada seluruh halaman.
+  - **Optimalisasi Tema Browser Mobile**: Menambahkan tag `theme-color` adaptif untuk mode gelap (`#0a0e1a`) dan mode terang (`#f8fafc`) serta `color-scheme: dark light`.
+  - **Schema.org JSON-LD `@graph` Komprehensif**:
+    1. *`WebSite`*: Metadata situs portofolio, bahasa, dan penerbit.
+    2. *`ProfilePage`*: Standar Google Search terbaru untuk portofolio insinyur / peneliti perorangan.
+    3. *`Person`*: Data profil profesional lengkap (Asesor LSP TPTU, Direktur CV. Dingin Lestari Teknik, F-Gas Level 4, M.Sc. NTUT Taiwan, S.Tr.T Polman Bandung, Bangkit Distinction, keahlian rekayasa, dan link sosial).
+    4. *`ItemList` of `ScholarlyArticle`*: Metadata terstruktur untuk 7 publikasi ilmiah internasional terindeks (IJCAS 2026 Springer DOI `10.1007/s12555-026-00119-1`, ICCAS 2025 IEEE DOI `10.23919/ICCAS66577.2025.11301156`, SICE FES 2025 IEEE DOI `10.23919/SICEFES67750.2025.11236621`, JCIE 2025 Taylor & Francis DOI `10.1080/02533839.2025.2503867`, ICCAS 2024 IEEE DOI `10.23919/ICCAS63016.2024.10773212`, JTT 2024 DOI `10.31884/jtt.v10i2.624`, IJRA 2024 DOI `10.11591/ijra.v13i1.pp50-64`).
+    5. *`WebApplication` / `SoftwareApplication`*: Metadata aplikasi untuk Laboratorium Simulasi Robotika Interaktif (7 modul riset & KaTeX math engine), Cold Storage Calculator, DLT ERP Platform, serta Software Paten MATLAB Direct Air Capture.
+
+- **`seo(sitemap)`**: Google Image Sitemap XML & Geo/Alternate Namespaces:
+  - Menambahkan namespace `xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"` dan `xmlns:xhtml="http://www.w3.org/1999/xhtml"`.
+  - Mendaftarkan seluruh 11 aset gambar proyek rekayasa, cold storage, prototipe DAC, dan potret profil resmi dengan judul serta keterangan lengkap agar terindeks di Google Images.
+  - Memperbarui `<lastmod>2026-08-19</lastmod>` untuk semua rute halaman aktif.
+
+- **`seo(robots)`**: Peningkatan Arahan Perayapan Mesin Pencari di `robots.txt`:
+  - Menambahkan aturan perayapan terarah untuk `Googlebot`, `Googlebot-Image`, `Bingbot`, `Twitterbot`, dan `facebookexternalhit`.
+  - Memblokir perayapan folder internal `.git/`, `.github/`, `.agents/`, dan `lighthouse.json`.
+  - Menentukan canonical host dan sitemap XML.
+
+### Performance / Performa
+- **`perf(core-web-vitals)`**: Optimasi LCP & Cumulative Layout Shift (CLS):
+  - Memperbarui gambar hero avatar di `index.html` dengan `fetchpriority="high"`, `decoding="async"`, `width="480"`, dan `height="600"` untuk mempercepat LCP (Largest Contentful Paint).
+  - Menambahkan `decoding="async"` pada seluruh elemen gambar dinamis di `js/app.js`.
+
+### Security / Keamanan
+- **`security(links)`**: Menambahkan `rel="noopener noreferrer"` pada seluruh tautan eksternal `target="_blank"` di seluruh halaman HTML dan engine rendering dinamis JavaScript (`js/app.js`).
+
+---
+
 ## [v2026.08.12.19] — 2026-08-12
 
 ### Fixed / Diperbaiki

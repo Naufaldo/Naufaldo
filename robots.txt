@@ -1,6 +1,36 @@
-# Robots.txt for Naufaldo Portfolio Website
+# ==============================================================================
+# Robots.txt for Naufaldo, M.Sc. Portfolio Website
+# Production Domain: https://naufaldo.github.io/Naufaldo/
+# ==============================================================================
+
 User-agent: *
 Allow: /
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /.agents/
+Disallow: /lighthouse.json
 
-# XML Sitemap Location
+User-agent: Googlebot
+Allow: /
+Allow: /img/
+Allow: /css/
+Allow: /js/
+
+User-agent: Googlebot-Image
+Allow: /img/
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Host
+Host: https://naufaldo.github.io
+
+# Canonical XML Sitemap Location
 Sitemap: https://naufaldo.github.io/Naufaldo/sitemap.xml

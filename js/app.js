@@ -934,6 +934,7 @@ function renderPublications(filterCategory = "all", searchQuery = "") {
     const doiLink = document.createElement("a");
     doiLink.href = pub.doi;
     doiLink.target = "_blank";
+    doiLink.rel = "noopener noreferrer";
     doiLink.className = "btn btn-outline btn-sm";
     const extIcon = document.createElement("i");
     extIcon.className = "fa fa-external-link";
@@ -1242,6 +1243,7 @@ function renderProjects(filterCategory = "all") {
     imgEl.alt = title;
     imgEl.className = "project-img";
     imgEl.loading = "lazy";
+    imgEl.decoding = "async";
     imgWrapper.appendChild(imgEl);
 
     if (p.isVideo) {
@@ -1280,6 +1282,7 @@ function renderProjects(filterCategory = "all") {
       const linkAnchor = document.createElement("a");
       linkAnchor.href = p.link;
       linkAnchor.target = "_blank";
+      linkAnchor.rel = "noopener noreferrer";
       linkAnchor.className = "badge badge-purple";
       linkAnchor.style.fontSize = "0.78rem";
       const extIcon = document.createElement("i");
@@ -1352,6 +1355,7 @@ function openProjectModal(index) {
     const linkBtn = document.createElement("a");
     linkBtn.href = p.link;
     linkBtn.target = "_blank";
+    linkBtn.rel = "noopener noreferrer";
     linkBtn.className = "btn btn-primary btn-sm";
     const extIcon = document.createElement("i");
     extIcon.className = "fa fa-external-link";

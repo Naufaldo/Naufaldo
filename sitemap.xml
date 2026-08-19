@@ -1,39 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+        http://www.google.com/schemas/sitemap-image/1.1
+        http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
 
   <!-- Main Portfolio Homepage -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://naufaldo.github.io/Naufaldo/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://naufaldo.github.io/Naufaldo/" />
+    
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/Pas%20Fotos.JPG</image:loc>
+      <image:title>Naufaldo, M.Sc. - Direktur CV Dingin Lestari Teknik &amp; Asesor LSP TPTU</image:title>
+      <image:caption>Foto profil profesional Naufaldo, M.Sc., insinyur cold storage, asesor kompetensi resmi BNSP/LSP TPTU, dan peneliti robotika mekatronika.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/Header.jpeg</image:loc>
+      <image:title>Naufaldo, M.Sc. - Portfolio Header</image:title>
+      <image:caption>Header banner portofolio rekayasa cold storage, otomasi industri, dan riset robotika Naufaldo.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/Fotos.JPG</image:loc>
+      <image:title>Naufaldo - Official Professional Portrait</image:title>
+      <image:caption>Potret resmi Naufaldo, M.Sc., lulusan NTUT Taiwan dan Polman Bandung.</image:caption>
+    </image:image>
   </url>
 
   <!-- Interactive Robotics Simulation Hub -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/robotics-sim.html</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/robotics-sim.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://naufaldo.github.io/Naufaldo/robotics-sim.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://naufaldo.github.io/Naufaldo/robotics-sim.html" />
+    
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/Pas%20Fotos.JPG</image:loc>
+      <image:title>Laboratorium Simulasi Robotika Interaktif - Naufaldo, M.Sc.</image:title>
+      <image:caption>Platform simulasi robotika 2D/3D interaktif: Fuzzy PID DDMR, Kinematika Mecanum IJCAS 2026, Path vs Trajectory Tracking, OpenCV Vision Follower, Swarm Drone SICE FES 2025, &amp; LiDAR SLAM.</image:caption>
+    </image:image>
   </url>
 
   <!-- Engineering Projects Gallery -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/projects.html</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/projects.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://naufaldo.github.io/Naufaldo/projects.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://naufaldo.github.io/Naufaldo/projects.html" />
+    
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/New/CS_1.jpg</image:loc>
+      <image:title>Cold Storage &amp; Freezer Room Industrial Project - Bitzer Unit</image:title>
+      <image:caption>Perancangan sistem termal, perakitan panel listrik 3-phase, pemilihan kompresor Bitzer, dan commissioning Freezer Room industri oleh CV. Dingin Lestari Teknik.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/New/CS_2.jpg</image:loc>
+      <image:title>Chiller Room Refrigeration System</image:title>
+      <image:caption>Instalasi kamar dingin Chiller Room untuk produk komersial dengan optimasi efisiensi energi kompresor dan evaporator.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/New/CS_3.jpg</image:loc>
+      <image:title>Air Blast Freezer (ABF) Rapid Freezing System</image:title>
+      <image:caption>Sistem pembekuan cepat Air Blast Freezer (ABF) kapasitas industri -40°C dengan pengontrol suhu presisi.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/New/DAC_1.jpg</image:loc>
+      <image:title>Direct Air Capture (DAC) Hardware Prototype - Carbon Capture</image:title>
+      <image:caption>Prototipe perangkat keras penangkapan gas CO2 Direct Air Capture berbasis media absorpsi biochar dan kontrol telemetri otomatis.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/New/DAC_2.jpg</image:loc>
+      <image:title>Hak Cipta Paten Software MATLAB Telemetri DAC</image:title>
+      <image:caption>Program software kontrol telemetri MATLAB DAC penangkapan CO2 terdaftar dengan Hak Cipta Paten Resmi di Kemenkumham RI.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/IMG-20230503-WA0015.jpg</image:loc>
+      <image:title>DLT ERP Platform Cloud Software</image:title>
+      <image:caption>Sistem ERP manajemen operasional servis, inventaris spare part, dan monitoring cold storage CV. Dingin Lestari Teknik.</image:caption>
+    </image:image>
   </url>
 
   <!-- Publications & Peer-Reviewed Journals -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/publications.html</loc>
-    <lastmod>2026-08-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <lastmod>2026-08-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/publications.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://naufaldo.github.io/Naufaldo/publications.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://naufaldo.github.io/Naufaldo/publications.html" />
+    
+    <image:image>
+      <image:loc>https://naufaldo.github.io/Naufaldo/img/Pas%20Fotos.JPG</image:loc>
+      <image:title>Daftar Publikasi Ilmiah Terindeks - Naufaldo, M.Sc.</image:title>
+      <image:caption>Jurnal ilmiah internasional terindeks IJCAS (Springer), SICE FES (IEEE), ICCAS (IEEE), JCIE (Taylor &amp; Francis), JTT, dan IJRA.</image:caption>
+    </image:image>
   </url>
 
 </urlset>
