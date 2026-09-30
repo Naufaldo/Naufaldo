@@ -30,9 +30,8 @@
   <link rel="alternate" hreflang="x-default" href="https://naufaldo.github.io/Naufaldo/">
 
   <!-- Mobile Browser & Theme Optimization -->
-  <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)">
-  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
-  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a0e1a">
+  <meta name="color-scheme" content="dark">
 
   <!-- Geo Location Meta Tags -->
   <meta name="geo.region" content="ID-JB">
@@ -323,7 +322,9 @@
   </script>
 </head>
 
-<body>
+<body class="portfolio-home">
+
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
 
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
@@ -348,9 +349,6 @@
         <button onclick="openCmsModal()" class="btn btn-outline btn-sm"
           style="border-color:var(--accent-purple); color:var(--accent-purple);" title="Login Admin Portal">
           <i class="fa fa-lock"></i> Login
-        </button>
-        <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Light / Dark Mode" aria-label="Toggle Theme">
-          <i class="fa fa-sun-o"></i>
         </button>
         <button class="lang-toggle-btn" id="langToggleBtn" title="Switch Language">
           <span>🇮🇩</span> ID
@@ -383,8 +381,8 @@
         </p>
 
         <div class="hero-cta">
-          <a href="#contact" class="btn btn-primary">
-            <i class="fa fa-envelope"></i> <span data-i18n="hero-btn-contact">Hubungi Saya</span>
+          <a href="#projects" class="btn btn-primary">
+            <i class="fa fa-cubes"></i> <span data-i18n="hero-btn-projects">Lihat Proyek Unggulan</span>
           </a>
           <a href="robotics-sim.html" class="btn btn-outline">
             <i class="fa fa-android"></i> <span data-i18n="hero-btn-sim">Lab Simulasi Robot</span>
@@ -413,27 +411,30 @@
         </div>
       </div>
 
-      <!-- Avatar Frame with Floating Badges -->
+      <!-- Interactive cold-storage system model -->
       <div class="hero-image-container">
-        <div class="hero-avatar-wrapper">
-          <img src="img/Pas Fotos.JPG" alt="Naufaldo, M.Sc. - Asesor LSP TPTU & Cold Storage Engineer"
-            class="hero-avatar-img" width="480" height="600" fetchpriority="high" decoding="async">
-
-          <div class="hero-badge-float">
-            <i class="fa fa-certificate fa-2x" style="color:var(--accent-amber);"></i>
-            <div>
-              <div style="font-size:0.75rem; color:var(--text-secondary);">Asesor Resmi BNSP</div>
-              <div style="font-size:0.85rem; font-weight:700;">PT. LSP TPTU (Reg. 2026)</div>
+        <div class="cold-scene" id="coldStorageScene" aria-label="Interactive 3D cold storage refrigeration system model">
+          <canvas id="coldStorageCanvas" role="img" aria-label="3D model showing a cold room, evaporator, condensing unit, refrigerant pipes, and moving thermal flow"></canvas>
+          <div class="cold-scene-head">
+            <span class="cold-scene-kicker" data-i18n="scene-kicker">SISTEM REFRIGERASI / 01</span>
+            <span class="cold-scene-live"><i></i><span data-i18n="scene-live">MODEL AKTIF</span></span>
+          </div>
+          <div class="scene-callout scene-callout-evap"><span>01</span><strong>EVAPORATOR</strong></div>
+          <div class="scene-callout scene-callout-cdu"><span>02</span><strong>CONDENSING UNIT</strong></div>
+          <div class="scene-temperature"><span data-i18n="scene-room">COLD ROOM</span><strong>-18°<small>C</small></strong></div>
+          <div class="cold-scene-controls">
+            <span class="scene-legend"><i class="flow-cold"></i><span data-i18n="scene-absorb">SERAP KALOR</span><i class="flow-hot"></i><span data-i18n="scene-reject">BUANG KALOR</span></span>
+            <div class="scene-actions">
+              <button class="scene-control" id="coldFlowToggle" type="button" aria-label="Pause thermal flow" title="Pause thermal flow"><i class="fa fa-pause"></i></button>
+              <button class="scene-control" id="coldViewReset" type="button" aria-label="Reset 3D view" title="Reset 3D view"><i class="fa fa-crosshairs"></i></button>
             </div>
           </div>
-
-          <div class="hero-badge-float-2">
-            <i class="fa fa-snowflake-o fa-2x" style="color:var(--primary-cyan);"></i>
-            <div>
-              <div style="font-size:0.75rem; color:var(--text-secondary);">Direktur Utama</div>
-              <div style="font-size:0.85rem; font-weight:700;">CV. Dingin Lestari Teknik</div>
-            </div>
-          </div>
+          <p class="scene-caption" data-i18n="scene-caption">MODEL SISTEM KONSEPTUAL · TIDAK BERSKALA</p>
+        </div>
+        <div class="hero-portrait-frame">
+          <img src="img/Pas Fotos.JPG" alt="Naufaldo, M.Sc. - Cold Storage Engineer dan Asesor LSP TPTU"
+            class="hero-portrait" width="480" height="600" fetchpriority="high" decoding="async">
+          <span data-i18n="portrait-caption">FIELD ENGINEER / BANDUNG</span>
         </div>
       </div>
     </div>
@@ -704,16 +705,20 @@
     </div>
   </section>
 
-  <!-- Blogspot & Technical Article Section -->
-  <section class="section-padding" id="blog">
-    <div class="container">
-      <h2 class="section-title" data-i18n="blog-title">Artikel Teknis & Blogspot</h2>
+  <!-- Featured Projects Overview -->
+  <section class="section-padding featured-work" id="projects">
+    <div class="container text-center">
+      <h2 class="section-title" data-i18n="featured-title">Bukti di Lapangan</h2>
       <div class="divider"></div>
-      <p class="section-subtitle" data-i18n="blog-sub">
-        Tulisan ilmiah, analisis rekayasa cold storage, serta jurnal riset robotika oleh Naufaldo, M.Sc.
+      <p class="section-subtitle" data-i18n="featured-sub">
+        Sistem cold storage, riset penangkapan karbon, robotika, dan platform digital yang dirancang untuk bekerja di dunia nyata.
       </p>
-
-      <div class="blog-grid" id="blogContainer"></div>
+      <div class="projects-grid" id="projectsGrid"></div>
+      <div style="margin-top: 2.5rem;">
+        <a href="projects.html" class="btn btn-outline">
+          <i class="fa fa-th"></i> <span data-i18n="featured-all">Lihat Semua Proyek</span> &rarr;
+        </a>
+      </div>
     </div>
   </section>
 
@@ -805,22 +810,15 @@
     </div>
   </section>
 
-  <!-- Featured Projects Overview -->
-  <section class="section-padding">
-    <div class="container text-center">
-      <h2 class="section-title">Sorotan Proyek & Inovasi</h2>
+  <!-- Blogspot & Technical Article Section -->
+  <section class="section-padding" id="blog">
+    <div class="container">
+      <h2 class="section-title" data-i18n="blog-title">Artikel Teknis & Blogspot</h2>
       <div class="divider"></div>
-      <p class="section-subtitle">
-        Sistem Cold Storage Industri, Paten Direct Air Capture (DAC), Swarm Drone, dan Platform Web ERP
+      <p class="section-subtitle" data-i18n="blog-sub">
+        Tulisan ilmiah, analisis rekayasa cold storage, serta jurnal riset robotika oleh Naufaldo, M.Sc.
       </p>
-
-      <div class="projects-grid" id="projectsGrid"></div>
-
-      <div style="margin-top: 2.5rem;">
-        <a href="projects.html" class="btn btn-outline">
-          <i class="fa fa-th"></i> Lihat Galeri Proyek Lengkap &rarr;
-        </a>
-      </div>
+      <div class="blog-grid" id="blogContainer"></div>
     </div>
   </section>
 
@@ -848,7 +846,7 @@
             <div class="contact-icon"><i class="fa fa-envelope"></i></div>
             <div class="contact-text">
               <h4 data-i18n="contact-email-title">Email Rekayasa</h4>
-              <p>naufaldo1301@gmail.com</p>
+              <p><a href="mailto:naufaldo1301@gmail.com">naufaldo1301@gmail.com</a></p>
             </div>
           </div>
 
@@ -879,6 +877,17 @@
           </div>
         </div>
 
+        <aside class="contact-cta-panel">
+          <span class="contact-cta-index">01 / CONTACT</span>
+          <h3 data-i18n="contact-cta-title">Punya sistem yang perlu dirancang?</h3>
+          <p data-i18n="contact-cta-text">Kirim konteks awal melalui email. Saya akan meninjau kebutuhan dan mengarahkan langkah teknis berikutnya.</p>
+          <a class="btn btn-primary" href="mailto:naufaldo1301@gmail.com">
+            <i class="fa fa-envelope"></i> <span data-i18n="contact-cta-btn">Tulis Email</span>
+          </a>
+        </aside>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
@@ -1034,6 +1043,9 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="js/cold-storage-scene.js"></script>
   <script src="js/app.js"></script>
 </body>
 

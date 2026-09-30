@@ -1,15 +1,14 @@
 /* ==========================================================================
    Naufaldo Portfolio - Main JavaScript & Interactive Engines
    Bilingual System (ID/EN), Official CV Integrated Dataset,
-   Theme Switching Engine (Dark / Light Mode),
+  Fixed CAD Blueprint Theme,
    Blogspot & Technical Article System, Interactive Admin CMS Engine,
    YouTube Embedded Video Support, Multi-Page Engine & Cold Storage Calculator
    ========================================================================== */
 
-// Immediate Theme initialization to prevent FOUC
+// Keep the blueprint palette consistent and prevent theme flash.
 (function() {
-  const savedTheme = localStorage.getItem("naufaldo_theme") || "dark";
-  document.documentElement.setAttribute("data-theme", savedTheme);
+  document.documentElement.setAttribute("data-theme", "dark");
 })();
 
 // --- Translations Dictionary (ID & EN) ---
@@ -28,10 +27,20 @@ const i18n = {
     "hero-title-prefix": "Halo, Saya ",
     "hero-subtitle": "Cold Storage & Automation Engineer | Asesor LSP TPTU | Peneliti Robotika",
     "hero-desc": "Direktur CV. Dingin Lestari Teknik & Asesor Kompetensi PT. LSP TPTU (No. Reg. MET.000.002933 2026). Pemegang Sertifikasi Teknis Refrigerasi F-Gas Tingkat 4, Paten Software MATLAB Direct Air Capture (DAC), & Lulusan M.Sc. NTUT Taiwan.",
-    "hero-btn-contact": "Hubungi Saya",
+    "hero-btn-projects": "Lihat Proyek Unggulan",
     "hero-btn-calc": "Kalkulator Cold Storage",
     "hero-btn-erp": "Demo Web ERP",
     "hero-btn-sim": "Lab Simulasi Robot",
+    "scene-kicker": "SISTEM REFRIGERASI / 01",
+    "scene-live": "MODEL AKTIF",
+    "scene-room": "COLD ROOM",
+    "scene-absorb": "SERAP KALOR",
+    "scene-reject": "BUANG KALOR",
+    "scene-caption": "MODEL SISTEM KONSEPTUAL · TIDAK BERSKALA",
+    "portrait-caption": "FIELD ENGINEER / BANDUNG",
+    "featured-title": "Bukti di Lapangan",
+    "featured-sub": "Sistem cold storage, riset penangkapan karbon, robotika, dan platform digital yang dirancang untuk bekerja di dunia nyata.",
+    "featured-all": "Lihat Semua Proyek",
     "stat-exp": "Tahun Pengalaman",
     "stat-pub": "Publikasi Ilmiah",
     "stat-proj": "Proyek Rekayasa",
@@ -338,21 +347,18 @@ const i18n = {
     "sim7-eq2-title": "Model Berkas Sinar LiDAR 2D &amp; Kemudi Reaktif",
 
     // Contact
-    "contact-title": "Hubungi Saya",
-    "contact-sub": "Diskusi proyek cold storage, sertifikasi & sertifikasi kompetensi, atau kolaborasi riset robotika",
+    "contact-title": "Mari Berkolaborasi",
+    "contact-sub": "Untuk desain cold storage, otomasi industri, atau riset robotika, mari mulai lewat email.",
     "contact-loc-title": "Lokasi Utama",
     "contact-loc-desc": "Bandung, Jawa Barat, Indonesia",
     "contact-email-title": "Email Rekayasa",
-    "contact-wa-title": "WhatsApp Direct",
     "contact-company-title": "Perusahaan Utama",
     "contact-company-desc": "CV. Dingin Lestari Teknik (dinginlestariteknik.com)",
     "contact-erp-title": "Demo ERP System",
     "contact-erp-desc": "demo.dinginlestariteknik.com",
-    "contact-form-name": "Nama Anda",
-    "contact-form-email": "Email Anda",
-    "contact-form-subject": "Subjek Pesan",
-    "contact-form-message": "Tuliskan Pesan Anda...",
-    "contact-form-btn": "Kirim Pesan WhatsApp",
+    "contact-cta-title": "Punya sistem yang perlu dirancang?",
+    "contact-cta-text": "Kirim konteks awal melalui email. Saya akan meninjau kebutuhan dan mengarahkan langkah teknis berikutnya.",
+    "contact-cta-btn": "Tulis Email",
     "footer-text": "Dibuat oleh Naufaldo, M.Sc. | Hak Cipta Dilindungi."
   },
 
@@ -370,10 +376,20 @@ const i18n = {
     "hero-title-prefix": "Hi, I am ",
     "hero-subtitle": "Cold Storage & Automation Engineer | LSP TPTU Assessor | Robotics Researcher",
     "hero-desc": "Director of CV. Dingin Lestari Teknik & Official Competency Assessor at PT. LSP TPTU (Reg. MET.000.002933 2026). Holder of F-Gas Level 4 Technical Refrigeration Certification, MATLAB Software Patent for Direct Air Capture (DAC), & M.Sc. from NTUT Taiwan.",
-    "hero-btn-contact": "Contact Me",
+    "hero-btn-projects": "View Featured Work",
     "hero-btn-calc": "Cold Storage Calculator",
     "hero-btn-erp": "Web ERP Demo",
     "hero-btn-sim": "Robotics Sim Lab",
+    "scene-kicker": "REFRIGERATION SYSTEM / 01",
+    "scene-live": "LIVE MODEL",
+    "scene-room": "COLD ROOM",
+    "scene-absorb": "HEAT ABSORPTION",
+    "scene-reject": "HEAT REJECTION",
+    "scene-caption": "CONCEPTUAL SYSTEM MODEL · NOT TO SCALE",
+    "portrait-caption": "FIELD ENGINEER / BANDUNG",
+    "featured-title": "Proof in the Field",
+    "featured-sub": "Cold storage systems, carbon capture research, robotics, and digital platforms designed to work beyond the screen.",
+    "featured-all": "View All Projects",
     "stat-exp": "Years Experience",
     "stat-pub": "Scientific Papers",
     "stat-proj": "Engineering Projects",
@@ -680,21 +696,18 @@ const i18n = {
     "sim7-eq2-title": "2D LiDAR Laser Ray-Casting Model &amp; Reactive Steering",
 
     // Contact
-    "contact-title": "Contact Me",
-    "contact-sub": "Discuss cold storage engineering, technical consulting, or robotics research collaboration",
+    "contact-title": "Let's Collaborate",
+    "contact-sub": "For cold storage design, industrial automation, or robotics research, let's start by email.",
     "contact-loc-title": "Main Location",
     "contact-loc-desc": "Bandung, West Java, Indonesia",
     "contact-email-title": "Engineering Email",
-    "contact-wa-title": "WhatsApp Direct",
     "contact-company-title": "Main Company",
     "contact-company-desc": "CV. Dingin Lestari Teknik (dinginlestariteknik.com)",
     "contact-erp-title": "ERP System Demo",
     "contact-erp-desc": "demo.dinginlestariteknik.com",
-    "contact-form-name": "Your Name",
-    "contact-form-email": "Your Email",
-    "contact-form-subject": "Subject",
-    "contact-form-message": "Write your message...",
-    "contact-form-btn": "Send WhatsApp Message",
+    "contact-cta-title": "Have a system to engineer?",
+    "contact-cta-text": "Send an initial brief by email. I will review the requirements and suggest the next technical step.",
+    "contact-cta-btn": "Write an Email",
     "footer-text": "Designed by Naufaldo, M.Sc. | All Rights Reserved."
   }
 };
@@ -751,35 +764,6 @@ function updateLanguage(lang) {
       console.warn("KaTeX render error:", e);
     }
   }
-}
-
-// --- Theme Switching Engine (Dark / Light Mode) ---
-let currentTheme = localStorage.getItem("naufaldo_theme") || "dark";
-
-function applyTheme(theme) {
-  currentTheme = theme;
-  localStorage.setItem("naufaldo_theme", theme);
-  document.documentElement.setAttribute("data-theme", theme);
-  
-  const themeBtns = document.querySelectorAll("#themeToggleBtn, .theme-toggle-btn");
-  themeBtns.forEach(btn => {
-    btn.replaceChildren();
-    const icon = document.createElement("i");
-    if (theme === "light") {
-      icon.className = "fa fa-moon-o";
-      btn.setAttribute("title", currentLang === "id" ? "Ganti ke Mode Gelap (Dark Mode)" : "Switch to Dark Mode");
-      btn.setAttribute("aria-label", "Switch to Dark Mode");
-    } else {
-      icon.className = "fa fa-sun-o";
-      btn.setAttribute("title", currentLang === "id" ? "Ganti ke Mode Terang (Light Mode)" : "Switch to Light Mode");
-      btn.setAttribute("aria-label", "Switch to Light Mode");
-    }
-    btn.appendChild(icon);
-  });
-}
-
-function toggleTheme() {
-  applyTheme(currentTheme === "dark" ? "light" : "dark");
 }
 
 // --- Cold Storage Sizing Calculator Engine ---
@@ -1390,28 +1374,42 @@ function closeCmsModal() {
   if (modal) modal.classList.remove("active");
 }
 
+function initializeScrollMotion() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+
+  const targets = document.querySelectorAll(
+    ".hero-content, .hero-image-container, .section-padding .container > *, #about .glass-card, #experience .glass-card, .project-card, .contact-item, .contact-cta-panel"
+  );
+  const observer = new IntersectionObserver((entries, motionObserver) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      motionObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -36px 0px" });
+
+  targets.forEach((target, index) => {
+    target.classList.add("scroll-reveal");
+    target.style.setProperty("--reveal-delay", `${(index % 4) * 75}ms`);
+    observer.observe(target);
+  });
+}
+
 // --- Initialization & Event Binding ---
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize Language & Theme
+  // Initialize language
   updateLanguage(currentLang);
-  applyTheme(currentTheme);
 
   const langBtn = document.getElementById("langToggleBtn");
   if (langBtn) {
     langBtn.addEventListener("click", () => {
       const nextLang = currentLang === "id" ? "en" : "id";
       updateLanguage(nextLang);
-      applyTheme(currentTheme); // refresh tooltip text
       renderPublications();
       renderBlogPosts();
       renderProjects(document.querySelector(".proj-filter-tags .filter-btn.active")?.dataset.cat || "all");
     });
   }
-
-  // Theme Toggle Buttons
-  document.querySelectorAll("#themeToggleBtn, .theme-toggle-btn").forEach(btn => {
-    btn.addEventListener("click", toggleTheme);
-  });
 
   // Calculator Submit
   document.getElementById("calcComputeBtn")?.addEventListener("click", calculateCoolingLoad);
@@ -1447,18 +1445,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Blog Posts Render
   renderBlogPosts();
-
-  // Contact Form Submission (Redirects to WhatsApp)
-  document.getElementById("contactForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("cfName").value;
-    const email = document.getElementById("cfEmail").value;
-    const subject = document.getElementById("cfSubject").value;
-    const msg = document.getElementById("cfMessage").value;
-
-    const waText = `Halo Naufaldo, M.Sc.%0A%0ASaya: ${encodeURIComponent(name)} (${encodeURIComponent(email)})%0ASubjek: ${encodeURIComponent(subject)}%0APesan: ${encodeURIComponent(msg)}`;
-    window.open(`https://wa.me/6281320608283?text=${waText}`, "_blank");
-  });
+  initializeScrollMotion();
 
   // Mobile Navigation Menu Toggle & Auto Close on Click
   const navToggle = document.getElementById("mobileNavToggle");
@@ -1486,6 +1473,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  const scrollProgressBar = document.getElementById("scrollProgressBar");
+  let progressFrame = 0;
+  const updateScrollProgress = () => {
+    if (!scrollProgressBar || progressFrame) return;
+    progressFrame = requestAnimationFrame(() => {
+      const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollRange > 0 ? window.scrollY / scrollRange : 0;
+      scrollProgressBar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+      progressFrame = 0;
+    });
+  };
+  window.addEventListener("scroll", updateScrollProgress, { passive: true });
+  window.addEventListener("resize", updateScrollProgress, { passive: true });
+  updateScrollProgress();
 
   // --- Admin CMS Auth & Form Handler ---
   const cmsLoginForm = document.getElementById("cmsLoginForm");
