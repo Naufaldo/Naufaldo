@@ -1,17 +1,16 @@
 (() => {
-  const canvas = document.getElementById("coldStorageCanvas");
-  const wrapper = document.getElementById("coldStorageScene");
-  if (!canvas || !wrapper || !window.THREE || !THREE.OrbitControls) return;
+  const initScene = () => {
+    const canvas = document.getElementById("coldStorageCanvas");
+    const wrapper = document.getElementById("coldStorageScene");
+    if (!canvas || !wrapper || !window.THREE || !THREE.OrbitControls) return;
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-  camera.position.set(8.2, 6.3, 10.4);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+    camera.position.set(8.2, 6.3, 10.4);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+    renderer.outputEncoding = THREE.sRGBEncoding;
 
   const controls = new THREE.OrbitControls(camera, canvas);
   controls.target.set(0.25, 1.3, 0);
@@ -191,8 +190,31 @@
   resizeObserver.observe(wrapper);
   window.addEventListener("resize", resizeScene, { passive: true });
 
+  let isVisible = true;
+  let animId = null;
+  if ("IntersectionObserver" in window) {
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      const visible = entries[0]?.isIntersecting ?? true;
+      if (visible && !isVisible) {
+        isVisible = true;
+        if (!animId) animId = requestAnimationFrame(animate);
+      } else if (!visible) {
+        isVisible = false;
+        if (animId) {
+          cancelAnimationFrame(animId);
+          animId = null;
+        }
+      }
+    }, { threshold: 0.05 });
+    visibilityObserver.observe(wrapper);
+  }
+
   const animate = () => {
-    requestAnimationFrame(animate);
+    if (!isVisible) {
+      animId = null;
+      return;
+    }
+    animId = requestAnimationFrame(animate);
     if (isPlaying) elapsed += 0.006;
     controls.update();
     fans.forEach((fan, index) => {
@@ -224,4 +246,13 @@
     renderer.render(scene, camera);
   };
   animate();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      (window.requestIdleCallback || ((cb) => setTimeout(cb, 50)))(initScene);
+    });
+  } else {
+    (window.requestIdleCallback || ((cb) => setTimeout(cb, 50)))(initScene);
+  }
 })();

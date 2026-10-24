@@ -53,7 +53,19 @@
 
   <!-- Favicon & Icons -->
   <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Preconnect to CDNs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+  <!-- Fonts & Icons (Async Non-Blocking) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </noscript>
   
   <!-- Custom Modern Design System -->
   <link rel="stylesheet" href="css/style.css">
@@ -213,6 +225,8 @@
     </div>
   </nav>
 
+  <main id="main">
+
   <!-- Projects Banner -->
   <section class="section-padding" style="padding-top: 8rem; padding-bottom: 2rem;">
     <div class="container text-center">
@@ -240,6 +254,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -261,7 +277,7 @@
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="closeProjectModal()">&times;</button>
       <div class="modal-img-wrapper">
-        <img src="" id="modalImg" alt="Project Image" class="modal-img">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" id="modalImg" alt="Project Image" class="modal-img">
         <video id="modalVideo" controls class="modal-video" style="display:none;"></video>
       </div>
       <div class="modal-body">
@@ -274,6 +290,6 @@
     </div>
   </div>
 
-  <script src="js/app.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@
   <!-- Main Portfolio Homepage -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
     <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/" />
@@ -38,7 +38,7 @@
   <!-- Interactive Robotics Simulation Hub -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/robotics-sim.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/robotics-sim.html" />
@@ -55,7 +55,7 @@
   <!-- Engineering Projects Gallery -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/projects.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/projects.html" />
@@ -97,7 +97,7 @@
   <!-- Publications & Peer-Reviewed Journals -->
   <url>
     <loc>https://naufaldo.github.io/Naufaldo/publications.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <xhtml:link rel="alternate" hreflang="id" href="https://naufaldo.github.io/Naufaldo/publications.html" />

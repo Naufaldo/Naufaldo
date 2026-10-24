@@ -53,7 +53,20 @@
 
   <!-- Favicon & Icons -->
   <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Preconnect to CDNs -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+  <!-- Fonts & Icons (Async Non-Blocking) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </noscript>
   
   <!-- KaTeX LaTeX Stylesheet -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
@@ -139,6 +152,8 @@
     </div>
   </nav>
 
+  <main id="main">
+
   <!-- Banner Section -->
   <section class="section-padding" style="padding-top: 8rem; padding-bottom: 2rem;">
     <div class="container text-center">
@@ -168,7 +183,7 @@
       <!-- ===== TAB 1: Fuzzy PID DDMR & APF ===== -->
       <div class="sim-tab-content active" id="tab1">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;" data-i18n="sim1-title">Modul 1: Fuzzy PID DDMR &amp; Multi-Agent Formation Control (ICCAS 2025)</h3>
+          <h2 style="color:var(--primary-cyan);margin-bottom:0.5rem;font-size:1.25rem;" data-i18n="sim1-title">Modul 1: Fuzzy PID DDMR &amp; Multi-Agent Formation Control (ICCAS 2025)</h2>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;" data-i18n="sim1-desc">Kendali formasi multi-robot berbasis Leader-Follower dengan Fuzzy-tuned PID &amp; penghindaran rintangan APF (Artificial Potential Field). Dukungan kendali trajektori Lemniscate (8), Melingkar (Circular), dan Manual.</p>
           <div class="sim-canvas-wrapper"><canvas id="canvasSim1"></canvas></div>
           <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
@@ -191,23 +206,23 @@
             <!-- Dynamic Parameter Sliders Grid -->
             <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:0.75rem;background:rgba(0,0,0,0.3);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:0.85rem;">
               <div>
-                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-followers">Jumlah Follower:</span> <strong id="valFollowerCount1" style="color:var(--primary-cyan);">3</strong></label><br>
+                <label for="sliderFollowerCount1" style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-followers">Jumlah Follower:</span> <strong id="valFollowerCount1" style="color:var(--primary-cyan);">3</strong></label><br>
                 <input type="range" id="sliderFollowerCount1" min="2" max="8" value="3" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-spacing">Jarak Spasi (d):</span> <strong id="valFormDist1" style="color:var(--accent-emerald);">48px</strong></label><br>
+                <label for="sliderFormDist1" style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-spacing">Jarak Spasi (d):</span> <strong id="valFormDist1" style="color:var(--accent-emerald);">48px</strong></label><br>
                 <input type="range" id="sliderFormDist1" min="25" max="80" value="48" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-kp">PID Gain (Kp):</span> <strong id="valKp1" style="color:var(--accent-amber);">0.16</strong></label><br>
+                <label for="sliderKp1" style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-kp">PID Gain (Kp):</span> <strong id="valKp1" style="color:var(--accent-amber);">0.16</strong></label><br>
                 <input type="range" id="sliderKp1" min="5" max="40" value="16" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-speed">Kecepatan:</span> <strong id="valLeaderSpeed1" style="color:var(--accent-purple);">2.2×</strong></label><br>
+                <label for="sliderLeaderSpeed1" style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-speed">Kecepatan:</span> <strong id="valLeaderSpeed1" style="color:var(--accent-purple);">2.2×</strong></label><br>
                 <input type="range" id="sliderLeaderSpeed1" min="10" max="45" value="22" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-apf">Gaya Tolak APF:</span> <strong id="valApfForce1" style="color:#ef4444;">4.0</strong></label><br>
+                <label for="sliderApfForce1" style="font-size:0.75rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim1-param-apf">Gaya Tolak APF:</span> <strong id="valApfForce1" style="color:#ef4444;">4.0</strong></label><br>
                 <input type="range" id="sliderApfForce1" min="10" max="80" value="40" style="width:100%;">
               </div>
             </div>
@@ -268,7 +283,7 @@
       <!-- ===== TAB 2: Model Kinematika + PID Trajectory ===== -->
       <div class="sim-tab-content" id="tab2" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-emerald);margin-bottom:0.5rem;" data-i18n="sim2-title">Modul 2: Model Matematika Kinematika Mecanum (MWDR) &amp; Trajectory Tracking</h3>
+          <h2 style="color:var(--accent-emerald);margin-bottom:0.5rem;font-size:1.25rem;" data-i18n="sim2-title">Modul 2: Model Matematika Kinematika Mecanum (MWDR) &amp; Trajectory Tracking</h2>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;" data-i18n="sim2-desc">Open-loop $\omega_r/\omega_l$ <em>atau</em> mode PID Trajectory — robot mengejar lintasan referensi (Sinusoidal, Circular, Lemniscate, Square) dengan kontrol heading PID.</p>
           <div style="display:flex;gap:0.5rem;margin-bottom:1rem;">
             <button class="btn btn-primary btn-sm" id="btnModeOpenLoop2" data-i18n="sim2-btn-openloop">⚙ Open-Loop ωr/ωl</button>
@@ -282,11 +297,11 @@
           <!-- Open-Loop panel -->
           <div id="panelOpenLoop2" style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;">
             <div>
-              <label style="font-size:0.8rem;color:var(--text-secondary);">ωr (Roda Kanan): <span id="wrLabel" style="color:var(--primary-cyan);">6.1</span></label><br>
+              <label for="sliderWr" style="font-size:0.8rem;color:var(--text-secondary);">ωr (Roda Kanan): <span id="wrLabel" style="color:var(--primary-cyan);">6.1</span></label><br>
               <input type="range" id="sliderWr" min="0" max="100" value="60" style="width:140px;">
             </div>
             <div>
-              <label style="font-size:0.8rem;color:var(--text-secondary);">ωl (Roda Kiri): <span id="wlLabel" style="color:var(--accent-emerald);">4.1</span></label><br>
+              <label for="sliderWl" style="font-size:0.8rem;color:var(--text-secondary);">ωl (Roda Kiri): <span id="wlLabel" style="color:var(--accent-emerald);">4.1</span></label><br>
               <input type="range" id="sliderWl" min="0" max="100" value="40" style="width:140px;">
             </div>
             <div style="font-size:0.8rem;color:var(--text-secondary);line-height:1.8;">
@@ -299,7 +314,7 @@
           <div id="panelPID2" style="display:none;margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Trajectory Type:</label><br>
+                <label for="selectTrajType" style="font-size:0.8rem;color:var(--text-secondary);">Trajectory Type:</label><br>
                 <select id="selectTrajType" style="width:100%;margin-top:0.3rem;padding:0.4rem 0.6rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
                   <option value="sinusoidal">🌊 Sinusoidal</option>
                   <option value="circular">⭕ Circular</option>
@@ -315,15 +330,15 @@
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Kp: <span id="kpLabel" style="color:var(--primary-cyan);">2.5</span></label><br>
+                <label for="sliderKp" style="font-size:0.8rem;color:var(--text-secondary);">Kp: <span id="kpLabel" style="color:var(--primary-cyan);">2.5</span></label><br>
                 <input type="range" id="sliderKp" min="0" max="100" value="25" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Ki: <span id="kiLabel" style="color:var(--accent-emerald);">0.01</span></label><br>
+                <label for="sliderKi" style="font-size:0.8rem;color:var(--text-secondary);">Ki: <span id="kiLabel" style="color:var(--accent-emerald);">0.01</span></label><br>
                 <input type="range" id="sliderKi" min="0" max="20" value="1" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Kd: <span id="kdLabel" style="color:var(--accent-amber);">0.8</span></label><br>
+                <label for="sliderKd" style="font-size:0.8rem;color:var(--text-secondary);">Kd: <span id="kdLabel" style="color:var(--accent-amber);">0.8</span></label><br>
                 <input type="range" id="sliderKd" min="0" max="50" value="8" style="width:100%;">
               </div>
             </div>
@@ -367,16 +382,16 @@
       <!-- ===== TAB 3: Path vs Trajectory Tracking ===== -->
       <div class="sim-tab-content" id="tab3" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;" data-i18n="sim3-title">Modul 3: Path Tracking vs Trajectory Tracking</h3>
+          <h2 style="color:var(--accent-purple);margin-bottom:0.5rem;font-size:1.25rem;" data-i18n="sim3-title">Modul 3: Path Tracking vs Trajectory Tracking</h2>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;" data-i18n="sim3-desc">Perbandingan mendalam antara Path Tracking (Pure Pursuit tanpa kendala waktu) vs Trajectory Tracking (sinkronisasi ruang-waktu ketat).</p>
           <div style="display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;">
             <span style="font-size:0.82rem;color:var(--text-secondary);" data-i18n="sim3-label-mode">Mode Aktif:</span>
             <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
-              <input type="radio" name="trackMode3" id="radioPath3" value="path" checked>
+              <input type="radio" name="trackMode3" id="radioPath3" value="path" aria-label="Path Tracking" checked>
               <span style="font-size:0.84rem;color:var(--primary-cyan);font-weight:600;" data-i18n="sim3-mode-path">Path Tracking (Pure Pursuit)</span>
             </label>
             <label style="display:flex;align-items:center;gap:0.4rem;cursor:pointer;">
-              <input type="radio" name="trackMode3" id="radioTraj3" value="trajectory">
+              <input type="radio" name="trackMode3" id="radioTraj3" value="trajectory" aria-label="Trajectory Tracking">
               <span style="font-size:0.84rem;color:var(--accent-purple);font-weight:600;" data-i18n="sim3-mode-traj">Trajectory Tracking (Time-Sync)</span>
             </label>
           </div>
@@ -386,16 +401,16 @@
           <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Start X: <span id="startX3Label" style="color:var(--primary-cyan);">50</span>px</label><br>
+                <label for="startX3" style="font-size:0.8rem;color:var(--text-secondary);">Start X: <span id="startX3Label" style="color:var(--primary-cyan);">50</span>px</label><br>
                 <input type="range" id="startX3" min="30" max="250" value="50" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Offset Y: <span id="startY3Label" style="color:var(--accent-purple);">+0</span></label><br>
+                <label for="startY3" style="font-size:0.8rem;color:var(--text-secondary);">Offset Y: <span id="startY3Label" style="color:var(--accent-purple);">+0</span></label><br>
                 <input type="range" id="startY3" min="-150" max="150" value="0" style="width:100%;"><br>
                 <span style="font-size:0.72rem;color:var(--text-secondary);">(relatif thd tengah kanvas)</span>
               </div>
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Kecepatan: <span id="speed3Label" style="color:var(--accent-amber);">1.0×</span></label><br>
+                <label for="speed3" style="font-size:0.8rem;color:var(--text-secondary);">Kecepatan: <span id="speed3Label" style="color:var(--accent-amber);">1.0×</span></label><br>
                 <input type="range" id="speed3" min="1" max="50" value="10" style="width:100%;">
               </div>
             </div>
@@ -433,7 +448,7 @@
       <!-- ===== TAB 4: Vision Follower Camera ===== -->
       <div class="sim-tab-content" id="tab4" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-amber);margin-bottom:0.5rem;" data-i18n="sim4-title">Modul 4: Robot Following Kamera Vision (OpenCV Bounding Box)</h3>
+          <h2 style="color:var(--accent-amber);margin-bottom:0.5rem;font-size:1.25rem;" data-i18n="sim4-title">Modul 4: Robot Following Kamera Vision (OpenCV Bounding Box)</h2>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;" data-i18n="sim4-desc">Simulasi visual tracking HSV &amp; kalkulasi error offset piksel (ex, ey) untuk mengendalikan aktuator gimbal kamera 2-DOF.</p>
           <div class="sim-canvas-wrapper"><canvas id="canvasSim4"></canvas></div>
           <div style="margin-top:0.75rem;display:flex;gap:2rem;font-size:0.82rem;color:var(--text-secondary);">
@@ -469,25 +484,25 @@
       <!-- ===== TAB 5: Drone Swarm 3D ===== -->
       <div class="sim-tab-content" id="tab5" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--primary-cyan);margin-bottom:0.5rem;" data-i18n="sim5-title">Modul 5: Drone Swarm Sinusoidal Altitude Flocking (SICE FES 2025)</h3>
+          <h2 style="color:var(--primary-cyan);margin-bottom:0.5rem;font-size:1.25rem;" data-i18n="sim5-title">Modul 5: Drone Swarm Sinusoidal Altitude Flocking (SICE FES 2025)</h2>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;" data-i18n="sim5-desc">Kawanan quadcopter dengan algoritma flocking Cohesion/Separation/Alignment. Klik kanvas untuk pindah target.</p>
           <div class="sim-canvas-wrapper"><canvas id="canvasSim5"></canvas></div>
           <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid var(--border-color);">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:0.75rem;">
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Jumlah Drone: <span id="droneCountLabel" style="color:var(--primary-cyan);">12</span></label><br>
+                <label for="sliderDroneCount" style="font-size:0.8rem;color:var(--text-secondary);">Jumlah Drone: <span id="droneCountLabel" style="color:var(--primary-cyan);">12</span></label><br>
                 <input type="range" id="sliderDroneCount" min="3" max="25" value="12" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Cohesion (goal-seeking): <span id="cohesionLabel" style="color:var(--accent-emerald);">0.30</span></label><br>
+                <label for="sliderCohesion" style="font-size:0.8rem;color:var(--text-secondary);">Cohesion (goal-seeking): <span id="cohesionLabel" style="color:var(--accent-emerald);">0.30</span></label><br>
                 <input type="range" id="sliderCohesion" min="0" max="100" value="30" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Separation Distance: <span id="separationLabel" style="color:var(--accent-amber);">40</span>px</label><br>
+                <label for="sliderSeparation" style="font-size:0.8rem;color:var(--text-secondary);">Separation Distance: <span id="separationLabel" style="color:var(--accent-amber);">40</span>px</label><br>
                 <input type="range" id="sliderSeparation" min="10" max="120" value="40" style="width:100%;">
               </div>
               <div>
-                <label style="font-size:0.8rem;color:var(--text-secondary);">Alignment (velocity match): <span id="alignmentLabel" style="color:var(--accent-purple);">0.20</span></label><br>
+                <label for="sliderAlignment" style="font-size:0.8rem;color:var(--text-secondary);">Alignment (velocity match): <span id="alignmentLabel" style="color:var(--accent-purple);">0.20</span></label><br>
                 <input type="range" id="sliderAlignment" min="0" max="100" value="20" style="width:100%;">
               </div>
             </div>
@@ -537,7 +552,7 @@
       <div class="sim-tab-content" id="tab6" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
           <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;">
-            <h3 style="color:var(--accent-emerald);margin-bottom:0;" data-i18n="sim6-title">Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM &amp; Frontier vs Floodfill (ICCAS 2024)</h3>
+            <h2 style="color:var(--accent-emerald);margin-bottom:0;font-size:1.25rem;" data-i18n="sim6-title">Modul 6: Eksplorasi Indoor Otonom berbasis 2D LiDAR SLAM &amp; Frontier vs Floodfill (ICCAS 2024)</h2>
             <span class="paper-meta-badge" style="margin-bottom:0;"><i class="fa fa-book"></i> ICCAS 2024 (IEEE Xplore)</span>
           </div>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.85rem;" data-i18n="sim6-desc">
@@ -547,7 +562,7 @@
           <!-- Top Control Bar: Environment Preset & Algorithm Selector -->
           <div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:center;background:rgba(0,0,0,0.35);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:0.75rem 1rem;margin-bottom:1rem;">
             <div>
-              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;" data-i18n="sim6-label-map">Lingkungan Uji (Paper Map):</label><br>
+              <label for="selectExploreMap6" style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;" data-i18n="sim6-label-map">Lingkungan Uji (Paper Map):</label><br>
               <select id="selectExploreMap6" style="margin-top:0.25rem;padding:0.4rem 0.6rem;background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-color);border-radius:6px;font-size:0.85rem;">
                 <option value="phoenix" data-i18n="sim6-opt-phoenix">🗺 Phoenix World (Labirin Kompleks - Frontier 57.6% Lebih Cepat)</option>
                 <option value="complex_zee" data-i18n="sim6-opt-zee">⚡ Complex Zee World (Skala Luas - Frontier 60% Lebih Cepat)</option>
@@ -558,17 +573,17 @@
               <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;" data-i18n="sim6-label-algo">Algoritma Eksplorasi:</label><br>
               <div style="display:flex;gap:0.85rem;margin-top:0.4rem;">
                 <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.82rem;color:var(--accent-amber);">
-                  <input type="radio" name="exploreAlgo6" id="radioFrontier6" value="frontier" checked>
+                  <input type="radio" name="exploreAlgo6" id="radioFrontier6" value="frontier" aria-label="Frontier Exploration" checked>
                   <strong data-i18n="sim6-algo-frontier">Frontier-Based (A* Path)</strong>
                 </label>
                 <label style="display:flex;align-items:center;gap:0.35rem;cursor:pointer;font-size:0.82rem;color:var(--primary-cyan);">
-                  <input type="radio" name="exploreAlgo6" id="radioFloodfill6" value="floodfill">
+                  <input type="radio" name="exploreAlgo6" id="radioFloodfill6" value="floodfill" aria-label="Floodfill Exploration">
                   <strong data-i18n="sim6-algo-floodfill">Floodfill (BFS Murni)</strong>
                 </label>
               </div>
             </div>
             <div>
-              <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim6-label-speed">Kecepatan Eksplorasi:</span> <span id="exploreSpeedLabel6" style="color:var(--primary-cyan);">1.5×</span></label><br>
+              <label for="sliderExploreSpeed6" style="font-size:0.78rem;color:var(--text-secondary);font-weight:600;"><span data-i18n="sim6-label-speed">Kecepatan Eksplorasi:</span> <span id="exploreSpeedLabel6" style="color:var(--primary-cyan);">1.5×</span></label><br>
               <input type="range" id="sliderExploreSpeed6" min="1" max="40" value="15" style="width:130px;margin-top:0.3rem;">
             </div>
           </div>
@@ -662,7 +677,7 @@
       <!-- ===== TAB 7: LiDAR SLAM ===== -->
       <div class="sim-tab-content" id="tab7" style="display:none;">
         <div class="glass-card" style="margin-bottom:1.5rem;">
-          <h3 style="color:var(--accent-purple);margin-bottom:0.5rem;" data-i18n="sim7-title">Modul 7: Navigasi Otonom &amp; Pemetaan LiDAR SLAM (IJRA 2024)</h3>
+          <h2 style="color:var(--accent-purple);margin-bottom:0.5rem;font-size:1.25rem;" data-i18n="sim7-title">Modul 7: Navigasi Otonom &amp; Pemetaan LiDAR SLAM (IJRA 2024)</h2>
           <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:0.75rem;" data-i18n="sim7-desc">Simulasi LiDAR 360° dengan 3 mode kontrol: Mouse | TurtleBot WASD | Auto-Navigation (Reactive).</p>
           <div style="display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center;">
             <button class="btn btn-primary btn-sm sim-mode-btn" id="btnModeMouse7" data-mode="mouse" data-i18n="sim7-btn-mouse">🖱 Mouse Control</button>
@@ -757,6 +772,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -774,8 +791,8 @@
   </footer>
 
   <!-- KaTeX LaTeX Script & Auto-Render -->
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       if (typeof renderMathInElement !== "undefined") {
@@ -792,7 +809,7 @@
     });
   </script>
 
-  <script src="js/app.js"></script>
-  <script src="js/robotics-sim.js"></script>
+  <script defer src="js/app.js"></script>
+  <script defer src="js/robotics-sim.js"></script>
 </body>
 </html>

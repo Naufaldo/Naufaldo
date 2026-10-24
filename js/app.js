@@ -713,10 +713,17 @@ const i18n = {
 };
 
 // --- Safe DOM HTML Parser Helper ---
+const _domParser = typeof DOMParser !== "undefined" ? new DOMParser() : null;
 function setSafeHTML(element, htmlContent) {
-  const parser = new DOMParser();
-  const parsed = parser.parseFromString(htmlContent, 'text/html');
-  element.replaceChildren(...parsed.body.childNodes);
+  if (!htmlContent) return;
+  if (!htmlContent.includes('<')) {
+    element.textContent = htmlContent;
+    return;
+  }
+  if (_domParser) {
+    const parsed = _domParser.parseFromString(htmlContent, 'text/html');
+    element.replaceChildren(...parsed.body.childNodes);
+  }
 }
 
 // --- Language Switching Engine ---
@@ -1397,8 +1404,10 @@ function initializeScrollMotion() {
 
 // --- Initialization & Event Binding ---
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize language
-  updateLanguage(currentLang);
+  // Initialize language only if not default ID
+  if (currentLang !== "id") {
+    updateLanguage(currentLang);
+  }
 
   const langBtn = document.getElementById("langToggleBtn");
   if (langBtn) {
@@ -1451,14 +1460,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const navToggle = document.getElementById("mobileNavToggle");
   const navLinks = document.getElementById("navLinks");
   if (navToggle && navLinks) {
-    navToggle.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = navLinks.classList.toggle("active");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      const icon = navToggle.querySelector("i");
+      if (icon) {
+        icon.className = isOpen ? "fa fa-times" : "fa fa-bars";
+      }
     });
 
     document.querySelectorAll(".nav-link").forEach(link => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+        const icon = navToggle.querySelector("i");
+        if (icon) icon.className = "fa fa-bars";
       });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (navLinks.classList.contains("active") && !navLinks.contains(e.target) && !navToggle.contains(e.target)) {
+        navLinks.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
+        const icon = navToggle.querySelector("i");
+        if (icon) icon.className = "fa fa-bars";
+      }
     });
   }
 

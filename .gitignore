@@ -1,5 +1,7 @@
 # Ignore Lighthouse and test output
 lighthouse.json
+lh-report.json
+*_orig.*
 *.log
 .DS_Store
 Thumbs.db
