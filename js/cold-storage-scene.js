@@ -16,9 +16,18 @@
   controls.target.set(0.25, 1.3, 0);
   controls.enableDamping = true;
   controls.dampingFactor = 0.06;
+  controls.enableZoom = false;
   controls.minDistance = 8;
   controls.maxDistance = 16;
   controls.maxPolarAngle = Math.PI * 0.49;
+
+  // Ergonomic mobile touch: single finger scrolls page; two fingers rotate 3D scene
+  if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+    controls.touches = {
+      ONE: THREE.TOUCH.NONE,
+      TWO: THREE.TOUCH.ROTATE
+    };
+  }
   controls.update();
 
   scene.add(new THREE.HemisphereLight(0xc9efff, 0x142335, 1.35));

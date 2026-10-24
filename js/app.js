@@ -28,6 +28,8 @@ const i18n = {
     "hero-subtitle": "Cold Storage & Automation Engineer | Asesor LSP TPTU | Peneliti Robotika",
     "hero-desc": "Direktur CV. Dingin Lestari Teknik & Asesor Kompetensi PT. LSP TPTU (No. Reg. MET.000.002933 2026). Pemegang Sertifikasi Teknis Refrigerasi F-Gas Tingkat 4, Paten Software MATLAB Direct Air Capture (DAC), & Lulusan M.Sc. NTUT Taiwan.",
     "hero-btn-projects": "Lihat Proyek Unggulan",
+    "hero-btn-cv": "Unduh CV (PDF)",
+    "nav-btn-cv": "CV (PDF)",
     "hero-btn-calc": "Kalkulator Cold Storage",
     "hero-btn-erp": "Demo Web ERP",
     "hero-btn-sim": "Lab Simulasi Robot",
@@ -40,7 +42,7 @@ const i18n = {
     "portrait-caption": "FIELD ENGINEER / BANDUNG",
     "featured-title": "Bukti di Lapangan",
     "featured-sub": "Sistem cold storage, riset penangkapan karbon, robotika, dan platform digital yang dirancang untuk bekerja di dunia nyata.",
-    "featured-all": "Lihat Semua Proyek",
+    "featured-all": "Lihat Semua Proyek (11 Proyek)",
     "stat-exp": "Tahun Pengalaman",
     "stat-pub": "Publikasi Ilmiah",
     "stat-proj": "Proyek Rekayasa",
@@ -376,7 +378,9 @@ const i18n = {
     "hero-title-prefix": "Hi, I am ",
     "hero-subtitle": "Cold Storage & Automation Engineer | LSP TPTU Assessor | Robotics Researcher",
     "hero-desc": "Director of CV. Dingin Lestari Teknik & Official Competency Assessor at PT. LSP TPTU (Reg. MET.000.002933 2026). Holder of F-Gas Level 4 Technical Refrigeration Certification, MATLAB Software Patent for Direct Air Capture (DAC), & M.Sc. from NTUT Taiwan.",
-    "hero-btn-projects": "View Featured Work",
+    "hero-btn-projects": "View Featured Projects",
+    "hero-btn-cv": "Download CV (PDF)",
+    "nav-btn-cv": "CV (PDF)",
     "hero-btn-calc": "Cold Storage Calculator",
     "hero-btn-erp": "Web ERP Demo",
     "hero-btn-sim": "Robotics Sim Lab",
@@ -389,7 +393,7 @@ const i18n = {
     "portrait-caption": "FIELD ENGINEER / BANDUNG",
     "featured-title": "Proof in the Field",
     "featured-sub": "Cold storage systems, carbon capture research, robotics, and digital platforms designed to work beyond the screen.",
-    "featured-all": "View All Projects",
+    "featured-all": "View All Projects (11 Projects)",
     "stat-exp": "Years Experience",
     "stat-pub": "Scientific Papers",
     "stat-proj": "Engineering Projects",
@@ -959,7 +963,7 @@ function copyCitation(title, venue) {
 }
 
 // --- Blogspot Article Dataset Engine ---
-let blogPostsData = JSON.parse(localStorage.getItem("naufaldo_blog_posts")) || [
+const blogPostsData = [
   {
     id: 1,
     title: "Panduan Optimasi Efisiensi Energi pada Freezer Room & Air Blast Freezer (ABF)",
@@ -1079,7 +1083,29 @@ function openBlogModal(index) {
 }
 
 // --- Projects Data Engine ---
-let projectsData = JSON.parse(localStorage.getItem("naufaldo_projects")) || [
+const projectsData = [
+  {
+    titleKey: "proj-cs1-title",
+    catKey: "proj-cs1-cat",
+    descKey: "proj-cs1-desc",
+    img: "img/New/CS_1.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["Cold Storage", "Freezer Room", "Compressor", "Panel 3-Phase"],
+    link: "https://dinginlestariteknik.com/",
+    linkText: "dinginlestariteknik.com"
+  },
+  {
+    titleKey: "proj-dac2-title",
+    catKey: "proj-dac2-cat",
+    descKey: "proj-dac2-desc",
+    img: "img/New/DAC_2.jpg",
+    isVideo: false,
+    category: "dac",
+    tags: ["MATLAB Software Patent", "Telemetry Control", "CO2 Sensor", "Paten Resmi"],
+    link: "https://www.researchgate.net/profile/Naufaldo-2",
+    linkText: "Patent Document"
+  },
   {
     titleKey: "proj-swarm-title",
     catKey: "proj-swarm-cat",
@@ -1091,6 +1117,62 @@ let projectsData = JSON.parse(localStorage.getItem("naufaldo_projects")) || [
     tags: ["Swarm Drone", "Flight Control", "Flocking Dynamics", "SICE FES 2025", "YouTube Video"],
     link: "https://doi.org/10.23919/SICEFES67750.2025.11236621",
     linkText: "SICE FES 2025 Paper"
+  },
+  {
+    titleKey: "proj-erp-title",
+    catKey: "proj-erp-cat",
+    descKey: "proj-erp-desc",
+    img: "img/IMG-20230503-WA0015.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["ERP Software", "SaaS Platform", "HVAC Operations", "Field Service", "Cloud"],
+    link: "https://demo.dinginlestariteknik.com/",
+    linkText: "demo.dinginlestariteknik.com"
+  },
+  {
+    titleKey: "proj-cs3-title",
+    catKey: "proj-cs3-cat",
+    descKey: "proj-cs3-desc",
+    img: "img/New/CS_3.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["Air Blast Freezer", "Rapid Freezing", "Control Panel", "Bitzer"],
+    link: "https://dinginlestariteknik.com/",
+    linkText: "dinginlestariteknik.com"
+  },
+  {
+    titleKey: "proj-lemniscate-title",
+    catKey: "proj-lemniscate-cat",
+    descKey: "proj-lemniscate-desc",
+    img: "https://img.youtube.com/vi/SJYSznTkrM0/hqdefault.jpg",
+    youtubeId: "SJYSznTkrM0",
+    isVideo: true,
+    category: "swarm",
+    tags: ["Leader-Follower", "Lemniscate Trajectory", "M.Sc. Thesis", "NTUT Taiwan", "YouTube Video"],
+    link: "https://doi.org/10.1007/s12555-026-00119-1",
+    linkText: "IJCAS 2026 Paper"
+  },
+  {
+    titleKey: "proj-cs2-title",
+    catKey: "proj-cs2-cat",
+    descKey: "proj-cs2-desc",
+    img: "img/New/CS_2.jpg",
+    isVideo: false,
+    category: "cs",
+    tags: ["Chiller Room", "Refrigeration", "Evaporator", "HVAC"],
+    link: "https://dinginlestariteknik.com/",
+    linkText: "dinginlestariteknik.com"
+  },
+  {
+    titleKey: "proj-dac1-title",
+    catKey: "proj-dac1-cat",
+    descKey: "proj-dac1-desc",
+    img: "img/New/DAC_1.jpg",
+    isVideo: false,
+    category: "dac",
+    tags: ["Direct Air Capture", "CO2 Capture", "Biochar Media", "Hardware Prototype"],
+    link: "https://www.researchgate.net/profile/Naufaldo-2",
+    linkText: "ResearchGate Details"
   },
   {
     titleKey: "proj-gazebo-follow-title",
@@ -1117,18 +1199,6 @@ let projectsData = JSON.parse(localStorage.getItem("naufaldo_projects")) || [
     linkText: "Watch on YouTube"
   },
   {
-    titleKey: "proj-lemniscate-title",
-    catKey: "proj-lemniscate-cat",
-    descKey: "proj-lemniscate-desc",
-    img: "https://img.youtube.com/vi/SJYSznTkrM0/hqdefault.jpg",
-    youtubeId: "SJYSznTkrM0",
-    isVideo: true,
-    category: "swarm",
-    tags: ["Leader-Follower", "Lemniscate Trajectory", "M.Sc. Thesis", "NTUT Taiwan", "YouTube Video"],
-    link: "https://doi.org/10.1007/s12555-026-00119-1",
-    linkText: "IJCAS 2026 Paper"
-  },
-  {
     titleKey: "proj-circular-title",
     catKey: "proj-circular-cat",
     descKey: "proj-circular-desc",
@@ -1139,72 +1209,6 @@ let projectsData = JSON.parse(localStorage.getItem("naufaldo_projects")) || [
     tags: ["Leader-Follower", "Circular Formation", "M.Sc. Thesis", "NTUT Taiwan", "YouTube Video"],
     link: "https://doi.org/10.1080/02533839.2025.2503867",
     linkText: "JCIE 2025 Paper"
-  },
-  {
-    titleKey: "proj-cs1-title",
-    catKey: "proj-cs1-cat",
-    descKey: "proj-cs1-desc",
-    img: "img/New/CS_1.jpg",
-    isVideo: false,
-    category: "cs",
-    tags: ["Cold Storage", "Freezer Room", "Compressor", "Panel 3-Phase"],
-    link: "https://dinginlestariteknik.com/",
-    linkText: "dinginlestariteknik.com"
-  },
-  {
-    titleKey: "proj-cs2-title",
-    catKey: "proj-cs2-cat",
-    descKey: "proj-cs2-desc",
-    img: "img/New/CS_2.jpg",
-    isVideo: false,
-    category: "cs",
-    tags: ["Chiller Room", "Refrigeration", "Evaporator", "HVAC"],
-    link: "https://dinginlestariteknik.com/",
-    linkText: "dinginlestariteknik.com"
-  },
-  {
-    titleKey: "proj-cs3-title",
-    catKey: "proj-cs3-cat",
-    descKey: "proj-cs3-desc",
-    img: "img/New/CS_3.jpg",
-    isVideo: false,
-    category: "cs",
-    tags: ["Air Blast Freezer", "Rapid Freezing", "Control Panel", "Bitzer"],
-    link: "https://dinginlestariteknik.com/",
-    linkText: "dinginlestariteknik.com"
-  },
-  {
-    titleKey: "proj-dac1-title",
-    catKey: "proj-dac1-cat",
-    descKey: "proj-dac1-desc",
-    img: "img/New/DAC_1.jpg",
-    isVideo: false,
-    category: "dac",
-    tags: ["Direct Air Capture", "CO2 Capture", "Biochar Media", "Hardware Prototype"],
-    link: "https://www.researchgate.net/profile/Naufaldo-2",
-    linkText: "ResearchGate Details"
-  },
-  {
-    titleKey: "proj-dac2-title",
-    catKey: "proj-dac2-cat",
-    descKey: "proj-dac2-desc",
-    img: "img/New/DAC_2.jpg",
-    isVideo: false,
-    category: "dac",
-    tags: ["MATLAB Software Patent", "Telemetry Control", "CO2 Sensor", "Paten Resmi"],
-    link: "https://www.researchgate.net/profile/Naufaldo-2",
-    linkText: "Patent Document"
-  },
-  {
-    titleKey: "proj-erp-title",
-    catKey: "proj-erp-cat",
-    descKey: "proj-erp-desc",
-    img: "img/IMG-20230503-WA0015.jpg",
-    isVideo: false,
-    category: "cs",
-    tags: ["ERP Software", "SaaS Platform", "HVAC Operations", "Field Service", "Cloud"],
-    link: "https://demo.dinginlestariteknik.com/",
-    linkText: "demo.dinginlestariteknik.com"
   }
 ];
 
@@ -1212,7 +1216,11 @@ function renderProjects(filterCategory = "all") {
   const grid = document.getElementById("projectsGrid");
   if (!grid) return;
 
-  const filtered = projectsData.filter(p => filterCategory === "all" || p.category === filterCategory);
+  const isHome = document.body.classList.contains("portfolio-home");
+  let filtered = projectsData.filter(p => filterCategory === "all" || p.category === filterCategory);
+  if (isHome) {
+    filtered = filtered.slice(0, 6);
+  }
 
   grid.replaceChildren();
 
@@ -1370,17 +1378,6 @@ function closeProjectModal() {
   if (modal) modal.classList.remove("active");
 }
 
-// --- Admin CMS Interactive Modal Portal Engine ---
-function openCmsModal() {
-  const modal = document.getElementById("cmsModal");
-  if (modal) modal.classList.add("active");
-}
-
-function closeCmsModal() {
-  const modal = document.getElementById("cmsModal");
-  if (modal) modal.classList.remove("active");
-}
-
 function initializeScrollMotion() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
 
@@ -1516,96 +1513,4 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", updateScrollProgress, { passive: true });
   window.addEventListener("resize", updateScrollProgress, { passive: true });
   updateScrollProgress();
-
-  // --- Admin CMS Auth & Form Handler ---
-  const cmsLoginForm = document.getElementById("cmsLoginForm");
-  const cmsDashboard = document.getElementById("cmsDashboard");
-  const cmsLoginBox = document.getElementById("cmsLoginBox");
-
-  if (localStorage.getItem("naufaldo_cms_logged_in") === "true") {
-    if (cmsLoginBox) cmsLoginBox.style.display = "none";
-    if (cmsDashboard) cmsDashboard.style.display = "block";
-  }
-
-  cmsLoginForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const user = document.getElementById("cmsUser").value;
-    const pass = document.getElementById("cmsPass").value;
-
-    if (user === "naufaldo" && pass === "admin123") {
-      localStorage.setItem("naufaldo_cms_logged_in", "true");
-      cmsLoginBox.style.display = "none";
-      cmsDashboard.style.display = "block";
-      alert("Login Admin CMS Berhasil! Selamat datang Naufaldo, M.Sc.");
-    } else {
-      alert("Username atau Password Admin CMS salah!");
-    }
-  });
-
-  // CMS Tab Switching
-  document.querySelectorAll(".cms-tab-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      document.querySelectorAll(".cms-tab-btn").forEach(b => b.classList.remove("active"));
-      document.querySelectorAll(".cms-tab-content").forEach(c => c.style.display = "none");
-      e.currentTarget.classList.add("active");
-      const targetId = e.currentTarget.dataset.target;
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) targetEl.style.display = "block";
-    });
-  });
-
-  // CMS Add Project Form
-  document.getElementById("cmsAddProjForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const title = document.getElementById("cmsProjTitle").value;
-    const cat = document.getElementById("cmsProjCat").value;
-    const desc = document.getElementById("cmsProjDesc").value;
-    const img = document.getElementById("cmsProjImg").value;
-    const yt = document.getElementById("cmsProjYt").value;
-
-    const newProj = {
-      title: title,
-      titleKey: title,
-      catKey: cat,
-      descKey: desc,
-      category: cat === "cs" ? "cs" : cat === "dac" ? "dac" : "swarm",
-      img: yt ? `https://img.youtube.com/vi/${yt}/hqdefault.jpg` : (img || "img/New/CS_1.jpg"),
-      youtubeId: yt || null,
-      isVideo: !!yt,
-      tags: ["Admin CMS Upload", cat.toUpperCase()]
-    };
-
-    projectsData.unshift(newProj);
-    localStorage.setItem("naufaldo_projects", JSON.stringify(projectsData));
-    renderProjects();
-    alert("Proyek baru berhasil diterbitkan di galeri portofolio!");
-    e.target.reset();
-  });
-
-  // CMS Add Blog Post Form
-  document.getElementById("cmsAddBlogForm")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const title = document.getElementById("cmsBlogTitle").value;
-    const cat = document.getElementById("cmsBlogCat").value;
-    const excerpt = document.getElementById("cmsBlogExcerpt").value;
-    const content = document.getElementById("cmsBlogContent").value;
-    const img = document.getElementById("cmsBlogImg").value;
-
-    const newPost = {
-      id: Date.now(),
-      title: title,
-      date: new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }),
-      author: "Naufaldo, M.Sc.",
-      category: cat,
-      excerpt: excerpt,
-      content: content,
-      image: img || "img/New/CS_1.jpg"
-    };
-
-    blogPostsData.unshift(newPost);
-    localStorage.setItem("naufaldo_blog_posts", JSON.stringify(blogPostsData));
-    renderBlogPosts();
-    alert("Artikel Blogspot baru berhasil diterbitkan!");
-    e.target.reset();
-  });
 });

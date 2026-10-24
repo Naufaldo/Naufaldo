@@ -57,8 +57,11 @@
     content="Direktur CV. Dingin Lestari Teknik & Asesor LSP TPTU (MET.000.002933 2026). Sertifikasi F-Gas Level 4, Paten MATLAB DAC, Swarm Drone, & Web ERP.">
   <meta name="twitter:image" content="https://naufaldo.github.io/Naufaldo/img/Pas%20Fotos.JPG">
 
-  <!-- Favicon -->
-  <link rel="icon" href="img/Pas Fotos.JPG" type="image/jpeg">
+  <!-- Modern Standard Favicon Stack -->
+  <link rel="icon" href="img/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="img/icons/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="img/icons/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="img/icons/apple-touch-icon.png">
 
   <!-- Preconnect to CDNs -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -357,10 +360,10 @@
       </ul>
 
       <div class="nav-actions">
-        <button onclick="openCmsModal()" class="btn btn-outline btn-sm"
-          style="border-color:var(--accent-purple); color:var(--accent-purple);" title="Login Admin Portal">
-          <i class="fa fa-lock"></i> Login
-        </button>
+        <a href="assets/CV_Naufaldo_MSc.pdf" download class="btn btn-outline btn-sm"
+          style="border-color:var(--accent-emerald); color:var(--accent-emerald);" title="Unduh Curriculum Vitae (PDF)">
+          <i class="fa fa-download"></i> <span data-i18n="nav-btn-cv">CV (PDF)</span>
+        </a>
         <button class="lang-toggle-btn" id="langToggleBtn" title="Switch Language">
           <span>🇮🇩</span> ID
         </button>
@@ -396,6 +399,10 @@
         <div class="hero-cta">
           <a href="#projects" class="btn btn-primary">
             <i class="fa fa-cubes"></i> <span data-i18n="hero-btn-projects">Lihat Proyek Unggulan</span>
+          </a>
+          <a href="assets/CV_Naufaldo_MSc.pdf" download class="btn btn-outline"
+            style="border-color:var(--accent-emerald); color:var(--accent-emerald);" title="Unduh Curriculum Vitae (PDF)">
+            <i class="fa fa-download"></i> <span data-i18n="hero-btn-cv">Unduh CV (PDF)</span>
           </a>
           <a href="robotics-sim.html" class="btn btn-outline">
             <i class="fa fa-android"></i> <span data-i18n="hero-btn-sim">Lab Simulasi Robot</span>
@@ -732,7 +739,7 @@
       <div class="projects-grid" id="projectsGrid"></div>
       <div style="margin-top: 2.5rem;">
         <a href="projects.html" class="btn btn-outline">
-          <i class="fa fa-th"></i> <span data-i18n="featured-all">Lihat Semua Proyek</span> &rarr;
+          <i class="fa fa-th"></i> <span data-i18n="featured-all">Lihat Semua Proyek (11 Proyek)</span> &rarr;
         </a>
       </div>
     </div>
@@ -942,121 +949,6 @@
         <p id="modalDesc" style="color:var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6;">Description</p>
         <div id="modalTags" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom: 1rem;"></div>
         <div id="modalLinkBox"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Interactive Admin CMS Portal Modal -->
-  <div class="modal-overlay" id="cmsModal" onclick="closeCmsModal()">
-    <div class="modal-content" onclick="event.stopPropagation()" style="max-width: 680px;">
-      <button class="modal-close" onclick="closeCmsModal()">&times;</button>
-      <div class="modal-body">
-
-        <!-- CMS Login Screen -->
-        <div id="cmsLoginBox">
-          <div class="text-center" style="margin-bottom: 1.5rem;">
-            <i class="fa fa-user-secret fa-3x" style="color: var(--primary-cyan);"></i>
-            <h2 style="margin-top:0.5rem;">Login Admin</h2>
-            <p style="font-size:0.85rem; color:var(--text-secondary);">Masuk untuk mengelola foto, galeri proyek,
-              pengalaman kerja, & blogspot secara langsung</p>
-          </div>
-
-          <form id="cmsLoginForm" style="display:flex; flex-direction:column; gap:1rem;">
-            <div class="form-group">
-              <label for="cmsUser">Username</label>
-              <input type="text" class="form-control" id="cmsUser" placeholder="Masukkan Username Admin" required>
-            </div>
-            <div class="form-group">
-              <label for="cmsPass">Password</label>
-              <input type="password" class="form-control" id="cmsPass" placeholder="Masukkan Password Admin"
-                autocomplete="current-password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">
-              <i class="fa fa-sign-in"></i> Masuk Dashboard Admin
-            </button>
-          </form>
-        </div>
-
-        <!-- CMS Dashboard Portal -->
-        <div id="cmsDashboard" style="display:none;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
-            <h2 style="font-size:1.3rem; color:var(--primary-cyan);"><i class="fa fa-sliders"></i> Panel Pengelolaan
-              Konten</h2>
-            <span class="badge badge-purple">Admin Logged In</span>
-          </div>
-
-          <div class="cms-tabs">
-            <button class="cms-tab-btn active" data-target="cmsTabProjects"><i class="fa fa-th"></i> Galeri
-              Proyek</button>
-            <button class="cms-tab-btn" data-target="cmsTabBlog"><i class="fa fa-pencil"></i> Artikel Blogspot</button>
-          </div>
-
-          <!-- Tab 1: Galeri Proyek -->
-          <div class="cms-tab-content" id="cmsTabProjects">
-            <form id="cmsAddProjForm" style="display:flex; flex-direction:column; gap:1rem;">
-              <div class="form-group">
-                <label for="cmsProjTitle">Judul Proyek / Riset Baru</label>
-                <input type="text" class="form-control" id="cmsProjTitle"
-                  placeholder="Contoh: Instalasai ABF 5 Ton Bitzer" required>
-              </div>
-              <div class="form-group">
-                <label for="cmsProjCat">Kategori Proyek</label>
-                <select class="form-select" id="cmsProjCat">
-                  <option value="cs">Cold Storage & Engineering</option>
-                  <option value="dac">Direct Air Capture (Paten)</option>
-                  <option value="swarm">Robotika & Swarm Drone</option>
-                  <option value="auto">Otomasi & Kelistrikan</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="cmsProjDesc">Deskripsi Singkat</label>
-                <textarea class="form-control" id="cmsProjDesc" rows="3" required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="cmsProjImg">URL Gambar / Poster Proyek</label>
-                <input type="text" class="form-control" id="cmsProjImg" placeholder="img/New/CS_1.jpg">
-              </div>
-              <div class="form-group">
-                <label for="cmsProjYt">ID Video YouTube Unlisted (Opsional)</label>
-                <input type="text" class="form-control" id="cmsProjYt" placeholder="Contoh: JKuoD_4qvYw">
-              </div>
-              <button type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-plus-circle"></i> Terbitkan Proyek Baru
-              </button>
-            </form>
-          </div>
-
-          <!-- Tab 2: Blogspot -->
-          <div class="cms-tab-content" id="cmsTabBlog" style="display:none;">
-            <form id="cmsAddBlogForm" style="display:flex; flex-direction:column; gap:1rem;">
-              <div class="form-group">
-                <label for="cmsBlogTitle">Judul Artikel Blogspot</label>
-                <input type="text" class="form-control" id="cmsBlogTitle"
-                  placeholder="Contoh: Strategi Efisiensi Energi Chiller Room" required>
-              </div>
-              <div class="form-group">
-                <label for="cmsBlogCat">Kategori Tulisan</label>
-                <input type="text" class="form-control" id="cmsBlogCat" value="Cold Storage & Automation" required>
-              </div>
-              <div class="form-group">
-                <label for="cmsBlogExcerpt">Ringkasan Artikel (Excerpt)</label>
-                <textarea class="form-control" id="cmsBlogExcerpt" rows="2" required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="cmsBlogContent">Isi Artikel Lengkap</label>
-                <textarea class="form-control" id="cmsBlogContent" rows="5" required></textarea>
-              </div>
-              <div class="form-group">
-                <label for="cmsBlogImg">URL Gambar Header Artikel</label>
-                <input type="text" class="form-control" id="cmsBlogImg" value="img/New/CS_1.jpg">
-              </div>
-              <button type="submit" class="btn btn-primary btn-sm">
-                <i class="fa fa-paper-plane"></i> Publikasikan Artikel Blogspot
-              </button>
-            </form>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
